@@ -116,15 +116,7 @@ python app/converters/movie_convert.py \
   -i input_path \
   -o output_path
 Supported Formats
-.mp4
-
-.mkv
-
-.avi
-
-.mov
-
-.flv
+mp4/mkv/avi/mov/flv
 
 ---
 
@@ -146,6 +138,7 @@ The system returns the Top-5 most similar tracks, ranked by distance.
 ---
 
 ## 📊 Example Output
+```
 AI-Based Recommendation
 text
 Copy code
@@ -168,7 +161,7 @@ data/music_db/earlysummerrain.mp3                  Bad
 data/music_db/Lightning Returns - FF XIII OST.mp3  Bad
 
 Precision: 1 / 5 = 20%
-
+```
 ---
 
 ## 🛠 Engineering Notes
