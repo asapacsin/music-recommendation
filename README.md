@@ -138,8 +138,6 @@ The system returns the Top-5 most similar tracks, ranked by distance.
 ## 📊 Example Output
 ```
 AI-Based Recommendation
-text
-Copy code
 Using Genesis to recommendation:
 Top Recommendations:
 ('data/music_db/premonition.mp3', 57.01)     Good
