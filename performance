@@ -1,0 +1,13 @@
+Using Genesis to recommendation:
+Top Recommendations:[('data/music_db/premonition.mp3', 57.010696), Good
+('data/music_db/flyingbird.mp3', 58.72244), Good
+('data/music_db/snowgoddess.mp3', 59.62406), Good
+('data/music_db/sakuraofwinter.mp3', 63.960762), Good
+('data/music_db/upinthesky.mp3', 65.458626)]　Bad
+
+Random recommendation:
+data/music_db/sora.mp3 Bad
+data/music_db/durnkinwind.mp3 Bad
+data/music_db/streetwherewindsettles.mp3 Good
+data/music_db/earlysummerrain.mp3 Bad
+data/music_db/Lightning Returns- Final Fantasy XIII OST - Lightning's Theme - Radiance - [HD].mp3 Bad

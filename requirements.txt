@@ -1,0 +1,10 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+sentence-transformers==2.6.1
+faiss-cpu==1.8.0
+numpy==1.26.4
+pydantic==2.6.1
+python-dotenv==1.0.1
+moviepy==1.0.3
+torch==2.9
+torchvision==0.24.0
