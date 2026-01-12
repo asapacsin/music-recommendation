@@ -70,6 +70,7 @@ NVIDIA GPU (CUDA)
 ---
 
 ## 📁 Project Structure
+```
 text
 Copy code
 .
@@ -83,6 +84,7 @@ Copy code
 │   └── music_db/        # Music database
 ├── Dockerfile
 └── README.md
+```
 
 ---
 
