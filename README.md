@@ -50,7 +50,7 @@ Embedding Time	~5 min / 100 tracks
 GPU Memory	~6 GB VRAM
 Deployment	Local / Docker / GPU
 
-🧰 Technology Stack
+## 🧰 Technology Stack
 Python
 
 PyTorch
@@ -65,7 +65,7 @@ Docker
 
 NVIDIA GPU (CUDA)
 
-📁 Project Structure
+## 📁 Project Structure
 text
 Copy code
 .
@@ -79,7 +79,7 @@ Copy code
 │   └── music_db/        # Music database
 ├── Dockerfile
 └── README.md
-🐳 Environment Setup (Docker)
+## 🐳 Environment Setup (Docker)
 Build the Docker Image
 bash
 Copy code
@@ -96,7 +96,7 @@ Copy code
 pip install -e .
 This ensures dependency consistency and reproducibility.
 
-🎬 Optional: Convert Movie Files to Audio
+## 🎬 Optional: Convert Movie Files to Audio
 Movie files can be converted into audio for recommendation.
 
 bash
@@ -115,7 +115,7 @@ Supported Formats
 
 .flv
 
-▶️ How to Use
+## ▶️ How to Use
 Step 1: Build the Embedding Index
 Run once or whenever the music database changes.
 
@@ -130,7 +130,7 @@ Copy code
 python app/recommend.py -r path_to_query_music_file
 The system returns the Top-5 most similar tracks, ranked by distance.
 
-📊 Example Output
+## 📊 Example Output
 AI-Based Recommendation
 text
 Copy code
@@ -153,7 +153,7 @@ data/music_db/earlysummerrain.mp3                  Bad
 data/music_db/Lightning Returns - FF XIII OST.mp3  Bad
 
 Precision: 1 / 5 = 20%
-🛠 Engineering Notes
+## 🛠 Engineering Notes
 Fully modular design
 
 Clear API boundaries for backend or full-stack integration
@@ -164,7 +164,7 @@ Dockerized for reproducibility
 
 Scales to large datasets via FAISS
 
-📌 Use Cases
+## 📌 Use Cases
 Music similarity search
 
 Audio discovery engines
@@ -173,5 +173,5 @@ Soundtrack recommendation
 
 Audio ML research prototypes
 
-📄 License
+## 📄 License
 MIT License 
