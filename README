@@ -1,154 +1,150 @@
-🎵 AI-Based Music Recommendation System
-Overview
+# AI-Based Music Recommendation System
 
-This project implements a content-based music recommendation system using audio embeddings extracted by deep learning models.
-Given a query music file, the system retrieves top-K similar tracks from a local music database.
+A self-contained, content-based music recommendation system that recommends similar music tracks based on uploaded audio files using deep audio embeddings and vector similarity search.
 
-Performance highlight
+The system achieves approximately **80% recommendation precision**, compared to **~20% from random selection**, demonstrating a ~4× improvement.
 
-Recommendation precision: ~80% “Good” matches
+---
 
-Random baseline precision: ~20%
+## What This System Does
 
-≈ 4× improvement over random selection
+- Takes a music file as input
+- Extracts deep audio embeddings using a pretrained neural network
+- Searches a local music database for similar tracks
+- Returns the Top-K most similar music files
 
-System Architecture
-Core Pipeline
+This is a **pure content-based system** (no user data, no metadata).
 
-Audio preprocessing
+---
 
-Extract audio features using librosa
+## Core Pipeline (End-to-End)
 
-Embedding extraction
+1. Load audio files using `librosa`
+2. Extract audio embeddings using `torchopenl3`
+3. Store embeddings in a FAISS index
+4. Perform nearest-neighbor search for recommendations
 
-Generate high-dimensional audio embeddings with torchopenl3
+---
 
-Similarity search
+## Performance & Resources
 
-Index embeddings using FAISS
+- Recommendation precision: ~80%
+- Random baseline: ~20%
+- Embedding generation time: ~5 minutes for 100 music files
+- Hardware: Single GPU with ~6 GB VRAM
+- Deployment: Local, Dockerized, GPU-enabled
 
-Perform nearest-neighbor search for recommendations
+---
 
-Inference
+## Technology Stack
 
-Given a query music file, return top-K most similar tracks
+- Python
+- PyTorch
+- librosa
+- torchopenl3
+- FAISS
+- Docker
+- NVIDIA GPU
 
-Tools & Technologies
-Component	Tool
-Audio processing	librosa
-Audio embedding	torchopenl3
-Vector indexing	faiss
-ML framework	PyTorch
-Containerization	Docker
-Hardware	GPU (6 GB VRAM)
-Resource & Performance Constraints
+---
 
-GPU memory: 6 GB
+## Directory Layout
 
-Embedding build time:
+.
+├── app/
+│ ├── recommend.py
+│ └── converters/
+│ └── movie_convert.py
+├── data/
+│ ├── input/ # Query music files
+│ ├── movie_input/ # Optional movie files
+│ └── music_db/ # Music database
+├── Dockerfile
+└── README.md
 
-~5 minutes for 100 standard music files
+yaml
+Copy code
 
-Designed for local deployment with GPU acceleration
+---
 
-Engineering Considerations
+## Environment Setup (Docker)
 
-Well-defined APIs for easy integration into full-stack applications
+Build the Docker image:
 
-Docker-based environment isolation for reproducibility
+```bash
+docker build -t your_image_name .
+Run the container with GPU support:
 
-Modular design for:
-
-Data preprocessing
-
-Embedding generation
-
-Index building
-
-Recommendation inference
-
-Directory Structure
-data/
-├── input/          # Query music files
-├── movie_input/    # (Optional) Movie files for audio extraction
-└── music_db/       # Music database for recommendation
-
-Environment Setup
-1. Build Docker Image
-
-Build the Docker image using the provided Dockerfile.
-
-2. Run Container
+bash
+Copy code
 docker run --gpus all -it --rm \
-  --mount type=bind,source="host_path",target=container_path \
+  --mount type=bind,source=host_path,target=container_path \
   your_image_name bash
+Inside the container, install the project in editable mode:
 
-3. Install Project Dependencies
-
-Inside the container:
-
-cd <project_root>
+bash
+Copy code
 pip install -e .
+This ensures exact dependency versions are used.
 
+Optional: Convert Movies to Audio
+Movie files can be converted into audio files for recommendation.
 
-This ensures the project uses exact dependency versions.
-
-Optional: Movie-to-Audio Conversion
-
-Convert movie files into audio files for recommendation.
-
+bash
+Copy code
 python app/converters/movie_convert.py \
   -i input_path \
   -o output_path
+Supported formats:
+.mp4, .mkv, .avi, .mov, .flv
 
-Supported Formats
+How to Use
+Step 1: Build the Embedding Index
+Run once or whenever the music database changes.
 
-.mp4
-
-.mkv
-
-.avi
-
-.mov
-
-.flv
-
-Usage
-1. Build Embeddings (One-time or after data update)
+bash
+Copy code
 python app/recommend.py -b True
+This extracts embeddings from data/music_db and builds the FAISS index.
 
-
-This:
-
-Extracts embeddings from music_db
-
-Builds the FAISS index
-
-2. Run Recommendation
-python app/recommend.py -r your_query_music_file
-
-
-Returns Top-5 recommendations based on audio similarity.
+Step 2: Run Recommendation
+bash
+Copy code
+python app/recommend.py -r path_to_query_music_file
+The system returns the Top-5 most similar tracks ranked by distance.
 
 Example Output
-AI-Based Recommendation
+AI-based recommendation:
+
+powershell
+Copy code
 Using Genesis to recommendation:
 Top Recommendations:
-('data/music_db/premonition.mp3', 57.010696)   Good
-('data/music_db/flyingbird.mp3', 58.72244)    Good
-('data/music_db/snowgoddess.mp3', 59.62406)   Good
-('data/music_db/sakuraofwinter.mp3', 63.960762) Good
-('data/music_db/upinthesky.mp3', 65.458626)   Bad
-
-
+('data/music_db/premonition.mp3', 57.01)   Good
+('data/music_db/flyingbird.mp3', 58.72)    Good
+('data/music_db/snowgoddess.mp3', 59.62)   Good
+('data/music_db/sakuraofwinter.mp3', 63.96) Good
+('data/music_db/upinthesky.mp3', 65.46)    Bad
 Precision: 4 / 5 = 80%
 
-Random Recommendation (Baseline)
-data/music_db/sora.mp3                              Bad
-data/music_db/durnkinwind.mp3                       Bad
-data/music_db/streetwherewindsettles.mp3            Good
-data/music_db/earlysummerrain.mp3                   Bad
-data/music_db/Lightning Returns - FF XIII OST.mp3   Bad
+Random baseline:
 
-
+bash
+Copy code
+data/music_db/sora.mp3                             Bad
+data/music_db/durnkinwind.mp3                      Bad
+data/music_db/streetwherewindsettles.mp3           Good
+data/music_db/earlysummerrain.mp3                  Bad
+data/music_db/Lightning Returns - FF XIII OST.mp3  Bad
 Precision: 1 / 5 = 20%
+
+Engineering Notes
+Fully modular design
+
+Clear API boundaries for backend or full-stack integration
+
+GPU-aware embedding extraction
+
+Dockerized for reproducibility
+
+Scales to larger datasets via FAISS
