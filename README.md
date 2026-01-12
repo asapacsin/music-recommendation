@@ -89,52 +89,50 @@ Copy code
 ---
 
 ## 🐳 Environment Setup (Docker)
-Build the Docker Image
-bash
-Copy code
-docker build -t your_image_name .
-Run the Container with GPU Support
-bash
-Copy code
+```
+#Build the Docker Image
+docker build -t your_image_name
+
+#Run the Container with GPU Support
 docker run --gpus all -it --rm \
   --mount type=bind,source=HOST_PATH,target=CONTAINER_PATH \
   your_image_name bash
-Install the Project (Editable Mode)
-bash
-Copy code
+
+#install Github repo locally
+apt update
+apt install -y git
+
+#
+Install the project-specific library within the dependencies
 pip install -e .
 This ensures dependency consistency and reproducibility.
-
+```
 ---
 
 ## 🎬 Optional: Convert Movie Files to Audio
 Movie files can be converted into audio for recommendation.
-
-bash
-Copy code
+```
 python app/converters/movie_convert.py \
   -i input_path \
   -o output_path
+
 Supported Formats
 mp4/mkv/avi/mov/flv
-
+```
 ---
 
 ## ▶️ How to Use
+```
 Step 1: Build the Embedding Index
 Run once or whenever the music database changes.
 
-bash
-Copy code
 python app/recommend.py -b True
 This extracts embeddings from data/music_db/ and builds the FAISS index.
 
 Step 2: Run Recommendation
-bash
-Copy code
-python app/recommend.py -r path_to_query_music_file
+python app/recommend.py -r file_name
 The system returns the Top-5 most similar tracks, ranked by distance.
-
+```
 ---
 
 ## 📊 Example Output
