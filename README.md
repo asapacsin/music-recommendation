@@ -49,7 +49,7 @@ Improvement	~4×
 Embedding Time	~5 min / 100 tracks
 GPU Memory	~6 GB VRAM
 Deployment	Local / Docker / GPU
-
+```
 ---
 
 ## 🧰 Technology Stack
