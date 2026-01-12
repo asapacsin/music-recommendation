@@ -148,8 +148,6 @@ Top Recommendations:
 
 Precision: 4 / 5 = 80%
 Random Baseline
-text
-Copy code
 data/music_db/sora.mp3                             Bad
 data/music_db/durnkinwind.mp3                      Bad
 data/music_db/streetwherewindsettles.mp3           Good
