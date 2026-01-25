@@ -98,9 +98,6 @@ docker run --gpus all -it --rm \
   --mount type=bind,source=HOST_PATH,target=CONTAINER_PATH \
   your_image_name bash
 
-#install Github repo locally
-apt update
-apt install -y git
 
 #
 Install the project-specific library within the dependencies
@@ -180,13 +177,10 @@ Soundtrack recommendation
 
 Audio ML research prototypes
 
-<<<<<<< HEAD
+
 ---
 
 ## 📄 License
-MIT License 
-=======
-📄 License
 MIT License 
 
 ### Dataset Size & Limitations
@@ -195,4 +189,3 @@ This project was evaluated on a small-scale dataset (159 music tracks) as a proo
 While absolute precision values are not statistically stable at this scale, results consistently
 demonstrate a strong signal compared to a random baseline. The system architecture is designed
 to scale to larger datasets without modification.
->>>>>>> 1b90635 (ci)
