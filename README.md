@@ -186,11 +186,6 @@ Audio ML research prototypes
 ## 📄 License
 MIT License 
 
-=======
-
-📄 License
-MIT License 
-
 ### Dataset Size & Limitations
 
 This project was evaluated on a small-scale dataset (159 music tracks) as a proof-of-concept.
