@@ -14,6 +14,10 @@ import argparse
 # ---------------------------
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f"Using device: {DEVICE}")
+def load_audio(file_path, sr=16000):
+    y, _ = librosa.load(file_path, sr=sr)
+    return y
+
 def extract_embedding(file_path, sr=48000,device="gpu"):
     """
     Extract OpenL3 embedding from audio file

@@ -23,4 +23,4 @@ jobs:
 
       - name: Run basic container check
         run: |
-          docker run --rm rag-app:latest python --version
+          docker run --rm myapp:latest python --version

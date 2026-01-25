@@ -180,7 +180,19 @@ Soundtrack recommendation
 
 Audio ML research prototypes
 
+<<<<<<< HEAD
 ---
 
 ## 📄 License
 MIT License 
+=======
+📄 License
+MIT License 
+
+### Dataset Size & Limitations
+
+This project was evaluated on a small-scale dataset (159 music tracks) as a proof-of-concept.
+While absolute precision values are not statistically stable at this scale, results consistently
+demonstrate a strong signal compared to a random baseline. The system architecture is designed
+to scale to larger datasets without modification.
+>>>>>>> 1b90635 (ci)

@@ -23,8 +23,29 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 7️⃣ Copy application code LAST
 COPY app ./app
 
-# 8️⃣ Expose API port
+# 8️⃣ Copy local dependencies
+COPY dependency ./dependency
+
+# 9️⃣ Create folders
+RUN mkdir -p ./data/input \
+    && mkdir -p ./data/movie_input \
+    && mkdir -p ./data/music_db
+
+# 🔧 Install local libraries
+
+RUN apt-get update && apt-get install -y git
+
+WORKDIR /app/dependency
+
+RUN echo "starting installation"
+
+RUN for d in */ ; do \
+      pip install -e "$d"; \
+    done
+
+# 10️⃣ Expose API port
 EXPOSE 8000
 
-# 9️⃣ Run FastAPI with Uvicorn
+# 11️⃣ Run FastAPI with Uvicorn
+WORKDIR /app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
