@@ -98,9 +98,6 @@ docker run --gpus all -it --rm \
   --mount type=bind,source=HOST_PATH,target=CONTAINER_PATH \
   your_image_name bash
 
-#install Github repo locally
-apt update
-apt install -y git
 
 #
 Install the project-specific library within the dependencies
