@@ -180,12 +180,14 @@ Soundtrack recommendation
 
 Audio ML research prototypes
 
-<<<<<<< HEAD
+
 ---
 
 ## 📄 License
 MIT License 
+
 =======
+
 📄 License
 MIT License 
 
