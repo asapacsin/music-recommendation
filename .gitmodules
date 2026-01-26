@@ -1,0 +1,6 @@
+[submodule "dependency/librosa"]
+	path = dependency/librosa
+	url = https://github.com/asapacsin/librosa.git
+[submodule "dependency/torchopenl3"]
+	path = dependency/torchopenl3
+	url = https://github.com/asapacsin/torchopenl3.git
