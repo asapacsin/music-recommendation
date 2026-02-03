@@ -8,6 +8,7 @@ import faiss
 import os
 import torch
 import argparse
+import time
 
 # ---------------------------
 # Step 1: Audio Preprocessing & Embedding
@@ -45,7 +46,10 @@ def get_cache_embedding(file_path, cache_dir="data/embeddings_cache"):
         embedding = np.load(cache_path)
     else:
         print(f"Extracting embedding for {file_path}")
+        start_time = time.time()
         embedding = extract_embedding(file_path)
+        end_time = time.time()
+        print(f"Extraction took {end_time - start_time:.2f} seconds")
         np.save(cache_path, embedding)
         print(f"Saved embedding to {cache_path}")
     return embedding
