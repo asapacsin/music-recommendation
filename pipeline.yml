@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Validate Kubernetes manifests
+        uses: instrumenta/kubeval-action
+        with:
+          files: k8s/
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
