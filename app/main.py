@@ -12,3 +12,7 @@ def api_recommend(file_path:str):
     get_file_path=os.path.join("data/input", file_path)
     get_recommend=recom.recommend(get_file_path)
     return {"recommend":str(get_recommend)}
+
+@app.get("/signal")
+def api_signal():
+    return {"signal":"ok"}

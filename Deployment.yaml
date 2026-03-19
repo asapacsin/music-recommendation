@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1                 
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: myapp:latest
+          imagePullPolicy: IfNotPresent
+          stdin: true               # -i interactive
+          tty: true                 # -t terminal
+          command: ["bash"]         # run bash instead of default entrypoint
+          volumeMounts:
+            - name: app-volume
+              mountPath: /app
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /signal
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /signal
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      volumes:
+        - name: app-volume
+          hostPath:
+            path:D:/桌面/Ragweb
+            type: Directory
+      nodeSelector:
+        kubernetes.io/hostname: docker-desktop
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+      resources:
+        limits:
+          nvidia.com/gpu: 1       # allocate 1 GPU

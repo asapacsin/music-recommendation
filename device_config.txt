@@ -1,0 +1,3 @@
+Python 3.11
+Torch 2.9.0+cpu
+Cuda 13.0
