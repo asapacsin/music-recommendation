@@ -1,8 +1,10 @@
 import clip
 from mutagen.easyid3 import EasyID3
-import transformers
 import torch
-
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import os
+import json
+import utils.translator as trans
 
 def extract_text_embedding(text, model_name='ViT-H/14'):
     """
@@ -32,45 +34,88 @@ def extract_info(music_path):
     
     try:
         audio = EasyID3(music_path)
-        topic = music_path.split('/')[-1].split('.')[0]  # Fallback to filename if metadata is missing
+        topic = os.path.splitext(os.path.basename(music_path))[0]
         author = audio.get('artist', ['Unknown'])[0]
-        return f"{topic} by {author}"
+        topic = topic.replace(author, '').strip()
+        describe_text = f"{topic} by {author}"
+        return describe_text
     except Exception as e:
         return f"Error extracting info: {str(e)}"
+    
+def extract_info_list(music_paths):
+    descriptions = []
+    for music_path in music_paths:
+        descriptions.append(extract_info(music_path))
+    return descriptions
+    
+def get_music_name(music_file):
+    """
+    Extract music name from file path.
+
+    Args:
+        music_path (str): Path to the music file
+        
+    Returns:
+        str: Music filename without extension
+    """
+    return music_file.rsplit('.', 1)[0]
+
+def llm_describe(prompt,model,tokenizer,max_new_tokens=200,devices="cpu"):
+    rule = """output only in "topic by author" format, only allow in English,
+    filter out any irrelevant information, and do not add any additional words.
+"""
+    prompt = "rule:"+rule + "\nInput:" + prompt
+    if devices == "cuda":
+        inputs = tokenizer(prompt, return_tensors="pt").to(devices)
+    else:
+        inputs = tokenizer(prompt, return_tensors="pt")
+    outputs = model.generate(**inputs, max_new_tokens=max_new_tokens)
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+def load_model(model_path="model/llama3", device="cpu"):
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    device = "cuda" if torch.cuda.is_available() and device == "cuda" else "cpu"
+    model = AutoModelForCausalLM.from_pretrained(model_path, dtype=torch.float16, device_map=device)
+    return model, tokenizer
+
+def save_descriptions(descriptions, output_path="data/files_map/music_map.txt"):
+    """
+    Save descriptions mapping to a JSON file.
+
+    Args:
+        descriptions (dict): Dictionary mapping music names to descriptions
+        output_path (str): Path to save the JSON file
+    """
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(descriptions, f, indent=2, ensure_ascii=False)
+
+def filter_text_list(text):
+    """
+    Filter out numbers and symbols from text, keeping only letters and spaces.
+
+    Args:
+        text (str): Text to filter
+
+    Returns:
+        list: List with filtered text containing only letters and spaces
+    """
+    return ''.join(element for element in text if element.isalpha() or element.isspace())
+
+def generate_map():
+    music_dir = "data/music_db"
+    music_files = [f for f in os.listdir(music_dir) if f.endswith(('.mp3', '.flac', '.wav', '.m4a'))]
+    descriptions = extract_info_list([os.path.join(music_dir, f) for f in music_files])
+    print("finish extracting music info")
+    filtered_files = [filter_text_list(desc) for desc in descriptions]
+    print("finish filtering music info")
+    results = trans.translate_text(filtered_files)
+    print("finish translating music info")
+    map = {music_file: result for music_file, result in zip(music_files, results)}
+    save_descriptions(map)
 
 def main():
-    rule = """# CLAP Text Input Generation Rule (for LLM) - English Version
-
-Purpose: Generate descriptive text for CLAP embedding input from music metadata.
-
-Rule Template:
------------------------
-Input:
-- Title: [song title]
-- Artist: [artist name]
-
-LLM Output Format (for CLAP):
-"[Title] by [Artist], a [Genre] piece that is [Emotion/Mood]"
-
-Example:
-Input:
-- Title: Wind Through the Town
-- Artist: Yukiko Isomura
-
-Output:
-"Wind Through the Town by Yukiko Isomura, an ambient piece that is reflective and nostalgic, featuring piano and serene instrumentation."
-
-Notes:
-- Include at least Title and Artist for minimal input.
-- Adding Genre, Mood, and Additional Features improves CLAP embedding matching.
-- Output should be a single coherent sentence suitable as text input for CLAP.
-"""
-    music_path = "data\music_pre\01.【3】山下直人 - Astral Requiem.mp3"
-    music_info = extract_info(music_path)
-    model_id = "LLM-Research/Meta-Llama-3-8B"
-    pipeline = transformers.pipeline(
-    "text-generation", model=model_id, model_kwargs={"torch_dtype": torch.bfloat16}, device_map="auto")
-    pipeline("Hey how are you doing today?")
+    generate_map()
 
 if __name__ == "__main__":
     main()
+    

@@ -12,3 +12,5 @@ ffmpeg==2.0.12
 laion-clap
 mutagen==1.47
 modelscope==1.35
+accelerate==1.13.0
+googletrans==4.0.2
