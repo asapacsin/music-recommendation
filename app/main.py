@@ -1,18 +1,23 @@
-from fastapi import FastAPI
-import app.recommend as recom
-import os
-import logging
-from pathlib import Path
+from app.init_model import model_creation
 
-app = FastAPI()
-
-@app.post("/recommend")
-def api_recommend(file_path:str):
-    # path = Path.cwd()
-    get_file_path=os.path.join("data/input", file_path)
-    get_recommend=recom.recommend(get_file_path)
-    return {"recommend":str(get_recommend)}
-
-@app.get("/signal")
-def api_signal():
-    return {"signal":"ok"}
+if __name__ == "__main__":
+    # 模型训练配置参数
+    params = {
+        'learning_rate': 1e-4,
+        'num_epochs': 5,
+        'batch_size': 128,
+        'temperature': 100,  # 对比学习温度系数
+        'unfreeze_layers': {
+            'audio_projection': True,
+            'audio_transform': True,
+            'text_projection': True,
+            'text_transform': True
+        },
+        'save_path': "../model/best_model.pt",
+        'early_stopping': {
+            'enabled': True,
+            'metric': 'similarity',
+            'mode': 'max'
+        }
+    }
+    model_creation(params = params)

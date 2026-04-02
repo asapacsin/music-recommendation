@@ -1,8 +1,6 @@
 import asyncio
 from googletrans import Translator
 
-
-
 async def implement_translate_text(name_list):
     async with Translator() as translator:
         tasks = [ translator.translate(text, dest='en') for text in name_list]

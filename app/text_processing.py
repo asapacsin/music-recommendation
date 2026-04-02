@@ -4,7 +4,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
 import json
-import utils.translator as trans
+from utils import translator as trans
 
 def extract_text_embedding(text, model_name='ViT-H/14'):
     """
@@ -78,7 +78,7 @@ def load_model(model_path="model/llama3", device="cpu"):
     model = AutoModelForCausalLM.from_pretrained(model_path, dtype=torch.float16, device_map=device)
     return model, tokenizer
 
-def save_descriptions(descriptions, output_path="data/files_map/music_map.txt"):
+def save_descriptions(descriptions, output_path="data/mapping/music_map.txt"):
     """
     Save descriptions mapping to a JSON file.
 
