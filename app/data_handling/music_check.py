@@ -1,6 +1,7 @@
 import os
 import librosa
 from pathlib import Path
+from config import settings
 
 def check_music_files(directory_path):
     """
@@ -51,8 +52,8 @@ def remove_files(file_paths):
             print(f"✗ Failed to remove: {os.path.basename(file_path)} - {type(e).__name__}")
 
 if __name__ == "__main__":
-    directory = "data\\music_db"
-    failed_files_path =check_music_files(directory)
+    directory = settings.MUSIC_DB_DIR
+    failed_files_path = check_music_files(directory)
     if failed_files_path:
         remove_files(failed_files_path)
     

@@ -5,6 +5,7 @@ import numpy as np
 import os
 import torch
 import time
+from config import settings
 
 # ---------------------------
 # Step 1: Audio Preprocessing & Embedding
@@ -28,10 +29,11 @@ def extract_embedding(file_path, sr=48000,device="gpu"):
                                 device=DEVICE) # use gpu?
     return embedding
 
-def get_cache_embedding(file_path, cache_dir="data/embeddings_cache"):
+def get_cache_embedding(file_path, cache_dir=None):
     """
     Get cached embedding or compute and cache it
     """
+    cache_dir = settings.EMBEDDINGS_CACHE_DIR if cache_dir is None else cache_dir
     os.makedirs(cache_dir, exist_ok=True)
     base_name = os.path.basename(file_path)
     cache_path = os.path.join(cache_dir, base_name + ".npy")
@@ -59,9 +61,9 @@ def build_embeddings_database(music_files):
     index = faiss.IndexFlatL2(dim)  # L2 distance
     index.add(embeddings)
     print(f"Index built with {index.ntotal} tracks")
-    faiss.write_index(index, "data/index/index.faiss")
+    faiss.write_index(index, str(settings.OL3_INDEX_FILE))
     #record file paths
-    with open("data/file_name/file_paths.txt", "w") as f:
+    with open(settings.FILE_PATHS_FILE, "w") as f:
         for path in file_paths:
             f.write(f"{path}\n")
     print("File paths saved.")

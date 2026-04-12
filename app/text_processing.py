@@ -5,6 +5,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
 import json
 from utils import translator as trans
+from config import settings
 
 def extract_text_embedding(text, model_name='ViT-H/14'):
     """
@@ -72,20 +73,24 @@ def llm_describe(prompt,model,tokenizer,max_new_tokens=200,devices="cpu"):
     outputs = model.generate(**inputs, max_new_tokens=max_new_tokens)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-def load_model(model_path="model/llama3", device="cpu"):
+def load_model(model_path=None, device="cpu"):
+    if model_path is None:
+        model_path = settings.LLM_MODEL_DIR
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     device = "cuda" if torch.cuda.is_available() and device == "cuda" else "cpu"
     model = AutoModelForCausalLM.from_pretrained(model_path, dtype=torch.float16, device_map=device)
     return model, tokenizer
 
-def save_descriptions(descriptions, output_path="data/mapping/music_map.txt"):
+def save_descriptions(descriptions, output_path=None):
     """
     Save descriptions mapping to a JSON file.
 
     Args:
         descriptions (dict): Dictionary mapping music names to descriptions
-        output_path (str): Path to save the JSON file
+        output_path (str | Path | None): Path to save the JSON file. Defaults to MUSIC_MAP_FILE.
     """
+    if output_path is None:
+        output_path = settings.MUSIC_MAP_FILE
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(descriptions, f, indent=2, ensure_ascii=False)
 
@@ -102,9 +107,9 @@ def filter_text_list(text):
     return ''.join(element for element in text if element.isalpha() or element.isspace())
 
 def generate_map():
-    music_dir = "data/music_db"
+    music_dir = settings.MUSIC_DB_DIR
     music_files = [f for f in os.listdir(music_dir) if f.endswith(('.mp3', '.flac', '.wav', '.m4a'))]
-    descriptions = extract_info_list([os.path.join(music_dir, f) for f in music_files])
+    descriptions = extract_info_list([str(music_dir / f) for f in music_files])
     print("finish extracting music info")
     filtered_files = [filter_text_list(desc) for desc in descriptions]
     print("finish filtering music info")
