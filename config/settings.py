@@ -16,6 +16,7 @@ FAISS_INDEX_DIR = DATA_DIR / "index"
 EMBEDDINGS_CACHE_DIR = DATA_DIR / "embeddings_cache"
 FILE_NAME_DIR = DATA_DIR / "file_name"
 MAPPING_DIR = DATA_DIR / "mapping"
+LOG_DIR = DATA_DIR / "log"
 
 # ---------------------------------------------------------------------------
 # Index / mapping files
@@ -44,5 +45,5 @@ TEST_DATA_DIR = BASE_DIR / "tests" / "data"
 # Auto-create runtime directories
 # ---------------------------------------------------------------------------
 for _d in [MUSIC_DB_DIR, FAISS_INDEX_DIR, QUERY_INPUT_DIR,
-           EMBEDDINGS_CACHE_DIR, FILE_NAME_DIR, MAPPING_DIR]:
+           EMBEDDINGS_CACHE_DIR, FILE_NAME_DIR, MAPPING_DIR, LOG_DIR]:
     _d.mkdir(parents=True, exist_ok=True)
