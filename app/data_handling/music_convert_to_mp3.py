@@ -22,6 +22,8 @@ _root = Path(__file__).resolve().parent.parent.parent
 if str(_root) not in sys.path:
     sys.path.insert(0, str(_root))
 
+from tqdm import tqdm
+
 from config import settings
 
 
@@ -72,12 +74,19 @@ def convert_file_in_place(src: Path, *, ffmpeg: str) -> None:
         raise
 
 
+def _short_name(name: str, max_len: int = 48) -> str:
+    if len(name) <= max_len:
+        return name
+    return name[: max_len - 1] + "…"
+
+
 def convert_music_db(
     music_dir: Path | None = None,
     *,
     dry_run: bool = False,
     limit: int | None = None,
     log_file: Path | None = None,
+    progress: bool = True,
 ) -> dict[str, int]:
     music_dir = music_dir or settings.MUSIC_DB_DIR
     stats: dict[str, int] = {
@@ -88,9 +97,10 @@ def convert_music_db(
     }
     log_lines: list[str] = []
 
-    def log(msg: str) -> None:
-        print(msg)
+    def log(msg: str, *, echo: bool = True) -> None:
         log_lines.append(msg)
+        if echo:
+            print(msg)
 
     if not music_dir.is_dir():
         log(f"ERROR: not a directory: {music_dir}")
@@ -118,23 +128,43 @@ def convert_music_db(
         f"to_convert={len(candidates)} skipped_mp3={stats['skipped_mp3']}"
     )
 
-    for path in candidates:
+    use_bar = progress and bool(candidates)
+    pbar = tqdm(
+        candidates,
+        desc="Converting to MP3",
+        unit="file",
+        disable=not use_bar,
+        dynamic_ncols=True,
+    )
+    for path in pbar:
+        if use_bar:
+            pbar.set_postfix_str(_short_name(path.name))
         try:
             if dry_run:
                 stats["dry_run"] += 1
-                log(f"DRY_RUN would convert: {path.name}")
+                msg = f"DRY_RUN would convert: {path.name}"
+                log_lines.append(msg)
+                if not use_bar:
+                    print(msg)
                 continue
             assert ffmpeg is not None
             convert_file_in_place(path, ffmpeg=ffmpeg)
             stats["ok"] += 1
-            log(f"OK: {path.name} -> {path.stem}.mp3")
+            msg = f"OK: {path.name} -> {path.stem}.mp3"
+            log_lines.append(msg)
+            if not use_bar:
+                print(msg)
         except subprocess.CalledProcessError as e:
             stats["error"] += 1
             err = (e.stderr or e.stdout or str(e)).strip()
-            log(f"ERROR: {path.name} :: {err[:500]}")
+            msg = f"ERROR: {path.name} :: {err[:500]}"
+            log_lines.append(msg)
+            tqdm.write(msg)
         except OSError as e:
             stats["error"] += 1
-            log(f"ERROR: {path.name} :: {e}")
+            msg = f"ERROR: {path.name} :: {e}"
+            log_lines.append(msg)
+            tqdm.write(msg)
 
     log(
         "summary: "
@@ -169,6 +199,11 @@ def main() -> None:
         action="store_true",
         help="Do not write data/log/music_to_mp3_<timestamp>.log",
     )
+    parser.add_argument(
+        "--no-progress",
+        action="store_true",
+        help="Disable tqdm progress bar (print each OK line instead).",
+    )
     args = parser.parse_args()
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
@@ -178,6 +213,7 @@ def main() -> None:
         dry_run=args.dry_run,
         limit=args.limit,
         log_file=log_path,
+        progress=not args.no_progress,
     )
 
 
