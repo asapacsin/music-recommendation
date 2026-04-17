@@ -7,11 +7,11 @@ Output file:
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import logging
 import os
 import sys
-import time
 from pathlib import Path
 from typing import Any
 
@@ -19,7 +19,13 @@ _root = Path(__file__).resolve().parent.parent.parent
 if str(_root) not in sys.path:
     sys.path.insert(0, str(_root))
 
-from openai import APIConnectionError, APITimeoutError, InternalServerError, OpenAI, RateLimitError
+from openai import (
+    APIConnectionError,
+    APITimeoutError,
+    AsyncOpenAI,
+    InternalServerError,
+    RateLimitError,
+)
 
 from config import settings
 
@@ -66,8 +72,8 @@ def _parse_model_json(raw_text: str) -> tuple[str | None, str | None]:
     return author, title
 
 
-def extract_metadata_from_filename(
-    client: OpenAI,
+async def extract_metadata_from_filename(
+    client: AsyncOpenAI,
     filename: str,
     *,
     model: str,
@@ -89,7 +95,7 @@ def extract_metadata_from_filename(
 
     for attempt in range(1, max_retries + 1):
         try:
-            response = client.chat.completions.create(
+            response = await client.chat.completions.create(
                 model=model,
                 response_format={"type": "json_object"},
                 messages=[
@@ -113,7 +119,7 @@ def extract_metadata_from_filename(
                 filename,
                 exc,
             )
-            time.sleep(sleep_s)
+            await asyncio.sleep(sleep_s)
         except (json.JSONDecodeError, ValueError, KeyError, IndexError, TypeError) as exc:
             logging.error("Invalid model JSON for '%s': %s", filename, exc)
             break
@@ -125,6 +131,40 @@ def extract_metadata_from_filename(
     return {"filename": filename, "author": None, "title": None}
 
 
+async def _extract_with_semaphore(
+    semaphore: asyncio.Semaphore,
+    client: AsyncOpenAI,
+    filename: str,
+    *,
+    model: str,
+) -> dict[str, str | None]:
+    async with semaphore:
+        return await extract_metadata_from_filename(client, filename, model=model)
+
+
+async def process_missing_filenames(
+    client: AsyncOpenAI,
+    filenames: list[str],
+    *,
+    model: str,
+    concurrency: int,
+) -> dict[str, dict[str, str | None]]:
+    """
+    Process missing filenames concurrently with bounded concurrency.
+    Returns mapping: filename -> metadata record.
+    """
+    if not filenames:
+        return {}
+
+    semaphore = asyncio.Semaphore(max(1, concurrency))
+    tasks = [
+        _extract_with_semaphore(semaphore, client, filename, model=model)
+        for filename in filenames
+    ]
+    results = await asyncio.gather(*tasks)
+    return {record["filename"]: record for record in results}
+
+
 def save_metadata(output_path: Path, records: list[dict[str, str | None]]) -> None:
     """Write deterministic JSON output."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -133,6 +173,40 @@ def save_metadata(output_path: Path, records: list[dict[str, str | None]]) -> No
         json.dumps(stable_records, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+
+
+def load_existing_metadata(output_path: Path) -> list[dict[str, str | None]]:
+    """
+    Load existing metadata JSON array if present.
+    Returns [] when file does not exist or is invalid.
+    """
+    if not output_path.exists():
+        return []
+
+    try:
+        payload = json.loads(output_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, list):
+            logging.warning("Existing metadata file is not a JSON array: %s", output_path)
+            return []
+    except (OSError, json.JSONDecodeError) as exc:
+        logging.warning("Failed to read existing metadata file %s: %s", output_path, exc)
+        return []
+
+    records: list[dict[str, str | None]] = []
+    for item in payload:
+        if not isinstance(item, dict):
+            continue
+        filename = item.get("filename")
+        if not isinstance(filename, str) or not filename.strip():
+            continue
+        records.append(
+            {
+                "filename": filename.strip(),
+                "author": _normalize_value(item.get("author")),
+                "title": _normalize_value(item.get("title")),
+            }
+        )
+    return records
 
 
 def main() -> None:
@@ -169,6 +243,12 @@ def main() -> None:
         default=None,
         help="Optional max number of files to process (for testing).",
     )
+    parser.add_argument(
+        "--concurrency",
+        type=int,
+        default=5,
+        help="Max concurrent API requests for missing files (default: 5).",
+    )
     args = parser.parse_args()
 
     logging.basicConfig(
@@ -190,13 +270,39 @@ def main() -> None:
     total = len(filenames)
     logging.info("Found %d files in %s", total, args.music_dir)
 
-    client = OpenAI(api_key=api_key, base_url=args.base_url)
-    records: list[dict[str, str | None]] = []
-    for idx, filename in enumerate(filenames, start=1):
-        record = extract_metadata_from_filename(client, filename, model=args.model)
-        records.append(record)
-        logging.info("Processed %d/%d: %s", idx, total, filename)
+    existing_records = load_existing_metadata(args.output)
+    existing_by_filename = {row["filename"]: row for row in existing_records}
+    logging.info("Loaded %d existing records from %s", len(existing_by_filename), args.output)
 
+    missing_filenames = [name for name in filenames if name not in existing_by_filename]
+    logging.info(
+        "%d files already cached, %d files need API extraction",
+        len(filenames) - len(missing_filenames),
+        len(missing_filenames),
+    )
+
+    if args.concurrency < 1:
+        raise ValueError("--concurrency must be >= 1")
+
+    client = AsyncOpenAI(api_key=api_key, base_url=args.base_url)
+    if missing_filenames:
+        logging.info(
+            "Starting async extraction for %d files with concurrency=%d",
+            len(missing_filenames),
+            args.concurrency,
+        )
+        new_records_by_filename = asyncio.run(
+            process_missing_filenames(
+                client,
+                missing_filenames,
+                model=args.model,
+                concurrency=args.concurrency,
+            )
+        )
+        existing_by_filename.update(new_records_by_filename)
+        logging.info("Finished async extraction for %d files", len(missing_filenames))
+
+    records = [existing_by_filename[name] for name in filenames]
     save_metadata(args.output, records)
     logging.info("Saved metadata for %d files to %s", len(records), args.output)
 
