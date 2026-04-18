@@ -33,10 +33,13 @@ DEFAULT_MODEL = "grok-4.20-non-reasoning"
 DEFAULT_BASE_URL = "https://api.x.ai/v1"
 DEFAULT_OUTPUT_PATH = settings.MAPPING_DIR / "music_metadata.json"
 SYSTEM_PROMPT = (
-    "You extract metadata from messy music filenames. "
-    "Return strict JSON with keys: author, title. "
-    "Use null for unknown values. "
-    "Do not invent details that are not reasonably inferable."
+    "You extract artist and song title from messy or incomplete music filenames. "
+    "Always return both fields as English text when you can infer them: "
+    "if the filename uses another language or script, translate or romanize into clear English; "
+    "do not leave non-English strings when a reasonable English form exists. "
+    "Output must be a single JSON object with exactly two keys: author, title. "
+    "Use JSON null for author or title when it cannot be determined from the filename alone. "
+    "Do not guess or invent names that are not supported by the filename."
 )
 
 
@@ -84,13 +87,14 @@ async def extract_metadata_from_filename(
     Extract author/title from one filename using Grok (xAI) with retries.
     """
     prompt = (
-        "Extract metadata from this music filename.\n"
-        "Return ONLY JSON with keys 'author' and 'title'.\n"
-        "Rules:\n"
-        "- If author is unknown, set author to null.\n"
-        "- If title is unknown, set title to null.\n"
-        "- Do not include extra keys.\n\n"
-        f"filename: {filename}"
+        "From the following music file path/name, infer artist (author) and song title.\n\n"
+        "Output rules:\n"
+        "- Return a single JSON object with only these keys: \"author\", \"title\".\n"
+        "- Values must be English strings when inferable (translate or romanize from other languages).\n"
+        "- If the artist cannot be determined, set \"author\" to null.\n"
+        "- If the title cannot be determined, set \"title\" to null.\n"
+        "- Do not add any other keys, comments, or markdown.\n\n"
+        f"filename:\n{filename}"
     )
 
     for attempt in range(1, max_retries + 1):
@@ -249,6 +253,15 @@ def main() -> None:
         default=5,
         help="Max concurrent API requests for missing files (default: 5).",
     )
+    parser.add_argument(
+        "--rebuild",
+        action="store_true",
+        help=(
+            "Load existing music_metadata.json, then re-call the API for every filename in the "
+            "union of (files on disk under music-dir) and (filenames already in the JSON), "
+            "and write the merged, updated JSON."
+        ),
+    )
     args = parser.parse_args()
 
     logging.basicConfig(
@@ -263,23 +276,37 @@ def main() -> None:
             "OPENAI_API_KEY is also accepted for compatibility."
         )
 
-    filenames = read_music_filenames(args.music_dir)
-    if args.limit is not None:
-        filenames = filenames[: args.limit]
-
-    total = len(filenames)
-    logging.info("Found %d files in %s", total, args.music_dir)
+    filenames_disk = read_music_filenames(args.music_dir)
+    logging.info("Found %d files on disk under %s", len(filenames_disk), args.music_dir)
 
     existing_records = load_existing_metadata(args.output)
-    existing_by_filename = {row["filename"]: row for row in existing_records}
+    existing_by_filename: dict[str, dict[str, str | None]] = {
+        row["filename"]: row for row in existing_records
+    }
     logging.info("Loaded %d existing records from %s", len(existing_by_filename), args.output)
 
-    missing_filenames = [name for name in filenames if name not in existing_by_filename]
-    logging.info(
-        "%d files already cached, %d files need API extraction",
-        len(filenames) - len(missing_filenames),
-        len(missing_filenames),
-    )
+    if args.rebuild:
+        # Union: keep JSON-only rows (e.g. file temporarily missing) and include new disk files.
+        all_filenames = sorted(set(filenames_disk) | set(existing_by_filename.keys()))
+        if args.limit is not None:
+            all_filenames = all_filenames[: args.limit]
+        missing_filenames = list(all_filenames)
+        logging.info(
+            "Rebuild mode: re-extracting via API for %d filenames (union of disk + JSON%s)",
+            len(missing_filenames),
+            f", limited to first {args.limit}" if args.limit is not None else "",
+        )
+    else:
+        filenames = list(filenames_disk)
+        if args.limit is not None:
+            filenames = filenames[: args.limit]
+        all_filenames = filenames
+        missing_filenames = [name for name in filenames if name not in existing_by_filename]
+        logging.info(
+            "%d files already cached, %d files need API extraction",
+            len(all_filenames) - len(missing_filenames),
+            len(missing_filenames),
+        )
 
     if args.concurrency < 1:
         raise ValueError("--concurrency must be >= 1")
@@ -302,7 +329,7 @@ def main() -> None:
         existing_by_filename.update(new_records_by_filename)
         logging.info("Finished async extraction for %d files", len(missing_filenames))
 
-    records = [existing_by_filename[name] for name in filenames]
+    records = [existing_by_filename[name] for name in all_filenames]
     save_metadata(args.output, records)
     logging.info("Saved metadata for %d files to %s", len(records), args.output)
 
