@@ -1,8 +1,13 @@
 """
 Extract structured music metadata from filenames in data/music_db using Grok (xAI).
 
-Each record matches:
-  audio, text, tags {artist, title, genre, mood, language}, confidence
+Each saved record:
+  audio, text, mood, confidence
+
+confidence is computed in code as:
+  0.5 * S + 0.3 * R + 0.2 * D
+(S, R, D are model-provided scores in [0, 1], not stored in the JSON file.)
+Stored confidence values are rounded to two decimal places.
 
 Output file:
     data/mapping/music_metadata.json
@@ -17,6 +22,11 @@ import os
 import sys
 from pathlib import Path
 from typing import Any
+
+# Weights for confidence = W_S * S + W_R * R + W_D * D
+CONFIDENCE_W_S = 0.5
+CONFIDENCE_W_R = 0.3
+CONFIDENCE_W_D = 0.2
 
 _root = Path(__file__).resolve().parent.parent.parent
 if str(_root) not in sys.path:
@@ -36,18 +46,22 @@ DEFAULT_MODEL = "grok-4.20-non-reasoning"
 DEFAULT_BASE_URL = "https://api.x.ai/v1"
 DEFAULT_OUTPUT_PATH = settings.MAPPING_DIR / "music_metadata.json"
 SYSTEM_PROMPT = (
-    "You infer music-related metadata only from the given file path or filename (no audio). "
-    "Respond with one JSON object using exactly these top-level keys: "
-    "\"audio\", \"text\", \"tags\", \"confidence\". "
-    "- \"audio\": string — must match the exact path string the user provides. "
-    "- \"text\": string — a short English description (one to three sentences) of likely style, "
-    "vocals, instruments, and mood inferred from the filename tokens; be conservative if uncertain. "
-    "- \"tags\": object with exactly these keys: \"artist\", \"title\", \"genre\", \"mood\", \"language\". "
-    "Use English strings when inferable; use JSON null for any field that cannot be determined from "
-    "the filename alone. Translate or romanize non-English filename text into English where reasonable. "
-    "- \"confidence\": a number from 0 to 1 for how confident you are in the artist/title tags. "
-    "Do not invent artist or title unsupported by the filename. "
-    "Do not add extra keys, markdown, or code fences. Output valid JSON only."
+    "You infer music-related cues only from the given file path or filename (no audio). "
+    "Return one JSON object with exactly these keys: "
+    "\"audio\", \"text\", \"mood\", \"S\", \"R\", \"D\". "
+    "- \"audio\": string — must equal the exact path string the user provides. "
+    "- \"text\": string — a short English line (one sentence preferred) describing likely style, "
+    "vocals, instruments, and overall feel inferred from the filename; be conservative if uncertain. "
+    "- \"mood\": string — a single concise English mood label (e.g. melancholic, upbeat) inferred "
+    "from the filename, or JSON null if it cannot be inferred. "
+    "- \"S\": number from 0 to 1 — semantic match: how well your text and mood align with the "
+    "meaningful tokens in the filename (artist/title/genre-like fragments vs noise). "
+    "- \"R\": number from 0 to 1 — source reliability: how informative and trustworthy the "
+    "filename/path is as evidence (structured title vs random IDs or garbage). "
+    "- \"D\": number from 0 to 1 — description richness: how specific and grounded your \"text\" is "
+    "for this filename versus a vague generic sentence. "
+    "Do not output confidence yourself; do not add any other keys. "
+    "No markdown or code fences. Output valid JSON only."
 )
 
 
@@ -79,27 +93,23 @@ def _normalize_confidence(value: Any) -> float:
     return 0.0
 
 
-def _parse_tags(tags_raw: Any) -> dict[str, str | None]:
-    keys = ("artist", "title", "genre", "mood", "language")
-    out: dict[str, str | None] = {k: None for k in keys}
-    if isinstance(tags_raw, dict):
-        for k in keys:
-            out[k] = _normalize_value(tags_raw.get(k))
-    return out
+def _quantize_confidence(value: float) -> float:
+    """Round stored confidence to two decimal places in [0, 1]."""
+    return round(max(0.0, min(1.0, float(value))), 2)
+
+
+def weighted_confidence(s: float, r: float, d: float) -> float:
+    """confidence = 0.5*S + 0.3*R + 0.2*D (clamped to [0, 1], two decimal places)."""
+    raw = CONFIDENCE_W_S * s + CONFIDENCE_W_R * r + CONFIDENCE_W_D * d
+    return _quantize_confidence(raw)
 
 
 def _failure_record(filename: str) -> dict[str, Any]:
     return {
         "audio": filename,
         "text": "",
-        "tags": {
-            "artist": None,
-            "title": None,
-            "genre": None,
-            "mood": None,
-            "language": None,
-        },
-        "confidence": 0.0,
+        "mood": None,
+        "confidence": _quantize_confidence(0.0),
     }
 
 
@@ -111,12 +121,15 @@ def _parse_model_json(raw_text: str, filename: str) -> dict[str, Any]:
     audio = _normalize_value(payload.get("audio")) or filename
     text_val = payload.get("text")
     text = text_val.strip() if isinstance(text_val, str) else ""
-    tags = _parse_tags(payload.get("tags"))
-    confidence = _normalize_confidence(payload.get("confidence"))
+    mood = _normalize_value(payload.get("mood"))
+    s = _normalize_confidence(payload.get("S"))
+    r = _normalize_confidence(payload.get("R"))
+    d = _normalize_confidence(payload.get("D"))
+    confidence = weighted_confidence(s, r, d)
     return {
         "audio": audio,
         "text": text,
-        "tags": tags,
+        "mood": mood,
         "confidence": confidence,
     }
 
@@ -133,14 +146,16 @@ async def extract_metadata_from_filename(
     Extract full metadata record from one filename using Grok (xAI) with retries.
     """
     prompt = (
-        "Infer metadata for this music file. Return a single JSON object with exactly these keys: "
-        "\"audio\", \"text\", \"tags\", \"confidence\".\n\n"
+        "Infer metadata for this music file from the filename only.\n"
+        "Return one JSON object with exactly these keys: "
+        "\"audio\", \"text\", \"mood\", \"S\", \"R\", \"D\".\n\n"
         "Rules:\n"
-        f"- Set \"audio\" to this exact string (copy verbatim): {json.dumps(filename)}\n"
-        "- \"text\": short English caption (style, vocals, instruments, mood) inferred from the filename.\n"
-        "- \"tags\": object with keys \"artist\", \"title\", \"genre\", \"mood\", \"language\" — "
-        "English when inferable; use null for unknown.\n"
-        "- \"confidence\": number from 0 to 1 for artist/title tag reliability.\n"
+        f"- \"audio\" must be this exact string: {json.dumps(filename)}\n"
+        "- \"text\": one short English sentence like the example tone "
+        '(e.g. "A slow, melancholic piano ballad with soft female vocals.").\n'
+        '- \"mood\": one English mood word or short phrase, or null if unknown.\n'
+        "- \"S\", \"R\", \"D\": each a number from 0 to 1 (see system message). "
+        "The client will compute confidence as 0.5*S + 0.3*R + 0.2*D — do not output confidence.\n"
         "- No markdown or extra keys.\n"
     )
 
@@ -233,12 +248,28 @@ def _record_from_loaded_item(item: dict[str, Any]) -> dict[str, Any] | None:
         audio = item["audio"].strip()
         text_val = item.get("text")
         text = text_val.strip() if isinstance(text_val, str) else ""
-        tags = _parse_tags(item.get("tags"))
+
+        mood = _normalize_value(item.get("mood"))
+        if mood is None and isinstance(item.get("tags"), dict):
+            mood = _normalize_value(item["tags"].get("mood"))
+
+        conf = item.get("confidence")
+        if conf is not None:
+            confidence = _quantize_confidence(_normalize_confidence(conf))
+        elif all(k in item for k in ("S", "R", "D")):
+            confidence = weighted_confidence(
+                _normalize_confidence(item.get("S")),
+                _normalize_confidence(item.get("R")),
+                _normalize_confidence(item.get("D")),
+            )
+        else:
+            confidence = _quantize_confidence(_normalize_confidence(item.get("confidence")))
+
         return {
             "audio": audio,
             "text": text,
-            "tags": tags,
-            "confidence": _normalize_confidence(item.get("confidence")),
+            "mood": mood,
+            "confidence": confidence,
         }
 
     # Legacy: { "filename", "author", "title" }
@@ -248,14 +279,8 @@ def _record_from_loaded_item(item: dict[str, Any]) -> dict[str, Any] | None:
         return {
             "audio": audio,
             "text": "",
-            "tags": {
-                "artist": _normalize_value(item.get("author")),
-                "title": _normalize_value(item.get("title")),
-                "genre": None,
-                "mood": None,
-                "language": None,
-            },
-            "confidence": 0.0,
+            "mood": None,
+            "confidence": _quantize_confidence(0.0),
         }
     return None
 
@@ -264,7 +289,7 @@ def load_existing_metadata(output_path: Path) -> list[dict[str, Any]]:
     """
     Load existing metadata JSON array if present.
     Returns [] when file does not exist or is invalid.
-    Legacy rows {filename, author, title} are upgraded to the new shape.
+    Legacy rows and older tag-based shapes are upgraded where possible.
     """
     if not output_path.exists():
         return []
@@ -291,7 +316,7 @@ def load_existing_metadata(output_path: Path) -> list[dict[str, Any]]:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Extract music metadata (audio, text, tags, confidence) from filenames in data/music_db."
+            "Extract music metadata (audio, text, mood, confidence) from filenames in data/music_db."
         )
     )
     parser.add_argument(
