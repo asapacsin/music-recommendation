@@ -1,6 +1,9 @@
 """
 Extract structured music metadata from filenames in data/music_db using Grok (xAI).
 
+Each record matches:
+  audio, text, tags {artist, title, genre, mood, language}, confidence
+
 Output file:
     data/mapping/music_metadata.json
 """
@@ -33,13 +36,18 @@ DEFAULT_MODEL = "grok-4.20-non-reasoning"
 DEFAULT_BASE_URL = "https://api.x.ai/v1"
 DEFAULT_OUTPUT_PATH = settings.MAPPING_DIR / "music_metadata.json"
 SYSTEM_PROMPT = (
-    "You extract artist and song title from messy or incomplete music filenames. "
-    "Always return both fields as English text when you can infer them: "
-    "if the filename uses another language or script, translate or romanize into clear English; "
-    "do not leave non-English strings when a reasonable English form exists. "
-    "Output must be a single JSON object with exactly two keys: author, title. "
-    "Use JSON null for author or title when it cannot be determined from the filename alone. "
-    "Do not guess or invent names that are not supported by the filename."
+    "You infer music-related metadata only from the given file path or filename (no audio). "
+    "Respond with one JSON object using exactly these top-level keys: "
+    "\"audio\", \"text\", \"tags\", \"confidence\". "
+    "- \"audio\": string — must match the exact path string the user provides. "
+    "- \"text\": string — a short English description (one to three sentences) of likely style, "
+    "vocals, instruments, and mood inferred from the filename tokens; be conservative if uncertain. "
+    "- \"tags\": object with exactly these keys: \"artist\", \"title\", \"genre\", \"mood\", \"language\". "
+    "Use English strings when inferable; use JSON null for any field that cannot be determined from "
+    "the filename alone. Translate or romanize non-English filename text into English where reasonable. "
+    "- \"confidence\": a number from 0 to 1 for how confident you are in the artist/title tags. "
+    "Do not invent artist or title unsupported by the filename. "
+    "Do not add extra keys, markdown, or code fences. Output valid JSON only."
 )
 
 
@@ -65,14 +73,52 @@ def _normalize_value(value: Any) -> str | None:
     return cleaned or None
 
 
-def _parse_model_json(raw_text: str) -> tuple[str | None, str | None]:
+def _normalize_confidence(value: Any) -> float:
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return max(0.0, min(1.0, float(value)))
+    return 0.0
+
+
+def _parse_tags(tags_raw: Any) -> dict[str, str | None]:
+    keys = ("artist", "title", "genre", "mood", "language")
+    out: dict[str, str | None] = {k: None for k in keys}
+    if isinstance(tags_raw, dict):
+        for k in keys:
+            out[k] = _normalize_value(tags_raw.get(k))
+    return out
+
+
+def _failure_record(filename: str) -> dict[str, Any]:
+    return {
+        "audio": filename,
+        "text": "",
+        "tags": {
+            "artist": None,
+            "title": None,
+            "genre": None,
+            "mood": None,
+            "language": None,
+        },
+        "confidence": 0.0,
+    }
+
+
+def _parse_model_json(raw_text: str, filename: str) -> dict[str, Any]:
     payload = json.loads(raw_text)
     if not isinstance(payload, dict):
         raise ValueError("Model response is not a JSON object")
 
-    author = _normalize_value(payload.get("author"))
-    title = _normalize_value(payload.get("title"))
-    return author, title
+    audio = _normalize_value(payload.get("audio")) or filename
+    text_val = payload.get("text")
+    text = text_val.strip() if isinstance(text_val, str) else ""
+    tags = _parse_tags(payload.get("tags"))
+    confidence = _normalize_confidence(payload.get("confidence"))
+    return {
+        "audio": audio,
+        "text": text,
+        "tags": tags,
+        "confidence": confidence,
+    }
 
 
 async def extract_metadata_from_filename(
@@ -82,19 +128,20 @@ async def extract_metadata_from_filename(
     model: str,
     max_retries: int = 5,
     initial_backoff_seconds: float = 1.5,
-) -> dict[str, str | None]:
+) -> dict[str, Any]:
     """
-    Extract author/title from one filename using Grok (xAI) with retries.
+    Extract full metadata record from one filename using Grok (xAI) with retries.
     """
     prompt = (
-        "From the following music file path/name, infer artist (author) and song title.\n\n"
-        "Output rules:\n"
-        "- Return a single JSON object with only these keys: \"author\", \"title\".\n"
-        "- Values must be English strings when inferable (translate or romanize from other languages).\n"
-        "- If the artist cannot be determined, set \"author\" to null.\n"
-        "- If the title cannot be determined, set \"title\" to null.\n"
-        "- Do not add any other keys, comments, or markdown.\n\n"
-        f"filename:\n{filename}"
+        "Infer metadata for this music file. Return a single JSON object with exactly these keys: "
+        "\"audio\", \"text\", \"tags\", \"confidence\".\n\n"
+        "Rules:\n"
+        f"- Set \"audio\" to this exact string (copy verbatim): {json.dumps(filename)}\n"
+        "- \"text\": short English caption (style, vocals, instruments, mood) inferred from the filename.\n"
+        "- \"tags\": object with keys \"artist\", \"title\", \"genre\", \"mood\", \"language\" — "
+        "English when inferable; use null for unknown.\n"
+        "- \"confidence\": number from 0 to 1 for artist/title tag reliability.\n"
+        "- No markdown or extra keys.\n"
     )
 
     for attempt in range(1, max_retries + 1):
@@ -109,8 +156,9 @@ async def extract_metadata_from_filename(
                 temperature=0,
             )
             raw = response.choices[0].message.content or "{}"
-            author, title = _parse_model_json(raw)
-            return {"filename": filename, "author": author, "title": title}
+            record = _parse_model_json(raw, filename)
+            record["audio"] = filename
+            return record
         except (RateLimitError, APIConnectionError, APITimeoutError, InternalServerError) as exc:
             if attempt == max_retries:
                 logging.error("xAI transient failure for '%s': %s", filename, exc)
@@ -131,8 +179,8 @@ async def extract_metadata_from_filename(
             logging.error("Unexpected error for '%s': %s", filename, exc)
             break
 
-    # Never skip files; return nulls on failure.
-    return {"filename": filename, "author": None, "title": None}
+    # Never skip files; return a safe skeleton on failure.
+    return _failure_record(filename)
 
 
 async def _extract_with_semaphore(
@@ -141,7 +189,7 @@ async def _extract_with_semaphore(
     filename: str,
     *,
     model: str,
-) -> dict[str, str | None]:
+) -> dict[str, Any]:
     async with semaphore:
         return await extract_metadata_from_filename(client, filename, model=model)
 
@@ -152,10 +200,10 @@ async def process_missing_filenames(
     *,
     model: str,
     concurrency: int,
-) -> dict[str, dict[str, str | None]]:
+) -> dict[str, dict[str, Any]]:
     """
     Process missing filenames concurrently with bounded concurrency.
-    Returns mapping: filename -> metadata record.
+    Returns mapping: audio path -> metadata record.
     """
     if not filenames:
         return {}
@@ -166,23 +214,57 @@ async def process_missing_filenames(
         for filename in filenames
     ]
     results = await asyncio.gather(*tasks)
-    return {record["filename"]: record for record in results}
+    return {record["audio"]: record for record in results}
 
 
-def save_metadata(output_path: Path, records: list[dict[str, str | None]]) -> None:
+def save_metadata(output_path: Path, records: list[dict[str, Any]]) -> None:
     """Write deterministic JSON output."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    stable_records = sorted(records, key=lambda item: item["filename"])
+    stable_records = sorted(records, key=lambda item: item["audio"])
     output_path.write_text(
         json.dumps(stable_records, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
 
 
-def load_existing_metadata(output_path: Path) -> list[dict[str, str | None]]:
+def _record_from_loaded_item(item: dict[str, Any]) -> dict[str, Any] | None:
+    """Normalize one JSON object to the current schema (supports legacy rows)."""
+    if "audio" in item and isinstance(item.get("audio"), str) and item["audio"].strip():
+        audio = item["audio"].strip()
+        text_val = item.get("text")
+        text = text_val.strip() if isinstance(text_val, str) else ""
+        tags = _parse_tags(item.get("tags"))
+        return {
+            "audio": audio,
+            "text": text,
+            "tags": tags,
+            "confidence": _normalize_confidence(item.get("confidence")),
+        }
+
+    # Legacy: { "filename", "author", "title" }
+    legacy = item.get("filename")
+    if isinstance(legacy, str) and legacy.strip():
+        audio = legacy.strip()
+        return {
+            "audio": audio,
+            "text": "",
+            "tags": {
+                "artist": _normalize_value(item.get("author")),
+                "title": _normalize_value(item.get("title")),
+                "genre": None,
+                "mood": None,
+                "language": None,
+            },
+            "confidence": 0.0,
+        }
+    return None
+
+
+def load_existing_metadata(output_path: Path) -> list[dict[str, Any]]:
     """
     Load existing metadata JSON array if present.
     Returns [] when file does not exist or is invalid.
+    Legacy rows {filename, author, title} are upgraded to the new shape.
     """
     if not output_path.exists():
         return []
@@ -196,26 +278,21 @@ def load_existing_metadata(output_path: Path) -> list[dict[str, str | None]]:
         logging.warning("Failed to read existing metadata file %s: %s", output_path, exc)
         return []
 
-    records: list[dict[str, str | None]] = []
+    records: list[dict[str, Any]] = []
     for item in payload:
         if not isinstance(item, dict):
             continue
-        filename = item.get("filename")
-        if not isinstance(filename, str) or not filename.strip():
-            continue
-        records.append(
-            {
-                "filename": filename.strip(),
-                "author": _normalize_value(item.get("author")),
-                "title": _normalize_value(item.get("title")),
-            }
-        )
+        rec = _record_from_loaded_item(item)
+        if rec is not None:
+            records.append(rec)
     return records
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Extract author/title metadata from filenames in data/music_db."
+        description=(
+            "Extract music metadata (audio, text, tags, confidence) from filenames in data/music_db."
+        )
     )
     parser.add_argument(
         "--music-dir",
@@ -280,8 +357,8 @@ def main() -> None:
     logging.info("Found %d files on disk under %s", len(filenames_disk), args.music_dir)
 
     existing_records = load_existing_metadata(args.output)
-    existing_by_filename: dict[str, dict[str, str | None]] = {
-        row["filename"]: row for row in existing_records
+    existing_by_filename: dict[str, dict[str, Any]] = {
+        row["audio"]: row for row in existing_records
     }
     logging.info("Loaded %d existing records from %s", len(existing_by_filename), args.output)
 
