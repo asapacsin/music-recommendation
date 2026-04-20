@@ -4,10 +4,8 @@ Extract structured music metadata from filenames in data/music_db using Grok (xA
 Each saved record:
   audio, text, mood, confidence
 
-confidence is computed in code as:
-  0.5 * S + 0.3 * R + 0.2 * D
-(S, R, D are model-provided scores in [0, 1], not stored in the JSON file.)
-Stored confidence values are rounded to two decimal places.
+The model outputs confidence (0–1) from KB-style assessment of the filename; values are
+quantized to two decimal places in code.
 
 Output file:
     data/mapping/music_metadata.json
@@ -22,11 +20,6 @@ import os
 import sys
 from pathlib import Path
 from typing import Any
-
-# Weights for confidence = W_S * S + W_R * R + W_D * D
-CONFIDENCE_W_S = 0.5
-CONFIDENCE_W_R = 0.3
-CONFIDENCE_W_D = 0.2
 
 _root = Path(__file__).resolve().parent.parent.parent
 if str(_root) not in sys.path:
@@ -46,22 +39,30 @@ DEFAULT_MODEL = "grok-4.20-non-reasoning"
 DEFAULT_BASE_URL = "https://api.x.ai/v1"
 DEFAULT_OUTPUT_PATH = settings.MAPPING_DIR / "music_metadata.json"
 SYSTEM_PROMPT = (
-    "You infer music-related cues only from the given file path or filename (no audio). "
-    "Return one JSON object with exactly these keys: "
-    "\"audio\", \"text\", \"mood\", \"S\", \"R\", \"D\". "
+    "You describe a music file using only its path/filename (no audio). "
+    "Treat your broad knowledge of how music tracks are named and labeled worldwide as a knowledge base (KB) "
+    "that helps you read artist/title tokens, languages, and common release patterns—but you must still "
+    "ground \"text\" and \"mood\" in what the filename string actually supports. "
+    "Return one JSON object with exactly these keys: \"audio\", \"text\", \"mood\", \"confidence\". "
     "- \"audio\": string — must equal the exact path string the user provides. "
-    "- \"text\": string — a short English line (one sentence preferred) describing likely style, "
-    "vocals, instruments, and overall feel inferred from the filename; be conservative if uncertain. "
-    "- \"mood\": string — a single concise English mood label (e.g. melancholic, upbeat) inferred "
-    "from the filename, or JSON null if it cannot be inferred. "
-    "- \"S\": number from 0 to 1 — semantic match: how well your text and mood align with the "
-    "meaningful tokens in the filename (artist/title/genre-like fragments vs noise). "
-    "- \"R\": number from 0 to 1 — source reliability: how informative and trustworthy the "
-    "filename/path is as evidence (structured title vs random IDs or garbage). "
-    "- \"D\": number from 0 to 1 — description richness: how specific and grounded your \"text\" is "
-    "for this filename versus a vague generic sentence. "
-    "Do not output confidence yourself; do not add any other keys. "
-    "No markdown or code fences. Output valid JSON only."
+    "- \"text\": string — one short English sentence (prefer about 8–15 words). Overall feel and general "
+    "musical character; stress mood, atmosphere, and energy; only high-certainty inferences from the filename; "
+    "slightly rich but general; do NOT guess specific instruments, vocals, or genre unless clearly indicated "
+    "in the filename; if the filename gives little information, use a simple, generic but meaningful sentence. "
+    "- \"mood\": string or JSON null — one concise English mood label only when explicit English mood words "
+    "or clearly interpretable mood tokens appear in the filename (e.g. sad, happy, chill); non-English or "
+    "poetic titles → null unless such a token is unambiguously present; never infer mood from your own \"text\". "
+    "- \"confidence\": number from 0 to 1 (you output it; the client may round to two decimals). "
+    "This is how trustworthy a music description is when predicted from this filename using the KB: "
+    "HIGH only when the KB plus the filename together give clear, trackable music information (recognizable "
+    "song/artist/title-like naming you can connect to a sensible general description). "
+    "FORCED LOW: if the KB cannot tie the string to any trackable music information (no usable song/title/artist "
+    "signal the KB can anchor—e.g. opaque names, bare numbers, meaningless tokens), set confidence in the "
+    "rough range 0.05–0.35 (do not use high values). "
+    "FORCED ZERO: if the filename is not a valid plausible music filename at all (random hash only, obvious "
+    "temp/encoder junk with no music naming, garbage stem, clearly not a music track label), set confidence "
+    "to exactly 0. "
+    "Do not output extra keys, markdown, or code fences. Output valid JSON only."
 )
 
 
@@ -98,12 +99,6 @@ def _quantize_confidence(value: float) -> float:
     return round(max(0.0, min(1.0, float(value))), 2)
 
 
-def weighted_confidence(s: float, r: float, d: float) -> float:
-    """confidence = 0.5*S + 0.3*R + 0.2*D (clamped to [0, 1], two decimal places)."""
-    raw = CONFIDENCE_W_S * s + CONFIDENCE_W_R * r + CONFIDENCE_W_D * d
-    return _quantize_confidence(raw)
-
-
 def _failure_record(filename: str) -> dict[str, Any]:
     return {
         "audio": filename,
@@ -122,10 +117,7 @@ def _parse_model_json(raw_text: str, filename: str) -> dict[str, Any]:
     text_val = payload.get("text")
     text = text_val.strip() if isinstance(text_val, str) else ""
     mood = _normalize_value(payload.get("mood"))
-    s = _normalize_confidence(payload.get("S"))
-    r = _normalize_confidence(payload.get("R"))
-    d = _normalize_confidence(payload.get("D"))
-    confidence = weighted_confidence(s, r, d)
+    confidence = _quantize_confidence(_normalize_confidence(payload.get("confidence")))
     return {
         "audio": audio,
         "text": text,
@@ -146,17 +138,18 @@ async def extract_metadata_from_filename(
     Extract full metadata record from one filename using Grok (xAI) with retries.
     """
     prompt = (
-        "Infer metadata for this music file from the filename only.\n"
-        "Return one JSON object with exactly these keys: "
-        "\"audio\", \"text\", \"mood\", \"S\", \"R\", \"D\".\n\n"
-        "Rules:\n"
-        f"- \"audio\" must be this exact string: {json.dumps(filename)}\n"
-        "- \"text\": one short English sentence like the example tone "
-        '(e.g. "A slow, melancholic piano ballad with soft female vocals.").\n'
-        '- \"mood\": one English mood word or short phrase, or null if unknown.\n'
-        "- \"S\", \"R\", \"D\": each a number from 0 to 1 (see system message). "
-        "The client will compute confidence as 0.5*S + 0.3*R + 0.2*D — do not output confidence.\n"
-        "- No markdown or extra keys.\n"
+        "Infer metadata for this music file from the filename only (no audio).\n"
+        "Use your KB of real-world music naming to read the string, but only assert mood/text the filename supports.\n"
+        "Return one JSON object with exactly these keys: \"audio\", \"text\", \"mood\", \"confidence\".\n\n"
+        "Fields:\n"
+        f"- \"audio\": must be exactly: {json.dumps(filename)}\n"
+        "- \"text\": one sentence (~8–15 words), general feel/energy; no invented instruments/vocals/genre; "
+        "generic if little signal.\n"
+        "- \"mood\": English mood word/token only if clearly in the filename; else null; not from your text.\n"
+        "- \"confidence\": 0–1. Use KB + filename: high only with clear trackable music naming; "
+        "if KB cannot anchor trackable music info → forced LOW (~0.05–0.35); "
+        "if not a valid music filename at all → exactly 0.\n"
+        "- Do not output S, R, or D. No markdown or extra keys.\n"
     )
 
     for attempt in range(1, max_retries + 1):
@@ -196,6 +189,12 @@ async def extract_metadata_from_filename(
 
     # Never skip files; return a safe skeleton on failure.
     return _failure_record(filename)
+
+
+def _chunked(items: list[str], chunk_size: int) -> list[list[str]]:
+    if chunk_size < 1:
+        raise ValueError("chunk_size must be >= 1")
+    return [items[i : i + chunk_size] for i in range(0, len(items), chunk_size)]
 
 
 async def _extract_with_semaphore(
@@ -257,13 +256,13 @@ def _record_from_loaded_item(item: dict[str, Any]) -> dict[str, Any] | None:
         if conf is not None:
             confidence = _quantize_confidence(_normalize_confidence(conf))
         elif all(k in item for k in ("S", "R", "D")):
-            confidence = weighted_confidence(
-                _normalize_confidence(item.get("S")),
-                _normalize_confidence(item.get("R")),
-                _normalize_confidence(item.get("D")),
-            )
+            # Legacy rows: approximate former client-side blend
+            s = _normalize_confidence(item.get("S"))
+            r = _normalize_confidence(item.get("R"))
+            d = _normalize_confidence(item.get("D"))
+            confidence = _quantize_confidence(0.5 * s + 0.3 * r + 0.2 * d)
         else:
-            confidence = _quantize_confidence(_normalize_confidence(item.get("confidence")))
+            confidence = _quantize_confidence(0.0)
 
         return {
             "audio": audio,
@@ -356,6 +355,12 @@ def main() -> None:
         help="Max concurrent API requests for missing files (default: 5).",
     )
     parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=400,
+        help="Save checkpoint after every N extracted files (default: 400).",
+    )
+    parser.add_argument(
         "--rebuild",
         action="store_true",
         help=(
@@ -412,23 +417,46 @@ def main() -> None:
 
     if args.concurrency < 1:
         raise ValueError("--concurrency must be >= 1")
+    if args.batch_size < 1:
+        raise ValueError("--batch-size must be >= 1")
 
     client = AsyncOpenAI(api_key=api_key, base_url=args.base_url)
     if missing_filenames:
+        batches = _chunked(missing_filenames, args.batch_size)
+        total_batches = len(batches)
         logging.info(
-            "Starting async extraction for %d files with concurrency=%d",
+            "Starting async extraction for %d files with concurrency=%d in %d batches (batch_size=%d)",
             len(missing_filenames),
             args.concurrency,
+            total_batches,
+            args.batch_size,
         )
-        new_records_by_filename = asyncio.run(
-            process_missing_filenames(
-                client,
-                missing_filenames,
-                model=args.model,
-                concurrency=args.concurrency,
+
+        for i, batch in enumerate(batches, start=1):
+            logging.info("Processing batch %d/%d with %d files", i, total_batches, len(batch))
+            batch_records = asyncio.run(
+                process_missing_filenames(
+                    client,
+                    batch,
+                    model=args.model,
+                    concurrency=args.concurrency,
+                )
             )
-        )
-        existing_by_filename.update(new_records_by_filename)
+            existing_by_filename.update(batch_records)
+
+            # Checkpoint after every batch so previous progress is preserved.
+            checkpoint_records = [
+                existing_by_filename[name] for name in all_filenames if name in existing_by_filename
+            ]
+            save_metadata(args.output, checkpoint_records)
+            logging.info(
+                "Saved batch %d/%d checkpoint to %s (%d records)",
+                i,
+                total_batches,
+                args.output,
+                len(checkpoint_records),
+            )
+
         logging.info("Finished async extraction for %d files", len(missing_filenames))
 
     records = [existing_by_filename[name] for name in all_filenames]

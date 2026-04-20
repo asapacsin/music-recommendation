@@ -27,6 +27,9 @@ OL3_INDEX_FILE = FAISS_INDEX_DIR / "index.faiss"
 FILE_PATHS_FILE = FILE_NAME_DIR / "file_paths.txt"
 ID_PATH_MAPPING_FILE = MAPPING_DIR / "id_path_mapping.json"
 MUSIC_MAP_FILE = MAPPING_DIR / "music_map.txt"
+MUSIC_METADATA_FILE = MAPPING_DIR / "music_metadata.json"
+HUMAN_PASS_WAY_FILE = MAPPING_DIR / "human_pass_way.json"
+PROCESS_META_FILE = MAPPING_DIR / "process_meta.json"
 
 # ---------------------------------------------------------------------------
 # Model paths
