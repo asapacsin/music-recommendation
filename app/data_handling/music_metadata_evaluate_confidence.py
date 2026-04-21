@@ -1,7 +1,7 @@
 """
 Evaluate confidence in data/mapping/music_metadata.json.
 
-Rows with 0.75 <= confidence <= 0.85 are written to human_pass_way.json for human review.
+Rows with 0.1 <= confidence <= 0.4 are written to human_pass_way.json for human review.
 """
 from __future__ import annotations
 
@@ -49,8 +49,8 @@ def evaluate_confidence(
     counts = {
         "total": len(records),
         "human_pass_way": 0,
-        "high_gt_0_80": 0,
-        "low_lt_0_70": 0,
+        "high_gt_0_4": 0,
+        "low_lt_0_1": 0,
         "other": 0,
     }
 
@@ -59,13 +59,13 @@ def evaluate_confidence(
         if c is None:
             counts["other"] += 1
             continue
-        if 0.75 <= c <= 0.80:
+        if 0.1 <= c <= 0.4:
             human_queue.append(row)
             counts["human_pass_way"] += 1
-        elif c > 0.80:
-            counts["high_gt_0_80"] += 1
-        elif c < 0.70:
-            counts["low_lt_0_70"] += 1
+        elif c > 0.4:
+            counts["high_gt_0_4"] += 1
+        elif c < 0.1:
+            counts["low_lt_0_1"] += 1
         else:
             counts["other"] += 1
 
@@ -75,7 +75,7 @@ def evaluate_confidence(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Route 0.5–0.7 confidence rows from music_metadata.json to human_pass_way.json."
+        description="Route 0.1–0.4 confidence rows from music_metadata.json to human_pass_way.json."
     )
     parser.add_argument(
         "--input",
@@ -98,8 +98,8 @@ def main() -> None:
 
     stats = evaluate_confidence(args.input, args.output)
     logging.info(
-        "total=%(total)d human_pass_way(0.5–0.7)=%(human_pass_way)d "
-        "high(>0.7)=%(high_gt_0_7)d low(<0.5)=%(low_lt_0_5)d other=%(other)d",
+        "total=%(total)d human_pass_way(0.1–0.4)=%(human_pass_way)d "
+        "high(>0.4)=%(high_gt_0_4)d low(<0.1)=%(low_lt_0_1)d other=%(other)d",
         stats,
     )
     logging.info("Wrote %d rows to %s", stats["human_pass_way"], args.output)
