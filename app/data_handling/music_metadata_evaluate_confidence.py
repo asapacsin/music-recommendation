@@ -2,6 +2,7 @@
 Evaluate confidence in data/mapping/music_metadata.json.
 
 Rows with 0.1 <= confidence <= 0.4 are written to human_pass_way.json for human review.
+Rows with confidence > threshold (default 0.35) can be collected to a separate file.
 """
 from __future__ import annotations
 
@@ -73,6 +74,30 @@ def evaluate_confidence(
     return counts
 
 
+def collect_high_confidence(
+    music_metadata_path: Path,
+    high_confidence_path: Path,
+    *,
+    threshold: float = 0.35,
+) -> dict[str, int]:
+    """
+    Collect rows with confidence strictly greater than threshold.
+    """
+    records = load_music_metadata(music_metadata_path)
+    high_rows: list[dict[str, Any]] = []
+
+    for row in records:
+        c = _confidence(row)
+        if c is not None and c > threshold:
+            high_rows.append(row)
+
+    save_json(high_confidence_path, high_rows)
+    return {
+        "total": len(records),
+        "high_confidence": len(high_rows),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Route 0.1–0.4 confidence rows from music_metadata.json to human_pass_way.json."
@@ -89,6 +114,23 @@ def main() -> None:
         default=settings.HUMAN_PASS_WAY_FILE,
         help="Output human_pass_way.json (mid-confidence queue)",
     )
+    parser.add_argument(
+        "--collect-high",
+        action="store_true",
+        help="Also collect rows with confidence > --high-threshold into --high-output.",
+    )
+    parser.add_argument(
+        "--high-threshold",
+        type=float,
+        default=0.35,
+        help="Threshold for high-confidence collector (strictly greater than this value).",
+    )
+    parser.add_argument(
+        "--high-output",
+        type=Path,
+        default=settings.MAPPING_DIR / "music_metadata_gt_0_35.json",
+        help="Output file for high-confidence collector.",
+    )
     args = parser.parse_args()
 
     logging.basicConfig(
@@ -103,6 +145,22 @@ def main() -> None:
         stats,
     )
     logging.info("Wrote %d rows to %s", stats["human_pass_way"], args.output)
+
+    if args.collect_high:
+        if not 0.0 <= args.high_threshold <= 1.0:
+            raise ValueError("--high-threshold must be between 0 and 1")
+        high_stats = collect_high_confidence(
+            args.input,
+            args.high_output,
+            threshold=args.high_threshold,
+        )
+        logging.info(
+            "Collected %d/%d rows with confidence > %s to %s",
+            high_stats["high_confidence"],
+            high_stats["total"],
+            args.high_threshold,
+            args.high_output,
+        )
 
 
 if __name__ == "__main__":
