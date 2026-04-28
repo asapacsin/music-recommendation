@@ -1,191 +1,182 @@
-## 🎵 AI-Based Music Recommendation System
+# Music Retrieval and CLAP Data Pipeline
 
-A **self-contained, content-based music recommendation system** that recommends similar tracks from a local music database using **deep audio embeddings** and **vector similarity search**.
+This repository contains a local music retrieval workflow built around:
 
-This system achieves approximately **80% recommendation precision**, compared to a **~20% random baseline**, representing a **4× improvement**.
+- metadata extraction from filenames,
+- confidence routing and merge utilities,
+- 15-second audio segmentation for CLAP fine-tuning,
+- FAISS indexing for retrieval,
+- and zero-shot tempo evaluation.
 
----
+## What is included
 
-## 🚀 Overview
+- `app/data_handling/music_extract_metadata.py`
+  - async metadata extraction to `data/mapping/music_metadata.json`
+  - supports incremental update, rebuild, confidence filtering, batching, and checkpoint saves
+- `app/data_handling/music_metadata_evaluate_confidence.py`
+  - confidence triage (`human_pass_way.json`) and optional high-confidence export
+- `app/data_handling/music_metadata_merge_process_meta.py`
+  - merge process metadata with confidence threshold + human override
+- `app/data_handling/music_split_to_15s.py`
+  - split source audio into 15s clips and update `music_15s_map.json`
+- `app/data_handling/music_build_train_val_from_15s.py`
+  - grouped-by-source train/val manifests for CLAP:
+    - `clap_train_15s.jsonl`
+    - `clap_val_15s.jsonl`
+    - `clap_split_summary.json`
+- `app/metadata_faiss.py`
+  - build and query FAISS text index from metadata rows
+- `app/data_handling/music_eval_zeroshot_tempo.py`
+  - BPM-derived pseudo labels + CLAP zero-shot tempo evaluation
+  - supports resume/checkpoint for large datasets
 
-This project implements an **end-to-end audio similarity pipeline**:
+## Setup
 
-- No user data
-- No metadata
-- No collaborative filtering
+### 1) Python environment
 
-Recommendations are generated **purely from audio content**.
-
----
-
-## 🔍 What This System Does
-
-1. Accepts a music file as input
-2. Extracts deep audio embeddings using a pretrained neural network
-3. Searches a local music database using FAISS
-4. Returns the **Top-K most similar tracks**
-
----
-
-## 🧠 Core Pipeline
-
-```text
-Audio File
-   ↓
-librosa (audio loading)
-   ↓
-torchopenl3 (deep audio embedding)
-   ↓
-FAISS (vector index)
-   ↓
-Nearest-Neighbor Search
-   ↓
-Top-K Recommendations
-📈 Performance
-Metric	Value
-Recommendation Precision	~80%
-Random Baseline	~20%
-Improvement	~4×
-Embedding Time	~5 min / 100 tracks
-GPU Memory	~6 GB VRAM
-Deployment	Local / Docker / GPU
-```
----
-
-## 🧰 Technology Stack
-Python
-
-PyTorch
-
-librosa
-
-torchopenl3
-
-FAISS
-
-Docker
-
-NVIDIA GPU (CUDA)
-
----
-
-## 📁 Project Structure
-```
-text
-Copy code
-.
-├── app/
-│   ├── recommend.py
-│   └── converters/
-│       └── movie_convert.py
-├── data/
-│   ├── input/           # Query music files
-│   ├── movie_input/     # Optional movie files
-│   └── music_db/        # Music database
-├── Dockerfile
-└── README.md
+```bash
+python -m venv .venv
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
 
----
+### 2) Environment variables
 
-## 🐳 Environment Setup (Docker)
+Create `.env` in project root (if not already present):
+
+```env
+XAI_API_KEY=your_key
+XAI_MODEL=grok-4.20-non-reasoning
+XAI_BASE_URL=https://api.x.ai/v1
+# Optional:
+# XAI_REASONING_MODEL=...
 ```
-#Build the Docker Image
-docker build -t your_image_name
 
-#Run the Container with GPU Support
-docker run --gpus all -it --rm \
-  --mount type=bind,source=HOST_PATH,target=CONTAINER_PATH \
-  your_image_name bash
+### 3) Required local model file
 
+The CLAP checkpoint path is configured in `config/settings.py`:
 
-#
-Install the project-specific library within the dependencies
-pip install -e .
-This ensures dependency consistency and reproducibility.
+- `model/clap/music_audioset_epoch_15_esc_90.14.pt`
+
+Make sure this file exists before CLAP indexing/evaluation commands.
+
+## Directory conventions
+
+- Source music: `data/music_db`
+- 15s segments: `data/music_db_15s`
+- Mappings/metadata/manifests: `data/mapping`
+- FAISS files: `data/index`
+
+## End-to-end workflow
+
+### Step A: Extract metadata from filenames
+
+Incremental update (default behavior):
+
+```bash
+python app/data_handling/music_extract_metadata.py
 ```
----
 
-## 🎬 Optional: Convert Movie Files to Audio
-Movie files can be converted into audio for recommendation.
+Use reasoning model + update only low-confidence rows:
+
+```bash
+python app/data_handling/music_extract_metadata.py --reasoning --confidence 0.35
 ```
-python app/converters/movie_convert.py \
-  -i input_path \
-  -o output_path
 
-Supported Formats
-mp4/mkv/avi/mov/flv
+Force rebuild over union of existing JSON + disk files:
+
+```bash
+python app/data_handling/music_extract_metadata.py --rebuild
 ```
----
 
-## ▶️ How to Use
+### Step B: Confidence routing
+
+Create human review queue and optionally collect high-confidence rows:
+
+```bash
+python app/data_handling/music_metadata_evaluate_confidence.py
+python app/data_handling/music_metadata_evaluate_confidence.py --collect-high --high-threshold 0.35
 ```
-Step 1: Build the Embedding Index
-Run once or whenever the music database changes.
 
-python app/recommend.py -b True
-This extracts embeddings from data/music_db/ and builds the FAISS index.
+### Step C: Merge process metadata
 
-Step 2: Run Recommendation
-python app/recommend.py -r file_name
-The system returns the Top-5 most similar tracks, ranked by distance.
+```bash
+python app/data_handling/music_metadata_merge_process_meta.py --music-confidence-min 0.7
 ```
----
 
-## 📊 Example Output
+### Step D: Split to 15-second clips
+
+This script updates mapping with checkpoint-safe behavior:
+
+```bash
+python app/data_handling/music_split_to_15s.py
 ```
-AI-Based Recommendation
-Using Genesis to recommendation:
-Top Recommendations:
-('data/music_db/premonition.mp3', 57.01)     Good
-('data/music_db/flyingbird.mp3', 58.72)      Good
-('data/music_db/snowgoddess.mp3', 59.62)     Good
-('data/music_db/sakuraofwinter.mp3', 63.96)  Good
-('data/music_db/upinthesky.mp3', 65.46)      Bad
 
-Precision: 4 / 5 = 80%
-Random Baseline
-data/music_db/sora.mp3                             Bad
-data/music_db/durnkinwind.mp3                      Bad
-data/music_db/streetwherewindsettles.mp3           Good
-data/music_db/earlysummerrain.mp3                  Bad
-data/music_db/Lightning Returns - FF XIII OST.mp3  Bad
+### Step E: Build CLAP train/val manifests
 
-Precision: 1 / 5 = 20%
+```bash
+python app/data_handling/music_build_train_val_from_15s.py
 ```
----
 
-## 🛠 Engineering Notes
-Fully modular design
+## Metadata FAISS index module
 
-Clear API boundaries for backend or full-stack integration
+Build metadata text index:
 
-GPU-aware embedding extraction
+```bash
+python -m app.metadata_faiss build --min-confidence 0.35
+```
 
-Dockerized for reproducibility
+Search metadata index:
 
-Scales to large datasets via FAISS
+```bash
+python -m app.metadata_faiss search --query "melancholic piano ballad" --top-k 5
+```
 
----
+Default outputs:
 
-## 📌 Use Cases
-Music similarity search
+- `data/index/metadata_text_index.faiss`
+- `data/mapping/metadata_id_mapping.json`
 
-Audio discovery engines
+## Zero-shot tempo evaluation (before fine-tuning)
 
-Soundtrack recommendation
+Run zero-shot tempo eval on validation manifest:
 
-Audio ML research prototypes
+```bash
+python -m app.data_handling.music_eval_zeroshot_tempo
+```
 
+Useful options for large datasets:
 
----
+```bash
+python -m app.data_handling.music_eval_zeroshot_tempo --save-every 50
+python -m app.data_handling.music_eval_zeroshot_tempo --resume
+python -m app.data_handling.music_eval_zeroshot_tempo --overwrite
+```
 
-## 📄 License
-MIT License 
+Outputs:
 
-### Dataset Size & Limitations
+- `data/mapping/tempo_eval_predictions.jsonl`
+- `data/mapping/tempo_eval_metrics.json`
 
-This project was evaluated on a small-scale dataset (159 music tracks) as a proof-of-concept.
-While absolute precision values are not statistically stable at this scale, results consistently
-demonstrate a strong signal compared to a random baseline. The system architecture is designed
-to scale to larger datasets without modification.
+Evaluation logic:
+
+- BPM estimated from audio (librosa) -> pseudo label:
+  - `slow` `< 80`
+  - `mid-tempo` `80-120`
+  - `fast` `> 120`
+- CLAP zero-shot prompt classification:
+  - `"a slow tempo music track"`
+  - `"a mid-tempo music track"`
+  - `"a fast tempo music track"`
+
+## Legacy audio retrieval scripts
+
+- `app/recommend.py`: OpenL3-based audio similarity flow
+- `app/init_model.py`: CLAP embedding/index utilities and retrieval helpers
+
+## Notes
+
+- Many scripts assume relative paths under project root.
+- For long-running jobs, keep outputs in `data/mapping` and resume where supported.
+- If GPU is available, CLAP components may use it depending on runtime environment; BPM extraction with `librosa` is CPU-side.
