@@ -170,6 +170,64 @@ Evaluation logic:
   - `"a mid-tempo music track"`
   - `"a fast tempo music track"`
 
+## Human-evaluated Top-10 style retrieval workflow
+
+This workflow is for:
+
+- instrumentation
+- mood
+- energy
+- texture
+
+using Top-10 retrieval and human labels.
+
+### 1) Prepare style query set
+
+Default query file:
+
+- `data/eval/style_queries.json`
+
+You can regenerate defaults:
+
+```bash
+python -m app.data_handling.music_eval_topk_prepare --init-queries --overwrite-queries
+```
+
+### 2) Generate Top-10 candidates and human labeling sheet
+
+```bash
+python -m app.data_handling.music_eval_topk_prepare --top-k 10
+```
+
+Outputs:
+
+- `data/eval/top10_candidates.jsonl` (machine records)
+- `data/eval/top10_human_labels.csv` (fill `relevance`)
+
+Human labeling guide for `relevance`:
+
+- `0` = not relevant
+- `1` = relevant
+- optional graded relevance (`2` = very relevant)
+
+### 3) Score human-labeled results
+
+After filling `data/eval/top10_human_labels.csv`:
+
+```bash
+python -m app.data_handling.music_eval_topk_score --top-k 10
+```
+
+Output:
+
+- `data/eval/top10_metrics.json`
+
+Reported metrics:
+
+- overall `precision@10`, `hitrate@10`, `ndcg@10`
+- per-type breakdown (`instrumentation`, `mood`, `energy`, `texture`)
+- per-query metrics
+
 ## Legacy audio retrieval scripts
 
 - `app/recommend.py`: OpenL3-based audio similarity flow
