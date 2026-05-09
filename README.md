@@ -29,6 +29,8 @@ This repository contains a local music retrieval workflow built around:
 - `app/data_handling/music_eval_zeroshot_tempo.py`
   - BPM-derived pseudo labels + CLAP zero-shot tempo evaluation
   - supports resume/checkpoint for large datasets
+- `app/data_handling/music_eval_build_song_manifest.py` / `music_eval_zeroshot_tempo_song.py` / `music_eval_prepare_gold_multihot_csv.py` / `music_eval_merge_gold.py` / `music_eval_upgrade_gold_csv.py`
+  - song-level eval manifest, human gold sheet, merged `gold_merged.jsonl`, safe CSV column upgrades (see `docs/README_eval_merge.md`)
 
 ## Setup
 
@@ -140,6 +142,8 @@ Default outputs:
 
 ## Zero-shot tempo evaluation (before fine-tuning)
 
+### Clip-level (15s rows in `clap_val_15s.jsonl`)
+
 Run zero-shot tempo eval on validation manifest:
 
 ```bash
@@ -170,16 +174,83 @@ Evaluation logic:
   - `"a mid-tempo music track"`
   - `"a fast tempo music track"`
 
+### Song-level (K clips per source track)
+
+Build a manifest with up to **3** clips per song (first / middle / last segment in `music_15s_map.json`):
+
+```bash
+# All split songs
+python -m app.data_handling.music_eval_build_song_manifest
+
+# Only val songs — full pool (can be hundreds of tracks)
+python -m app.data_handling.music_eval_build_song_manifest \
+  --filter-val-jsonl data/mapping/clap_val_15s.jsonl
+
+# Gold labeling: random ~150 songs from val (recommended workload)
+python -m app.data_handling.music_eval_build_song_manifest \
+  --filter-val-jsonl data/mapping/clap_val_15s.jsonl \
+  --random-sample 150 --seed 42
+```
+
+Run tempo eval aggregated per **song** (majority vote over clips; ties broken by mean BPM / mean CLAP scores):
+
+```bash
+python -m app.data_handling.music_eval_zeroshot_tempo_song
+```
+
+Outputs:
+
+- `data/eval/song_eval_manifest.jsonl`
+- `data/eval/tempo_eval_song_predictions.jsonl`
+- `data/eval/tempo_eval_song_metrics.json`
+
+Manifest script options: `--max-songs`, `--random-sample`, `--seed`.  
+Song tempo eval options: `--resume` / `--overwrite`, `--save-every`.
+
+### Human gold set (multi-hot 0/1 per class)
+
+Minimal Excel sheet: **filename only** + label columns (no full path, no clip list, no uncertain/notes). Tempo remains program/BPM. Labels follow `docs/music_style.txt`: **instrumentation** (piano / orchestral / vocal) and **mood/character** (sad/melancholic, relaxing, dark/tense, elegant, epic).
+
+After you have `song_eval_manifest.jsonl`:
+
+```bash
+python -m app.data_handling.music_eval_prepare_gold_multihot_csv
+```
+
+Outputs:
+
+- `data/eval/gold_labels_multihot_template.csv` — columns: `song_name`, then multi-hot columns (all start at **0**)
+- `data/eval/gold_labels_multihot_template.csv.sidecar.jsonl` — same row order: `{song_name, source_path}` for merging or disambiguating duplicate filenames (`--no-sidecar` to omit)
+
+Label columns: `inst_piano`, `inst_orchestral`, `inst_vocal`, `mood_sad_melancholic`, `mood_relaxing`, `mood_dark_tense`, `mood_exciting`, `mood_elegant`, `mood_epic` — use **0** or **1**.
+
+**Already labeling?** After taxonomy changes, upgrade in place (backs up `.bak`, preserves row order for sidecar):
+
+```bash
+python -m app.data_handling.music_eval_upgrade_gold_csv --csv data/eval/gold_labels_multihot_template.csv --in-place
+```
+
+Or write to a new file:
+
+```bash
+python -m app.data_handling.music_eval_upgrade_gold_csv --csv data/eval/gold_labels_multihot_template.csv --out data/eval/gold_labels_upgraded.csv
+```
+
+**UTF-8 with BOM** by default for Excel (`--no-bom` to disable).
+
+### Merge gold labels + program tempo (+ metadata)
+
+After human labeling and **`music_eval_zeroshot_tempo_song`** (same manifest):
+
+```bash
+python -m app.data_handling.music_eval_merge_gold
+```
+
+Writes **`data/eval/gold_merged.jsonl`** for downstream val/test. Full paths and ordering are documented in **`docs/README_eval_merge.md`**.
+
 ## Human-evaluated Top-10 style retrieval workflow
 
-This workflow is for:
-
-- instrumentation
-- mood
-- energy
-- texture
-
-using Top-10 retrieval and human labels.
+This workflow is for **instrumentation**, **mood**, and **style** (elegant / epic) queries — Top-10 retrieval and human labels. See `docs/music_style.txt` and `data/eval/style_queries.json`.
 
 ### 1) Prepare style query set
 
@@ -225,7 +296,7 @@ Output:
 Reported metrics:
 
 - overall `precision@10`, `hitrate@10`, `ndcg@10`
-- per-type breakdown (`instrumentation`, `mood`, `energy`, `texture`)
+- per-type breakdown (`instrumentation`, `mood`, `style`)
 - per-query metrics
 
 ## Legacy audio retrieval scripts

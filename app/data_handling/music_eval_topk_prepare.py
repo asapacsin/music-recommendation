@@ -2,7 +2,7 @@
 Prepare Top-K retrieval candidates for human evaluation of style queries.
 
 Workflow:
-1) Load style queries (instrumentation, mood, energy, texture).
+1) Load style queries (instrumentation, mood/character).
 2) Run text retrieval on metadata FAISS index.
 3) Write machine candidates JSONL and human labeling CSV template.
 """
@@ -29,18 +29,14 @@ from config import settings
 
 DEFAULT_STYLE_QUERIES: list[dict[str, str]] = [
     {"query_id": "inst_piano", "query_type": "instrumentation", "label": "piano", "query_text": "piano music"},
-    {"query_id": "inst_electronic", "query_type": "instrumentation", "label": "electronic", "query_text": "electronic music"},
     {"query_id": "inst_orchestral", "query_type": "instrumentation", "label": "orchestral", "query_text": "orchestral music"},
     {"query_id": "inst_vocal", "query_type": "instrumentation", "label": "vocal", "query_text": "vocal music"},
-    {"query_id": "mood_happy", "query_type": "mood", "label": "happy", "query_text": "happy music"},
     {"query_id": "mood_sad_melancholic", "query_type": "mood", "label": "sad/melancholic", "query_text": "sad melancholic music"},
-    {"query_id": "mood_energetic", "query_type": "mood", "label": "energetic", "query_text": "energetic music"},
     {"query_id": "mood_relaxing", "query_type": "mood", "label": "relaxing", "query_text": "relaxing music"},
     {"query_id": "mood_dark_tense", "query_type": "mood", "label": "dark/tense", "query_text": "dark tense music"},
-    {"query_id": "energy_low", "query_type": "energy", "label": "low", "query_text": "low energy ambient chill music"},
-    {"query_id": "energy_high", "query_type": "energy", "label": "high", "query_text": "high energy dance rock music"},
-    {"query_id": "texture_solo", "query_type": "texture", "label": "solo-instrument", "query_text": "solo instrument music"},
-    {"query_id": "texture_multi", "query_type": "texture", "label": "multi-instrument", "query_text": "multi instrument music"},
+    {"query_id": "mood_exciting", "query_type": "mood", "label": "exciting", "query_text": "exciting music"},
+    {"query_id": "mood_elegant", "query_type": "style", "label": "elegant", "query_text": "elegant refined sophisticated music"},
+    {"query_id": "mood_epic", "query_type": "style", "label": "epic", "query_text": "epic cinematic grand orchestral music"},
 ]
 
 
