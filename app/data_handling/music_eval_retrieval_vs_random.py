@@ -15,6 +15,11 @@ tempo_accuracy, tempo_macro_f1, tempo_n_songs — from song-level BPM vs CLAP ze
 already stored in ``gold_merged.jsonl`` (``program_tempo``), intersected with the
 metadata pool basenames (deduped per song).
 
+With ``--include-tempo-queries`` (default: on), three extra matrix blocks use
+**retrieval-tuned** tempo phrases (richer than the song-classifier prompts) for the
+metadata text index; relevance is still BPM ``tempo_bin_bpm`` only. Use
+``--no-include-tempo-queries`` for style-only rows.
+
 CLAP prompts strip a trailing " music" suffix (case-insensitive); CSV query_text matches
 that same stripped phrase.
 
@@ -28,7 +33,7 @@ import json
 import math
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 import numpy as np
 
@@ -39,6 +44,15 @@ if str(_root) not in sys.path:
 from config import settings
 
 from app.data_handling.music_eval_prepare_gold_multihot_csv import MULTIHOT_COLUMNS
+
+# Text for CLAP when scoring metadata FAISS (LLM-style blurbs), not the song-level
+# classifier strings in music_eval_zeroshot_tempo.TEMPO_PROMPTS. Order matches
+# TEMPO_LABELS: slow, mid-tempo, fast.
+_TEMPO_RETRIEVAL_QUERY_TEXTS: list[str] = [
+    "slow gentle ballad soft pacing low BPM relaxed understated",
+    "moderate steady mid-tempo walking groove even rhythm mid pacing",
+    "fast driving upbeat energetic high BPM quick rhythm danceable",
+]
 
 
 def _norm_sp(value: str) -> str:
@@ -65,10 +79,22 @@ def _normalize_embeddings(x: np.ndarray) -> np.ndarray:
     return x / norms
 
 
-def _load_gold_by_basename(path: Path) -> dict[str, dict[str, int]]:
+class _GoldTempoLoad(NamedTuple):
+    multihot_by_basename: dict[str, dict[str, int]]
+    tempo_bin_gt_by_basename: dict[str, str]
+    tempo_gt_pred_pair_by_basename: dict[str, tuple[str, str]]
+
+
+def _load_gold_multihot_and_tempo_bins(
+    path: Path,
+    *,
+    tempo_labels: frozenset[str],
+) -> _GoldTempoLoad:
     if not path.is_file():
         raise FileNotFoundError(f"Gold JSONL not found: {path}")
-    out: dict[str, dict[str, int]] = {}
+    multihot: dict[str, dict[str, int]] = {}
+    tempo_bin_gt: dict[str, str] = {}
+    tempo_pairs: dict[str, tuple[str, str]] = {}
     dupes = 0
     with path.open("r", encoding="utf-8") as f:
         for line in f:
@@ -86,46 +112,27 @@ def _load_gold_by_basename(path: Path) -> dict[str, dict[str, int]]:
             if not isinstance(hm, dict):
                 continue
             labels = {c: int(bool(hm.get(c))) for c in MULTIHOT_COLUMNS}
-            if bn in out:
+            if bn in multihot:
                 dupes += 1
-            out[bn] = labels
+            multihot[bn] = labels
+
+            pt = rec.get("program_tempo")
+            if isinstance(pt, dict):
+                gt = pt.get("tempo_bin_bpm")
+                pred = pt.get("tempo_clap_zeroshot")
+                if isinstance(gt, str) and gt in tempo_labels:
+                    tempo_bin_gt[bn] = gt
+                if (
+                    isinstance(gt, str)
+                    and isinstance(pred, str)
+                    and gt in tempo_labels
+                    and pred in tempo_labels
+                ):
+                    tempo_pairs[bn] = (gt, pred)
+
     if dupes:
         print(f"warning: {dupes} duplicate basename keys in gold (last row wins)", file=sys.stderr)
-    return out
-
-
-def _load_tempo_by_basename_from_gold(
-    path: Path,
-    *,
-    tempo_labels: frozenset[str],
-) -> dict[str, tuple[str, str]]:
-    """basename -> (gt_tempo, pred_tempo) from program_tempo; last JSONL row wins per basename."""
-    out: dict[str, tuple[str, str]] = {}
-    if not path.is_file():
-        return out
-    with path.open("r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            rec = json.loads(line)
-            if not isinstance(rec, dict):
-                continue
-            sp = rec.get("source_path")
-            if not isinstance(sp, str) or not sp.strip():
-                continue
-            pt = rec.get("program_tempo")
-            if not isinstance(pt, dict):
-                continue
-            gt = pt.get("tempo_bin_bpm")
-            pred = pt.get("tempo_clap_zeroshot")
-            if not isinstance(gt, str) or not isinstance(pred, str):
-                continue
-            if gt not in tempo_labels or pred not in tempo_labels:
-                continue
-            bn = _basename_key(sp)
-            out[bn] = (gt, pred)
-    return out
+    return _GoldTempoLoad(multihot, tempo_bin_gt, tempo_pairs)
 
 
 def _dcg_from_ranked(rels: list[float]) -> float:
@@ -296,6 +303,12 @@ def main() -> int:
         default=False,
         help="Append tempo_accuracy, tempo_macro_f1, tempo_n_songs from gold_merged program_tempo.",
     )
+    parser.add_argument(
+        "--include-tempo-queries",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Append matrix rows for slow/mid-tempo/fast (retrieval-tuned text vs BPM bin positives).",
+    )
     args = parser.parse_args()
 
     import faiss  # noqa: PLC0415 — defer heavy deps until CLI runs
@@ -309,7 +322,15 @@ def main() -> int:
     if any(k <= 0 for k in ks):
         raise ValueError("--top-k values must be positive")
 
-    gold_by_basename = _load_gold_by_basename(args.gold_jsonl)
+    from app.data_handling.music_eval_zeroshot_tempo import (  # noqa: PLC0415
+        TEMPO_LABELS,
+        _compute_metrics,
+    )
+
+    labels_set = frozenset(TEMPO_LABELS)
+    gold_load = _load_gold_multihot_and_tempo_bins(args.gold_jsonl, tempo_labels=labels_set)
+    gold_by_basename = gold_load.multihot_by_basename
+    tempo_bin_gt_by_basename = gold_load.tempo_bin_gt_by_basename
     if not gold_by_basename:
         raise ValueError(f"No gold rows loaded from {args.gold_jsonl}")
 
@@ -334,13 +355,7 @@ def main() -> int:
     tempo_meta: dict[str, Any] | None = None
     tempo_csv_fields: dict[str, str] = {}
     if args.include_tempo:
-        from app.data_handling.music_eval_zeroshot_tempo import (  # noqa: PLC0415
-            TEMPO_LABELS,
-            _compute_metrics,
-        )
-
-        labels_set = frozenset(TEMPO_LABELS)
-        tempo_by_bn = _load_tempo_by_basename_from_gold(args.gold_jsonl, tempo_labels=labels_set)
+        tempo_by_bn = gold_load.tempo_gt_pred_pair_by_basename
         y_true: list[str] = []
         y_pred: list[str] = []
         for bn in sorted(pool_basenames):
@@ -439,6 +454,57 @@ def main() -> int:
                 row.update(tempo_csv_fields)
             csv_rows.append(row)
 
+    if args.include_tempo_queries:
+        if len(_TEMPO_RETRIEVAL_QUERY_TEXTS) != len(TEMPO_LABELS):
+            raise RuntimeError("TEMPO_LABELS and _TEMPO_RETRIEVAL_QUERY_TEXTS length mismatch")
+        for tempo_idx, label in enumerate(TEMPO_LABELS):
+            prompt = _TEMPO_RETRIEVAL_QUERY_TEXTS[tempo_idx]
+            rel = np.array(
+                [
+                    1.0 if tempo_bin_gt_by_basename.get(basename_for_id[i]) == label else 0.0
+                    for i in pool_ids
+                ],
+                dtype=np.float32,
+            )
+            r_pos = int(rel.sum())
+            prevalence = (r_pos / n_pool) if n_pool else 0.0
+
+            phrase = _strip_music_suffix(prompt)
+            q_raw = model.get_text_embedding(x=[phrase], use_tensor=False)
+            q_emb = _normalize_embeddings(np.asarray(q_raw, dtype=np.float32))
+            scores = _score_pool(index=index, pool_ids=pool_ids, query_emb=q_emb.squeeze(0))
+            order = np.argsort(-scores)
+
+            seed_tag = 900_000 + tempo_idx * 17
+            for k in ks:
+                k_eff = min(k, n_pool)
+                p_model = float(rel[order[:k_eff]].sum()) / float(k_eff)
+                ndcg_model = _ndcg_at_k(rel, order, k)
+
+                p_rand = prevalence
+                ndcg_rand = _random_ndcg_mc(
+                    rel,
+                    k,
+                    n_iters=args.ndcg_random_iters,
+                    seed=args.seed + k * 100_003 + seed_tag,
+                )
+
+                row = {
+                    "query_text": phrase,
+                    "top_k": k,
+                    "n_pool": n_pool,
+                    "n_positive": r_pos,
+                    "prevalence": prevalence,
+                    "precision_at_k": p_model,
+                    "precision_delta": p_model - p_rand,
+                    "ndcg_at_k": ndcg_model,
+                    "ndcg_random_mean": ndcg_rand,
+                    "ndcg_delta": ndcg_model - ndcg_rand,
+                }
+                if args.include_tempo:
+                    row.update(tempo_csv_fields)
+                csv_rows.append(row)
+
     csv_columns = [
         "query_text",
         "top_k",
@@ -467,6 +533,11 @@ def main() -> int:
         "skipped_query_ids_not_in_multihot": skipped,
         "csv_columns": csv_columns,
         "include_tempo": bool(args.include_tempo),
+        "include_tempo_queries": bool(args.include_tempo_queries),
+        "tempo_retrieval_query_phrases": {
+            lab: _strip_music_suffix(txt)
+            for lab, txt in zip(TEMPO_LABELS, _TEMPO_RETRIEVAL_QUERY_TEXTS)
+        },
     }
     if tempo_meta is not None:
         meta["tempo"] = tempo_meta

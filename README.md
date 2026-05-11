@@ -29,7 +29,7 @@ This repository contains a local music retrieval workflow built around:
 - `app/data_handling/music_eval_zeroshot_tempo.py`
   - BPM-derived pseudo labels + CLAP zero-shot tempo evaluation
   - supports resume/checkpoint for large datasets
-- `app/data_handling/music_eval_build_song_manifest.py` / `music_eval_zeroshot_tempo_song.py` / `music_eval_prepare_gold_multihot_csv.py` / `music_eval_merge_gold.py` / `music_eval_upgrade_gold_csv.py` / `music_eval_gold_label_counts.py`
+- `app/data_handling/music_eval_build_song_manifest.py` / `music_eval_zeroshot_tempo_song.py` / `music_eval_prepare_gold_multihot_csv.py` / `music_eval_merge_gold.py` / `music_eval_export_gold_review_csv.py` / `music_eval_upgrade_gold_csv.py` / `music_eval_gold_label_counts.py` / `music_eval_gold_bpm_coverage.py`
   - song-level eval manifest, human gold sheet, merged `gold_merged.jsonl`, safe CSV column upgrades (see `docs/README_eval_merge.md`)
 
 ## Setup
@@ -190,12 +190,33 @@ python -m app.data_handling.music_eval_build_song_manifest \
 python -m app.data_handling.music_eval_build_song_manifest \
   --filter-val-jsonl data/mapping/clap_val_15s.jsonl \
   --random-sample 150 --seed 42
+
+# After the gold CSV exists: manifest = only labeled songs (sidecar paths)
+python -m app.data_handling.music_eval_build_song_manifest \
+  --filter-gold-sidecar data/eval/gold_labels_multihot_template.csv.sidecar.jsonl \
+  --out data/eval/gold_tempo_manifest.jsonl
 ```
 
 Run tempo eval aggregated per **song** (majority vote over clips; ties broken by mean BPM / mean CLAP scores):
 
 ```bash
 python -m app.data_handling.music_eval_zeroshot_tempo_song
+```
+
+If you built `gold_tempo_manifest.jsonl` above, point the song eval at it (and optionally a separate `--pred-output` so you do not overwrite a full-pool run):
+
+```bash
+python -m app.data_handling.music_eval_zeroshot_tempo_song \
+  --manifest data/eval/gold_tempo_manifest.jsonl \
+  --pred-output data/eval/tempo_eval_song_predictions.jsonl
+```
+
+Check sidecar vs tempo ledger before merge (`--strict` fails CI-style if anything is missing):
+
+```bash
+python -m app.data_handling.music_eval_gold_bpm_coverage \
+  --sidecar data/eval/gold_labels_multihot_template.csv.sidecar.jsonl \
+  --tempo-jsonl data/eval/tempo_eval_song_predictions.jsonl
 ```
 
 Outputs:
@@ -247,6 +268,14 @@ python -m app.data_handling.music_eval_merge_gold
 ```
 
 Writes **`data/eval/gold_merged.jsonl`** for downstream val/test. Full paths and ordering are documented in **`docs/README_eval_merge.md`**.
+
+Minimal spreadsheet for human review (`song_name`, multihot columns, **`tempo_bin_bpm`** from program BPM):
+
+```bash
+python -m app.data_handling.music_eval_export_gold_review_csv
+```
+
+Writes **`data/eval/gold_merged_review.csv`** (UTF-8 BOM for Excel). Re-running overwrites the file; use **`--out-csv`** to write elsewhere if you edited the CSV by hand.
 
 Per-class prevalence (positive counts per tag):
 
@@ -311,6 +340,8 @@ Reported metrics:
 
 Uses **`gold_merged.jsonl`** (human multihot + `source_path`) and the **metadata text FAISS** index. The eval pool is all index rows whose metadata `audio` **basename** matches a gold song (same idea as `music_eval_merge_gold` metadata matching).
 
+By default the matrix also includes **three tempo rows** per `top_k` (retrieval-oriented tempo phrases vs **BPM bin** `tempo_bin_bpm` as relevance; wording differs from song-level classifier prompts). Use **`--no-include-tempo-queries`** if you only want style-tag rows.
+
 Prerequisites: build the metadata index (`python -m app.metadata_faiss build ...`) and merge gold (`python -m app.data_handling.music_eval_merge_gold`).
 
 ```bash
@@ -334,7 +365,7 @@ Outputs:
 - `data/eval/retrieval_vs_random_matrix.json`
 - `data/eval/retrieval_vs_random_matrix.csv`
 
-CSV columns: `query_text` (prompt with trailing ` music` removed for CLAP), `top_k`, `n_pool`, `n_positive`, `prevalence`, `precision_at_k`, `precision_delta` (vs prevalence), `ndcg_at_k`, `ndcg_random_mean`, `ndcg_delta`. With `--include-tempo`, append **`tempo_accuracy`**, **`tempo_macro_f1`**, **`tempo_n_songs`** (same values on every row; songs = unique pool basenames with valid `program_tempo`). JSON has the same rows under `rows` plus `meta` (paths, pool size, seeds, skipped query ids; with `--include-tempo`, `meta.tempo` includes accuracy, macro_f1, confusion matrix, per-class breakdown).
+CSV columns: `query_text` (prompt with trailing ` music` removed for CLAP where applicable), `top_k`, `n_pool`, `n_positive`, `prevalence`, `precision_at_k`, `precision_delta` (vs prevalence), `ndcg_at_k`, `ndcg_random_mean`, `ndcg_delta`. With `--include-tempo`, append **`tempo_accuracy`**, **`tempo_macro_f1`**, **`tempo_n_songs`** (same values on every row; songs = unique pool basenames with valid `program_tempo`). JSON has the same rows under `rows` plus `meta` (paths, pool size, seeds, skipped query ids, `include_tempo_queries`; with `--include-tempo`, `meta.tempo` includes accuracy, macro_f1, confusion matrix, per-class breakdown).
 
 ## Legacy audio retrieval scripts
 

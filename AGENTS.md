@@ -19,6 +19,8 @@ Local music metadata pipeline + CLAP: 15s clips, train/val JSONL, FAISS retrieva
 
 ## Fine-tuning (CLAP)
 
+**Target labels (project decision):** fine-tune and primary reporting on **three** multihot classes only — **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`**. Gold retrieval-vs-random showed these as the most stable vs metadata text; other template columns may stay labeled for reference but are **out of scope for default fine-tune** unless explicitly reopened.
+
 - **Code:** `app/init_model.py` — freeze backbone; optionally train `audio_projection`, `audio_transform`, `text_projection`, `text_transform` via `params['unfreeze_layers']`; contrastive loss (cross-entropy on scaled audio–text similarity); Adam; optional early stopping on mean diagonal similarity.
 - **Data:** `app/data_handling/music_split_to_15s.py`, `music_build_train_val_from_15s.py` → `data/mapping/clap_train_15s.jsonl`, `clap_val_15s.jsonl`.
 - **Checkpoint path:** `config/settings.py` → `CLAP_MODEL_FILE` / `BEST_MODEL_FILE` as applicable.
@@ -34,16 +36,13 @@ Local music metadata pipeline + CLAP: 15s clips, train/val JSONL, FAISS retrieva
 
 ## Primary evaluation tags (`docs/class_selected.txt`)
 
-That file is **documentation only** (not loaded by code). Recommended primary tags:
+That file is **documentation only** (not loaded by code). For **fine-tuning and headline metrics**, treat only **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** as first-class (see *Fine-tuning* above). Other columns in `gold_labels_multihot_template.csv` are optional / exploratory.
 
-- `inst_vocal` — strong prevalence; watch imbalance.
-- `mood_relaxing` — best-supported mood.
-
-Gold / template columns align with README (`gold_labels_multihot_template.csv`): `inst_vocal`, `mood_relaxing`, etc.
+Gold / template columns align with README (`gold_labels_multihot_template.csv`).
 
 **Style retrieval defaults** already include matching `query_id`s and prompts in `app/data_handling/music_eval_topk_prepare.py` (`DEFAULT_STYLE_QUERIES`: e.g. `"vocal music"`, `"relaxing music"`). Override via `data/eval/style_queries.json` (see README “Human-evaluated Top-10 style retrieval workflow”).
 
-**Gold vs random (matrix):** `app/data_handling.music_eval_retrieval_vs_random.py` scores each style query against the metadata FAISS index on the **gold-labeled pool** (basename join); CSV is precision + nDCG vs random (see README). CLAP uses the query string with trailing ` music` stripped. Use **`--include-tempo`** to append song-level BPM vs CLAP zero-shot metrics from `gold_merged.jsonl` (`program_tempo`) on the same export.
+**Gold vs random (matrix):** `app/data_handling.music_eval_retrieval_vs_random.py` scores each style query against the metadata FAISS index on the **gold-labeled pool** (basename join); CSV is precision + nDCG vs random (see README). By default it also adds **three tempo query rows** per K (retrieval-tuned tempo text vs BPM `tempo_bin_bpm` positives). **`--no-include-tempo-queries`** drops those rows. Use **`--include-tempo`** to append global song-level BPM vs CLAP columns on every row.
 
 Top‑K human workflow (`music_eval_topk_prepare` / `music_eval_topk_score`) remains available for judged lists.
 
@@ -52,8 +51,9 @@ Top‑K human workflow (`music_eval_topk_prepare` / `music_eval_topk_score`) rem
 - Metadata FAISS: `python -m app.metadata_faiss build` / `search`
 - Tempo zero-shot: `python -m app.data_handling.music_eval_zeroshot_tempo`
 - Style Top‑K prep/score: `music_eval_topk_prepare`, `music_eval_topk_score`
+- Gold BPM end-to-end (after CSV is labeled): build manifest filtered by sidecar → `music_eval_zeroshot_tempo_song` → `music_eval_merge_gold` → **`music_eval_export_gold_review_csv`** (minimal review CSV: `song_name`, multihot, `tempo_bin_bpm`). Optional check: `music_eval_gold_bpm_coverage --sidecar …` (pre-merge) or `--merged-jsonl …` (post-merge). See `docs/README_eval_merge.md` *Gold-only manifest*.
 - Gold merge / counts: `music_eval_merge_gold`, `music_eval_gold_label_counts`
-- Retrieval vs random matrix: `python -m app.data_handling.music_eval_retrieval_vs_random` (merged gold + metadata FAISS index; add `--include-tempo` after song tempo eval + merge)
+- Retrieval vs random matrix: `python -m app.data_handling.music_eval_retrieval_vs_random` (merged gold + metadata FAISS index; tempo matrix rows on by default; `--include-tempo` adds global CLAP-vs-BPM columns)
 
 ## After a Cursor reset
 

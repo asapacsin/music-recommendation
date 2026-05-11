@@ -10,6 +10,9 @@ Duplicates are removed if n < 3.
 
 Outputs JSONL rows:
   source_path, num_segments, eval_segment_indices, eval_audio_paths (segment_path values)
+
+Optional: --filter-gold-sidecar points at the gold CSV sidecar (song_name + source_path per line)
+so the manifest includes only labeled songs (same paths as merge gold).
 """
 from __future__ import annotations
 
@@ -25,6 +28,10 @@ if str(_root) not in sys.path:
     sys.path.insert(0, str(_root))
 
 from config import settings
+
+
+def _norm_sp(value: str) -> str:
+    return value.strip().replace("\\", "/")
 
 
 def _read_json_array(path: Path) -> list[dict[str, Any]]:
@@ -48,7 +55,26 @@ def _unique_sources_from_val_jsonl(path: Path) -> set[str]:
                 continue
             sp = row.get("source_path")
             if isinstance(sp, str) and sp.strip():
-                out.add(sp.strip())
+                out.add(_norm_sp(sp))
+    return out
+
+
+def _unique_sources_from_gold_sidecar(path: Path) -> set[str]:
+    """source_path values from gold sidecar JSONL (one object per line)."""
+    if not path.is_file():
+        raise FileNotFoundError(f"Sidecar not found: {path}")
+    out: set[str] = set()
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                continue
+            sp = row.get("source_path")
+            if isinstance(sp, str) and sp.strip():
+                out.add(_norm_sp(sp))
     return out
 
 
@@ -95,6 +121,13 @@ def main() -> int:
         help="If set, only include songs whose source_path appears in this JSONL (e.g. clap_val_15s.jsonl).",
     )
     parser.add_argument(
+        "--filter-gold-sidecar",
+        type=Path,
+        default=None,
+        help="If set, only include songs listed in this gold sidecar JSONL (source_path per line). "
+        "If combined with --filter-val-jsonl, only paths in BOTH sets are kept.",
+    )
+    parser.add_argument(
         "--out",
         type=Path,
         default=settings.DATA_DIR / "eval" / "song_eval_manifest.jsonl",
@@ -123,16 +156,27 @@ def main() -> int:
 
     map_rows = _read_json_array(args.map_json)
     groups = _group_map_rows(map_rows)
+    # Normalize group keys for consistent filtering (map may use mixed slashes)
+    groups_norm: dict[str, list[dict[str, Any]]] = {}
+    for sp, segs in groups.items():
+        groups_norm[_norm_sp(sp)] = segs
 
     allowed: set[str] | None = None
     if args.filter_val_jsonl is not None:
         allowed = _unique_sources_from_val_jsonl(args.filter_val_jsonl)
+    if args.filter_gold_sidecar is not None:
+        gold_set = _unique_sources_from_gold_sidecar(args.filter_gold_sidecar)
+        if allowed is None:
+            allowed = gold_set
+        else:
+            allowed = allowed & gold_set
 
+    skipped_no_map: list[str] = []
     manifest_rows: list[dict[str, Any]] = []
-    for source_path in sorted(groups.keys()):
+    for source_path in sorted(groups_norm.keys()):
         if allowed is not None and source_path not in allowed:
             continue
-        segs = groups[source_path]
+        segs = groups_norm[source_path]
         n = len(segs)
         positions = _pick_eval_indices(n)
         paths: list[str] = []
@@ -168,24 +212,34 @@ def main() -> int:
             rng = random.Random(args.seed)
             manifest_rows = rng.sample(manifest_rows, args.random_sample)
 
+    if args.filter_gold_sidecar is not None and allowed is not None:
+        for sp in sorted(allowed):
+            if sp not in groups_norm:
+                skipped_no_map.append(sp)
+
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("w", encoding="utf-8") as f:
         for row in manifest_rows:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
-    print(
-        json.dumps(
-            {
-                "songs": len(manifest_rows),
-                "output": str(args.out),
-                "filtered_by_val": str(args.filter_val_jsonl) if args.filter_val_jsonl else None,
-                "random_sample": args.random_sample if args.random_sample > 0 else None,
-                "seed": args.seed if args.random_sample > 0 else None,
-            },
-            ensure_ascii=False,
-            indent=2,
+    summary: dict[str, Any] = {
+        "songs": len(manifest_rows),
+        "output": str(args.out),
+        "filtered_by_val": str(args.filter_val_jsonl) if args.filter_val_jsonl else None,
+        "filtered_by_gold_sidecar": str(args.filter_gold_sidecar) if args.filter_gold_sidecar else None,
+        "random_sample": args.random_sample if args.random_sample > 0 else None,
+        "seed": args.seed if args.random_sample > 0 else None,
+    }
+    if skipped_no_map:
+        summary["sidecar_paths_not_in_15s_map"] = len(skipped_no_map)
+        summary["sidecar_paths_not_in_15s_map_sample"] = skipped_no_map[:20]
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    if skipped_no_map:
+        print(
+            f"warning: {len(skipped_no_map)} sidecar source_path(s) have no 15s segments in map-json; "
+            f"omitted from manifest (see sidecar_paths_not_in_15s_map_sample in summary).",
+            file=sys.stderr,
         )
-    )
     return 0
 
 
