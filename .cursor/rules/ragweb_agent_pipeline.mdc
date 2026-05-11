@@ -1,0 +1,20 @@
+---
+description: Plan / Execute / Review multi-agent workflow for Ragweb (thesis pipeline)
+alwaysApply: true
+---
+
+# Ragweb multi-agent workflow
+
+For **non-trivial** tasks (new eval logic, metric or join-key changes, FAISS/gold pipeline behavior, multi-file refactors, or anything affecting thesis numbers), use **three phases** with repo artifacts—do not rely on chat alone.
+
+## Phases
+
+1. **Plan** — Create or update `docs/agent_runs/<run_id>/PLAN.md` from [docs/templates/agent_plan.template.md](docs/templates/agent_plan.template.md). Include exact commands, inputs, expected output paths, risks. Tie eval commands to [AGENTS.md](AGENTS.md) / [README.md](README.md) where relevant.
+2. **Execute** — Follow PLAN: implement and/or run commands; append each batch to `RUNLOG.md` (from [docs/templates/agent_runlog.template.md](docs/templates/agent_runlog.template.md)) with exit codes and output paths. Large outputs stay under `data/`; PLAN must name those paths.
+3. **Review** — Fill `REVIEW.md` (from [docs/templates/agent_review.template.md](docs/templates/agent_review.template.md)): checklist, PASS/FAIL, defects. On FAIL, fix via Execute (or revise Plan if scope was wrong).
+
+Use a new `<run_id>` folder per experiment (e.g. `YYYYMMDD_topic`). Full protocol: [docs/multi_agent_workflow.md](docs/multi_agent_workflow.md).
+
+## Skip the ritual when
+
+Trivial one-line fixes, typos, or comments-only edits: still run tests if the area is covered; no new run folder required.

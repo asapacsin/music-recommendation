@@ -29,7 +29,7 @@ This repository contains a local music retrieval workflow built around:
 - `app/data_handling/music_eval_zeroshot_tempo.py`
   - BPM-derived pseudo labels + CLAP zero-shot tempo evaluation
   - supports resume/checkpoint for large datasets
-- `app/data_handling/music_eval_build_song_manifest.py` / `music_eval_zeroshot_tempo_song.py` / `music_eval_prepare_gold_multihot_csv.py` / `music_eval_merge_gold.py` / `music_eval_upgrade_gold_csv.py`
+- `app/data_handling/music_eval_build_song_manifest.py` / `music_eval_zeroshot_tempo_song.py` / `music_eval_prepare_gold_multihot_csv.py` / `music_eval_merge_gold.py` / `music_eval_upgrade_gold_csv.py` / `music_eval_gold_label_counts.py`
   - song-level eval manifest, human gold sheet, merged `gold_merged.jsonl`, safe CSV column upgrades (see `docs/README_eval_merge.md`)
 
 ## Setup
@@ -248,6 +248,14 @@ python -m app.data_handling.music_eval_merge_gold
 
 Writes **`data/eval/gold_merged.jsonl`** for downstream val/test. Full paths and ordering are documented in **`docs/README_eval_merge.md`**.
 
+Per-class prevalence (positive counts per tag):
+
+```bash
+python -m app.data_handling.music_eval_gold_label_counts
+```
+
+Use **`--csv data/eval/gold_labels_multihot_template.csv`** instead of the default merged JSONL.
+
 ## Human-evaluated Top-10 style retrieval workflow
 
 This workflow is for **instrumentation**, **mood**, and **style** (elegant / epic) queries — Top-10 retrieval and human labels. See `docs/music_style.txt` and `data/eval/style_queries.json`.
@@ -298,6 +306,35 @@ Reported metrics:
 - overall `precision@10`, `hitrate@10`, `ndcg@10`
 - per-type breakdown (`instrumentation`, `mood`, `style`)
 - per-query metrics
+
+### 4) Automatic matrix: retrieval vs random baseline (gold multihot)
+
+Uses **`gold_merged.jsonl`** (human multihot + `source_path`) and the **metadata text FAISS** index. The eval pool is all index rows whose metadata `audio` **basename** matches a gold song (same idea as `music_eval_merge_gold` metadata matching).
+
+Prerequisites: build the metadata index (`python -m app.metadata_faiss build ...`) and merge gold (`python -m app.data_handling.music_eval_merge_gold`).
+
+```bash
+python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10
+```
+
+Multiple cutoffs:
+
+```bash
+python -m app.data_handling.music_eval_retrieval_vs_random --top-k 5 10 20
+```
+
+**Optional: merge song-level tempo zero-shot** (BPM bin vs CLAP from `gold_merged.jsonl`’s `program_tempo`) into the same CSV/JSON. Requires that merged gold includes `tempo_bin_bpm` and `tempo_clap_zeroshot` (run **`music_eval_zeroshot_tempo_song`** on the same manifest, then **`music_eval_merge_gold`** — see *Merge gold labels*).
+
+```bash
+python -m app.data_handling.music_eval_retrieval_vs_random --top-k 5 10 20 --include-tempo
+```
+
+Outputs:
+
+- `data/eval/retrieval_vs_random_matrix.json`
+- `data/eval/retrieval_vs_random_matrix.csv`
+
+CSV columns: `query_text` (prompt with trailing ` music` removed for CLAP), `top_k`, `n_pool`, `n_positive`, `prevalence`, `precision_at_k`, `precision_delta` (vs prevalence), `ndcg_at_k`, `ndcg_random_mean`, `ndcg_delta`. With `--include-tempo`, append **`tempo_accuracy`**, **`tempo_macro_f1`**, **`tempo_n_songs`** (same values on every row; songs = unique pool basenames with valid `program_tempo`). JSON has the same rows under `rows` plus `meta` (paths, pool size, seeds, skipped query ids; with `--include-tempo`, `meta.tempo` includes accuracy, macro_f1, confusion matrix, per-class breakdown).
 
 ## Legacy audio retrieval scripts
 
