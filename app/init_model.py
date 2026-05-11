@@ -1,12 +1,27 @@
+import glob
+import json
+import random
+from pathlib import Path
+from typing import Any
+
+import faiss
+import laion_clap
 import numpy as np
 import torch
-import laion_clap
-import json
-import glob
-import faiss
-from pathlib import Path
+
 import text_processing as tp
 from config import settings
+
+
+def set_seed(seed: int) -> None:
+    """Deterministic-ish training for multi-seed studies (CUDA still has some nondeterminism)."""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 
 # quantization
@@ -76,8 +91,9 @@ def normalize_embeddings(embeddings):
     return embeddings / norm
 
 def load_original_model():
-    model = laion_clap.CLAP_Module(enable_fusion=False, amodel= 'HTSAT-base')
-    model.load_ckpt(str(settings.CLAP_MODEL_FILE))
+    """Always start from the public pretrained backbone (ignores ``RAGWEB_CLAP_CHECKPOINT``)."""
+    model = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-base")
+    model.load_ckpt(str(settings.CLAP_PRETRAINED_BACKBONE_FILE))
     return model
 
 def mock_path_list():
@@ -144,7 +160,12 @@ def cross_entropy_loss(logits, labels):
     loss = loss.mean()
     return loss
 
-def model_creation(params):
+def model_creation(params: dict[str, Any]) -> dict[str, Any]:
+    """Contrastive fine-tune CLAP heads. Writes checkpoint to ``save_path`` and optional ``metrics_path``.
+
+    Params may include: ``seed`` (int, default 42), ``metrics_path`` (str, default next to ``save_path``).
+    Returns a small dict with best epoch, best similarity, paths (for multi-seed drivers).
+    """
     # 模型训练配置参数
     # params = {
     #     'learning_rate': 1e-4,
@@ -164,6 +185,9 @@ def model_creation(params):
     #         'mode': 'max'
     #     }
     # }
+    seed = int(params.get("seed", 42))
+    set_seed(seed)
+
     model = load_original_model()
     paths = mock_path_list()
     # print("Model parameters and their requires_grad status:")
@@ -209,8 +233,16 @@ def model_creation(params):
     num_epochs = params.get('num_epochs', 5)
     batch_size = params.get('batch_size', 128)
     temperature = params.get('temperature', 100)
-    save_path = params.get('save_path', str(settings.BEST_MODEL_FILE))
-    
+    save_path = str(params.get('save_path', str(settings.BEST_MODEL_FILE)))
+    save_parent = Path(save_path).resolve().parent
+    save_parent.mkdir(parents=True, exist_ok=True)
+    metrics_path = Path(
+        params.get("metrics_path", str(save_parent / "metrics.jsonl"))
+    ).resolve()
+    metrics_path.parent.mkdir(parents=True, exist_ok=True)
+    if metrics_path.is_file():
+        metrics_path.unlink()
+
     # 早停配置
     early_stopping = params.get('early_stopping', {})
     early_stop_enabled = early_stopping.get('enabled', False)
@@ -219,7 +251,8 @@ def model_creation(params):
     
     best_similarity = float('-inf') if early_stop_mode == 'max' else float('inf')
     best_epoch = 0
-    
+    last_loss = 0.0
+
     for epoch in range(num_epochs):
         for i in range(0, len(paths), batch_size):
             loss = 0
@@ -232,10 +265,25 @@ def model_creation(params):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-        
+            last_loss = float(loss.detach().cpu().item())
+
         audio_embed_list, text_embed_list = embed_pipeline(paths, model, tensor_mode=True)
         similarity = compute_avg_similarity(audio_embed_list, text_embed_list)
-        print(f"Epoch {epoch+1}/{num_epochs}, Loss: {loss.item():.4f}, Similarity: {similarity.item():.4f}")
+        sim_f = float(similarity.detach().cpu().item())
+        print(f"Epoch {epoch+1}/{num_epochs}, Loss: {last_loss:.4f}, Similarity: {sim_f:.4f}")
+        with metrics_path.open("a", encoding="utf-8") as mf:
+            mf.write(
+                json.dumps(
+                    {
+                        "seed": seed,
+                        "epoch": epoch + 1,
+                        "loss": last_loss,
+                        "similarity": sim_f,
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n"
+            )
         
         # 保存最佳模型
         should_save = False
@@ -249,13 +297,29 @@ def model_creation(params):
         if should_save:
             best_similarity = similarity
             best_epoch = epoch + 1
-            torch.save({
-                'epoch': epoch,
-                'model_state_dict': core_model.state_dict(),
-                'optimizer_state_dict': optimizer.state_dict(),
-                'similarity': similarity,
-            }, save_path)
+            torch.save(
+                {
+                    "epoch": epoch,
+                    "seed": seed,
+                    "model_state_dict": core_model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "similarity": similarity,
+                },
+                save_path,
+            )
             print(f"保存最佳模型，相似度: {similarity.item():.4f}")
-    
-    print(f"训练完成，最佳模型在第 {best_epoch} 轮，相似度: {best_similarity.item():.4f}")
+
+    best_sim_f = (
+        float(best_similarity.detach().cpu().item())
+        if isinstance(best_similarity, torch.Tensor)
+        else float(best_similarity)
+    )
+    print(f"训练完成，最佳模型在第 {best_epoch} 轮，相似度: {best_sim_f:.4f}")
+    return {
+        "seed": seed,
+        "best_epoch": best_epoch,
+        "best_similarity": best_sim_f,
+        "save_path": save_path,
+        "metrics_path": str(metrics_path),
+    }
 

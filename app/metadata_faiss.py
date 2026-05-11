@@ -30,9 +30,9 @@ def _normalize_embeddings(embeddings: np.ndarray) -> np.ndarray:
 
 
 def _load_clap_model() -> laion_clap.CLAP_Module:
-    model = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-base")
-    model.load_ckpt(str(settings.CLAP_MODEL_FILE))
-    return model
+    from app.clap_eval_load import load_clap_module_httsat
+
+    return load_clap_module_httsat()
 
 
 def _compose_text(row: dict[str, Any]) -> str:

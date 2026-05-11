@@ -47,9 +47,9 @@ def _normalize_embeddings(x: np.ndarray) -> np.ndarray:
 
 
 def _load_model() -> laion_clap.CLAP_Module:
-    model = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-base")
-    model.load_ckpt(str(settings.CLAP_MODEL_FILE))
-    return model
+    from app.clap_eval_load import load_clap_module_httsat
+
+    return load_clap_module_httsat()
 
 
 def _load_queries(path: Path) -> list[dict[str, str]]:

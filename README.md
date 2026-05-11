@@ -31,6 +31,7 @@ This repository contains a local music retrieval workflow built around:
   - supports resume/checkpoint for large datasets
 - `app/data_handling/music_eval_build_song_manifest.py` / `music_eval_zeroshot_tempo_song.py` / `music_eval_prepare_gold_multihot_csv.py` / `music_eval_merge_gold.py` / `music_eval_export_gold_review_csv.py` / `music_eval_upgrade_gold_csv.py` / `music_eval_gold_label_counts.py` / `music_eval_gold_bpm_coverage.py`
   - song-level eval manifest, human gold sheet, merged `gold_merged.jsonl`, safe CSV column upgrades (see `docs/README_eval_merge.md`)
+- `app/train_clap_multiseed.py` — multi-seed CLAP fine-tune driver (`python -m app.train_clap_multiseed`); protocol in **`docs/cloud_finetune_protocol.md`**
 
 ## Setup
 
@@ -59,9 +60,12 @@ XAI_BASE_URL=https://api.x.ai/v1
 
 The CLAP checkpoint path is configured in `config/settings.py`:
 
-- `model/clap/music_audioset_epoch_15_esc_90.14.pt`
+- **`CLAP_PRETRAINED_BACKBONE_FILE`** — public LAION weights used for **training** (`init_model.load_original_model`) and as the base when loading fine-tuned cores for eval.
+- **`CLAP_MODEL_FILE`** — defaults to the same path; overridden when **`RAGWEB_CLAP_CHECKPOINT`** is set (fine-tuned `best_model.pt` for retrieval/tempo eval).
 
-Make sure this file exists before CLAP indexing/evaluation commands.
+Make sure the backbone `.pt` exists under `model/clap/` before CLAP indexing/evaluation commands.
+
+**Fine-tuned checkpoint for eval:** set **`RAGWEB_CLAP_CHECKPOINT`** to an absolute path of a saved `best_model.pt` (e.g. from `data/log/finetune_runs/.../`). Multi-seed training and thesis-style reporting: **`docs/cloud_finetune_protocol.md`**.
 
 ## Directory conventions
 

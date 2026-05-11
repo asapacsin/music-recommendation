@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -37,7 +38,15 @@ PROCESS_META_FILE = MAPPING_DIR / "process_meta.json"
 # Model paths
 # ---------------------------------------------------------------------------
 MODEL_DIR = BASE_DIR / "model"
-CLAP_MODEL_FILE = MODEL_DIR / "clap" / "music_audioset_epoch_15_esc_90.14.pt"
+# Public LAION CLAP weights (training always starts from this path in ``init_model.load_original_model``).
+CLAP_PRETRAINED_BACKBONE_FILE = MODEL_DIR / "clap" / "music_audioset_epoch_15_esc_90.14.pt"
+# Eval / retrieval: defaults to backbone; set ``RAGWEB_CLAP_CHECKPOINT`` to a ``best_model.pt`` from fine-tune.
+_clap_ckpt = os.environ.get("RAGWEB_CLAP_CHECKPOINT")
+CLAP_MODEL_FILE = (
+    Path(_clap_ckpt).expanduser().resolve()
+    if _clap_ckpt
+    else CLAP_PRETRAINED_BACKBONE_FILE
+)
 LLM_MODEL_DIR = MODEL_DIR / "llama3"
 BEST_MODEL_FILE = MODEL_DIR / "best_model.pt"
 
@@ -50,5 +59,6 @@ TEST_DATA_DIR = BASE_DIR / "tests" / "data"
 # Auto-create runtime directories
 # ---------------------------------------------------------------------------
 for _d in [MUSIC_DB_DIR, FAISS_INDEX_DIR, QUERY_INPUT_DIR,
-           EMBEDDINGS_CACHE_DIR, FILE_NAME_DIR, MAPPING_DIR, LOG_DIR]:
+           EMBEDDINGS_CACHE_DIR, FILE_NAME_DIR, MAPPING_DIR, LOG_DIR,
+           LOG_DIR / "finetune_runs"]:
     _d.mkdir(parents=True, exist_ok=True)
