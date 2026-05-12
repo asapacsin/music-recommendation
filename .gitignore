@@ -2,5 +2,6 @@
 model/
 data/music_db/
 data/music_db_15s/
+data/movie_input/
 .env
 .gitconfig
