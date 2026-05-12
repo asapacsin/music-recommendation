@@ -1,0 +1,14 @@
+{
+  "rows_written": 200,
+  "with_program_tempo": 200,
+  "with_program_metadata": 200,
+  "warnings": [],
+  "warning_total": 0,
+  "inputs": {
+    "gold_csv": "E:\\Ragweb\\data\\eval\\gold_labels_multihot_template.csv",
+    "sidecar": "E:\\Ragweb\\data\\eval\\gold_labels_multihot_template.csv.sidecar.jsonl",
+    "tempo_jsonl": "E:\\Ragweb\\data\\eval\\tempo_eval_song_predictions.jsonl",
+    "metadata_json": "E:\\Ragweb\\data\\mapping\\music_metadata.json"
+  },
+  "output": "E:\\Ragweb\\data\\eval\\gold_merged.jsonl"
+}

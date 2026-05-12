@@ -1,0 +1,16 @@
+generated_utc: 2026-04-12T11:11:19.549251+00:00
+music_dir: E:\Ragweb\data\music_db
+distinct_suffix_types: 10
+total_files: 3680
+
+suffix	count
+.flac	1233
+.mp3	1177
+.wav	1126
+.wma	42
+.ape	36
+.dff	19
+.dsf	17
+.ogg	13
+.m4a	12
+.tta	5

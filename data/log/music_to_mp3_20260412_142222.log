@@ -1,0 +1,15 @@
+start_utc=2026-04-12T14:22:22.168007+00:00
+music_dir=E:\Ragweb\data\music_db
+ffmpeg=C:\Users\Administrator\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1-full_build\bin\ffmpeg.EXE
+dry_run=False to_convert=10 skipped_mp3=1177
+OK: (off vocal) - Scaret Velvet feat. Romonosov_、Ginryu.wav -> (off vocal) - Scaret Velvet feat. Romonosov_、Ginryu.mp3
+OK: (White ～セツナサのカケラ～)(YU-KI) Dream like stories.flac -> (White ～セツナサのカケラ～)(YU-KI) Dream like stories.mp3
+OK: - 音轨13 - PC游戏『Muv-Luv(マブラヴ)』.wav -> - 音轨13 - PC游戏『Muv-Luv(マブラヴ)』.mp3
+OK: 40mP - ピーターパンシンドローム - PSP游戏《Caligula》OST.wav -> 40mP - ピーターパンシンドローム - PSP游戏《Caligula》OST.mp3
+OK: 7!! - オレンジ - TV动画《四月は君の嘘（四月是你的谎言）》ED2.flac -> 7!! - オレンジ - TV动画《四月は君の嘘（四月是你的谎言）》ED2.mp3
+OK: [DSD]Suara - adamant faith - TV动画《传颂之物》OVA主题曲.dff -> [DSD]Suara - adamant faith - TV动画《传颂之物》OVA主题曲.mp3
+OK: [DSD]Suara - Crystal Tears.dff -> [DSD]Suara - Crystal Tears.mp3
+OK: [DSD]Suara - Dream.dff -> [DSD]Suara - Dream.mp3
+OK: [DSD]Suara - Free and Dream - TV动画《提亚拉之泪》OP主题曲.dff -> [DSD]Suara - Free and Dream - TV动画《提亚拉之泪》OP主题曲.mp3
+OK: [DSD]Suara - POWDER SNOW - PC游戏《白色相簿》ED.dff -> [DSD]Suara - POWDER SNOW - PC游戏《白色相簿》ED.mp3
+summary: skipped_mp3=1177, ok=10, error=0

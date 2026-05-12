@@ -1,0 +1,57 @@
+{
+  "labels": [
+    "slow",
+    "mid-tempo",
+    "fast"
+  ],
+  "accuracy": 0.4346148546231225,
+  "macro_f1": 0.38683353921291647,
+  "confusion_matrix": [
+    [
+      231,
+      198,
+      56
+    ],
+    [
+      612,
+      1571,
+      940
+    ],
+    [
+      773,
+      1524,
+      1352
+    ]
+  ],
+  "per_class": {
+    "slow": {
+      "precision": 0.14294554455445543,
+      "recall": 0.4762886597938144,
+      "f1": 0.21989528795811517,
+      "support": 485.0
+    },
+    "mid-tempo": {
+      "precision": 0.4770725781961737,
+      "recall": 0.5030419468459815,
+      "f1": 0.48971321695760595,
+      "support": 3123.0
+    },
+    "fast": {
+      "precision": 0.575809199318569,
+      "recall": 0.37051246916963554,
+      "f1": 0.4508921127230282,
+      "support": 3649.0
+    }
+  },
+  "num_total_rows": 7257,
+  "num_valid_for_eval": 7257,
+  "num_skipped": 0,
+  "val_jsonl": "E:\\Ragweb\\data\\mapping\\clap_val_15s.jsonl",
+  "audio_field": "audio_path",
+  "tempo_prompts": [
+    "a slow tempo music track",
+    "a mid-tempo music track",
+    "a fast tempo music track"
+  ],
+  "clap_ckpt": "E:\\Ragweb\\model\\clap\\music_audioset_epoch_15_esc_90.14.pt"
+}

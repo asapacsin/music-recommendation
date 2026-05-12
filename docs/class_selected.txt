@@ -1,0 +1,23 @@
+Fine-tuning scope (project decision — three classes only)
+- inst_piano, inst_vocal, mood_relaxing — default targets for CLAP fine-tune and primary reporting; retrieval-vs-random on gold indicated these as the most reliable vs metadata text.
+- Other multihot columns: keep in the sheet if useful, but treat as out of scope for default fine-tune unless you reopen the decision.
+
+Use as primary evaluation tags (enough positives to be interpretable)
+inst_vocal — ~70% positive; strong mass (watch class imbalance vs non-vocal).
+mood_relaxing — ~38% positive; best-supported mood.
+inst_piano — ~15% (~29 positives); weaker than vocal/relaxing but included in the fine-tune trio above.
+Use only with caveats (borderline sample size)
+mood_sad_melancholic, mood_elegant — ~7–8% each (~15 positives); same story—report but don’t over-trust.
+
+BPM / tempo (not in human multihot CSV — program + CLAP only)
+- Human gold sheet has no BPM column; tempo is merged later from song-level pipeline (see README / docs/README_eval_merge.md).
+- Implemented silver bins in code (librosa BPM → labels): slow if BPM < 80; mid-tempo if 80 ≤ BPM ≤ 120; fast if BPM > 120. Same logic in music_eval_zeroshot_tempo and song aggregates in music_eval_zeroshot_tempo_song. To change cuts, edit _bpm_to_label in code, not only this doc.
+
+Musical reading of those bins (for thesis / intuition — examples are illustrative)
+- Slow / ballad (under current code: BPM < 80, often ~60–79): emotional ballads, chill tracks, many slow R&B; e.g. ~60 very slow/spacious, ~70 classic ballad feel. Exactly 80 BPM is mid-tempo in code (not slow).
+- Medium / moderate (80–120 in code): mainstream pop, casual rock, groove-based; e.g. ~90 laid-back groove, ~100 typical pop, 120 still mid-tempo until strictly above 120.
+- Fast / upbeat (BPM > 120 in code): dance, EDM, upbeat pop, punk; e.g. ~128 club/EDM; many tracks exceed 160 BPM — label stays “fast” (no upper cap).
+
+- CLAP zero-shot tempo: three text prompts aligned to those classes; song-level vote in music_eval_zeroshot_tempo_song; merged into gold_merged.jsonl as program_tempo (tempo_bin_bpm, tempo_clap_zeroshot, bpm_mean, clip_bpms, …) when tempo eval status is ok.
+- retrieval_vs_random_matrix.csv with --include-tempo: appends global song-level tempo_accuracy and tempo_macro_f1 (same value on every style row); not per-query. n_pool counts metadata rows; tempo counts unique songs with valid program_tempo — use tempo_n_songs when present in the export.
+- Interpretation: BPM pseudo-labels are noisy (beat tracking, genre bias, half-time/double-time); boundaries at 80 and 120 are coarse; low agreement vs CLAP does not by itself mean CLAP is wrong — report both and note limitations.

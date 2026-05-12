@@ -1,0 +1,1144 @@
+start_utc=2026-04-13T01:17:46.855323+00:00
+music_dir=E:\Ragweb\data\music_db
+ffmpeg=C:\Users\Administrator\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1-full_build\bin\ffmpeg.EXE
+dry_run=False to_convert=1139 skipped_mp3=2542
+OK: お前の×××で・・・ - 天元突破OST.flac -> お前の×××で・・・ - 天元突破OST.mp3
+OK: お前の×××よ、そそり立て! - 天元突破OST.flac -> お前の×××よ、そそり立て! - 天元突破OST.mp3
+OK: こじまめぐみ - Fruits Candy - TV动画《魔卡少女櫻》ED.flac -> こじまめぐみ - Fruits Candy - TV动画《魔卡少女櫻》ED.mp3
+OK: こばやしさちこ - さよならありがとう.wav -> こばやしさちこ - さよならありがとう.mp3
+OK: つぐみ寮寮生会合唱団 - さよならのかわりに - PC游戏「この青空に约束を（青空下的约定）」ED.wav -> つぐみ寮寮生会合唱団 - さよならのかわりに - PC游戏「この青空に约束を（青空下的约定）」ED.mp3
+OK: ともしびのうた - 《遥仰凰华》OST.flac -> ともしびのうた - 《遥仰凰华》OST.mp3
+OK: どーなつ◎くいんてっと - プラチナジェット - TV动画《SHIROBAKO（白箱）》ED2.flac -> どーなつ◎くいんてっと - プラチナジェット - TV动画《SHIROBAKO（白箱）》ED2.mp3
+OK: なかせひな - dear - PC游戏《Vestige ―刃に残るは君の面影》.wav -> なかせひな - dear - PC游戏《Vestige ―刃に残るは君の面影》.mp3
+OK: なるちょ - 空を見上げて - PCゲーム『ナツメグ』OST.wav -> なるちょ - 空を見上げて - PCゲーム『ナツメグ』OST.mp3
+OK: にーそっくすす(木户衣吹、优木加奈、石上静香、大西沙织、加隈亚衣) - 精霊剣舞祭 - TV动画《精霊使いの剣舞（精灵使的剑舞）》ED.wav -> にーそっくすす(木户衣吹、优木加奈、石上静香、大西沙织、加隈亚衣) - 精霊剣舞祭 - TV动画《精霊使いの剣舞（精灵使的剑舞）》ED.mp3
+OK: ねこねこソフト - 120円の冬 -org ver.-.wav -> ねこねこソフト - 120円の冬 -org ver.-.mp3
+OK: ねこねこソフト - 120円の冬.wav -> ねこねこソフト - 120円の冬.mp3
+OK: ねこねこソフト - 120円の春オルゴール by Elements Garden - 120円の春.wav -> ねこねこソフト - 120円の春オルゴール by Elements Garden - 120円の春.mp3
+OK: ねこねこソフト - Clouded sky.wav -> ねこねこソフト - Clouded sky.mp3
+OK: ねこねこソフト - pure pain - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - pure pain - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - いっしょに - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - いっしょに - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - みずいろ -inst ver.- - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - みずいろ -inst ver.- - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - みずいろ -org ver.- - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - みずいろ -org ver.- - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - サナララ～花咲く月曜日(SANARARA～花开的星期一)～ -inst ver.wav -> ねこねこソフト - サナララ～花咲く月曜日(SANARARA～花开的星期一)～ -inst ver.mp3
+OK: ねこねこソフト - スカーレット - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - スカーレット - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - スカーレット -ex ver.wav -> ねこねこソフト - スカーレット -ex ver.mp3
+OK: ねこねこソフト - ラムネ -inst ver - PC游戏《波子汽水（ラムネ）》OST.wav -> ねこねこソフト - ラムネ -inst ver - PC游戏《波子汽水（ラムネ）》OST.mp3
+OK: ねこねこソフト - 凍氷 - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - 凍氷 - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - 彼の地へ.wav -> ねこねこソフト - 彼の地へ.mp3
+OK: ねこねこソフト - 星空 by feel - 120円の春.wav -> ねこねこソフト - 星空 by feel - 120円の春.mp3
+OK: ねこねこソフト - 星空アレンジ by Ebi(SoundUnion) - 120円の春.wav -> ねこねこソフト - 星空アレンジ by Ebi(SoundUnion) - 120円の春.mp3
+OK: ねこねこソフト - 春風.wav -> ねこねこソフト - 春風.mp3
+OK: ねこねこソフト - 月下.wav -> ねこねこソフト - 月下.mp3
+OK: ねこねこソフト - 水溜まりに映る空 - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - 水溜まりに映る空 - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - 水色 - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - 水色 - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - 色なき視線 - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - 色なき視線 - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - 遠くへ - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - 遠くへ - PCゲーム「水色（みずいろ）」OST.mp3
+OK: ねこねこソフト - 銀色.wav -> ねこねこソフト - 銀色.mp3
+OK: ねこねこソフト - 雨やどり - PCゲーム「水色（みずいろ）」OST.wav -> ねこねこソフト - 雨やどり - PCゲーム「水色（みずいろ）」OST.mp3
+OK: のみこ - 4SEASONs short ver. - PC游戏《星空へ架かる桥AA（架向星空之桥AA）》OP主题曲.wav -> のみこ - 4SEASONs short ver. - PC游戏《星空へ架かる桥AA（架向星空之桥AA）》OP主题曲.mp3
+OK: のみこ - 星空へ架かる橋 - PC游戏《星空へ架かる桥（架向星空之桥）》OP主题曲.wav -> のみこ - 星空へ架かる橋 - PC游戏《星空へ架かる桥（架向星空之桥）》OP主题曲.mp3
+OK: のみこ - 星风のホロスコープ（星风的天宫图） - TV动画《架向星空之桥》OP主题曲.wav -> のみこ - 星风のホロスコープ（星风的天宫图） - TV动画《架向星空之桥》OP主题曲.mp3
+OK: はな - Eden's song - PC游戏《灰色的乐园》序章OP主题曲.wav -> はな - Eden's song - PC游戏《灰色的乐园》序章OP主题曲.mp3
+OK: はな - ヒマワリの教会 - PC游戏《向日葵の教会と長い夏休み》OP.wav -> はな - ヒマワリの教会 - PC游戏《向日葵の教会と長い夏休み》OP.mp3
+OK: ぱじゃまソフト - いつまでも一緒にいよう - ピアノの森の満開の下（盛开的钢琴之森下）.wav -> ぱじゃまソフト - いつまでも一緒にいよう - ピアノの森の満開の下（盛开的钢琴之森下）.mp3
+OK: ぱじゃまソフト - ちる はな さくら ～ピアノバージョン～ - ピアノの森の満開の下（盛开的钢琴之森下）.wav -> ぱじゃまソフト - ちる はな さくら ～ピアノバージョン～ - ピアノの森の満開の下（盛开的钢琴之森下）.mp3
+OK: ぱじゃまソフト - 今いてくれればそれでいい - ピアノの森の満開の下（盛开的钢琴之森下）.wav -> ぱじゃまソフト - 今いてくれればそれでいい - ピアノの森の満開の下（盛开的钢琴之森下）.mp3
+OK: ふたつの鼓動と赤い罪 你我的心跳与鲜红的罪孽--TV动画吸血鬼骑士--OP.wma -> ふたつの鼓動と赤い罪 你我的心跳与鲜红的罪孽--TV动画吸血鬼骑士--OP.mp3
+OK: ほしうた（星之歌） - 尋ねビト - Veil ∞ Lia.wav -> ほしうた（星之歌） - 尋ねビト - Veil ∞ Lia.mp3
+OK: ほしうた（星之歌） - 揺藍歌-ヨウランカ- - Veil ∞ Kaori Omura.wav -> ほしうた（星之歌） - 揺藍歌-ヨウランカ- - Veil ∞ Kaori Omura.mp3
+OK: みきとP - Orbit - PSP游戏《Caligula》OST.wav -> みきとP - Orbit - PSP游戏《Caligula》OST.mp3
+OK: みとせのりこ - クローバー - PC游戏「Clover Point」.wav -> みとせのりこ - クローバー - PC游戏「Clover Point」.mp3
+OK: みんな - 誰よりもきっと～for memories～ - 《Memories Off 5中断的胶片THE ANIMATION》.wav -> みんな - 誰よりもきっと～for memories～ - 《Memories Off 5中断的胶片THE ANIMATION》.mp3
+OK: めぐり逢い - 岡崎律子＆日向めぐみ - 円盤皇女.flac -> めぐり逢い - 岡崎律子＆日向めぐみ - 円盤皇女.mp3
+OK: もうひとつの青空 - PC游戏《青空下的约定》OST.wav -> もうひとつの青空 - PC游戏《青空下的约定》OST.mp3
+OK: もつれそうなストライド - PC游戏《青空下的约定》OST.wav -> もつれそうなストライド - PC游戏《青空下的约定》OST.mp3
+OK: ももいろクローバーZ（桃色幸运草Z） - MOON PRIDE - TV动画《美少女战士Crystal》OP.flac -> ももいろクローバーZ（桃色幸运草Z） - MOON PRIDE - TV动画《美少女战士Crystal》OP.mp3
+OK: やなぎなぎ - over and over - TV动画《Just Because!》OP主题曲.wav -> やなぎなぎ - over and over - TV动画《Just Because!》OP主题曲.mp3
+OK: やなぎなぎ - Rain - TV动画《Just Because!》OP专辑副歌.wav -> やなぎなぎ - Rain - TV动画《Just Because!》OP专辑副歌.mp3
+OK: やなぎなぎ - ユキトキ - 我的青春恋爱物语果然有问题OP.wav -> やなぎなぎ - ユキトキ - 我的青春恋爱物语果然有问题OP.mp3
+OK: やなぎなぎ - 偽らない君へ - PC游戏「Rewrite」朱音线ED.wav -> やなぎなぎ - 偽らない君へ - PC游戏「Rewrite」朱音线ED.mp3
+OK: やなぎなぎ - 忘れない為に - TV动画《ブラック・ブレット（漆黑的子弹）》第四话ED.wav -> やなぎなぎ - 忘れない為に - TV动画《ブラック・ブレット（漆黑的子弹）》第四话ED.mp3
+OK: やなぎなぎ - 恋文 - PC游戏「Rewrite」静流线ED.wav -> やなぎなぎ - 恋文 - PC游戏「Rewrite」静流线ED.mp3
+OK: やなぎなぎ - 飛べない魔法使い - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OP.wav -> やなぎなぎ - 飛べない魔法使い - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OP.mp3
+OK: ゆうか - with a smile (Full ver.) - 《遥仰凰华》OST.flac -> ゆうか - with a smile (Full ver.) - 《遥仰凰华》OST.mp3
+OK: ゆうか(鷹月殿子(遠山枝里子) ) - 風のRhythm - 遥かに仰ぎ、麗しの(遥仰凰华)OST.wav -> ゆうか(鷹月殿子(遠山枝里子) ) - 風のRhythm - 遥かに仰ぎ、麗しの(遥仰凰华)OST.mp3
+OK: ゆうなぎ - PC游戏《青空下的约定》OST.wav -> ゆうなぎ - PC游戏《青空下的约定》OST.mp3
+OK: ゆめおぼろ - tv桃华月禅OP.ape -> ゆめおぼろ - tv桃华月禅OP.mp3
+OK: ゆりかご - 《遥仰凰华》OST.flac -> ゆりかご - 《遥仰凰华》OST.mp3
+OK: らん丸 - KANATA.flac -> らん丸 - KANATA.mp3
+OK: アッチョリケ - With You… - PC游戏《SHUFFLE!》OST.wav -> アッチョリケ - With You… - PC游戏《SHUFFLE!》OST.mp3
+OK: アツミサオリ - もう少し…もう少し…（再多些…再多一些…） - TV动画《美鸟日记》ED.wav -> アツミサオリ - もう少し…もう少し…（再多些…再多一些…） - TV动画《美鸟日记》ED.mp3
+OK: アフィリア.サーガ - ネプテューヌ☆サガして - TV动画《超次元游戏：海王星》ED.wav -> アフィリア.サーガ - ネプテューヌ☆サガして - TV动画《超次元游戏：海王星》ED.mp3
+OK: アルミナ--死亡笔记ED.wma -> アルミナ--死亡笔记ED.mp3
+OK: グランドオープニング 運命の糸 - [豹头王传说 Guin Saga Original Soundtrack].flac -> グランドオープニング 運命の糸 - [豹头王传说 Guin Saga Original Soundtrack].mp3
+OK: コイノシルシ - 只有神知道的世界ED.flac -> コイノシルシ - 只有神知道的世界ED.mp3
+OK: ココア(CV.佐倉綾音)&チノ(CV.水瀬いのり) - コーヒーカップでエスコート - 剧场版《请问您今天要来点兔子吗？？ ～Dear My Sister～》.wav -> ココア(CV.佐倉綾音)&チノ(CV.水瀬いのり) - コーヒーカップでエスコート - 剧场版《请问您今天要来点兔子吗？？ ～Dear My Sister～》.mp3
+OK: ココロのちず--ONE PIECE--OP.wma -> ココロのちず--ONE PIECE--OP.mp3
+OK: コットンソフト - LAST SUMMER arrange ver - PCゲーム『ナツメグ』挿入歌.wav -> コットンソフト - LAST SUMMER arrange ver - PCゲーム『ナツメグ』挿入歌.mp3
+OK: コミネリサ - unity - GOSICK ED1&2.wav -> コミネリサ - unity - GOSICK ED1&2.mp3
+OK: サイキックラバー（PSYCHIC LOVER） - Rewrite - PC游戏「Rewrite」2nd主题曲.wav -> サイキックラバー（PSYCHIC LOVER） - Rewrite - PC游戏「Rewrite」2nd主题曲.mp3
+OK: サムライハート（Some Like It Hot！！） - TV动画《银魂》第二季ED1.flac -> サムライハート（Some Like It Hot！！） - TV动画《银魂》第二季ED1.mp3
+OK: サンレス水郷.flac -> サンレス水郷.mp3
+OK: シンドウ·スガタ(福山潤) - 憂いの鎖.flac -> シンドウ·スガタ(福山潤) - 憂いの鎖.mp3
+OK: ジムノペディ 第1番.flac -> ジムノペディ 第1番.mp3
+OK: ソンナム（Seong-Nam） - belong together - PC游戏《優遇接待＃～孤島と６人のスク水っ娘たち～》.wav -> ソンナム（Seong-Nam） - belong together - PC游戏《優遇接待＃～孤島と６人のスク水っ娘たち～》.mp3
+OK: タイナカサチ（田井中彩智） - disillusion（幻灭） - TV动画《FateStayNight》OP1.wav -> タイナカサチ（田井中彩智） - disillusion（幻灭） - TV动画《FateStayNight》OP1.mp3
+OK: タッキー&翼 - 卒業～さよならは明日のために～(ONE VERSION).flac -> タッキー&翼 - 卒業～さよならは明日のために～(ONE VERSION).mp3
+OK: ノーブランドサウンズ - つないだ手ぶくろ - ゆのはな（雪之华）OST.wav -> ノーブランドサウンズ - つないだ手ぶくろ - ゆのはな（雪之华）OST.mp3
+OK: ノーブランドサウンズ - まどろみの昼下がり - ゆのはな（雪之华）.wav -> ノーブランドサウンズ - まどろみの昼下がり - ゆのはな（雪之华）.mp3
+OK: パープルソフトウェア - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> パープルソフトウェア - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: ファクトリーノイズ＆AG - 姑獲鳥 - PC游戏《あやかしびと（妖人）》OST.wav -> ファクトリーノイズ＆AG - 姑獲鳥 - PC游戏《あやかしびと（妖人）》OST.mp3
+OK: ファクトリーノイズ＆AG - 座敷童子 - PC游戏《あやかしびと（妖人）》OST.wav -> ファクトリーノイズ＆AG - 座敷童子 - PC游戏《あやかしびと（妖人）》OST.mp3
+OK: ファクトリーノイズ＆AG - 牛鬼 - PC游戏《あやかしびと（妖人）》OST.wav -> ファクトリーノイズ＆AG - 牛鬼 - PC游戏《あやかしびと（妖人）》OST.mp3
+OK: ファクトリーノイズ＆AG - 迷い家 - PC游戏《あやかしびと（妖人）》OST.wav -> ファクトリーノイズ＆AG - 迷い家 - PC游戏《あやかしびと（妖人）》OST.mp3
+OK: ポーリュシカ·ポーレ--DRAMA青涩时代--OP.wma -> ポーリュシカ·ポーレ--DRAMA青涩时代--OP.mp3
+OK: マリナイスマイール(恒松あゆみ) - TOMORROW.flac -> マリナイスマイール(恒松あゆみ) - TOMORROW.mp3
+OK: 伊莉絲·芙蕾雅(日高里菜)&物部深月(沼倉愛美) - Ray of bullet - TV动画《銃皇無尽のファフニール（铳皇无尽的法夫纳）》ED.flac -> 伊莉絲·芙蕾雅(日高里菜)&物部深月(沼倉愛美) - Ray of bullet - TV动画《銃皇無尽のファフニール（铳皇无尽的法夫纳）》ED.mp3
+OK: 伊藤由奈 - ENDLESS STORY - 电影《NANA》主题曲.wav -> 伊藤由奈 - ENDLESS STORY - 电影《NANA》主题曲.mp3
+OK: 伊藤真澄 - 予感 - 濒危物种少女ED.flac -> 伊藤真澄 - 予感 - 濒危物种少女ED.mp3
+OK: 伊藤瞳子 - moon... - PCゲーム『ウィズアニバーサリィー☆FUNTA！ feat. RURU』ED曲.flac -> 伊藤瞳子 - moon... - PCゲーム『ウィズアニバーサリィー☆FUNTA！ feat. RURU』ED曲.mp3
+OK: 伊藤賢治 - 小さな街の大空 - PC游戏《神隐之狼》OST.wav -> 伊藤賢治 - 小さな街の大空 - PC游戏《神隐之狼》OST.mp3
+OK: 伊藤香奈子 - 沙耶の唄 - 沙耶の呗ED.wav -> 伊藤香奈子 - 沙耶の唄 - 沙耶の呗ED.mp3
+OK: 传颂之物 - まどろみの輪廻 - 河井英里.wav -> 传颂之物 - まどろみの輪廻 - 河井英里.mp3
+OK: 传颂之物 - 運命 -SADAME- - 元田恵美.wav -> 传颂之物 - 運命 -SADAME- - 元田恵美.mp3
+OK: 佐倉千代(CV.小澤亜李) - ウラオモテ・フォーチュン - TV动画《月刊少女野崎くん》ED.flac -> 佐倉千代(CV.小澤亜李) - ウラオモテ・フォーチュン - TV动画《月刊少女野崎くん》ED.mp3
+OK: 佐倉紗織;ave;new - HONEY - PC游戏「こいいろChu!Lips」主题歌.flac -> 佐倉紗織;ave;new - HONEY - PC游戏「こいいろChu!Lips」主题歌.mp3
+OK: 佐咲紗花 - Ceremony - PC游戏《灰色的乐园》ED.wav -> 佐咲紗花 - Ceremony - PC游戏《灰色的乐园》ED.mp3
+OK: 佐咲紗花 - Distance - PC游戏《恋花绽放樱飞时（恋がさくころ桜どき）》OP2.wav -> 佐咲紗花 - Distance - PC游戏《恋花绽放樱飞时（恋がさくころ桜どき）》OP2.mp3
+OK: 佐咲紗花 - キスのひとつで - PC游戏《ちいさな彼女の小夜曲（娇小少女的小夜曲）》ED.wav -> 佐咲紗花 - キスのひとつで - PC游戏《ちいさな彼女の小夜曲（娇小少女的小夜曲）》ED.mp3
+OK: 佐咲紗花 - マリンブルーに沿って - PC游戏《ちいさな彼女の小夜曲（娇小少女的小夜曲）》OP主题曲.wav -> 佐咲紗花 - マリンブルーに沿って - PC游戏《ちいさな彼女の小夜曲（娇小少女的小夜曲）》OP主题曲.mp3
+OK: 佐咲紗花 - ワールドエンド - PC游戏《灰色的迷宫》OP主题曲.wav -> 佐咲紗花 - ワールドエンド - PC游戏《灰色的迷宫》OP主题曲.mp3
+OK: 佐咲紗花 - 恋さくミライ - PC游戏《恋花绽放樱飞时（恋がさくころ桜どき）》OP1.wav -> 佐咲紗花 - 恋さくミライ - PC游戏《恋花绽放樱飞时（恋がさくころ桜どき）》OP1.mp3
+OK: 佐土原かおり - To Be Continued - 问题儿童都来自异世界？ED.wav -> 佐土原かおり - To Be Continued - 问题儿童都来自异世界？ED.mp3
+OK: 佐藤しずく - 百花繚乱ファンタズム 葵ちゃんReMIX - PC游戏《鬼ごっこ！ ファンディスク（鬼ごっこ！FD）》OP主题曲.wav -> 佐藤しずく - 百花繚乱ファンタズム 葵ちゃんReMIX - PC游戏《鬼ごっこ！ ファンディスク（鬼ごっこ！FD）》OP主题曲.mp3
+OK: 佐藤ひろ美 - Believe forever - PCゲーム『凉风のメルト -Where wishes are drawn to each other-』OP.wav -> 佐藤ひろ美 - Believe forever - PCゲーム『凉风のメルト -Where wishes are drawn to each other-』OP.mp3
+OK: 佐藤ひろ美 - Tears in snow - PC游戏《真实之泪》主题曲.wav -> 佐藤ひろ美 - Tears in snow - PC游戏《真实之泪》主题曲.mp3
+OK: 佐藤ひろ美 - ありがとうの歌 - PC游戏「Ricotte～アルペンブルの歌姫～」挿入歌.wav -> 佐藤ひろ美 - ありがとうの歌 - PC游戏「Ricotte～アルペンブルの歌姫～」挿入歌.mp3
+OK: 佐藤ひろ美 - サヨナラ - 虫之歌ED.wav -> 佐藤ひろ美 - サヨナラ - 虫之歌ED.mp3
+OK: 佐藤ひろ美 - 夏のファンタジア - PC游戏《黄昏のシンセミア(黄昏的禁忌之药)》OP主题曲.wav -> 佐藤ひろ美 - 夏のファンタジア - PC游戏《黄昏のシンセミア(黄昏的禁忌之药)》OP主题曲.mp3
+OK: 佐藤ひろ美 - 夏の終わりに - ほしうた（星之歌）.wav -> 佐藤ひろ美 - 夏の終わりに - ほしうた（星之歌）.mp3
+OK: 佐藤ひろ美 - 迷いの森 - PC游戏《灰色的果实》マキナED.wav -> 佐藤ひろ美 - 迷いの森 - PC游戏《灰色的果实》マキナED.mp3
+OK: 佐藤ひろ美&NANA - Promise ～月夜の記憶～.flac -> 佐藤ひろ美&NANA - Promise ～月夜の記憶～.mp3
+OK: 佐藤利奈 - 待たないで - 专辑《雪降る歌2～恋する君の冬物語～》.wav -> 佐藤利奈 - 待たないで - 专辑《雪降る歌2～恋する君の冬物語～》.mp3
+OK: 佐藤聡美 & 茅野愛衣 - まどろみの約束 - 冰果ED1.ape -> 佐藤聡美 & 茅野愛衣 - まどろみの約束 - 冰果ED1.mp3
+OK: 佐藤裕美 - ごめんね - PCゲーム「水色（みずいろ）」挿入歌.wav -> 佐藤裕美 - ごめんね - PCゲーム「水色（みずいろ）」挿入歌.mp3
+OK: 佐藤裕美 - なんてね76's - PC游戏《波子汽水（ラムネ）》OP主题歌.wav -> 佐藤裕美 - なんてね76's - PC游戏《波子汽水（ラムネ）》OP主题歌.mp3
+OK: 佐藤裕美 - みずいろ - PCゲーム「水色（みずいろ）」OP.wav -> 佐藤裕美 - みずいろ - PCゲーム「水色（みずいろ）」OP.mp3
+OK: 保坂汐音 - Dancing Love! - PC游戏《虹を見つけたら教えて。》.wav -> 保坂汐音 - Dancing Love! - PC游戏《虹を見つけたら教えて。》.mp3
+OK: 倉木麻衣 - Time after time ～花舞う街で～ - 剧场版《名侦探柯南剧场版 迷宫的十字路口》主题歌.wav -> 倉木麻衣 - Time after time ～花舞う街で～ - 剧场版《名侦探柯南剧场版 迷宫的十字路口》主题歌.mp3
+OK: 偶像大师 - 目が逢う瞬間 - 如月千早 (CV今井麻美).wav -> 偶像大师 - 目が逢う瞬間 - 如月千早 (CV今井麻美).mp3
+OK: 偽物語 - 戦場ヶ原ひたぎ(斎藤千和) - 二言目.ape -> 偽物語 - 戦場ヶ原ひたぎ(斎藤千和) - 二言目.mp3
+OK: 傀儡师左近 - 声 - 五木花実.wav -> 傀儡师左近 - 声 - 五木花実.mp3
+OK: 備長炭 - Coorie - いろは.flac -> 備長炭 - Coorie - いろは.mp3
+OK: 傳頌之物 - Suara - 永久に.flac -> 傳頌之物 - Suara - 永久に.mp3
+OK: 優しい世界 - 反叛的鲁鲁修-娜娜莉角色歌.wav -> 優しい世界 - 反叛的鲁鲁修-娜娜莉角色歌.mp3
+OK: 元ちとせ - Perfect.wav -> 元ちとせ - Perfect.mp3
+OK: 元ちとせ - ミヨリの森.wav -> 元ちとせ - ミヨリの森.mp3
+OK: 元ちとせ - 語り継ぐこと - TV动画《BLOOD+》ED.wav -> 元ちとせ - 語り継ぐこと - TV动画《BLOOD+》ED.mp3
+OK: 元ちとせ - 青のレクイエム.wav -> 元ちとせ - 青のレクイエム.mp3
+OK: 元田恵美 - 永久に - PC游戏《传颂之物》ED.wav -> 元田恵美 - 永久に - PC游戏《传颂之物》ED.mp3
+OK: 光GENJI - 勇気100% - TV动画《忍者乱太郎》OP主题曲.wav -> 光GENJI - 勇気100% - TV动画《忍者乱太郎》OP主题曲.mp3
+OK: 光宗信吉 - 光さす庭（流光倾泻的庭院） - TV动画《少女革命》OST.wav -> 光宗信吉 - 光さす庭（流光倾泻的庭院） - TV动画《少女革命》OST.mp3
+OK: 光明力量 - 川嶋あい - 絶望と希望.flac -> 光明力量 - 川嶋あい - 絶望と希望.mp3
+OK: 光輝 -コウキ- 桃華月憚OST.wav -> 光輝 -コウキ- 桃華月憚OST.mp3
+OK: 全金屬狂潮 - 下川みくに - 枯れない花.flac -> 全金屬狂潮 - 下川みくに - 枯れない花.mp3
+OK: 全金屬狂潮 Fumoffu - 下川みくに - それが、愛でしょう.flac -> 全金屬狂潮 Fumoffu - 下川みくに - それが、愛でしょう.mp3
+OK: 公主戀人 - 橋本みゆき - Princess Primp!.flac -> 公主戀人 - 橋本みゆき - Princess Primp!.mp3
+OK: 冈崎律子 - 青空.wav -> 冈崎律子 - 青空.mp3
+OK: 凰华 - 《遥仰凰华》OST.flac -> 凰华 - 《遥仰凰华》OST.mp3
+OK: 凰华女学院 学院歌『遥かに仰ぎ、丽しの』斉唱 - 《遥仰凰华》OST.flac -> 凰华女学院 学院歌『遥かに仰ぎ、丽しの』斉唱 - 《遥仰凰华》OST.mp3
+OK: 初恋limited --初恋限定--ED.wma -> 初恋limited --初恋限定--ED.mp3
+OK: 前田愛 - keep on - TV动画《数码宝贝》ED.wav -> 前田愛 - keep on - TV动画《数码宝贝》ED.mp3
+OK: 加瀬愛奈 - Growing - PC游戏「空を飛ぶ、3つの方法。」真主题曲.wav -> 加瀬愛奈 - Growing - PC游戏「空を飛ぶ、3つの方法。」真主题曲.mp3
+OK: 加瀬愛奈 - 柔らかな桜光 - PC游戏《fortissimoAkkord：Bsusvier》插曲.wav -> 加瀬愛奈 - 柔らかな桜光 - PC游戏《fortissimoAkkord：Bsusvier》插曲.mp3
+OK: 加藤敏樹 - ボス・マリアノ - ps3游戏《フェアリーフェンサーエフ（妖精剑士f）》OST.wav -> 加藤敏樹 - ボス・マリアノ - ps3游戏《フェアリーフェンサーエフ（妖精剑士f）》OST.mp3
+OK: 加賀美セイラ - Super Special - TV动画『CHAOS;HEAD』ED.wav -> 加賀美セイラ - Super Special - TV动画『CHAOS;HEAD』ED.mp3
+OK: 加那.-イトシキヒトヨ- - つばさ - 城南海.wav -> 加那.-イトシキヒトヨ- - つばさ - 城南海.mp3
+OK: 加那.-イトシキヒトヨ- - 光 (album mix) - 城南海.wav -> 加那.-イトシキヒトヨ- - 光 (album mix) - 城南海.mp3
+OK: 加那.-イトシキヒトヨ- - 四季ウタカタ - 城南海.wav -> 加那.-イトシキヒトヨ- - 四季ウタカタ - 城南海.mp3
+OK: 加那.-イトシキヒトヨ- - 月とペンギン - 城南海.wav -> 加那.-イトシキヒトヨ- - 月とペンギン - 城南海.mp3
+OK: 化物語 - 八九寺真宵(加藤英美里) - 帰り道.ape -> 化物語 - 八九寺真宵(加藤英美里) - 帰り道.mp3
+OK: 化物语OP5 堀江由衣 sugar sweet nightmare.wav -> 化物语OP5 堀江由衣 sugar sweet nightmare.mp3
+OK: 北白川たまこ (洲崎綾) - 睡乱的头发 ねぐせ - 玉子市场ED.wav -> 北白川たまこ (洲崎綾) - 睡乱的头发 ねぐせ - 玉子市场ED.mp3
+OK: 北都南 - ちいさな奇跡 - PC游戏《为与明日君相逢》广播剧(御风铃角色曲).wav -> 北都南 - ちいさな奇跡 - PC游戏《为与明日君相逢》广播剧(御风铃角色曲).mp3
+OK: 十二國記 - 有坂美香 - 月迷風影.flac -> 十二國記 - 有坂美香 - 月迷風影.mp3
+OK: 十字架与吸血鬼 - 時に愛は - 福圓美里.wav -> 十字架与吸血鬼 - 時に愛は - 福圓美里.mp3
+OK: 千與千尋 - 木村弓 - いつも何度でも.flac -> 千與千尋 - 木村弓 - いつも何度でも.mp3
+OK: 千菅春香 - 希望の花 - 琴浦小姐（琴浦さん）ED.wav -> 千菅春香 - 希望の花 - 琴浦小姐（琴浦さん）ED.mp3
+OK: 千葉紗子 - トゥインクル☆スター（闪亮的星星） - TV动画《彗星公主（音乐小彗星）》ED.wav -> 千葉紗子 - トゥインクル☆スター（闪亮的星星） - TV动画《彗星公主（音乐小彗星）》ED.mp3
+OK: 半妖少女綺麗譚 - スフィア - Moon Signal.flac -> 半妖少女綺麗譚 - スフィア - Moon Signal.mp3
+OK: 单恋--只想告诉你--ED.wma -> 单恋--只想告诉你--ED.mp3
+OK: 南春香(CV佐藤利奈)南夏奈(CV井上麻里奈)南千秋(CV茅原実里) - 急接近ラッキーDAYS - 『南家三姐妹第四季』ED.flac -> 南春香(CV佐藤利奈)南夏奈(CV井上麻里奈)南千秋(CV茅原実里) - 急接近ラッキーDAYS - 『南家三姐妹第四季』ED.mp3
+OK: 南春香[CV佐藤利奈]、南夏奈[CV井上麻里奈]、南千秋[CV茅原実里] - シアワセ☆ハイテンション↑↑~幸福☆兴高采烈↑↑ - 『南家三姐妹第四季』OP.flac -> 南春香[CV佐藤利奈]、南夏奈[CV井上麻里奈]、南千秋[CV茅原実里] - シアワセ☆ハイテンション↑↑~幸福☆兴高采烈↑↑ - 『南家三姐妹第四季』OP.mp3
+OK: 南条爱乃 - 君が笑む夕暮れ - TV动画《东京暗鸦》ED1.wav -> 南条爱乃 - 君が笑む夕暮れ - TV动画《东京暗鸦》ED1.mp3
+OK: 原田ひとみ - little explorer - PC游戏eden（地球最后的恋物语）.flac -> 原田ひとみ - little explorer - PC游戏eden（地球最后的恋物语）.mp3
+OK: 原田ひとみ - The Brave Under The Summer Sky - PC游戏「夏空のペルセウス（夏空的英仙座）」OP主题曲.wav -> 原田ひとみ - The Brave Under The Summer Sky - PC游戏「夏空のペルセウス（夏空的英仙座）」OP主题曲.mp3
+OK: 原田ひとみ - 共鳴のTrue Force - TV动画《精霊使いの剣舞（精灵使的剑舞）》OP.wav -> 原田ひとみ - 共鳴のTrue Force - TV动画《精霊使いの剣舞（精灵使的剑舞）》OP.mp3
+OK: 原田ひとみ - 冬だより - PC游戏《雪之华(ゆのはな)》OP主题曲.flac -> 原田ひとみ - 冬だより - PC游戏《雪之华(ゆのはな)》OP主题曲.mp3
+OK: 原田ひとみ - 約束～resume～ - PC游戏《雪之华(ゆのはな)》ED.wav -> 原田ひとみ - 約束～resume～ - PC游戏《雪之华(ゆのはな)》ED.mp3
+OK: 原田ひとみ 「Anicca」- TVアニメ「機巧少女は傷つかない」OP.wav -> 原田ひとみ 「Anicca」- TVアニメ「機巧少女は傷つかない」OP.mp3
+OK: 古泉一樹(小野大輔) - ただの秘密.flac -> 古泉一樹(小野大輔) - ただの秘密.mp3
+OK: 可塑性记忆-Ring of Fortune.flac -> 可塑性记忆-Ring of Fortune.mp3
+OK: 吉岡亜衣加 - 十六夜涙 - TV动画《薄桜鬼》OP.wav -> 吉岡亜衣加 - 十六夜涙 - TV动画《薄桜鬼》OP.mp3
+OK: 吉田亚纪子（KOKIA) - say goodbye & good day - 圣洁传说ED.wav -> 吉田亚纪子（KOKIA) - say goodbye & good day - 圣洁传说ED.mp3
+OK: 吉田奈穂子 - ONLY MY STYLE - PC游戏《麻雀 英雄×魔王》.flac -> 吉田奈穂子 - ONLY MY STYLE - PC游戏《麻雀 英雄×魔王》.mp3
+OK: 同じ云を见つめて - 《遥仰凰华》OST.flac -> 同じ云を见つめて - 《遥仰凰华》OST.mp3
+OK: 名偵探柯南 04 - Zard - 運命のルーレット廻して.flac -> 名偵探柯南 04 - Zard - 運命のルーレット廻して.mp3
+OK: 名偵探柯南 04 - 宇徳敬子 - 光と影のロマン.flac -> 名偵探柯南 04 - 宇徳敬子 - 光と影のロマン.mp3
+OK: 名偵探柯南 05 - 小松未歩 - 願い事ひとつだけ.flac -> 名偵探柯南 05 - 小松未歩 - 願い事ひとつだけ.mp3
+OK: 名偵探柯南 09 - 松橋未樹 - Destiny.flac -> 名偵探柯南 09 - 松橋未樹 - Destiny.mp3
+OK: 名偵探柯南 10 - 倉木麻衣 - Winter Bells.flac -> 名偵探柯南 10 - 倉木麻衣 - Winter Bells.mp3
+OK: 名偵探柯南 12 - 倉木麻衣 - Always.flac -> 名偵探柯南 12 - 倉木麻衣 - Always.mp3
+OK: 名偵探柯南 12 - 倉木麻衣 - 風のららら.flac -> 名偵探柯南 12 - 倉木麻衣 - 風のららら.mp3
+OK: 名偵探柯南 16 - 倉木麻衣 - Growing Of My Heart.flac -> 名偵探柯南 16 - 倉木麻衣 - Growing Of My Heart.mp3
+OK: 名偵探柯南 23 - 巖田さゆり - Thank You For Everything.flac -> 名偵探柯南 23 - 巖田さゆり - Thank You For Everything.mp3
+OK: 名偵探柯南 33 - Garnet Crow - Doing All Right.flac -> 名偵探柯南 33 - Garnet Crow - Doing All Right.mp3
+OK: 名偵探柯南 名偵探柯南 - 伊織 - キミがいれば.flac -> 名偵探柯南 名偵探柯南 - 伊織 - キミがいれば.mp3
+OK: 名偵探柯南 名偵探柯南 - 伊織 - 逢いたいよ.flac -> 名偵探柯南 名偵探柯南 - 伊織 - 逢いたいよ.mp3
+OK: 名偵探柯南 水平線上的陰謀 - ＺＡＲＤ - 夏を待つセイル（帆）のように.flac -> 名偵探柯南 水平線上的陰謀 - ＺＡＲＤ - 夏を待つセイル（帆）のように.mp3
+OK: 名偵探柯南 瞳孔中的暗殺者 - 小松未歩 - あなたがいるから.flac -> 名偵探柯南 瞳孔中的暗殺者 - 小松未歩 - あなたがいるから.mp3
+OK: 名偵探柯南 紺碧之棺 - 愛內里菜、三枝夕夏 - 七つの海を渡る風のように.flac -> 名偵探柯南 紺碧之棺 - 愛內里菜、三枝夕夏 - 七つの海を渡る風のように.mp3
+OK: 名偵探柯南 銀翼的魔術師 - 愛內里菜 - Dream×Dream.flac -> 名偵探柯南 銀翼的魔術師 - 愛內里菜 - Dream×Dream.mp3
+OK: 吹响！悠风号-トゥッティ！.flac -> 吹响！悠风号-トゥッティ！.mp3
+OK: 和田光司 - Butter Fly -  TV动画《数码暴龙1 OP主题曲》.flac -> 和田光司 - Butter Fly -  TV动画《数码暴龙1 OP主题曲》.mp3
+OK: 哆啦A夢 - 大杉久美子 - ドラえもんのうた.flac -> 哆啦A夢 - 大杉久美子 - ドラえもんのうた.mp3
+OK: 哈爾的移動城堡 - 倍賞千恵子 - 世界の約束.flac -> 哈爾的移動城堡 - 倍賞千恵子 - 世界の約束.mp3
+OK: 喜多村英梨 - Be Starters! - TV动画《迷茫管家与懦弱的我》OP主题曲.flac -> 喜多村英梨 - Be Starters! - TV动画《迷茫管家与懦弱的我》OP主题曲.mp3
+OK: 喜多村英梨 - Birth - 《神不在的星期天》OP.wav -> 喜多村英梨 - Birth - 《神不在的星期天》OP.mp3
+OK: 喜多村英梨 - 凛麗 - TV动画《クロスアンジュ 天使と竜の輪舞（CROSS ANGE 天使与龙的轮舞）》ED.wav -> 喜多村英梨 - 凛麗 - TV动画《クロスアンジュ 天使と竜の輪舞（CROSS ANGE 天使与龙的轮舞）》ED.mp3
+OK: 喜多村英梨 - 月詠ノ詩.wav -> 喜多村英梨 - 月詠ノ詩.mp3
+OK: 喧囂學院 - 能登麻美子 - 夕顔(Vo).flac -> 喧囂學院 - 能登麻美子 - 夕顔(Vo).mp3
+OK: 嘉陽愛子 - 瞳の中の迷宮 - 暗与帽子与书之旅人.flac -> 嘉陽愛子 - 瞳の中の迷宮 - 暗与帽子与书之旅人.mp3
+OK: 園田まひる - 雪の降る頃に偶然逢えたら.wav -> 園田まひる - 雪の降る頃に偶然逢えたら.mp3
+OK: 圣诞之吻 - i Love - azusa.wav -> 圣诞之吻 - i Love - azusa.mp3
+OK: 地海傳說 - 手嶌葵 - テルーの唄.flac -> 地海傳說 - 手嶌葵 - テルーの唄.mp3
+OK: 地狱少女 - あいぞめ - 能登麻美子.wav -> 地狱少女 - あいぞめ - 能登麻美子.mp3
+OK: 地狱少女 - 逆さまの蝶 - SNoW.wav -> 地狱少女 - 逆さまの蝶 - SNoW.mp3
+OK: 地獄少女 - 坂本真綾 - マメシバ.flac -> 地獄少女 - 坂本真綾 - マメシバ.mp3
+OK: 地球少女 - Cloe クロエ - 山本千夏.wav -> 地球少女 - Cloe クロエ - 山本千夏.mp3
+OK: 地球防衛少年 - 石川智晶 - Vermillion.flac -> 地球防衛少年 - 石川智晶 - Vermillion.mp3
+OK: 地球防衛少年 - 石川智晶 - ロストイノセント.flac -> 地球防衛少年 - 石川智晶 - ロストイノセント.mp3
+OK: 坂本真綾 - おかえりなさい~Acoustic Ver.~(TVアニメ「たまゆら~もあぐれっしぶ~」挿入歌).wav -> 坂本真綾 - おかえりなさい~Acoustic Ver.~(TVアニメ「たまゆら~もあぐれっしぶ~」挿入歌).mp3
+OK: 坂本真绫 - Tune The Rainbow - 翼神传说剧场版 多元变奏曲TM.flac -> 坂本真绫 - Tune The Rainbow - 翼神传说剧场版 多元变奏曲TM.mp3
+OK: 城南海 - Sunrise.wav -> 城南海 - Sunrise.mp3
+OK: 城南海 - あさな ゆうな.wav -> 城南海 - あさな ゆうな.mp3
+OK: 城南海 - アイツムギ.wav -> 城南海 - アイツムギ.mp3
+OK: 城南海 - ココロのフィルム.wav -> 城南海 - ココロのフィルム.mp3
+OK: 城南海 - 白い月.wav -> 城南海 - 白い月.mp3
+OK: 城南海 - 红.wav -> 城南海 - 红.mp3
+OK: 城南海 - 蛍恋.wav -> 城南海 - 蛍恋.mp3
+OK: 城南海 - 谁カノタメニ.wav -> 城南海 - 谁カノタメニ.mp3
+OK: 城市猎人 - 十六夜 - 高橋真梨子.wav -> 城市猎人 - 十六夜 - 高橋真梨子.mp3
+OK: 堀奈生 - 遠くへ….wav -> 堀奈生 - 遠くへ….mp3
+OK: 堀江由衣 - そよ风のハーモニー - TV动画《初音岛》第10话、23话 插入曲.wav -> 堀江由衣 - そよ风のハーモニー - TV动画《初音岛》第10话、23话 插入曲.mp3
+OK: 堀江美都子 - 花の子ルンルン - TV动画《花仙子》OP主题曲.wav -> 堀江美都子 - 花の子ルンルン - TV动画《花仙子》OP主题曲.mp3
+OK: 壳ノ少女 - Thin purple - Innocent Grey.wav -> 壳ノ少女 - Thin purple - Innocent Grey.mp3
+OK: 夏川りみ  - 天的搖籃曲（蒙古地方搖籃曲）.wav -> 夏川りみ  - 天的搖籃曲（蒙古地方搖籃曲）.mp3
+OK: 夏川りみ - あの花のように - あいのうた～セルフセレクション.ベスト～.wav -> 夏川りみ - あの花のように - あいのうた～セルフセレクション.ベスト～.mp3
+OK: 夏川りみ - さようなら　ありがとう～天の風～ - あいのうた～セルフセレクション.ベスト～.wav -> 夏川りみ - さようなら　ありがとう～天の風～ - あいのうた～セルフセレクション.ベスト～.mp3
+OK: 夏川りみ - ずっと、憶えてる.wav -> 夏川りみ - ずっと、憶えてる.mp3
+OK: 夏川りみ - 月のかほり - てぃだ.wav -> 夏川りみ - 月のかほり - てぃだ.mp3
+OK: 夏日香气Part.2 - 韩剧《夏日香气》OST.wav -> 夏日香气Part.2 - 韩剧《夏日香气》OST.mp3
+OK: 夏空彼方OST - リフレイン ～ Piano Version ～.wav -> 夏空彼方OST - リフレイン ～ Piano Version ～.mp3
+OK: 夏空彼方OST - 儚い願い.wav -> 夏空彼方OST - 儚い願い.mp3
+OK: 夏空彼方OST - 想いのカナタ ～ MusicBox Version ～.wav -> 夏空彼方OST - 想いのカナタ ～ MusicBox Version ～.mp3
+OK: 多田 葵 - CANOE - PC游戏「Rewrite」Terra线ED.wav -> 多田 葵 - CANOE - PC游戏「Rewrite」Terra线ED.mp3
+OK: 多田 葵 - Harvest - PC游戏「Rewrite Harvest festa!」主题曲.wav -> 多田 葵 - Harvest - PC游戏「Rewrite Harvest festa!」主题曲.mp3
+OK: 多田 葵 - 渡りの詩 - PC游戏「Rewrite」Moon线ED.wav -> 多田 葵 - 渡りの詩 - PC游戏「Rewrite」Moon线ED.mp3
+OK: 多田彰文 - 歓喜の詩(うた) - TV动画《暗与帽子与书之旅人》OST.wav -> 多田彰文 - 歓喜の詩(うた) - TV动画《暗与帽子与书之旅人》OST.mp3
+OK: 多田葵 - Brave Song.flac -> 多田葵 - Brave Song.mp3
+OK: 多田葵 - スカボロー・フェア - 英格兰民谣 - 神枪少女（枪姬）第八话ED.flac -> 多田葵 - スカボロー・フェア - 英格兰民谣 - 神枪少女（枪姬）第八话ED.mp3
+OK: 夜明けを运ぶ风 - 《遥仰凰华》OST.flac -> 夜明けを运ぶ风 - 《遥仰凰华》OST.mp3
+OK: 夜明前的琉璃色 - 大藤史 - 前奏曲 -We Are Not Alone-.flac -> 夜明前的琉璃色 - 大藤史 - 前奏曲 -We Are Not Alone-.mp3
+OK: 夢幻 -ムゲン- 桃華月憚OST.wav -> 夢幻 -ムゲン- 桃華月憚OST.mp3
+OK: 大咲美和 - Pieces - PCゲーム「この青空に约束を（青空下的约定）」插入曲.wav -> 大咲美和 - Pieces - PCゲーム「この青空に约束を（青空下的约定）」插入曲.mp3
+OK: 大塚愛 - プラネタリウム（星象仪） - 日剧《花样男子》第一部插曲.wav -> 大塚愛 - プラネタリウム（星象仪） - 日剧《花样男子》第一部插曲.mp3
+OK: 大空直美 - 風色メロディ - TV动画《偶像大师 灰姑娘女孩》绪方智绘里 角色歌.flac -> 大空直美 - 風色メロディ - TV动画《偶像大师 灰姑娘女孩》绪方智绘里 角色歌.mp3
+OK: 大黒摩季 - 太陽の国へ行こうよ すぐに ～空飛ぶ夢に乗って～.wav -> 大黒摩季 - 太陽の国へ行こうよ すぐに ～空飛ぶ夢に乗って～.mp3
+OK: 天使小夜曲 - 飯塚雅弓 - 天使の歌う小夜曲.flac -> 天使小夜曲 - 飯塚雅弓 - 天使の歌う小夜曲.mp3
+OK: 天使心 - Gloria - カノン.wav -> 天使心 - Gloria - カノン.mp3
+OK: 天壌 -テンジョウ- 桃華月憚OST.wav -> 天壌 -テンジョウ- 桃華月憚OST.mp3
+OK: 天宮小百合(牧島有希) - 予感.flac -> 天宮小百合(牧島有希) - 予感.mp3
+OK: 天空之城 - 君をのせて - 井上あずみ.wav -> 天空之城 - 君をのせて - 井上あずみ.mp3
+OK: 天空之艾斯嘉科尼 - 坂本真綾 - You'Re Not Alone.flac -> 天空之艾斯嘉科尼 - 坂本真綾 - You'Re Not Alone.mp3
+OK: 天空之艾斯嘉科尼 - 坂本真綾 - ポケットを空にして.flac -> 天空之艾斯嘉科尼 - 坂本真綾 - ポケットを空にして.mp3
+OK: 天誅ガールズ - ミライ＊ガール - TV动画《天诛少女（漆黑的子弹剧中剧）》OP主题曲.wav -> 天誅ガールズ - ミライ＊ガール - TV动画《天诛少女（漆黑的子弹剧中剧）》OP主题曲.mp3
+OK: 天誅ガールズ - 百年先も - TV动画《天诛少女（漆黑的子弹剧中剧）》副歌.wav -> 天誅ガールズ - 百年先も - TV动画《天诛少女（漆黑的子弹剧中剧）》副歌.mp3
+OK: 天門 - feel coming spring by piano（f.c.s.by piano） - PC游戏《春天的足音（はるのあしおと）》.wav -> 天門 - feel coming spring by piano（f.c.s.by piano） - PC游戏《春天的足音（はるのあしおと）》.mp3
+OK: 天門&多田彰文 - 祝福.flac -> 天門&多田彰文 - 祝福.mp3
+OK: 失落的宇宙 - ～infinity～∞ - 林原めぐみ.wav -> 失落的宇宙 - ～infinity～∞ - 林原めぐみ.mp3
+OK: 奇幻兒童 - Origa - 浮遊夢(日文版).flac -> 奇幻兒童 - Origa - 浮遊夢(日文版).mp3
+OK: 奥井亜纪 - 月の茧 - TV动画《TURN A GUNDAM（机动战士高达逆A）》ED2.wav -> 奥井亜纪 - 月の茧 - TV动画《TURN A GUNDAM（机动战士高达逆A）》ED2.mp3
+OK: 奥井雅美 - FISSION - PC游戏《灰色的乐园》本篇OP主题曲.wav -> 奥井雅美 - FISSION - PC游戏《灰色的乐园》本篇OP主题曲.mp3
+OK: 奥井雅美 - 宝箱-TREASURE BOX- - TV动画《SHIROBAKO（白箱）》OP2.flac -> 奥井雅美 - 宝箱-TREASURE BOX- - TV动画《SHIROBAKO（白箱）》OP2.mp3
+OK: 奥井雅美 - 恋华大乱 - TV アニメ「真恋姫无双～乙女大乱～」OP.ape -> 奥井雅美 - 恋华大乱 - TV アニメ「真恋姫无双～乙女大乱～」OP.mp3
+OK: 奥井雅美 - 篝火 - TVアニメ「魂兽」ED1.ape -> 奥井雅美 - 篝火 - TVアニメ「魂兽」ED1.mp3
+OK: 奥井雅美 - 紫音-sion- - PC游戏『Muv-Luv(マブラヴ)』[全年齢版]UNLIMITED編 OP主题曲.wav -> 奥井雅美 - 紫音-sion- - PC游戏『Muv-Luv(マブラヴ)』[全年齢版]UNLIMITED編 OP主题曲.mp3
+OK: 奥井雅美 - 輪舞-revolution - 少女革命OP.flac -> 奥井雅美 - 輪舞-revolution - 少女革命OP.mp3
+OK: 奥森香由 - いっしょに.wav -> 奥森香由 - いっしょに.mp3
+OK: 奥華子 - きみの空.wav -> 奥華子 - きみの空.mp3
+OK: 奥華子 - ガーネット (弾き語り) - 《超越时空的少女》主題歌.wav -> 奥華子 - ガーネット (弾き語り) - 《超越时空的少女》主題歌.mp3
+OK: 奥華子 - 僕のクリスマス.wav -> 奥華子 - 僕のクリスマス.mp3
+OK: 奥華子 - 帰っておいで.wav -> 奥華子 - 帰っておいで.mp3
+OK: 奥華子 - 明日咲く花.wav -> 奥華子 - 明日咲く花.mp3
+OK: 奥華子 - 最终电车.wav -> 奥華子 - 最终电车.mp3
+OK: 奥華子 - 窓辺.wav -> 奥華子 - 窓辺.mp3
+OK: 奥華子 - 紫陽花.wav -> 奥華子 - 紫陽花.mp3
+OK: 奥華子 - 雨あがり.wav -> 奥華子 - 雨あがり.mp3
+OK: 妖精-MACROSS F---IN.wma -> 妖精-MACROSS F---IN.mp3
+OK: 妖精的旋律 - LILIUM 〜opening version〜 - 小西香葉.wav -> 妖精的旋律 - LILIUM 〜opening version〜 - 小西香葉.mp3
+OK: 妖精的旋律 - 河辺千恵子 - Be Your Girl.flac -> 妖精的旋律 - 河辺千恵子 - Be Your Girl.mp3
+OK: 妹妹公主 - Merry Very X’mas - シスター・プリンセス.wav -> 妹妹公主 - Merry Very X’mas - シスター・プリンセス.mp3
+OK: 妹妹公主 - その奇跡は永遠(とわ)に - シスター・プリンセス.wav -> 妹妹公主 - その奇跡は永遠(とわ)に - シスター・プリンセス.mp3
+OK: 姫松高校 Ver. - この手が奇跡を選んでる - 咲-Saki-全国篇 ED.wav -> 姫松高校 Ver. - この手が奇跡を選んでる - 咲-Saki-全国篇 ED.mp3
+OK: 季节の影 - 《遥仰凰华》OST.flac -> 季节の影 - 《遥仰凰华》OST.mp3
+OK: 宇多良カナリア starring 石川由依 - EUPHORIC - TV动画《Qualidea Code（心灵代码）》OST.wav -> 宇多良カナリア starring 石川由依 - EUPHORIC - TV动画《Qualidea Code（心灵代码）》OST.mp3
+OK: 宇多良カナリア starring 石川由依 - Good night, Canary - TV动画《Qualidea Code（心灵代码）》OST.wav -> 宇多良カナリア starring 石川由依 - Good night, Canary - TV动画《Qualidea Code（心灵代码）》OST.mp3
+OK: 宇多良カナリア starring 石川由依 - TIME TO GO - TV动画《Qualidea Code（心灵代码）》OST 金丝雀BUFF曲.wav -> 宇多良カナリア starring 石川由依 - TIME TO GO - TV动画《Qualidea Code（心灵代码）》OST 金丝雀BUFF曲.mp3
+OK: 安倍ようこ - 天使のハートブレイク - PC游戏「恋Q！～恋とHの乱れ射さ～」主題歌.flac -> 安倍ようこ - 天使のハートブレイク - PC游戏「恋Q！～恋とHの乱れ射さ～」主題歌.mp3
+OK: 安瀬聖 - この痛みを力に変えて - PC游戏《ISLAND》OST.wav -> 安瀬聖 - この痛みを力に変えて - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - こぼれ落ちた水 - PC游戏《ISLAND》OST.wav -> 安瀬聖 - こぼれ落ちた水 - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 侮蔑の視線 - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 侮蔑の視線 - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 冷えた手で顔を拭って - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 冷えた手で顔を拭って - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 刻む時はおだやかで - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 刻む時はおだやかで - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 夕凪 - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 夕凪 - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 木陰 - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 木陰 - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 知らなければ良かった事実 - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 知らなければ良かった事実 - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 空虚な答え - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 空虚な答え - PC游戏《ISLAND》OST.mp3
+OK: 安瀬聖 - 繰り返す季節の中で - PC游戏《ISLAND》OST.wav -> 安瀬聖 - 繰り返す季節の中で - PC游戏《ISLAND》OST.mp3
+OK: 実谷なな - Dear Every Day.wav -> 実谷なな - Dear Every Day.mp3
+OK: 宫本骏一 - 白夜 - True Light - Full Version - 天使怪盗OP.flac -> 宫本骏一 - 白夜 - True Light - Full Version - 天使怪盗OP.mp3
+OK: 宮守女子高校 Ver. - この手が奇跡を選んでる - 咲-Saki-全国篇 ED.wav -> 宮守女子高校 Ver. - この手が奇跡を選んでる - 咲-Saki-全国篇 ED.mp3
+OK: 宮崎あゆみ - brave heart - TV动画《数码暴龙1 进化插入曲》.flac -> 宮崎あゆみ - brave heart - TV动画《数码暴龙1 进化插入曲》.mp3
+OK: 宮村優子 - It's only the fairy tale - 舞-HiME.wav -> 宮村優子 - It's only the fairy tale - 舞-HiME.mp3
+OK: 宿命 -シュクメイ- 桃華月憚OST.wav -> 宿命 -シュクメイ- 桃華月憚OST.mp3
+OK: 宿命.wav -> 宿命.mp3
+OK: 宿命傳說 - Deen - 夢であるように.flac -> 宿命傳說 - Deen - 夢であるように.mp3
+OK: 宿命傳說 2 - 倉木麻衣 - Key To My Heart.flac -> 宿命傳說 2 - 倉木麻衣 - Key To My Heart.mp3
+OK: 寒蝉鸣泣之时 - 諫山実生 - プレイス·オブ·ピリオド.flac -> 寒蝉鸣泣之时 - 諫山実生 - プレイス·オブ·ピリオド.mp3
+OK: 封神演义仙界伝 - WILL - 米倉千尋.wav -> 封神演义仙界伝 - WILL - 米倉千尋.mp3
+OK: 小さき死のように 桃華月憚OST.wav -> 小さき死のように 桃華月憚OST.mp3
+OK: 小倉唯 - Baby Sweet Berry Love - 变态王子与不笑猫ED.flac -> 小倉唯 - Baby Sweet Berry Love - 变态王子与不笑猫ED.mp3
+OK: 小倉唯 - Charming Do! - TV动画《最近，妹妹的样子有点怪？》ED.flac -> 小倉唯 - Charming Do! - TV动画《最近，妹妹的样子有点怪？》ED.mp3
+OK: 小夜曲(Guitar) - 韩剧《夏日香气》OST.wav -> 小夜曲(Guitar) - 韩剧《夏日香气》OST.mp3
+OK: 小寺可南子 - ボクラの未来 - PC游戏《双星物语2》OP主题曲.wav -> 小寺可南子 - ボクラの未来 - PC游戏《双星物语2》OP主题曲.mp3
+OK: 小松未可子 - 冷たい部屋、一人 - TV动画《K》ED.wav -> 小松未可子 - 冷たい部屋、一人 - TV动画《K》ED.mp3
+OK: 小松未可子 - 終わらないメロディーを歌いだしました。- 《神不在的星期天》ED.wav -> 小松未可子 - 終わらないメロディーを歌いだしました。- 《神不在的星期天》ED.mp3
+OK: 小松未歩-楽園.flac -> 小松未歩-楽園.mp3
+OK: 小林未郁 - βios(MK+nZk Version).wav -> 小林未郁 - βios(MK+nZk Version).mp3
+OK: 小泉恒平 - secret sorrow - TV动画《X战记》ED.wav -> 小泉恒平 - secret sorrow - TV动画《X战记》ED.mp3
+OK: 小泉恒平 - X - 战记 Strength.flac -> 小泉恒平 - X - 战记 Strength.mp3
+OK: 少女与战车IN 喀秋莎 カチューシャ.flac -> 少女与战车IN 喀秋莎 カチューシャ.mp3
+OK: 尸鬼 - Twilight - 高梨康治.wav -> 尸鬼 - Twilight - 高梨康治.mp3
+OK: 届かないもの - 《遥仰凰华》OST.flac -> 届かないもの - 《遥仰凰华》OST.mp3
+OK: 山口理恵 - 卒業.flac -> 山口理恵 - 卒業.mp3
+OK: 山崎まさよし - One more time, One more chance (弾き語りVer.).wav -> 山崎まさよし - One more time, One more chance (弾き語りVer.).mp3
+OK: 山本美禰子 - 冬のダイヤモンド - 『星空のメモリア Eternal Heart』ED.flac -> 山本美禰子 - 冬のダイヤモンド - 『星空のメモリア Eternal Heart』ED.mp3
+OK: 山本麻里安 - Snow flower - TV动画《小小雪精灵》ED.wav -> 山本麻里安 - Snow flower - TV动画《小小雪精灵》ED.mp3
+OK: 山本麻里安 - 勇気の翼 - psp游戏&OVA《秋之回忆1》OP.wav -> 山本麻里安 - 勇気の翼 - psp游戏&OVA《秋之回忆1》OP.mp3
+OK: 山辺美希(CV榎津まお) - Reset - PC游戏《CROSS†CHANNEL》.wav -> 山辺美希(CV榎津まお) - Reset - PC游戏《CROSS†CHANNEL》.mp3
+OK: 岁月的童话 - 愛は花、君はその種子 - 都はるみ.wav -> 岁月的童话 - 愛は花、君はその種子 - 都はるみ.mp3
+OK: 岡崎律子 - A Happy Life.wav -> 岡崎律子 - A Happy Life.mp3
+OK: 岡崎律子 - For フルーツバスケット - 水果篮子OP.wav -> 岡崎律子 - For フルーツバスケット - 水果篮子OP.mp3
+OK: 岡崎律子 - Girlfriend.wav -> 岡崎律子 - Girlfriend.mp3
+OK: 岡崎律子 - Morning Grace - TV动画《彩梦芭蕾》OP主题曲.wav -> 岡崎律子 - Morning Grace - TV动画《彩梦芭蕾》OP主题曲.mp3
+OK: 岡崎律子 - セレナーデ - TV动画《水果篮子》插曲.wav -> 岡崎律子 - セレナーデ - TV动画《水果篮子》插曲.mp3
+OK: 岡崎律子 - 悲しい自由.wav -> 岡崎律子 - 悲しい自由.mp3
+OK: 岡崎律子 - 星空にお祈り.wav -> 岡崎律子 - 星空にお祈り.mp3
+OK: 岡崎律子 - 朝～What's goin' on～.wav -> 岡崎律子 - 朝～What's goin' on～.mp3
+OK: 岡本菜摘 -Mirage- 穿透幻影的太阳 ED.wav -> 岡本菜摘 -Mirage- 穿透幻影的太阳 ED.mp3
+OK: 岡村孝子 - 愛という名の翼 - TV动画《少年桑塔的大冒险（天生礼物狂）》ED.wav -> 岡村孝子 - 愛という名の翼 - TV动画《少年桑塔的大冒险（天生礼物狂）》ED.mp3
+OK: 岩崎宏美 - 笑顔 - あなたの心に.wav -> 岩崎宏美 - 笑顔 - あなたの心に.mp3
+OK: 岩崎琢 - Good night, Canary (Piano Ver.) - TV动画《Qualidea Code（心灵代码）》OST.wav -> 岩崎琢 - Good night, Canary (Piano Ver.) - TV动画《Qualidea Code（心灵代码）》OST.mp3
+OK: 岩男潤子 - 洗いたての青空.flac -> 岩男潤子 - 洗いたての青空.mp3
+OK: 島みやえい子 - 奈落の花 - 寒蝉鸣泣之时 解OP.wav -> 島みやえい子 - 奈落の花 - 寒蝉鸣泣之时 解OP.mp3
+OK: 川井宪次 - 孤独な巡礼 - Fate stay Night.flac -> 川井宪次 - 孤独な巡礼 - Fate stay Night.mp3
+OK: 川妻美穂 - 月の宴 - アトラク＝ナクア.wav -> 川妻美穂 - 月の宴 - アトラク＝ナクア.mp3
+OK: 川妻美穂 - 眠りの森 - One～辉く季节へ～.wav -> 川妻美穂 - 眠りの森 - One～辉く季节へ～.mp3
+OK: 川嶋あい - 時雨.wav -> 川嶋あい - 時雨.mp3
+OK: 川田まみ - INITIATIVE - PC游戏「恋爱选举与巧克力(恋と选挙とチョコレート）」的主题曲.wav -> 川田まみ - INITIATIVE - PC游戏「恋爱选举与巧克力(恋と选挙とチョコレート）」的主题曲.mp3
+OK: 川田まみ - Masterpiece - 魔法禁书目录.flac -> 川田まみ - Masterpiece - 魔法禁书目录.mp3
+OK: 川田まみ - Psi Missing 魔法禁书目录OP.ape -> 川田まみ - Psi Missing 魔法禁书目录OP.mp3
+OK: 川田まみ - return to that place.wav -> 川田まみ - return to that place.mp3
+OK: 川田まみ - 空の森で - 天空的森林 - 拜托了老师ED.flac -> 川田まみ - 空の森で - 天空的森林 - 拜托了老师ED.mp3
+OK: 川田麻美 - All in good time.wav -> 川田麻美 - All in good time.mp3
+OK: 川田麻美 - 緋色の空 - TV动画《灼眼的夏娜》第一季主题曲.wav -> 川田麻美 - 緋色の空 - TV动画《灼眼的夏娜》第一季主题曲.mp3
+OK: 帝国歌劇団 - 奇跡の鐘.flac -> 帝国歌劇団 - 奇跡の鐘.mp3
+OK: 幕末机关说 - 愛の剣 - TAKAKO & THE CRAZY BOYS.wav -> 幕末机关说 - 愛の剣 - TAKAKO & THE CRAZY BOYS.mp3
+OK: 平井堅 - 楽園.flac -> 平井堅 - 楽園.mp3
+OK: 平原綾香 - mama's lullaby.flac -> 平原綾香 - mama's lullaby.mp3
+OK: 平成貍合戰 - 上々颱風 - いつでも誰かが(平成貍合戦ぽんぽこ).flac -> 平成貍合戰 - 上々颱風 - いつでも誰かが(平成貍合戦ぽんぽこ).mp3
+OK: 平成貍合戰 - 上々颱風 - アジアのこの街で.flac -> 平成貍合戰 - 上々颱風 - アジアのこの街で.mp3
+OK: 平沢憂(米澤円) - Oui!愛言葉.flac -> 平沢憂(米澤円) - Oui!愛言葉.mp3
+OK: 平野綾 - 蒼い星 - PC游戏「秋之回忆6～T-wave～」箱崎智紗ED.wav -> 平野綾 - 蒼い星 - PC游戏「秋之回忆6～T-wave～」箱崎智紗ED.mp3
+OK: 平野綾&茅原実里&後藤邑子-潜在的太陽の証明 - TV动画《凉宫春日的忧郁》ED专辑.wav -> 平野綾&茅原実里&後藤邑子-潜在的太陽の証明 - TV动画《凉宫春日的忧郁》ED专辑.mp3
+OK: 平野绫 - God knows - TVアニメ『凉宫ハルヒの忧郁』插入曲.flac -> 平野绫 - God knows - TVアニメ『凉宫ハルヒの忧郁』插入曲.mp3
+OK: 幸福的音色---反叛的鲁路修 R2---第1季片尾曲.wma -> 幸福的音色---反叛的鲁路修 R2---第1季片尾曲.mp3
+OK: 幽灵公主 - もののけ姫 - 米良美一.wav -> 幽灵公主 - もののけ姫 - 米良美一.mp3
+OK: 库拉乌 幻之记忆 - MoonLight - 勝木ゆかり(S.E.N.S).wav -> 库拉乌 幻之记忆 - MoonLight - 勝木ゆかり(S.E.N.S).mp3
+OK: 引田香織 - みちゆき - 无爱之战.wav -> 引田香織 - みちゆき - 无爱之战.mp3
+OK: 弘田佳孝 - Adios.wav -> 弘田佳孝 - Adios.mp3
+OK: 弘田佳孝 - ICARO - acoustic arrangement -.wav -> 弘田佳孝 - ICARO - acoustic arrangement -.mp3
+OK: 彩云国物语OP - はじまりの風 - 平原綾香.wav -> 彩云国物语OP - はじまりの風 - 平原綾香.mp3
+OK: 彩京朋美、セルニア伊織フレイムハート、四季鏡早苗、大地薫(川澄綾子、中原麻衣、小清水亜美、釘宮理恵) - LOVE×HEAVEN - TV动画《管家后宫学院》OP.wav -> 彩京朋美、セルニア伊織フレイムハート、四季鏡早苗、大地薫(川澄綾子、中原麻衣、小清水亜美、釘宮理恵) - LOVE×HEAVEN - TV动画《管家后宫学院》OP.mp3
+OK: 彩菜 - freak of nature-start - PC游戏《初雪樱花（はつゆきさくら）》插曲.wav -> 彩菜 - freak of nature-start - PC游戏《初雪樱花（はつゆきさくら）》插曲.mp3
+OK: 彩菜 - Last regrets (Full Chorus Version) - 《Kanon》OP.wav -> 彩菜 - Last regrets (Full Chorus Version) - 《Kanon》OP.mp3
+OK: 彩菜 - 風の辿り着く場所 (Full Chorus Version) - 《Kanon》ED.wav -> 彩菜 - 風の辿り着く場所 (Full Chorus Version) - 《Kanon》ED.mp3
+OK: 彩菜＆堀奈生 - 砂銀 - PC游戏《朱 -Aka-》OP、ED主题曲.wav -> 彩菜＆堀奈生 - 砂銀 - PC游戏《朱 -Aka-》OP、ED主题曲.mp3
+OK: 彩音 - Close Your Eyes - G弦上的魔王插曲.flac -> 彩音 - Close Your Eyes - G弦上的魔王插曲.mp3
+OK: 彩音 - Fullmoon Rhapsody - PC游戏《俺の彼女はヒトでなし》插入曲.wav -> 彩音 - Fullmoon Rhapsody - PC游戏《俺の彼女はヒトでなし》插入曲.mp3
+OK: 彩音 - Lunatic Tears... - PC游戏「11eyes －罪と罰と贖いの少女－」OP主题曲.flac -> 彩音 - Lunatic Tears... - PC游戏「11eyes －罪と罰と贖いの少女－」OP主题曲.mp3
+OK: 彩音 - ORANGE - PC游戏《秋之回忆5：中断的胶片》OP主题曲.wav -> 彩音 - ORANGE - PC游戏《秋之回忆5：中断的胶片》OP主题曲.mp3
+OK: 彩音 - あの空の果てまで - PSP游戏『Memories Off #5 とぎれたフィルム』主題歌.wav -> 彩音 - あの空の果てまで - PSP游戏『Memories Off #5 とぎれたフィルム』主題歌.mp3
+OK: 彩音 - キミが居た証拠に - PC游戏《秋之回忆5：安可》OP.wav -> 彩音 - キミが居た証拠に - PC游戏《秋之回忆5：安可》OP.mp3
+OK: 彩音 - ロマンシングストーリー - PC游戏《秋之回忆5：安可》最终主线ED.wav -> 彩音 - ロマンシングストーリー - PC游戏《秋之回忆5：安可》最终主线ED.mp3
+OK: 彩音 - 君の描片～キミノカケラ～ - PC游戏《秋之回忆4～从今以后～》ED.wav -> 彩音 - 君の描片～キミノカケラ～ - PC游戏《秋之回忆4～从今以后～》ED.mp3
+OK: 彩風（AYAKAJI） - さとうきび畑.wav -> 彩風（AYAKAJI） - さとうきび畑.mp3
+OK: 彩風（AYAKAJI） - 満天の星(彩風 with BEGIN) .wav -> 彩風（AYAKAJI） - 満天の星(彩風 with BEGIN) .mp3
+OK: 彩風（AYAKAJI） - 童神.wav -> 彩風（AYAKAJI） - 童神.mp3
+OK: 彼男彼女的事情 - 福田　舞 - Fun[↑]2.flac -> 彼男彼女的事情 - 福田　舞 - Fun[↑]2.mp3
+OK: 後ろから這いより隊G - 太陽曰く燃えよカオス - TV动画《潜行吧！奈亚子》OP主题曲.flac -> 後ろから這いより隊G - 太陽曰く燃えよカオス - TV动画《潜行吧！奈亚子》OP主题曲.mp3
+OK: 御影由宇 - MIDNIGHT MEMORY - PC游戏《夜勤病栋》「七瀨恋」主題歌.flac -> 御影由宇 - MIDNIGHT MEMORY - PC游戏《夜勤病栋》「七瀨恋」主題歌.mp3
+OK: 微笑的閃士 - 下川 みくに - Kohaku.flac -> 微笑的閃士 - 下川 みくに - Kohaku.mp3
+OK: 徳永 愛 - ISHIN-DENSHIN - CROSS WORLD.wav -> 徳永 愛 - ISHIN-DENSHIN - CROSS WORLD.mp3
+OK: 徳永 愛 - 星の花～Star of Flower～ - CROSS WORLD.wav -> 徳永 愛 - 星の花～Star of Flower～ - CROSS WORLD.mp3
+OK: 心之彼端 - 上原れな - Heart To Heart.flac -> 心之彼端 - 上原れな - Heart To Heart.mp3
+OK: 心理测量者ED Egoist - 名前のない怪物.wav -> 心理测量者ED Egoist - 名前のない怪物.mp3
+OK: 心跳回忆 - 桜樹のささやき - 村井かずさ.wav -> 心跳回忆 - 桜樹のささやき - 村井かずさ.mp3
+OK: 心跳回憶 - 金月真美 - もう一度キスしよう.flac -> 心跳回憶 - 金月真美 - もう一度キスしよう.mp3
+OK: 心跳回憶 - 黒崎彩子 - 観覧車にのって.flac -> 心跳回憶 - 黒崎彩子 - 観覧車にのって.mp3
+OK: 心跳回憶 奇妙的聖誕舞會 - きらめき合唱団 - Sweet Christmas.flac -> 心跳回憶 奇妙的聖誕舞會 - きらめき合唱団 - Sweet Christmas.mp3
+OK: 心跳回憶 奇妙的聖誕舞會 - きらめき合唱団 - きよしこの夜.flac -> 心跳回憶 奇妙的聖誕舞會 - きらめき合唱団 - きよしこの夜.mp3
+OK: 志方あきこ - 祈りの彼方 - instrumental -.wav -> 志方あきこ - 祈りの彼方 - instrumental -.mp3
+OK: 志方あきこ - 祈りの彼方.wav -> 志方あきこ - 祈りの彼方.mp3
+OK: 志方あきこ - 空蝉 - TV动画《曾几何时的天魔黑兔》ED.wav -> 志方あきこ - 空蝉 - TV动画《曾几何时的天魔黑兔》ED.mp3
+OK: 志方晶子 - 片恋 - 海猫鸣泣之时.wav -> 志方晶子 - 片恋 - 海猫鸣泣之时.mp3
+OK: 志方晶子 - 片翼の鳥.wav -> 志方晶子 - 片翼の鳥.mp3
+OK: 怪ayakashi - 春のかたみ - 元ちとせ.wav -> 怪ayakashi - 春のかたみ - 元ちとせ.mp3
+OK: 恋路 -コイジ- 桃華月憚OST.wav -> 恋路 -コイジ- 桃華月憚OST.mp3
+OK: 情報処理部 (大久保瑠美、津田美波、種田梨沙) - Mayumi Morinaga - Affection - 悠悠式ED.flac -> 情報処理部 (大久保瑠美、津田美波、種田梨沙) - Mayumi Morinaga - Affection - 悠悠式ED.mp3
+OK: 情報処理部 (大久保瑠美、津田美波、種田梨沙) - セツナイロ - 悠悠式OP.flac -> 情報処理部 (大久保瑠美、津田美波、種田梨沙) - セツナイロ - 悠悠式OP.mp3
+OK: 惡魔城 - Cynthia Harrell - I Am The Wind.flac -> 惡魔城 - Cynthia Harrell - I Am The Wind.mp3
+OK: 愿此刻永恒 - 星空のワルツ - 栗林みな実.wav -> 愿此刻永恒 - 星空のワルツ - 栗林みな実.mp3
+OK: 愿此刻永恒 - 栗林みな実 - Precious Memories.flac -> 愿此刻永恒 - 栗林みな実 - Precious Memories.mp3
+OK: 愿此刻永恒 - 栗林みな実 - 君が望む永遠.flac -> 愿此刻永恒 - 栗林みな実 - 君が望む永遠.mp3
+OK: 戏画 - 落ちる涙の蒼 - 女仆咖啡帕露菲.wav -> 戏画 - 落ちる涙の蒼 - 女仆咖啡帕露菲.mp3
+OK: 我的女神 - 井上喜久子 - 神さまの伝言.flac -> 我的女神 - 井上喜久子 - 神さまの伝言.mp3
+OK: 我的女神 - 石田燿子 - Open Your Mind～小さな羽根ひろげて～.flac -> 我的女神 - 石田燿子 - Open Your Mind～小さな羽根ひろげて～.mp3
+OK: 我的女神 - 西端 おり - Try To Wish～キミに必要なもの～.flac -> 我的女神 - 西端 おり - Try To Wish～キミに必要なもの～.mp3
+OK: 我的妹妹不可能這麼可愛 - 花澤香菜 - Masquerade!.flac -> 我的妹妹不可能這麼可愛 - 花澤香菜 - Masquerade!.mp3
+OK: 我的妹妹不可能那么可爱2 ClariS - Tik Tak.flac -> 我的妹妹不可能那么可爱2 ClariS - Tik Tak.mp3
+OK: 我的鄰居山田君 - 矢野顕子 - ひとりぼっちはやめた(ホーホケキョ となりの山田くん).flac -> 我的鄰居山田君 - 矢野顕子 - ひとりぼっちはやめた(ホーホケキョ となりの山田くん).mp3
+OK: 戯画 - ANOTHER HEAVEN - PC游戏《JINKI EXTEND RE：VISION》.wav -> 戯画 - ANOTHER HEAVEN - PC游戏《JINKI EXTEND RE：VISION》.mp3
+OK: 戸松遥 - 産巣日の時 - 神薙.wav -> 戸松遥 - 産巣日の時 - 神薙.mp3
+OK: 戸越まごめ - 空に光る.wav -> 戸越まごめ - 空に光る.mp3
+OK: 戸越まごめ-日溜まりの街 - PC游戏《KANON》OST.wav -> 戸越まごめ-日溜まりの街 - PC游戏《KANON》OST.mp3
+OK: 手をつないだら - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 手をつないだら - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 折戸伸治 - Honesty - PC游戏「Rewrite」OST.wav -> 折戸伸治 - Honesty - PC游戏「Rewrite」OST.mp3
+OK: 折戸伸治 - Philosophy of ours - PC游戏「Rewrite」OST.wav -> 折戸伸治 - Philosophy of ours - PC游戏「Rewrite」OST.mp3
+OK: 折戸伸治 - Philosophy of yours - PC游戏「Rewrite」OST.wav -> 折戸伸治 - Philosophy of yours - PC游戏「Rewrite」OST.mp3
+OK: 折戸伸治 - Reply - PC游戏「Rewrite」OST.wav -> 折戸伸治 - Reply - PC游戏「Rewrite」OST.mp3
+OK: 折戸伸治 - カーネーション - PC游戏「Rewrite」OST 静流出场专用曲.wav -> 折戸伸治 - カーネーション - PC游戏「Rewrite」OST 静流出场专用曲.mp3
+OK: 拜托了 雙子星 - 川田まみ - 明日への涙.flac -> 拜托了 雙子星 - 川田まみ - 明日への涙.mp3
+OK: 攻殼機動隊 Innocence - 伊藤君子 - Follow Me.flac -> 攻殼機動隊 Innocence - 伊藤君子 - Follow Me.mp3
+OK: 放学后的昴星团-Stella-rium.flac -> 放学后的昴星团-Stella-rium.mp3
+OK: 放課後ティータイム - 天使にふれたよ! - 轻音少女插曲.flac -> 放課後ティータイム - 天使にふれたよ! - 轻音少女插曲.mp3
+OK: 數碼寶貝 - 前田愛 - I Wish.flac -> 數碼寶貝 - 前田愛 - I Wish.mp3
+OK: 新世紀福音戰士 - 高橋洋子 - 月の迷宮.flac -> 新世紀福音戰士 - 高橋洋子 - 月の迷宮.mp3
+OK: 新名彩乃 - 君の事 - PC游戏「秋之回忆6～T-wave～」远峰莉莉丝ED.wav -> 新名彩乃 - 君の事 - PC游戏「秋之回忆6～T-wave～」远峰莉莉丝ED.mp3
+OK: 新居昭乃 - 星の雨 - OVA《罗德斯岛战记》印象曲重唱.wav -> 新居昭乃 - 星の雨 - OVA《罗德斯岛战记》印象曲重唱.mp3
+OK: 新居昭乃 - 星の雨 - 罗德岛战记.wav -> 新居昭乃 - 星の雨 - 罗德岛战记.mp3
+OK: 新居昭乃 - 月からの祈りと共に（在月之祝福中） - TV动画《地球守护灵》OST.wav -> 新居昭乃 - 月からの祈りと共に（在月之祝福中） - TV动画《地球守护灵》OST.mp3
+OK: 新谷良子 - きらきらセレナーデ(亮闪闪小夜曲) - CROSS WORLD.wav -> 新谷良子 - きらきらセレナーデ(亮闪闪小夜曲) - CROSS WORLD.mp3
+OK: 新谷良子 - ふわふわロンド(轻飘飘圆舞曲) - CROSS WORLD.wav -> 新谷良子 - ふわふわロンド(轻飘飘圆舞曲) - CROSS WORLD.mp3
+OK: 旋風管家 1 - 詩月カオリ - Chasse.flac -> 旋風管家 1 - 詩月カオリ - Chasse.mp3
+OK: 日式面包王 - ホウキ雲 - RYTHEM.wav -> 日式面包王 - ホウキ雲 - RYTHEM.mp3
+OK: 日笠陽子 - 美しき残酷な世界 - 进击的巨人ED01.flac -> 日笠陽子 - 美しき残酷な世界 - 进击的巨人ED01.mp3
+OK: 早乃香織 - ALL Our Might Tonight - ps3游戏《フェアリーフェンサーエフ（妖精剑士f）》后妖精化音乐.wav -> 早乃香織 - ALL Our Might Tonight - ps3游戏《フェアリーフェンサーエフ（妖精剑士f）》后妖精化音乐.mp3
+OK: 早见沙织、佳村遥、津田美波、原田瞳、东山奈央、赤崎千夏、竹达彩奈、牧野由依、樱咲千依 - お願い！シンデレラ - TV动画《偶像大师 灰姑娘女孩》第一话插曲.flac -> 早见沙织、佳村遥、津田美波、原田瞳、东山奈央、赤崎千夏、竹达彩奈、牧野由依、樱咲千依 - お願い！シンデレラ - TV动画《偶像大师 灰姑娘女孩》第一话插曲.mp3
+OK: 明日的世界bgm00.ogg -> 明日的世界bgm00.mp3
+OK: 明日的世界bgm01.ogg -> 明日的世界bgm01.mp3
+OK: 星之梦OST - Gentle Jena.flac -> 星之梦OST - Gentle Jena.mp3
+OK: 星之聲 - Low - Through The Years Far Away.flac -> 星之聲 - Low - Through The Years Far Away.mp3
+OK: 星井美希(長谷川明子)-一時間遅れの僕の天使 ～lately X'mas～ - 《偶像大师·特别的冬天》偶像大师圣诞专辑.wav -> 星井美希(長谷川明子)-一時間遅れの僕の天使 ～lately X'mas～ - 《偶像大师·特别的冬天》偶像大师圣诞专辑.mp3
+OK: 星名ななみ (羽鸟空), 月守りりか (鹰月さくら), 柊ノ木砚 (七原ことみ), 鳄口きらら (榊るな) - Winter Bells♪ 合唱バージョン - PC游戏「白熊铃星群♪」ED2 圣诞快乐~.wav -> 星名ななみ (羽鸟空), 月守りりか (鹰月さくら), 柊ノ木砚 (七原ことみ), 鳄口きらら (榊るな) - Winter Bells♪ 合唱バージョン - PC游戏「白熊铃星群♪」ED2 圣诞快乐~.mp3
+OK: 星空と潮騒と - 《遥仰凰华》OST.flac -> 星空と潮騒と - 《遥仰凰华》OST.mp3
+OK: 星空的记忆OST - Eternal recurrence (Arrange).flac -> 星空的记忆OST - Eternal recurrence (Arrange).mp3
+OK: 星空的记忆OST - Prelude ～Memoria～.flac -> 星空的记忆OST - Prelude ～Memoria～.mp3
+OK: 星空的记忆OST - ゆめ.flac -> 星空的记忆OST - ゆめ.mp3
+OK: 星空的记忆OST - 同じ星に生まれて.flac -> 星空的记忆OST - 同じ星に生まれて.mp3
+OK: 星空的记忆OST - 小春日和.flac -> 星空的记忆OST - 小春日和.mp3
+OK: 星空的记忆OST - 星の夢 ～Gathering the stars of love～ (Arrange).flac -> 星空的记忆OST - 星の夢 ～Gathering the stars of love～ (Arrange).mp3
+OK: 星空的记忆OST - 星の夢 ～Gathering the stars of love～ (orgel).flac -> 星空的记忆OST - 星の夢 ～Gathering the stars of love～ (orgel).mp3
+OK: 星空的记忆OST - 星空のメモリア (Arrange).flac -> 星空的记忆OST - 星空のメモリア (Arrange).mp3
+OK: 星空的记忆OST - 星空のメモリア (orgel).flac -> 星空的记忆OST - 星空のメモリア (orgel).mp3
+OK: 星空的记忆OST - 真冬の蛍.flac -> 星空的记忆OST - 真冬の蛍.mp3
+OK: 春奈るな - Startear - TV动画《刀剑神域第二季》ED.flac -> 春奈るな - Startear - TV动画《刀剑神域第二季》ED.mp3
+OK: 春奈有美 - 星に願いを - 秋のうららの ～あかね色商店街～.wav -> 春奈有美 - 星に願いを - 秋のうららの ～あかね色商店街～.mp3
+OK: 春機 -シュンキ- 桃華月憚OST.wav -> 春機 -シュンキ- 桃華月憚OST.mp3
+OK: 時空之輪 - 光田康典 - 時の傷痕.flac -> 時空之輪 - 光田康典 - 時の傷痕.mp3
+OK: 普通の一日 - 《遥仰凰华》OST.flac -> 普通の一日 - 《遥仰凰华》OST.mp3
+OK: 晴晴゛ - 太陽に焦がれて - TV动画《SD高达FORCE》ED3.wav -> 晴晴゛ - 太陽に焦がれて - TV动画《SD高达FORCE》ED3.mp3
+OK: 最終幻想 - 野口郁子 - Valse Des Amoureux.flac -> 最終幻想 - 野口郁子 - Valse Des Amoureux.mp3
+OK: 最終幻想 01 - 大木理紗 - Au Palais De Verre.flac -> 最終幻想 01 - 大木理紗 - Au Palais De Verre.mp3
+OK: 最終幻想 01 - 野口郁子 - Gaia.flac -> 最終幻想 01 - 野口郁子 - Gaia.mp3
+OK: 最終幻想 02 - 大木理紗 - Love Will Grow.flac -> 最終幻想 02 - 大木理紗 - Love Will Grow.mp3
+OK: 最終幻想 03 - 大木理紗 - 悠久の風.flac -> 最終幻想 03 - 大木理紗 - 悠久の風.mp3
+OK: 最終幻想 04 - 伊田恵美 - 月の明り -ファイナルファンタジーIv 愛のテーマ-.flac -> 最終幻想 04 - 伊田恵美 - 月の明り -ファイナルファンタジーIv 愛のテーマ-.mp3
+OK: 最終幻想 07 - 清田まなみ - 雨上がり、散歩道.flac -> 最終幻想 07 - 清田まなみ - 雨上がり、散歩道.mp3
+OK: 最終幻想 08 - 王菲 - Eyes On Me(英文版).flac -> 最終幻想 08 - 王菲 - Eyes On Me(英文版).mp3
+OK: 最終幻想 09 - 白鳥英美子 - Melodies Of Life(英文版).flac -> 最終幻想 09 - 白鳥英美子 - Melodies Of Life(英文版).mp3
+OK: 最終幻想 10 - Rikki - 素敵だね(英文版).flac -> 最終幻想 10 - Rikki - 素敵だね(英文版).mp3
+OK: 最終幻想 10.2 - 倖田來未 - 1000の言葉(交響樂版).flac -> 最終幻想 10.2 - 倖田來未 - 1000の言葉(交響樂版).mp3
+OK: 最終幻想 10.2 - 倖田來未 - 1000の言葉(英文版).flac -> 最終幻想 10.2 - 倖田來未 - 1000の言葉(英文版).mp3
+OK: 最終幻想 10.2 - 倖田來未 - Real Emotion(日文版).flac -> 最終幻想 10.2 - 倖田來未 - Real Emotion(日文版).mp3
+OK: 最終幻想 12 - Angela Aki - Kiss Me Good-Bye～殺しの接吻(キッス)～(日文版).flac -> 最終幻想 12 - Angela Aki - Kiss Me Good-Bye～殺しの接吻(キッス)～(日文版).mp3
+OK: 月子 - 風花 - PC游戏《初雪樱花（はつゆきさくら）》ED.wav -> 月子 - 風花 - PC游戏《初雪樱花（はつゆきさくら）》ED.mp3
+OK: 月導 -Tsukishirube-.flac -> 月導 -Tsukishirube-.mp3
+OK: 月読鎖々美(阿澄佳奈) - 浸透圧シンフォニー - 《锁锁美同学@提不起劲》ED.wav -> 月読鎖々美(阿澄佳奈) - 浸透圧シンフォニー - 《锁锁美同学@提不起劲》ED.mp3
+OK: 有坂美香 - dis- 2006 (English Version).wav -> 有坂美香 - dis- 2006 (English Version).mp3
+OK: 有坂美香 - 十二幻夢曲～孤月蒼夜 - 十二国记.wav -> 有坂美香 - 十二幻夢曲～孤月蒼夜 - 十二国记.mp3
+OK: 有坂美香 - 夢を過ぎても - 无限的未知.wav -> 有坂美香 - 夢を過ぎても - 无限的未知.mp3
+OK: 有坂美香 - 时の砂漠 - 机动战士高达 SEED DESTINY.wav -> 有坂美香 - 时の砂漠 - 机动战士高达 SEED DESTINY.mp3
+OK: 有坂美香 - 月迷風影 (Slow Version).wav -> 有坂美香 - 月迷風影 (Slow Version).mp3
+OK: 有村深羽 - メッセージ - 加奈・・・おかえり!!.wav -> 有村深羽 - メッセージ - 加奈・・・おかえり!!.mp3
+OK: 朝海うらら - Journey to a dream - PCゲーム『ウィズ アニバーサリィー』ドラマCD「Re：birth」主题歌.flac -> 朝海うらら - Journey to a dream - PCゲーム『ウィズ アニバーサリィー』ドラマCD「Re：birth」主题歌.mp3
+OK: 木蓮 - 想い -風に舞うしるべ-（思念～随风飘舞的导标～） - PC游戏《朱-Aka-》插曲.wav -> 木蓮 - 想い -風に舞うしるべ-（思念～随风飘舞的导标～） - PC游戏《朱-Aka-》插曲.mp3
+OK: 未来が見えても - 硬是无视与你的未来OST.wav -> 未来が見えても - 硬是无视与你的未来OST.mp3
+OK: 未来は… -full chorus- - 硬是无视与你的未来OST.wav -> 未来は… -full chorus- - 硬是无视与你的未来OST.mp3
+OK: 未来は… on piano - 硬是无视与你的未来OST.wav -> 未来は… on piano - 硬是无视与你的未来OST.mp3
+OK: 本名阳子 - COUNTRY ROAD - 侧耳倾听.flac -> 本名阳子 - COUNTRY ROAD - 侧耳倾听.mp3
+OK: 本間芽衣子、安城鳴子、鶴見知利子（CV：茅野愛衣&戸松遥&早見沙織） - secret base ～君がくれたもの～ （10 years after Ver.） - 我们仍未知道那天所看见的花的名字.flac -> 本間芽衣子、安城鳴子、鶴見知利子（CV：茅野愛衣&戸松遥&早見沙織） - secret base ～君がくれたもの～ （10 years after Ver.） - 我们仍未知道那天所看见的花的名字.mp3
+OK: 机动战士高达 SEED - 水の証 - 田中理恵.wav -> 机动战士高达 SEED - 水の証 - 田中理恵.mp3
+OK: 机动战士高达 SEED DESTINY - Fields of hope - 田中理恵.wav -> 机动战士高达 SEED DESTINY - Fields of hope - 田中理恵.mp3
+OK: 机动战士高达 SEED DESTINY - 深海の孤独 - 桑島法子.wav -> 机动战士高达 SEED DESTINY - 深海の孤独 - 桑島法子.mp3
+OK: 机动战士高达 TURN A - Moon - Gabriela Robin.wav -> 机动战士高达 TURN A - Moon - Gabriela Robin.mp3
+OK: 机动战士高达 X - DREAMS - ROMANTIC MODE.wav -> 机动战士高达 X - DREAMS - ROMANTIC MODE.mp3
+OK: 机动战士高达00 - 泪のムコウ - ステレオポニー.wav -> 机动战士高达00 - 泪のムコウ - ステレオポニー.mp3
+OK: 村上由紀 - Nocturne - PC游戏《秋之回忆 Memories Off》OST.wav -> 村上由紀 - Nocturne - PC游戏《秋之回忆 Memories Off》OST.mp3
+OK: 村上由紀 - Usual place - PC游戏《秋之回忆 Memories Off》OST.wav -> 村上由紀 - Usual place - PC游戏《秋之回忆 Memories Off》OST.mp3
+OK: 村上由紀 - オルゴールとピアノと - PC游戏《秋之回忆 Memories Off》OST.wav -> 村上由紀 - オルゴールとピアノと - PC游戏《秋之回忆 Memories Off》OST.mp3
+OK: 村上由紀 - リプレイマシン - PC游戏《秋之回忆 Memories Off》OST.wav -> 村上由紀 - リプレイマシン - PC游戏《秋之回忆 Memories Off》OST.mp3
+OK: 村上由紀 - 雨のち想い出 - PC游戏《秋之回忆 Memories Off》OST.wav -> 村上由紀 - 雨のち想い出 - PC游戏《秋之回忆 Memories Off》OST.mp3
+OK: 村松健 - たんぽぽ水車～Instrumental～.wav -> 村松健 - たんぽぽ水車～Instrumental～.mp3
+OK: 村田あゆみ - Drawing Again - PS2游戏「 秋之回忆4～从今以后～」OP主题歌.wav -> 村田あゆみ - Drawing Again - PS2游戏「 秋之回忆4～从今以后～」OP主题歌.mp3
+OK: 村田あゆみ - Triangle Wave - PC游戏「秋之回忆6～T-wave～」OP.wav -> 村田あゆみ - Triangle Wave - PC游戏「秋之回忆6～T-wave～」OP.mp3
+OK: 来自新世界OST 陰の伝承歌 第一部.wav -> 来自新世界OST 陰の伝承歌 第一部.mp3
+OK: 来自风平浪静的明天OST - Cry for the moon.flac -> 来自风平浪静的明天OST - Cry for the moon.mp3
+OK: 来自风平浪静的明天OST - Fonte.flac -> 来自风平浪静的明天OST - Fonte.mp3
+OK: 来自风平浪静的明天OST - Mirage of the sea.flac -> 来自风平浪静的明天OST - Mirage of the sea.mp3
+OK: 来自风平浪静的明天OST - Silencio.flac -> 来自风平浪静的明天OST - Silencio.mp3
+OK: 来自风平浪静的明天OST - すりぬける心.flac -> 来自风平浪静的明天OST - すりぬける心.mp3
+OK: 来自风平浪静的明天OST - ひとりぼっち.flac -> 来自风平浪静的明天OST - ひとりぼっち.mp3
+OK: 来自风平浪静的明天OST - ロザ・ムーナ.flac -> 来自风平浪静的明天OST - ロザ・ムーナ.mp3
+OK: 来自风平浪静的明天OST - 伝説.flac -> 来自风平浪静的明天OST - 伝説.mp3
+OK: 来自风平浪静的明天OST - 時のため息.flac -> 来自风平浪静的明天OST - 時のため息.mp3
+OK: 来自风平浪静的明天OST - 月に磨く.flac -> 来自风平浪静的明天OST - 月に磨く.mp3
+OK: 来自风平浪静的明天OST - 海の涙.flac -> 来自风平浪静的明天OST - 海の涙.mp3
+OK: 来自风平浪静的明天OST - 祈り.flac -> 来自风平浪静的明天OST - 祈り.mp3
+OK: 来自风平浪静的明天OST - 表裏な想い.flac -> 来自风平浪静的明天OST - 表裏な想い.mp3
+OK: 東京女子流 - 僕の手紙.flac -> 東京女子流 - 僕の手紙.mp3
+OK: 松下奈緒 - 青空.flac -> 松下奈緒 - 青空.mp3
+OK: 松本文紀 - コトバラ -Piano solo- - 向日葵の教会と長い夏休みOST.wav -> 松本文紀 - コトバラ -Piano solo- - 向日葵の教会と長い夏休みOST.mp3
+OK: 松本文紀 - ヒマワリの教會 -piano solo long ver- - PC游戏《向日葵の教会と長い夏休み》OST.wav -> 松本文紀 - ヒマワリの教會 -piano solo long ver- - PC游戏《向日葵の教会と長い夏休み》OST.mp3
+OK: 松本文紀 - 夏の木陰（こかげ） - 向日葵の教会と長い夏休みOST.wav -> 松本文紀 - 夏の木陰（こかげ） - 向日葵の教会と長い夏休みOST.mp3
+OK: 松本文紀 - 希望の前で待ち合わせ -Orgel- - 向日葵の教会と長い夏休みOST.wav -> 松本文紀 - 希望の前で待ち合わせ -Orgel- - 向日葵の教会と長い夏休みOST.mp3
+OK: 松本文紀 - 永遠を願うとき - PC游戏《向日葵の教会と長い夏休み》OST.wav -> 松本文紀 - 永遠を願うとき - PC游戏《向日葵の教会と長い夏休み》OST.mp3
+OK: 松泽由美 - 地球仪 - 《圣斗士星矢 冥王十二宫篇》OP.ape -> 松泽由美 - 地球仪 - 《圣斗士星矢 冥王十二宫篇》OP.mp3
+OK: 松澤由美 - YOU GET TO BURNING - TV动画《机动战舰撫子》OP主题曲.wav -> 松澤由美 - YOU GET TO BURNING - TV动画《机动战舰撫子》OP主题曲.mp3
+OK: 松澤由美 - 哀しいよ(伤悲) - あしあと.wav -> 松澤由美 - 哀しいよ(伤悲) - あしあと.mp3
+OK: 松澤由美 - 雪のかなた - PC游戏《SNOW》ED2.wav -> 松澤由美 - 雪のかなた - PC游戏《SNOW》ED2.mp3
+OK: 松田聖子 - あなたに逢いたくて - TV动画《圣少女》OP2.wav -> 松田聖子 - あなたに逢いたくて - TV动画《圣少女》OP2.mp3
+OK: 松雪泰子 - 時を越えて - TV动画《圣少女》OP1.wav -> 松雪泰子 - 時を越えて - TV动画《圣少女》OP1.mp3
+OK: 枕 - おとずれない明日 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - おとずれない明日 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - イザナイ - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - イザナイ - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - キミといるから -オルゴール- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - キミといるから -オルゴール- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - キミといるから -ピアノソロ- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - キミといるから -ピアノソロ- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - 夢幻 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - 夢幻 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - 好きだよ -ピアノソロ- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - 好きだよ -ピアノソロ- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - 未来への扉 -オルゴール- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - 未来への扉 -オルゴール- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - 約束 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - 約束 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - 陽はまたのぼる - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - 陽はまたのぼる - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 枕 - 飛べない魔法使い -オルゴール- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.wav -> 枕 - 飛べない魔法使い -オルゴール- - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》OST.mp3
+OK: 林原めぐみ - Over Soul - 通灵王OP主题曲.flac -> 林原めぐみ - Over Soul - 通灵王OP主题曲.mp3
+OK: 林原めぐみ - Proof of Myself - TV动画《机械女神J to X》OP主题曲.wav -> 林原めぐみ - Proof of Myself - TV动画《机械女神J to X》OP主题曲.mp3
+OK: 林原めぐみ - 天国の記憶.flac -> 林原めぐみ - 天国の記憶.mp3
+OK: 林原めぐみ&関智一 - Destiny~宿命 - 羊之歌.wav -> 林原めぐみ&関智一 - Destiny~宿命 - 羊之歌.mp3
+OK: 果てなき道.flac -> 果てなき道.mp3
+OK: 枪神斯托拉塔斯-MIRAI.flac -> 枪神斯托拉塔斯-MIRAI.mp3
+OK: 枪神斯托拉塔斯-vanilla sky.flac -> 枪神斯托拉塔斯-vanilla sky.mp3
+OK: 柏木晴子 (CV-夏野巳琴) - START IN LOVE - アージュFC専用PCゲーム『ハルコマニアックス』OPテーマ.wav -> 柏木晴子 (CV-夏野巳琴) - START IN LOVE - アージュFC専用PCゲーム『ハルコマニアックス』OPテーマ.mp3
+OK: 染红的街道BGM 03.ogg -> 染红的街道BGM 03.mp3
+OK: 染红的街道BGM 03p.ogg -> 染红的街道BGM 03p.mp3
+OK: 染红的街道BGM 04.ogg -> 染红的街道BGM 04.mp3
+OK: 染红的街道BGM 08.ogg -> 染红的街道BGM 08.mp3
+OK: 染红的街道BGM 11.ogg -> 染红的街道BGM 11.mp3
+OK: 染红的街道BGM 16.ogg -> 染红的街道BGM 16.mp3
+OK: 染红的街道BGM 19.ogg -> 染红的街道BGM 19.mp3
+OK: 染红的街道BGM 20.ogg -> 染红的街道BGM 20.mp3
+OK: 染红的街道BGM あかね色shortVo橋本.ogg -> 染红的街道BGM あかね色shortVo橋本.mp3
+OK: 柚(CV.大野柚布子) & 皐(CV.秦佐和子) - 雪華煌めく家路にて - TV动画《此花亭奇谭》ED4.flac -> 柚(CV.大野柚布子) & 皐(CV.秦佐和子) - 雪華煌めく家路にて - TV动画《此花亭奇谭》ED4.mp3
+OK: 柯賽特的肖像 - 井上麻里奈 - 寶石.flac -> 柯賽特的肖像 - 井上麻里奈 - 寶石.mp3
+OK: 柳麻美 - ハナのオト - キミへ贈る、ソラの花.wav -> 柳麻美 - ハナのオト - キミへ贈る、ソラの花.mp3
+OK: 柳麻美 - 永遠の楽園 - PC游戏「翠の海 -midori no umi-」ED主题曲.flac -> 柳麻美 - 永遠の楽園 - PC游戏「翠の海 -midori no umi-」ED主题曲.mp3
+OK: 树梢的阳光--PC GameCLANNAD--IM.wma -> 树梢的阳光--PC GameCLANNAD--IM.mp3
+OK: 栗林みな実 - Blue Tears - PC游戏《君が望む永遠》 DVD specification 挿入歌.wav -> 栗林みな実 - Blue Tears - PC游戏《君が望む永遠》 DVD specification 挿入歌.mp3
+OK: 栗林みな実 - I will - PC游戏『Muv-Luv(マブラヴ)』EXTRA編 ED.wav -> 栗林みな実 - I will - PC游戏『Muv-Luv(マブラヴ)』EXTRA編 ED.mp3
+OK: 栗林みな実 - Rumbling hearts - TV动画《君が望む永远》第二话ED.wav -> 栗林みな実 - Rumbling hearts - TV动画《君が望む永远》第二话ED.mp3
+OK: 栗林みな実 - あなたが…いない - PC游戏《School Days》ED.wav -> 栗林みな実 - あなたが…いない - PC游戏《School Days》ED.mp3
+OK: 栗林みな実 - マブラヴ - PC游戏『Muv-Luv(マブラヴ)』OP主题曲.wav -> 栗林みな実 - マブラヴ - PC游戏『Muv-Luv(マブラヴ)』OP主题曲.mp3
+OK: 栗林みな実 - 冥夜花伝廊 - TV动画《刀语》OP主题曲.wav -> 栗林みな実 - 冥夜花伝廊 - TV动画《刀语》OP主题曲.mp3
+OK: 栗林みな実 - 遙かなる地球の歌 - PC游戏『Muv-Luv(マブラヴ)』UNLIMITED編 ED.wav -> 栗林みな実 - 遙かなる地球の歌 - PC游戏『Muv-Luv(マブラヴ)』UNLIMITED編 ED.mp3
+OK: 栗林みな實 - 海から始まる物語 - summer days.wav -> 栗林みな實 - 海から始まる物語 - summer days.mp3
+OK: 栗林美奈实 - Crystal Energy - TV动画《舞-乙HiME》OP2.wav -> 栗林美奈实 - Crystal Energy - TV动画《舞-乙HiME》OP2.mp3
+OK: 栗林美奈实 - 涙の理由 - TV动画《School Days》ED6（第6、10话）.wav -> 栗林美奈实 - 涙の理由 - TV动画《School Days》ED6（第6、10话）.mp3
+OK: 校园迷糊大王 - オンナのコ·オトコのコ - 小倉優子.wav -> 校园迷糊大王 - オンナのコ·オトコのコ - 小倉優子.mp3
+OK: 桃香 -トウカ- 桃華月憚OST.wav -> 桃香 -トウカ- 桃華月憚OST.mp3
+OK: 桐島青大 (CV.細谷佳正) - 君のいる町 - 有你的小镇 ED.wav -> 桐島青大 (CV.細谷佳正) - 君のいる町 - 有你的小镇 ED.mp3
+OK: 桑島法子 - 愛が教えてくれた.wav -> 桑島法子 - 愛が教えてくれた.mp3
+OK: 桥本みゆき - 未来ノスタルジア（未来乡愁） - PC游戏《未来乡愁》OP主题曲.wav -> 桥本みゆき - 未来ノスタルジア（未来乡愁） - PC游戏《未来乡愁》OP主题曲.mp3
+OK: 桥本潮 - ロマンティックあげるよ.wav -> 桥本潮 - ロマンティックあげるよ.mp3
+OK: 桥本美雪 - screaming - TV动画《Soul Link（魂链）》OP主题曲.wav -> 桥本美雪 - screaming - TV动画《Soul Link（魂链）》OP主题曲.mp3
+OK: 桥本美雪 - The Day Takeoff(full) - PCゲーム「だいていこく（大帝国）」OP.wav -> 桥本美雪 - The Day Takeoff(full) - PCゲーム「だいていこく（大帝国）」OP.mp3
+OK: 桥本美雪 - 愛のカケラ - TV动画『School Days』第2话ED.wav -> 桥本美雪 - 愛のカケラ - TV动画『School Days』第2话ED.mp3
+OK: 梦的点滴 - 梦的点滴 - 松隆子.wav -> 梦的点滴 - 梦的点滴 - 松隆子.mp3
+OK: 梶浦由記 - el cazador.wav -> 梶浦由記 - el cazador.mp3
+OK: 梶浦由記 - ennui.wav -> 梶浦由記 - ennui.mp3
+OK: 梶浦由記 - forest - 魔女猎人.wav -> 梶浦由記 - forest - 魔女猎人.mp3
+OK: 梶浦由記 - hotel del sol.wav -> 梶浦由記 - hotel del sol.mp3
+OK: 梶浦由記 - my long forgotten cloistered sleep.wav -> 梶浦由記 - my long forgotten cloistered sleep.mp3
+OK: 梶浦由记 - Fake wings - TV动画《.Hack／／Sign》.flac -> 梶浦由记 - Fake wings - TV动画《.Hack／／Sign》.mp3
+OK: 梶浦由记 - Noir - Canta per me.flac -> 梶浦由记 - Noir - Canta per me.mp3
+OK: 梶浦由记 - 刀剑神域 - Swordland.flac -> 梶浦由记 - 刀剑神域 - Swordland.mp3
+OK: 梶浦由记 - 刀剑神域 - The First Town.flac -> 梶浦由记 - 刀剑神域 - The First Town.mp3
+OK: 梶浦由记 - 刀剑神域 - We Have To Defeat It.flac -> 梶浦由记 - 刀剑神域 - We Have To Defeat It.mp3
+OK: 梶浦由记 - 媛星 - TV动画《舞Hime》插曲.flac -> 梶浦由记 - 媛星 - TV动画《舞Hime》插曲.mp3
+OK: 梶浦由记 - 潘多拉之心 - Alone.flac -> 梶浦由记 - 潘多拉之心 - Alone.mp3
+OK: 梶浦由记 - 魔法少女小圆 - Credens justitiam.flac -> 梶浦由记 - 魔法少女小圆 - Credens justitiam.mp3
+OK: 梶浦由记 - 魔法少女小圆 - Sis puella magica!.flac -> 梶浦由记 - 魔法少女小圆 - Sis puella magica!.mp3
+OK: 梶浦由记 - （1997）Eat-Man - Pleasure.flac -> 梶浦由记 - （1997）Eat-Man - Pleasure.mp3
+OK: 梶浦由记 - （2002） - A stray child - TV动画《.Hack／／Sign》.flac -> 梶浦由记 - （2002） - A stray child - TV动画《.Hack／／Sign》.mp3
+OK: 梶浦由记 - （2002）.Hack／／Sign - B.T..flac -> 梶浦由记 - （2002）.Hack／／Sign - B.T..mp3
+OK: 梶浦由记 - （2003）.Hack／／Liminality - Liminality.flac -> 梶浦由记 - （2003）.Hack／／Liminality - Liminality.mp3
+OK: 梶浦由记 - （2005）武器种族传说 - Everlasting song.flac -> 梶浦由记 - （2005）武器种族传说 - Everlasting song.mp3
+OK: 梶浦由记 - （2005）舞Hime - 大切な人.flac -> 梶浦由记 - （2005）舞Hime - 大切な人.mp3
+OK: 梶浦由记 - （2006）翼·年代记 - Longingly.flac -> 梶浦由记 - （2006）翼·年代记 - Longingly.mp3
+OK: 梶浦由记 - （2006）翼·年代记 - Tsubasa.flac -> 梶浦由记 - （2006）翼·年代记 - Tsubasa.mp3
+OK: 梶浦由记 - （2008）空の境界：杀人考察（前） - M18.flac -> 梶浦由记 - （2008）空の境界：杀人考察（前） - M18.mp3
+OK: 棋魂  - I'll be the one - H~L.wav -> 棋魂  - I'll be the one - H~L.mp3
+OK: 棗(CV.諏訪彩花) & 蓮(CV.久保田梨沙) - 夏咲き恋花火 - TV动画《此花亭奇谭》ED2.flac -> 棗(CV.諏訪彩花) & 蓮(CV.久保田梨沙) - 夏咲き恋花火 - TV动画《此花亭奇谭》ED2.mp3
+OK: 森下未散(cv-井ノ原理子（今井麻美）) - きみのいろ おしえて - PC游戏《恋爱与选举与巧克力》森下未散线ED.wav -> 森下未散(cv-井ノ原理子（今井麻美）) - きみのいろ おしえて - PC游戏《恋爱与选举与巧克力》森下未散线ED.mp3
+OK: 森下未散＆扇橋香奈 - 明日のハーモニー - PC游戏《恋爱与选举与巧克力》角色歌.wav -> 森下未散＆扇橋香奈 - 明日のハーモニー - PC游戏《恋爱与选举与巧克力》角色歌.mp3
+OK: 森園立夏(新田恵海),芳乃シャルル(宮崎羽衣),葛木姫乃(佐々木未来),瑠川さら(桜咲千依),陽ノ下葵(海保えりか) - サクラサクミライコイユメ(feat.風見学園新聞部) - TV动画《初音岛D.C.III～》OP专辑副歌.m4a -> 森園立夏(新田恵海),芳乃シャルル(宮崎羽衣),葛木姫乃(佐々木未来),瑠川さら(桜咲千依),陽ノ下葵(海保えりか) - サクラサクミライコイユメ(feat.風見学園新聞部) - TV动画《初音岛D.C.III～》OP专辑副歌.mp3
+OK: 森園立夏(新田恵海),芳乃シャルル(宮崎羽衣),葛木姫乃(佐々木未来),瑠川さら(桜咲千依),陽ノ下葵(海保えりか) - サクラハッピーイノベーション - TV动画《初音岛D.C.III～》OP主题歌.m4a -> 森園立夏(新田恵海),芳乃シャルル(宮崎羽衣),葛木姫乃(佐々木未来),瑠川さら(桜咲千依),陽ノ下葵(海保えりか) - サクラハッピーイノベーション - TV动画《初音岛D.C.III～》OP主题歌.mp3
+OK: 森川由綺(CV：平野綾) - WHITE ALBUM - PC游戏《白色相簿》插曲.wav -> 森川由綺(CV：平野綾) - WHITE ALBUM - PC游戏《白色相簿》插曲.mp3
+OK: 森川美穂 - Yes! I will… - TV动画《蓝宝石之谜》ED.flac -> 森川美穂 - Yes! I will… - TV动画《蓝宝石之谜》ED.mp3
+OK: 森川美穗 - ブルーウォーター - TV动画《蓝宝石之谜》OP主题曲.flac -> 森川美穗 - ブルーウォーター - TV动画《蓝宝石之谜》OP主题曲.mp3
+OK: 植松伸夫 - 街のテーマ - PC游戏《最终幻想5》OST.wav -> 植松伸夫 - 街のテーマ - PC游戏《最终幻想5》OST.mp3
+OK: 椎名へきる&笠原弘子&吉田古奈美 - 聖夜の天使たち - TV动画《魔法骑士》圣诞主题曲.flac -> 椎名へきる&笠原弘子&吉田古奈美 - 聖夜の天使たち - TV动画《魔法骑士》圣诞主题曲.mp3
+OK: 榊原ゆい - FairChild - PC游戏《FairChild》.wav -> 榊原ゆい - FairChild - PC游戏《FairChild》.mp3
+OK: 榊原ゆい - School meet you - PC游戏《すくみずポリス》OP主題歌.wav -> 榊原ゆい - School meet you - PC游戏《すくみずポリス》OP主題歌.mp3
+OK: 榊原ゆい - きっと夢と雪でできている - PC游戏《春萌～はるもい～》OP主题曲.flac -> 榊原ゆい - きっと夢と雪でできている - PC游戏《春萌～はるもい～》OP主题曲.mp3
+OK: 榊原ゆい - ぱじゃまソフト - ちる はな さくら ～永遠～（散·花·樱 ～永远～） - ピアノの森の満開の下ED1（樱乃True ED）.wav -> 榊原ゆい - ぱじゃまソフト - ちる はな さくら ～永遠～（散·花·樱 ～永远～） - ピアノの森の満開の下ED1（樱乃True ED）.mp3
+OK: 榊原ゆい - ぱじゃまソフト - 此の花咲ク頃（此花绽放之时） - ピアノの森の満開の下（盛开的钢琴之森下）OP.wav -> 榊原ゆい - ぱじゃまソフト - 此の花咲ク頃（此花绽放之时） - ピアノの森の満開の下（盛开的钢琴之森下）OP.mp3
+OK: 榊原ゆい - リフレイン - PC游戏「夏空カナタ（夏空彼方）」ED.wav -> 榊原ゆい - リフレイン - PC游戏「夏空カナタ（夏空彼方）」ED.mp3
+OK: 榊原ゆい - 晴れのち曇り、時々雨 - PC游戏《FairChild》.wav -> 榊原ゆい - 晴れのち曇り、時々雨 - PC游戏《FairChild》.mp3
+OK: 榊原ゆい - 猫猫大合唱「ねこねこ音头」 - 猫愿三角恋-插曲.wav -> 榊原ゆい - 猫猫大合唱「ねこねこ音头」 - 猫愿三角恋-插曲.mp3
+OK: 榊原由依 - 片翼のイカロス - TV动画《H2O 赤砂之印记》OP主题曲.wav -> 榊原由依 - 片翼のイカロス - TV动画《H2O 赤砂之印记》OP主题曲.mp3
+OK: 榎本温子 - Keep on Going - TV动画《足球小将2002》ED3.wav -> 榎本温子 - Keep on Going - TV动画《足球小将2002》ED3.mp3
+OK: 榎本温子 - 夢の中へ (フルサイズ) - TV动画《彼男彼女的事情》ED.wav -> 榎本温子 - 夢の中へ (フルサイズ) - TV动画《彼男彼女的事情》ED.mp3
+OK: 榎津まお-春日りか-倉沢はるか-榊原ゆい-茶谷やすら - ☆☆☆☆☆☆ - PC游戏《六ツ星きらり（六星之闪光流星之都）》主題歌.wav -> 榎津まお-春日りか-倉沢はるか-榊原ゆい-茶谷やすら - ☆☆☆☆☆☆ - PC游戏《六ツ星きらり（六星之闪光流星之都）》主題歌.mp3
+OK: 樋口秀樹 - 与神ひよ - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.wav -> 樋口秀樹 - 与神ひよ - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.mp3
+OK: 樋口秀樹 - 学びの揺り籠 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.wav -> 樋口秀樹 - 学びの揺り籠 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.mp3
+OK: 樋口秀樹 - 生ある彩の祭 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.wav -> 樋口秀樹 - 生ある彩の祭 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.mp3
+OK: 樋口秀樹 - 若 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.wav -> 樋口秀樹 - 若 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.mp3
+OK: 樋口秀樹 - 藤の帳と夜の歌――無歌 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.wav -> 樋口秀樹 - 藤の帳と夜の歌――無歌 - 从晴朗的朝色泛起之际开始（きっと、澄みわたる朝色よりも）OST.mp3
+OK: 樱花大战 - イカルスの星 - 帝国歌劇団.wav -> 樱花大战 - イカルスの星 - 帝国歌劇団.mp3
+OK: 樱花大战 - 愛しのジャンポール - アイリス (西原久美子).wav -> 樱花大战 - 愛しのジャンポール - アイリス (西原久美子).mp3
+OK: 樱花大战 - 花咲く乙女 - 帝国歌劇団.wav -> 樱花大战 - 花咲く乙女 - 帝国歌劇団.mp3
+OK: 樹海 - あなたがいた森（曾经有你的森林） - TV动画《FateStayNight》ED.wav -> 樹海 - あなたがいた森（曾经有你的森林） - TV动画《FateStayNight》ED.mp3
+OK: 橋本ちなみ&小倉唯&金元寿子 - BINKANあてんしょん - TV动画《最近我的妹妹有点怪》OP主题曲.flac -> 橋本ちなみ&小倉唯&金元寿子 - BINKANあてんしょん - TV动画《最近我的妹妹有点怪》OP主题曲.mp3
+OK: 橋本みゆき - Astraea - PC游戏『Muv-Luv(マブラヴ)』[全年齢版]EXTRA編 彩峰慧ED.wav -> 橋本みゆき - Astraea - PC游戏『Muv-Luv(マブラヴ)』[全年齢版]EXTRA編 彩峰慧ED.mp3
+OK: 橋本みゆき - BREEZE - PC游戏《灰色的乐园》插曲.wav -> 橋本みゆき - BREEZE - PC游戏《灰色的乐园》插曲.mp3
+OK: 橋本みゆき - Eternal recurrence - PC游戏《星空のメモリア－Wish upon a shooting star－》OP主题曲.flac -> 橋本みゆき - Eternal recurrence - PC游戏《星空のメモリア－Wish upon a shooting star－》OP主题曲.mp3
+OK: 橋本みゆき - Futuristic Player - TV动画《咲-Saki- 阿知贺编 episode of side-A》第3~4话、第8~11话ED.flac -> 橋本みゆき - Futuristic Player - TV动画《咲-Saki- 阿知贺编 episode of side-A》第3~4话、第8~11话ED.mp3
+OK: 橋本みゆき - glitter (Full ver) - PC游戏「MagusTale Infinity（世界树与恋爱魔法使FD）」OP主题曲.wav -> 橋本みゆき - glitter (Full ver) - PC游戏「MagusTale Infinity（世界树与恋爱魔法使FD）」OP主题曲.mp3
+OK: 橋本みゆき - Glossy：MMM - TV动画《咲-Saki- 天才麻将少女》第2~14话OP，第1话、25话ED.flac -> 橋本みゆき - Glossy：MMM - TV动画《咲-Saki- 天才麻将少女》第2~14话OP，第1话、25话ED.mp3
+OK: 橋本みゆき - HOME - PC游戏《灰色的果实》天音ED.wav -> 橋本みゆき - HOME - PC游戏《灰色的果实》天音ED.mp3
+OK: 橋本みゆき - L - PC游戏『あると』OP主题曲.flac -> 橋本みゆき - L - PC游戏『あると』OP主题曲.mp3
+OK: 橋本みゆき - New SPARKS! - TV动画《咲-Saki-全国篇》OP.flac -> 橋本みゆき - New SPARKS! - TV动画《咲-Saki-全国篇》OP.mp3
+OK: 橋本みゆき - to the sky - PC游戏《MagusTale～世界樹と恋する魔法使い～（世界树与恋爱魔法使 本篇）》OP主题曲.wav -> 橋本みゆき - to the sky - PC游戏《MagusTale～世界樹と恋する魔法使い～（世界树与恋爱魔法使 本篇）》OP主题曲.mp3
+OK: 橋本みゆき - 夢の無限回廊 - PC游戏《ハピメア（幸福噩梦）》OP主题曲.wav -> 橋本みゆき - 夢の無限回廊 - PC游戏《ハピメア（幸福噩梦）》OP主题曲.mp3
+OK: 橋本みゆき - 幻想楼閣 - PC游戏《ハピメアFD（幸福噩梦FD）》OP主题曲.wav -> 橋本みゆき - 幻想楼閣 - PC游戏《ハピメアFD（幸福噩梦FD）》OP主题曲.mp3
+OK: 橋本みゆき - 恋桜 -  PC游戏「春色桜瀬」片头曲.flac -> 橋本みゆき - 恋桜 -  PC游戏「春色桜瀬」片头曲.mp3
+OK: 橋本みゆき - 本当の勇気に変わるまで - PCゲーム『ワルキューレ·ロマンツェ (少女骑士物语)』OP主题曲.wav -> 橋本みゆき - 本当の勇気に変わるまで - PCゲーム『ワルキューレ·ロマンツェ (少女骑士物语)』OP主题曲.mp3
+OK: 橋本みゆき - 青空の見える丘で - PC游戏《望见青空之丘》OP主题曲.flac -> 橋本みゆき - 青空の見える丘で - PC游戏《望见青空之丘》OP主题曲.mp3
+OK: 橋本仁 - ロックマンのテーマ ～风を突き拨けて～.wav -> 橋本仁 - ロックマンのテーマ ～风を突き拨けて～.mp3
+OK: 機動戰士高達 0083 - Mio - Men Of Destiny.flac -> 機動戰士高達 0083 - Mio - Men Of Destiny.mp3
+OK: 機動戰士高達 0083 - 松原みき - Back To Paradise.flac -> 機動戰士高達 0083 - 松原みき - Back To Paradise.mp3
+OK: 機動戰士高達 08Ms - 米倉千尋 - 嵐の中で輝いて.flac -> 機動戰士高達 08Ms - 米倉千尋 - 嵐の中で輝いて.mp3
+OK: 機動戰士高達 08Ms - 米倉千尋 - 永遠の扉.flac -> 機動戰士高達 08Ms - 米倉千尋 - 永遠の扉.mp3
+OK: 機動戰士高達 F19 - 下川みくに - Enernal Wind～ほほえみは光る風の中～.flac -> 機動戰士高達 F19 - 下川みくに - Enernal Wind～ほほえみは光る風の中～.mp3
+OK: 機動戰士高達 Mv - 清水咲斗子 - 夏のうねり.flac -> 機動戰士高達 Mv - 清水咲斗子 - 夏のうねり.mp3
+OK: 機動戰士高達 Seed - 玉置成実 - Believe.flac -> 機動戰士高達 Seed - 玉置成実 - Believe.mp3
+OK: 機動戰士高達 Seed - 玉置成実 - Realize.flac -> 機動戰士高達 Seed - 玉置成実 - Realize.mp3
+OK: 機動戰士高達 Seed Destiny - Rei Fu - I Wanna Go To A Pliace....flac -> 機動戰士高達 Seed Destiny - Rei Fu - I Wanna Go To A Pliace....mp3
+OK: 機動戰士高達 Seed Destiny - 玉置成実 - Reason.flac -> 機動戰士高達 Seed Destiny - 玉置成実 - Reason.mp3
+OK: 機動戰艦Nadesico - 桑島法子 - 私らしく.flac -> 機動戰艦Nadesico - 桑島法子 - 私らしく.mp3
+OK: 機神飛翔デモンベイン- 伊藤香奈子(いとうかなこ) - ANGEL'S LADDER.flac -> 機神飛翔デモンベイン- 伊藤香奈子(いとうかなこ) - ANGEL'S LADDER.mp3
+OK: 機神飛翔デモンベイン- 伊藤香奈子(いとうかなこ) - RISE ON GREEN WINGS.flac -> 機神飛翔デモンベイン- 伊藤香奈子(いとうかなこ) - RISE ON GREEN WINGS.mp3
+OK: 櫻(CV.加隈亜衣) & 桐(CV.沼倉愛美) - 茜空、君舞フ紅葉ノ散歩道 - TV动画《此花亭奇谭》ED3.flac -> 櫻(CV.加隈亜衣) & 桐(CV.沼倉愛美) - 茜空、君舞フ紅葉ノ散歩道 - TV动画《此花亭奇谭》ED3.mp3
+OK: 櫻花大戰 - 帝國歌劇団 - 劇場版·奇跡の鐘.flac -> 櫻花大戰 - 帝國歌劇団 - 劇場版·奇跡の鐘.mp3
+OK: 櫻花大戰 - 帝國歌劇団 - 奇跡の鐘~So Special A Day~.flac -> 櫻花大戰 - 帝國歌劇団 - 奇跡の鐘~So Special A Day~.mp3
+OK: 歌之王子殿下真爱2000% 宮野真守 - FOREVER LULLABY.flac -> 歌之王子殿下真爱2000% 宮野真守 - FOREVER LULLABY.mp3
+OK: 歌之王子殿下真爱2000% 宮野真守 - THANK YOU.flac -> 歌之王子殿下真爱2000% 宮野真守 - THANK YOU.mp3
+OK: 歌：白（CV.茅野愛衣）、ステファニー・ドーラ（CV.日笠陽子）、ジブリール（CV.田村ゆかり） - Bias Hacker - TV动画《NO GAME NO LIFE 游戏人生》.wav -> 歌：白（CV.茅野愛衣）、ステファニー・ドーラ（CV.日笠陽子）、ジブリール（CV.田村ゆかり） - Bias Hacker - TV动画《NO GAME NO LIFE 游戏人生》.mp3
+OK: 此花亭仲居の会[柚(CV.大野柚布子), 皐(CV.秦佐和子), 棗(CV.諏訪彩花), 蓮(CV.久保田梨沙), 櫻(CV.加隈亜衣), 桐(CV.沼倉愛美)] - 春ウララ、君ト咲キ誇ル - TV动画《此花亭奇谭》ED1.flac -> 此花亭仲居の会[柚(CV.大野柚布子), 皐(CV.秦佐和子), 棗(CV.諏訪彩花), 蓮(CV.久保田梨沙), 櫻(CV.加隈亜衣), 桐(CV.沼倉愛美)] - 春ウララ、君ト咲キ誇ル - TV动画《此花亭奇谭》ED1.mp3
+OK: 死神 - Life is Like a Boat - Rie fu.wav -> 死神 - Life is Like a Boat - Rie fu.mp3
+OK: 死神 - Yui - Life.flac -> 死神 - Yui - Life.mp3
+OK: 民安★ROCK - ラブレター - PC游戏《ラブらブライド》.wav -> 民安★ROCK - ラブレター - PC游戏《ラブらブライド》.mp3
+OK: 民安ともえ - White…Shining wing - PC游戏《ヴァルプルギス》OP.wav -> 民安ともえ - White…Shining wing - PC游戏《ヴァルプルギス》OP.mp3
+OK: 民安ともえ - 猫と硝子と円い月 - 《little busters》笹瀬川佐々美角色歌.wav -> 民安ともえ - 猫と硝子と円い月 - 《little busters》笹瀬川佐々美角色歌.mp3
+OK: 水城新人 - 夜の終わりに - PC游戏『枯れない世界と終わる花』OST.wav -> 水城新人 - 夜の終わりに - PC游戏『枯れない世界と終わる花』OST.mp3
+OK: 水城新人 - 彼方からの呼び声 - PC游戏『枯れない世界と終わる花』OST.wav -> 水城新人 - 彼方からの呼び声 - PC游戏『枯れない世界と終わる花』OST.mp3
+OK: 水城新人 - 未来への序曲 - PC游戏『枯れない世界と終わる花』OST.wav -> 水城新人 - 未来への序曲 - PC游戏『枯れない世界と終わる花』OST.mp3
+OK: 水城新人 - 花葬 - PC游戏『枯れない世界と終わる花』OST.wav -> 水城新人 - 花葬 - PC游戏『枯れない世界と終わる花』OST.mp3
+OK: 水城新人 - 追想 - PC游戏『枯れない世界と終わる花』OST.wav -> 水城新人 - 追想 - PC游戏『枯れない世界と終わる花』OST.mp3
+OK: 水星領航員 - Round Table Featuring Nino - Rainbow.flac -> 水星領航員 - Round Table Featuring Nino - Rainbow.mp3
+OK: 水星领航员 - Il Cielo - 花泽香菜.wav -> 水星领航员 - Il Cielo - 花泽香菜.mp3
+OK: 水月 陵 - Scene shifts there - PC游戏「Rewrite」OST.wav -> 水月 陵 - Scene shifts there - PC游戏「Rewrite」OST.mp3
+OK: 水月 陵 - 散花 - PC游戏「Rewrite」OST.wav -> 水月 陵 - 散花 - PC游戏「Rewrite」OST.mp3
+OK: 水月陵 - alpha - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - alpha - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - We are alone - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - We are alone - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - はしゃぎきれない少年 - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - はしゃぎきれない少年 - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - はとけかけの小豆アイス - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - はとけかけの小豆アイス - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - 壇上のBlue eyes - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - 壇上のBlue eyes - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - 小雨降る日の優しさ - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - 小雨降る日の優しさ - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - 思ひ出荘に祝福を.flac -> 水月陵 - 思ひ出荘に祝福を.mp3
+OK: 水月陵 - 恋×シンアイ彼女　メインテーマ - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - 恋×シンアイ彼女　メインテーマ - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - 恋をしたら - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - 恋をしたら - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - 虹かかる空の恋しさ - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - 虹かかる空の恋しさ - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水月陵 - 風の止まり木 - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.wav -> 水月陵 - 風の止まり木 - PC游戏《恋×シンアイ彼女（想要传达给你的爱恋）》OST.mp3
+OK: 水树奈 - Innocent Starter - 魔法少女奈叶.flac -> 水树奈 - Innocent Starter - 魔法少女奈叶.mp3
+OK: 水树奈々 - それでも君を想い出すから-again- - 《秋之回忆4：从今以后》主题曲.flac -> 水树奈々 - それでも君を想い出すから-again- - 《秋之回忆4：从今以后》主题曲.mp3
+OK: 水树奈々 - 宝物.ape -> 水树奈々 - 宝物.mp3
+OK: 水树奈奈 - Astrogation.wav -> 水树奈奈 - Astrogation.mp3
+OK: 水树奈奈 - オルゴールとピアノと -holy style- - PC游戏《秋之回忆2》重置版ED.wav -> 水树奈奈 - オルゴールとピアノと -holy style- - PC游戏《秋之回忆2》重置版ED.mp3
+OK: 水树奈奈 - 夢の続き.wav -> 水树奈奈 - 夢の続き.mp3
+OK: 水樹奈々 - Happy☆Go-Round!.wav -> 水樹奈々 - Happy☆Go-Round!.mp3
+OK: 水樹奈々 - Nocturne - OVA动画《秋之回忆2》OP主题曲.wav -> 水樹奈々 - Nocturne - OVA动画《秋之回忆2》OP主题曲.mp3
+OK: 水樹奈々 - replay machine（リプレイマシン） - PC游戏《Memories Off 想い出にかわる君(秋之回忆3 想君)》OP主题曲.wav -> 水樹奈々 - replay machine（リプレイマシン） - PC游戏《Memories Off 想い出にかわる君(秋之回忆3 想君)》OP主题曲.mp3
+OK: 水樹奈々 - 深愛 - TV动画《白色相簿》OP1.wav -> 水樹奈々 - 深愛 - TV动画《白色相簿》OP1.mp3
+OK: 水樹奈々- POWDER SNOW - TV动画《白色相簿》緒方理奈角色歌.wav -> 水樹奈々- POWDER SNOW - TV动画《白色相簿》緒方理奈角色歌.mp3
+OK: 水橋ゆっきー - 花畑の太陽たち - 東方幻想界 -円舞曲の音-.wav -> 水橋ゆっきー - 花畑の太陽たち - 東方幻想界 -円舞曲の音-.mp3
+OK: 水瓶新世紀 - Seyun - Majimak Sarang(韓文版).flac -> 水瓶新世紀 - Seyun - Majimak Sarang(韓文版).mp3
+OK: 水谷瑠奈 (NanosizeMir) - Philosophyz - PC游戏「Rewrite」OP主题曲.wav -> 水谷瑠奈 (NanosizeMir) - Philosophyz - PC游戏「Rewrite」OP主题曲.mp3
+OK: 水谷瑠奈 (NanosizeMir)(小鸟、千早、露西娅) - 闇の彼方へ - PC游戏「Rewrite」ED.wav -> 水谷瑠奈 (NanosizeMir)(小鸟、千早、露西娅) - 闇の彼方へ - PC游戏「Rewrite」ED.mp3
+OK: 水谷瑠奈（NanosizeMir） - ささやかなはじまり（小小的开始） - PC游戏《Rewrite Harvest festa!》（Rewrite FD）ED.wav -> 水谷瑠奈（NanosizeMir） - ささやかなはじまり（小小的开始） - PC游戏《Rewrite Harvest festa!》（Rewrite FD）ED.mp3
+OK: 水鏡 - 灯音 - monet - under thr different sky (full vocal ver) - 灯穂奇谭主题曲.flac -> 水鏡 - 灯音 - monet - under thr different sky (full vocal ver) - 灯穂奇谭主题曲.mp3
+OK: 氷解 [冰解]--《蔷薇少女》--BGM.wma -> 氷解 [冰解]--《蔷薇少女》--BGM.mp3
+OK: 永水女子高校 Ver. - この手が奇跡を選んでる - 咲-Saki-全国篇 ED.wav -> 永水女子高校 Ver. - この手が奇跡を選んでる - 咲-Saki-全国篇 ED.mp3
+OK: 河井英里 - 千の海を越えて - 传颂之物ED单曲副歌.wav -> 河井英里 - 千の海を越えて - 传颂之物ED单曲副歌.mp3
+OK: 泷本瞳 - 笑顔をあげる - TV动画《鬼神童子》ED1.flac -> 泷本瞳 - 笑顔をあげる - TV动画《鬼神童子》ED1.mp3
+OK: 津田朱里 - Twinkle Snow - PC游戏《白色相册2》IC章节ED.wav -> 津田朱里 - Twinkle Snow - PC游戏《白色相册2》IC章节ED.mp3
+OK: 津田朱里 - 心はいつもあなたのそばに - PC游戏『白色相册2～最终章》冬马和纱ED.wma -> 津田朱里 - 心はいつもあなたのそばに - PC游戏『白色相册2～最终章》冬马和纱ED.mp3
+OK: 津田朱里 - 愛する心 - PC游戏『白色相册2～终章》ED.wma -> 津田朱里 - 愛する心 - PC游戏『白色相册2～终章》ED.mp3
+OK: 浅葉リオ - 愛奴の小径 - PC游戏《ハピメア（幸福噩梦）》ED.wav -> 浅葉リオ - 愛奴の小径 - PC游戏《ハピメア（幸福噩梦）》ED.mp3
+OK: 浜野和子 - wishing for an eternal sky(向遥远的天空祈愿) - PS2游戏【Sky Gunner】主题歌.flac -> 浜野和子 - wishing for an eternal sky(向遥远的天空祈愿) - PS2游戏【Sky Gunner】主题歌.mp3
+OK: 海境より来自海境--虫师--BGM.wma -> 海境より来自海境--虫师--BGM.mp3
+OK: 海猫鸣泣之时 - うみねこのなく頃に - 志方あきこ.wav -> 海猫鸣泣之时 - うみねこのなく頃に - 志方あきこ.mp3
+OK: 海賊王 - Triplane - Dear friends.wav -> 海賊王 - Triplane - Dear friends.mp3
+OK: 涼宮春日的憂郁 - 平野綾 - 冒険でしょでしょ？.flac -> 涼宮春日的憂郁 - 平野綾 - 冒険でしょでしょ？.mp3
+OK: 清浦夏実 - 旅の途中 - - 《狼与香辛料》OP主题曲.wav -> 清浦夏実 - 旅の途中 - - 《狼与香辛料》OP主题曲.mp3
+OK: 溝口肇&延近輝之 - 恋の予感.flac -> 溝口肇&延近輝之 - 恋の予感.mp3
+OK: 滨崎步 - Get Over [Original.mix] - 棋魂OP.flac -> 滨崎步 - Get Over [Original.mix] - 棋魂OP.mp3
+OK: 滨崎步 - MY ALL.flac -> 滨崎步 - MY ALL.mp3
+OK: 滨崎步 - progress - PS3游戏《无限传说》主题曲.flac -> 滨崎步 - progress - PS3游戏《无限传说》主题曲.mp3
+OK: 漫畫同人會 Revolution - 中山愛梨沙 - Fly（Acoustic Ver.）.flac -> 漫畫同人會 Revolution - 中山愛梨沙 - Fly（Acoustic Ver.）.mp3
+OK: 潘多拉之心 - everytime you kissed me - 梶浦由记.wav -> 潘多拉之心 - everytime you kissed me - 梶浦由记.mp3
+OK: 潜行吧！奈亚子W 後ろから這いより隊G - Blast of Fate ~疾風の行方~.flac -> 潜行吧！奈亚子W 後ろから這いより隊G - Blast of Fate ~疾風の行方~.mp3
+OK: 澤田なつ - サンクチュアリ - 五彩斑斓的世界真红主线ED.flac -> 澤田なつ - サンクチュアリ - 五彩斑斓的世界真红主线ED.mp3
+OK: 澤野弘之 - κrOnё.flac -> 澤野弘之 - κrOnё.mp3
+OK: 瀧沢一留 - あさき、ゆめみし - 乙女向游戏《晨曦时、梦见兮（あさき、ゆめみし）》主题曲.wav -> 瀧沢一留 - あさき、ゆめみし - 乙女向游戏《晨曦时、梦见兮（あさき、ゆめみし）》主题曲.mp3
+OK: 瀧沢一留 - 鎮命歌-しずめうた - 乙女向游戏《晨曦时、梦见兮（あさき、ゆめみし）》ED.wav -> 瀧沢一留 - 鎮命歌-しずめうた - 乙女向游戏《晨曦时、梦见兮（あさき、ゆめみし）》ED.mp3
+OK: 瀬名 - Long for… - PC游戏《黄昏のシンセミア(黄昏的禁忌之药)》插曲.wav -> 瀬名 - Long for… - PC游戏《黄昏のシンセミア(黄昏的禁忌之药)》插曲.mp3
+OK: 瀬名 - Silent Stars - PCゲーム「空を飛ぶ、3つの方法。」ED主题曲.wav -> 瀬名 - Silent Stars - PCゲーム「空を飛ぶ、3つの方法。」ED主题曲.mp3
+OK: 火影忍者 - いきものがかり - ホタルノヒカリ.flac -> 火影忍者 - いきものがかり - ホタルノヒカリ.mp3
+OK: 火影忍者 疾风传 - いきものがかり - ブルーバード.flac -> 火影忍者 疾风传 - いきものがかり - ブルーバード.mp3
+OK: 灰色的乐园-きみを探しに.flac -> 灰色的乐园-きみを探しに.mp3
+OK: 灰色的乐园-黄昏のスタアライト.flac -> 灰色的乐园-黄昏のスタアライト.mp3
+OK: 灵魂力量 - 愛の輪郭 - KOKIA.wav -> 灵魂力量 - 愛の輪郭 - KOKIA.mp3
+OK: 灼眼的夏娜 - 夜明け生まれ来る少女 - 高橋洋子.wav -> 灼眼的夏娜 - 夜明け生まれ来る少女 - 高橋洋子.mp3
+OK: 灼眼的夏娜 2 - 川田まみ - Joint.flac -> 灼眼的夏娜 2 - 川田まみ - Joint.mp3
+OK: 無限地帶23 - 宮里久美 - 風のララバイ.flac -> 無限地帶23 - 宮里久美 - 風のララバイ.mp3
+OK: 無限的斯特拉托斯 - 栗林みな実 - Straight Jet.flac -> 無限的斯特拉托斯 - 栗林みな実 - Straight Jet.mp3
+OK: 無限的未知 - 有坂美香 - Dis- (Club Mix Version 2).flac -> 無限的未知 - 有坂美香 - Dis- (Club Mix Version 2).mp3
+OK: 熊木杏里 - Hello Goodbye & Hello - 追逐繁星的孩子.wav -> 熊木杏里 - Hello Goodbye & Hello - 追逐繁星的孩子.mp3
+OK: 熊木杏里 - 風の記憶.flac -> 熊木杏里 - 風の記憶.mp3
+OK: 片霧烈火 - そらの隙間 - 車輪の国、向日葵の少女插曲.flac -> 片霧烈火 - そらの隙間 - 車輪の国、向日葵の少女插曲.mp3
+OK: 片霧烈火 - 楽園のメタファー.flac -> 片霧烈火 - 楽園のメタファー.mp3
+OK: 片霧烈火 - 祝福の大地、暁光の世界 - 車輪の国、向日葵の少女片尾曲.flac -> 片霧烈火 - 祝福の大地、暁光の世界 - 車輪の国、向日葵の少女片尾曲.mp3
+OK: 片霧烈火 - 紅空恋歌 - 車輪の国、向日葵の少女主题曲.flac -> 片霧烈火 - 紅空恋歌 - 車輪の国、向日葵の少女主题曲.mp3
+OK: 片霧烈火 - 魂響 - PC游戏『魂响』OP主题歌.flac -> 片霧烈火 - 魂響 - PC游戏『魂响』OP主题歌.mp3
+OK: 片霧烈火-Answer - PC游戏《G線上の魔王》OP主题曲.wav -> 片霧烈火-Answer - PC游戏《G線上の魔王》OP主题曲.mp3
+OK: 牧野由依 - Precious - ホログラフィー.wav -> 牧野由依 - Precious - ホログラフィー.mp3
+OK: 牧野由依 - You Are My Love - 翼-年代记BGM.flac -> 牧野由依 - You Are My Love - 翼-年代记BGM.mp3
+OK: 牧野由依 - お願いジュンブライト.wav -> 牧野由依 - お願いジュンブライト.mp3
+OK: 牧野由依 - たんぽぽ水車～Yui Makino Version～ - TV动画《素描簿》第13话ED.wav -> 牧野由依 - たんぽぽ水車～Yui Makino Version～ - TV动画《素描簿》第13话ED.mp3
+OK: 牧野由依 - ふわふわ♪.flac -> 牧野由依 - ふわふわ♪.mp3
+OK: 犬夜叉 - Boa - Every Heart-ミンナノキモチ-.flac -> 犬夜叉 - Boa - Every Heart-ミンナノキモチ-.mp3
+OK: 犬夜叉 - Do As Infinity - 楽園.flac -> 犬夜叉 - Do As Infinity - 楽園.mp3
+OK: 犬夜叉 - 浜崎あゆみ - Dearest.flac -> 犬夜叉 - 浜崎あゆみ - Dearest.mp3
+OK: 狼雨 - gravity - 坂本真綾.wav -> 狼雨 - gravity - 坂本真綾.mp3
+OK: 猫猫社 - WHITE.wav -> 猫猫社 - WHITE.mp3
+OK: 猫猫社 - 夕化粧.wav -> 猫猫社 - 夕化粧.mp3
+OK: 献给暗之女神的祈祷-ZWEI2---BGM.wma -> 献给暗之女神的祈祷-ZWEI2---BGM.mp3
+OK: 王國之心 - 宇多田光 - 光.flac -> 王國之心 - 宇多田光 - 光.mp3
+OK: 理事长ご机嫌如何 - 《遥仰凰华》OST.flac -> 理事长ご机嫌如何 - 《遥仰凰华》OST.mp3
+OK: 琴浦春香（CV：金元寿子） - つるぺた（洗衣板之歌） - 琴浦小姐（琴浦さん）第6话特别ED.wav -> 琴浦春香（CV：金元寿子） - つるぺた（洗衣板之歌） - 琴浦小姐（琴浦さん）第6话特别ED.mp3
+OK: 瑪德萊克絲 - 南里侑香 - Nowhere.flac -> 瑪德萊克絲 - 南里侑香 - Nowhere.mp3
+OK: 田井中彩智 - hollow.wav -> 田井中彩智 - hollow.mp3
+OK: 田井中彩智 - 最高の片想い - TV动画《彩云国物语》ED.wav -> 田井中彩智 - 最高の片想い - TV动画《彩云国物语》ED.mp3
+OK: 田村ゆかり -  Fantastic future - 变态王子与不笑猫OP.flac -> 田村ゆかり -  Fantastic future - 变态王子与不笑猫OP.mp3
+OK: 田村ゆかり - あなたの笑顔に - TV动画《魔法少女奈叶StrikerS》高町なのは角色歌.wav -> 田村ゆかり - あなたの笑顔に - TV动画《魔法少女奈叶StrikerS》高町なのは角色歌.mp3
+OK: 田村ゆかり - コードレス☆照れ☆PHONE - TV动画「のうりん（农林）」第1话插入曲、第11话片尾曲.wav -> 田村ゆかり - コードレス☆照れ☆PHONE - TV动画「のうりん（农林）」第1话插入曲、第11话片尾曲.mp3
+OK: 田村ゆかり&花澤香菜 - も ぎ た て フルーツガールズ - TV动画《农林》ED .wav -> 田村ゆかり&花澤香菜 - も ぎ た て フルーツガールズ - TV动画《农林》ED .mp3
+OK: 畑亜貴 - イバラ・ティアラ - PC游戏「ゆりね～おねえさまがおしえてくれた～」主題歌.flac -> 畑亜貴 - イバラ・ティアラ - PC游戏「ゆりね～おねえさまがおしえてくれた～」主題歌.mp3
+OK: 異度裝甲 - 光田康典 - Kokoro.flac -> 異度裝甲 - 光田康典 - Kokoro.mp3
+OK: 異度裝甲 - 光田康典 - Pain.flac -> 異度裝甲 - 光田康典 - Pain.mp3
+OK: 癒月 - 郷愁 - Precious Road～わたしだけの地図～.wav -> 癒月 - 郷愁 - Precious Road～わたしだけの地図～.mp3
+OK: 白(CV.茅野爱衣) - オラシオン - TV动画《NO GAME NO LIFE 游戏人生》ED.wav -> 白(CV.茅野爱衣) - オラシオン - TV动画《NO GAME NO LIFE 游戏人生》ED.mp3
+OK: 白取愛良(CV：愛風春榴)  - sing a song - PC游戏『世界と世界の真ん中で』插入曲.wav -> 白取愛良(CV：愛風春榴)  - sing a song - PC游戏『世界と世界の真ん中で』插入曲.mp3
+OK: 白河ほたる（水樹奈々） - 遠いこの空から - PC游戏《秋之回忆2》白河萤ED.wav -> 白河ほたる（水樹奈々） - 遠いこの空から - PC游戏《秋之回忆2》白河萤ED.mp3
+OK: 百合城銀子 (荒川美穂), 百合ヶ咲るる (生田善子), 椿輝紅羽 (山根希美) - TERRITORY - TV动画《ユリ熊嵐（百合熊岚）》ED.wav -> 百合城銀子 (荒川美穂), 百合ヶ咲るる (生田善子), 椿輝紅羽 (山根希美) - TERRITORY - TV动画《ユリ熊嵐（百合熊岚）》ED.mp3
+OK: 百合城銀子(CV.荒川美穂)、百合ヶ咲るる(CV.生田善子)、椿輝紅羽(CV.山根希美) - 断絶3 - TV动画《ユリ熊嵐（百合熊岚）》.flac -> 百合城銀子(CV.荒川美穂)、百合ヶ咲るる(CV.生田善子)、椿輝紅羽(CV.山根希美) - 断絶3 - TV动画《ユリ熊嵐（百合熊岚）》.mp3
+OK: 相望 -ソウボウ- 桃華月憚OST.wav -> 相望 -ソウボウ- 桃華月憚OST.mp3
+OK: 相良心 - 星空のいま short ver. - PC游戏《星空へ架かる桥AA（架向星空之桥AA）》ED.wav -> 相良心 - 星空のいま short ver. - PC游戏《星空へ架かる桥AA（架向星空之桥AA）》ED.mp3
+OK: 相良心 - 虹色の世界 - PC游戏『枯れない世界と終わる花』ED.wav -> 相良心 - 虹色の世界 - PC游戏『枯れない世界と終わる花』ED.mp3
+OK: 真実の語り部（真实传说的传承者） - 世界树与恋爱魔法使OST.wav -> 真実の語り部（真实传说的传承者） - 世界树与恋爱魔法使OST.mp3
+OK: 真理絵 - JUMPING - PC游戏《人妻コスプレ喫茶2 ～人妻らぶらぶエッチ》主题曲.flac -> 真理絵 - JUMPING - PC游戏《人妻コスプレ喫茶2 ～人妻らぶらぶエッチ》主题曲.mp3
+OK: 真理絵 - Labyrinth - PC游戏《秘密游戏2反叛（リベリオンズ Secret Game 2nd Stage）》插入曲.wav -> 真理絵 - Labyrinth - PC游戏《秘密游戏2反叛（リベリオンズ Secret Game 2nd Stage）》插入曲.mp3
+OK: 真理絵 - ひとつだけの願いごと - PCゲーム『うたてめぐり』挿入歌.wav -> 真理絵 - ひとつだけの願いごと - PCゲーム『うたてめぐり』挿入歌.mp3
+OK: 真理絵 - 百花繚乱ファンタズム - PCゲーム「鬼ごっこ！」OPソング.wav -> 真理絵 - 百花繚乱ファンタズム - PCゲーム「鬼ごっこ！」OPソング.mp3
+OK: 真理絵 - 蝶ノ夢 - PC游戏《蝶ノ梦 ～游郭絵草纸～》.flac -> 真理絵 - 蝶ノ夢 - PC游戏《蝶ノ梦 ～游郭絵草纸～》.mp3
+OK: 瞬間センチメンタル.flac -> 瞬間センチメンタル.mp3
+OK: 石剣 -セキケン- 桃華月憚OST.wav -> 石剣 -セキケン- 桃華月憚OST.mp3
+OK: 石川智晶 - スイッチが入ったら - TV动画《神样DOLLS》ED.wav -> 石川智晶 - スイッチが入ったら - TV动画《神样DOLLS》ED.mp3
+OK: 石川智晶 - 不完全燃焼 - TV动画《神样DOLLS》OP.wav -> 石川智晶 - 不完全燃焼 - TV动画《神样DOLLS》OP.mp3
+OK: 石川智晶 - 夏の庭 - TV动画《神样DOLLS》第七话ED.wav -> 石川智晶 - 夏の庭 - TV动画《神样DOLLS》第七话ED.mp3
+OK: 石橋優子 - York of love. - 魔塔大陆.wav -> 石橋優子 - York of love. - 魔塔大陆.mp3
+OK: 石橋優子 - 絆～KIZNA - 魔塔大陆.wav -> 石橋優子 - 絆～KIZNA - 魔塔大陆.mp3
+OK: 石田燿子 - COLORFUL BOX - TV动画《SHIROBAKO（白箱）》第一季片头曲.wav -> 石田燿子 - COLORFUL BOX - TV动画《SHIROBAKO（白箱）》第一季片头曲.mp3
+OK: 石田燿子 - 永遠(とわ)の花 - 《青出于蓝》OP主题曲.wav -> 石田燿子 - 永遠(とわ)の花 - 《青出于蓝》OP主题曲.mp3
+OK: 砂上の夢--THE THIRD～苍瞳的少女～OP--佐々木ゆう子.wma -> 砂上の夢--THE THIRD～苍瞳的少女～OP--佐々木ゆう子.mp3
+OK: 磯村由紀子 - 緋のワルツ（绯红的华尔兹）.wav -> 磯村由紀子 - 緋のワルツ（绯红的华尔兹）.mp3
+OK: 磯村由紀子 - 風の住む街(Short Version).wav -> 磯村由紀子 - 風の住む街(Short Version).mp3
+OK: 祇条深月(能登麻美子) - 青空loop(祇条深月ver.)-album version- - TV动画《君吻》能登版OP.flac -> 祇条深月(能登麻美子) - 青空loop(祇条深月ver.)-album version- - TV动画《君吻》能登版OP.mp3
+OK: 神幻拍档 - 瞳のこたえ - Noria.wav -> 神幻拍档 - 瞳のこたえ - Noria.mp3
+OK: 神村ひな - 好きだよ - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》.wav -> 神村ひな - 好きだよ - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》.mp3
+OK: 神村ひな - 未来への扉 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》.wav -> 神村ひな - 未来への扉 - PC游戏《しゅぷれ～むキャンディ～王道には王道たる理由があるんです！～（超级糖果）》.mp3
+OK: 神枪少女 - doll - Lia.flac -> 神枪少女 - doll - Lia.mp3
+OK: 神薙 - 戸松遙 - Motto☆派手にね！.flac -> 神薙 - 戸松遙 - Motto☆派手にね！.mp3
+OK: 神隐之狼 - 时の向こう 幻の空 - FictionJunction.wav -> 神隐之狼 - 时の向こう 幻の空 - FictionJunction.mp3
+OK: 福田舞 - 天使的起誓(天使のゆびきり) - 彼男彼女的故事OP.flac -> 福田舞 - 天使的起誓(天使のゆびきり) - 彼男彼女的故事OP.mp3
+OK: 秀逗魔導士 Next - 林原めぐみ - Give A Reason.flac -> 秀逗魔導士 Next - 林原めぐみ - Give A Reason.mp3
+OK: 秋之回憶 - 水樹奈々 - それでも君を思い出すから.flac -> 秋之回憶 - 水樹奈々 - それでも君を思い出すから.mp3
+OK: 科學的超電磁炮 - Fripside - Late In Autumn.flac -> 科學的超電磁炮 - Fripside - Late In Autumn.mp3
+OK: 科學的超電磁炮 - Fripside - Memory Of Snow.flac -> 科學的超電磁炮 - Fripside - Memory Of Snow.mp3
+OK: 秒速五厘米 - 山崎将義 - One More Time,One More Chance.ape -> 秒速五厘米 - 山崎将義 - One More Time,One More Chance.mp3
+OK: 秘密 作詞･作曲 岡崎律子 (トルタ／CV中原麻衣) - 交响乐之雨角色CD.flac -> 秘密 作詞･作曲 岡崎律子 (トルタ／CV中原麻衣) - 交响乐之雨角色CD.mp3
+OK: 秘密ドールズ - Strawberry Panic(惊爆草莓)OP.wma -> 秘密ドールズ - Strawberry Panic(惊爆草莓)OP.mp3
+OK: 秦基博 - Rain - 言叶之庭.flac -> 秦基博 - Rain - 言叶之庭.mp3
+OK: 空之轨迹OST - Sophisticated Fight.flac -> 空之轨迹OST - Sophisticated Fight.mp3
+OK: 空之轨迹OST - リベールの誇り.flac -> 空之轨迹OST - リベールの誇り.mp3
+OK: 空之轨迹OST - レイストン要塞.flac -> 空之轨迹OST - レイストン要塞.mp3
+OK: 空之轨迹OST - 告白.flac -> 空之轨迹OST - 告白.mp3
+OK: 空之轨迹OST - 星の在り処 Harmonica long Ver..flac -> 空之轨迹OST - 星の在り処 Harmonica long Ver..mp3
+OK: 空之轨迹OST - 星の在り処.flac -> 空之轨迹OST - 星の在り処.mp3
+OK: 空之轨迹OST - 月明りの下で.flac -> 空之轨迹OST - 月明りの下で.mp3
+OK: 空之轨迹OST - 王城.flac -> 空之轨迹OST - 王城.mp3
+OK: 空之轨迹OST - 空の軌跡 [BONUS TRACK].flac -> 空之轨迹OST - 空の軌跡 [BONUS TRACK].mp3
+OK: 空之轨迹OST - 組曲 白き花のマドリガル - 城.flac -> 空之轨迹OST - 組曲 白き花のマドリガル - 城.mp3
+OK: 空之轨迹OST - 組曲 白き花のマドリガル - 大団円.flac -> 空之轨迹OST - 組曲 白き花のマドリガル - 大団円.mp3
+OK: 空之轨迹OST - 胸の中に.flac -> 空之轨迹OST - 胸の中に.mp3
+OK: 空之轨迹OST - 虚ろなる光の封土.flac -> 空之轨迹OST - 虚ろなる光の封土.mp3
+OK: 空之轨迹OST - 銀の意志.flac -> 空之轨迹OST - 銀の意志.mp3
+OK: 空之轨迹OST - 闇を彷徨う.flac -> 空之轨迹OST - 闇を彷徨う.mp3
+OK: 空之轨迹OST - 陽だまりにて和む猫.flac -> 空之轨迹OST - 陽だまりにて和む猫.mp3
+OK: 空之轨迹OST - 風を共に舞う気持ち.flac -> 空之轨迹OST - 風を共に舞う気持ち.mp3
+OK: 空之轨迹OST-星の所在 ~「空の轨迹」主题歌.flac -> 空之轨迹OST-星の所在 ~「空の轨迹」主题歌.mp3
+OK: 窓を打つ雨 - 《遥仰凰华》OST.flac -> 窓を打つ雨 - 《遥仰凰华》OST.mp3
+OK: 竹井詩織里 - 世界 止めて(让世界停止) - TV动画《名侦探柯南》ED22.wav -> 竹井詩織里 - 世界 止めて(让世界停止) - TV动画《名侦探柯南》ED22.mp3
+OK: 竹田直子（结衣菜） - メリーゴーランドをぶっ壊せ - PC游戏《初雪樱花（はつゆきさくら）》插曲.wav -> 竹田直子（结衣菜） - メリーゴーランドをぶっ壊せ - PC游戏《初雪樱花（はつゆきさくら）》插曲.mp3
+OK: 竹達彩奈 - 齧りかけの林檎 - TV动画《デンキ街の本屋さん（电器街的漫画店）》OP主题曲.flac -> 竹達彩奈 - 齧りかけの林檎 - TV动画《デンキ街の本屋さん（电器街的漫画店）》OP主题曲.mp3
+OK: 笠原弘子 - Aqua Stripe - PC游戏《Ever17 —the out of infinity》ED.wav -> 笠原弘子 - Aqua Stripe - PC游戏《Ever17 —the out of infinity》ED.mp3
+OK: 箱庭の外で - 志方あきこ - [花帰葬交響曲].flac -> 箱庭の外で - 志方あきこ - [花帰葬交響曲].mp3
+OK: 籐野らん - がんばれひよりん.wav -> 籐野らん - がんばれひよりん.mp3
+OK: 米仓千寻 - FRIENDS.wav -> 米仓千寻 - FRIENDS.mp3
+OK: 米仓千寻 - My song for you.wav -> 米仓千寻 - My song for you.mp3
+OK: 米仓千寻 - ライラックの花束を.wav -> 米仓千寻 - ライラックの花束を.mp3
+OK: 米仓千寻 - 嵐の中で辉いて - 高达08MS小队.wav -> 米仓千寻 - 嵐の中で辉いて - 高达08MS小队.mp3
+OK: 米仓千寻 - 永遠の花.wav -> 米仓千寻 - 永遠の花.mp3
+OK: 約束 今日的5年2班ED.wav -> 約束 今日的5年2班ED.mp3
+OK: 約束のブーケ - PC游戏《青空下的约定》OST.wav -> 約束のブーケ - PC游戏《青空下的约定》OST.mp3
+OK: 細井聡司 - Radiance - PC游戏「Rewrite」OST.wav -> 細井聡司 - Radiance - PC游戏「Rewrite」OST.mp3
+OK: 細井聡司 - ニリンソウ - PC游戏「Rewrite」OST 小鸟出场专用曲.wav -> 細井聡司 - ニリンソウ - PC游戏「Rewrite」OST 小鸟出场专用曲.mp3
+OK: 細江慎治 - Now Loading.... - TV动画《NO GAME NO LIFE 游戏人生》OST.wav -> 細江慎治 - Now Loading.... - TV动画《NO GAME NO LIFE 游戏人生》OST.mp3
+OK: 終世 -シュウセイ- 桃華月憚OST.wav -> 終世 -シュウセイ- 桃華月憚OST.mp3
+OK: 経験値上昇中☆ - 南家三姐妹OP.flac -> 経験値上昇中☆ - 南家三姐妹OP.mp3
+OK: 経験値速上々↑↑ - 南家三姐妹～欢迎回来 OP.flac -> 経験値速上々↑↑ - 南家三姐妹～欢迎回来 OP.mp3
+OK: 結(早見沙織)&月海(井上麻里奈)&草野(花澤香菜)&松(遠藤綾) - 約束 I'm with You.flac -> 結(早見沙織)&月海(井上麻里奈)&草野(花澤香菜)&松(遠藤綾) - 約束 I'm with You.mp3
+OK: 結城アイラ - colorless wind - TV动画《sola》（第2话～第13话）OP主题曲.ape -> 結城アイラ - colorless wind - TV动画《sola》（第2话～第13话）OP主题曲.mp3
+OK: 結城アイラ - セカイノナミダ - TVアニメ『ture tears』ED.ape -> 結城アイラ - セカイノナミダ - TVアニメ『ture tears』ED.mp3
+OK: 結月そら - 陽炎 - PC游戏《寒蝉鸣泣之时~解》印象曲.wav -> 結月そら - 陽炎 - PC游戏《寒蝉鸣泣之时~解》印象曲.mp3
+OK: 綾川りの - ごめんね -雪希 ver.- - PCゲーム「水色（みずいろ）」.wav -> 綾川りの - ごめんね -雪希 ver.- - PCゲーム「水色（みずいろ）」.mp3
+OK: 緒方理奈(CV：水樹奈々) - SOUND OF DESTINY - PC游戏《白色相簿》插曲.wav -> 緒方理奈(CV：水樹奈々) - SOUND OF DESTINY - PC游戏《白色相簿》插曲.mp3
+OK: 红猪 - 加藤登紀子 - さくらんぼの実る頃(紅の豚).flac -> 红猪 - 加藤登紀子 - さくらんぼの実る頃(紅の豚).mp3
+OK: 红猪ED - 加藤登紀子 - 時には昔の話を(紅の豚).flac -> 红猪ED - 加藤登紀子 - 時には昔の話を(紅の豚).mp3
+OK: 罗密欧与朱丽叶 - You Raise Me Up - LENA PARK.wav -> 罗密欧与朱丽叶 - You Raise Me Up - LENA PARK.mp3
+OK: 罗密欧与朱丽叶 - 祈り～You Raise Me Up - LENA PARK.wav -> 罗密欧与朱丽叶 - 祈り～You Raise Me Up - LENA PARK.mp3
+OK: 罗德岛战记 - Eternity - 炎と永远 English - 新居昭乃.wav -> 罗德岛战记 - Eternity - 炎と永远 English - 新居昭乃.mp3
+OK: 罪恶王冠 - βios _feat.Mika Kobayashi_ - 小林未郁.wav -> 罪恶王冠 - βios _feat.Mika Kobayashi_ - 小林未郁.mp3
+OK: 罪恶王冠 - βιοζ-δ _feat.Mika Kobayashi_ - 小林未郁.wav -> 罪恶王冠 - βιοζ-δ _feat.Mika Kobayashi_ - 小林未郁.mp3
+OK: 羅密歐的藍天 - 笠原弘子 - 空へ…(Acoustic Version).flac -> 羅密歐的藍天 - 笠原弘子 - 空へ…(Acoustic Version).mp3
+OK: 美郷あき - TOMORROW'S TRUE.flac -> 美郷あき - TOMORROW'S TRUE.mp3
+OK: 美郷あき - さよなら君の声 - PC游戏《纯白交响曲》插曲.wav -> 美郷あき - さよなら君の声 - PC游戏《纯白交响曲》插曲.mp3
+OK: 美郷あき - 君が空だった(你曾是我的天空) - TV动画《舞-HiME》ED.wav -> 美郷あき - 君が空だった(你曾是我的天空) - TV动画《舞-HiME》ED.mp3
+OK: 群雄疾走--Fate stay night BGM.wma -> 群雄疾走--Fate stay night BGM.mp3
+OK: 羽岡佳 - 大切な手紙.flac -> 羽岡佳 - 大切な手紙.mp3
+OK: 羽毛田丈史 - -passive-.wav -> 羽毛田丈史 - -passive-.mp3
+OK: 羽毛田丈史 - 下校は君と.wav -> 羽毛田丈史 - 下校は君と.mp3
+OK: 羽毛田丈史 - 恋心.wav -> 羽毛田丈史 - 恋心.mp3
+OK: 羽毛田丈史 - 抉られる想い.wav -> 羽毛田丈史 - 抉られる想い.mp3
+OK: 羽毛田丈史 - 昼下がりのベンチ.wav -> 羽毛田丈史 - 昼下がりのベンチ.mp3
+OK: 羽毛田丈史 - 朝の坂道.wav -> 羽毛田丈史 - 朝の坂道.mp3
+OK: 羽毛田丈史 - 木漏れ日を駆け下りて.wav -> 羽毛田丈史 - 木漏れ日を駆け下りて.mp3
+OK: 羽毛田丈史 - 溢れ出る涙.wav -> 羽毛田丈史 - 溢れ出る涙.mp3
+OK: 羽毛田丈史 - 演劇祭.wav -> 羽毛田丈史 - 演劇祭.mp3
+OK: 翁 鈴佳 - 月の呪縛 - 无爱之战.wav -> 翁 鈴佳 - 月の呪縛 - 无爱之战.mp3
+OK: 翼神傳說 - 坂本真綾 - ヘミソフィア.flac -> 翼神傳說 - 坂本真綾 - ヘミソフィア.mp3
+OK: 聖斗士星矢 - 堀江美都子 - Shining Star（女神の子守歌 英文版）.flac -> 聖斗士星矢 - 堀江美都子 - Shining Star（女神の子守歌 英文版）.mp3
+OK: 聖斗士星矢 - 堀江美都子 - 女神の子守歌 -Lullaby-.flac -> 聖斗士星矢 - 堀江美都子 - 女神の子守歌 -Lullaby-.mp3
+OK: 聖斗士星矢 冥王十二宮 - まつざわゆみ - 君と同じ青空.flac -> 聖斗士星矢 冥王十二宮 - まつざわゆみ - 君と同じ青空.mp3
+OK: 聖魔之血 - 種ともこ - Let Me Hear.flac -> 聖魔之血 - 種ともこ - Let Me Hear.mp3
+OK: 胡蝶の夢 桃華月憚OST.wav -> 胡蝶の夢 桃華月憚OST.mp3
+OK: 能登麻美子 - 夕颜 - TV动画《校园迷糊大王》冢本八云角色歌.wav -> 能登麻美子 - 夕颜 - TV动画《校园迷糊大王》冢本八云角色歌.mp3
+OK: 自らを演出する乙女の会 - Girlish Lover - 「俺の彼女と幼なじみが修罗场すぎる」OP.wav -> 自らを演出する乙女の会 - Girlish Lover - 「俺の彼女と幼なじみが修罗场すぎる」OP.mp3
+OK: 舞 - Hime - 栗林みな実 - Dream☆Wing.flac -> 舞 - Hime - 栗林みな実 - Dream☆Wing.mp3
+OK: 舞-HiME - 小さな星が降りる時 - 栗林みな実.wav -> 舞-HiME - 小さな星が降りる時 - 栗林みな実.mp3
+OK: 舞-乙HiME - 星が奏でるものがたり(Full ver.) - アリカ(CV_菊地美香)＆ニナ(CV_小清水亜美)＆マシロ(CV_ゆかな).wav -> 舞-乙HiME - 星が奏でるものがたり(Full ver.) - アリカ(CV_菊地美香)＆ニナ(CV_小清水亜美)＆マシロ(CV_ゆかな).mp3
+OK: 花たん - Brand New Voice (ED Full ver.) - PC游戏《すきま桜とうその都会（隙间樱花与谎言都市）》ED.wav -> 花たん - Brand New Voice (ED Full ver.) - PC游戏《すきま桜とうその都会（隙间樱花与谎言都市）》ED.mp3
+OK: 花たん - 言葉繋ぎ (OP Full ver.)  - PC游戏《すきま桜とうその都会（隙间樱花与谎言都市）》OP.wav -> 花たん - 言葉繋ぎ (OP Full ver.)  - PC游戏《すきま桜とうその都会（隙间樱花与谎言都市）》OP.mp3
+OK: 花びらの刻.ape -> 花びらの刻.mp3
+OK: 花沢加絵 - セーラースターソング - TV动画《美少女战士Sailor Stars（美少女战士第五部）OP.flac -> 花沢加絵 - セーラースターソング - TV动画《美少女战士Sailor Stars（美少女战士第五部）OP.mp3
+OK: 花泽香菜 - 恋愛サーキュレーション - TV动画「化物语」OP4.flac -> 花泽香菜 - 恋愛サーキュレーション - TV动画「化物语」OP4.mp3
+OK: 苍穹之法芙娜 - Separation - angela.wav -> 苍穹之法芙娜 - Separation - angela.mp3
+OK: 英雄傳說 - う～み - 星の在り処（英雄傳說6空之軌跡）.flac -> 英雄傳說 - う～み - 星の在り処（英雄傳說6空之軌跡）.mp3
+OK: 英雄傳說 - 小寺可南子 - Cry For Me,Cry For You（空之軌跡 The 3Rd）.flac -> 英雄傳說 - 小寺可南子 - Cry For Me,Cry For You（空之軌跡 The 3Rd）.mp3
+OK: 英雄时代 - Aangela - Gravitation.flac -> 英雄时代 - Aangela - Gravitation.mp3
+OK: 英雄时代 - 浦壁多恵 - Azurite .ape -> 英雄时代 - 浦壁多恵 - Azurite .mp3
+OK: 茅原实里 - 優しい忘却 - 凉宫春日的消失主题曲.flac -> 茅原实里 - 優しい忘却 - 凉宫春日的消失主题曲.mp3
+OK: 茅原実里 - Paradise Lost（失楽园） - TV动画《食灵-零》OP主题曲.wav -> 茅原実里 - Paradise Lost（失楽园） - TV动画《食灵-零》OP主题曲.mp3
+OK: 茶太 - Angel - PC游戏《灰色的迷宮》ED.wav -> 茶太 - Angel - PC游戏《灰色的迷宮》ED.mp3
+OK: 茶太 - I will - PC游戏《晴のちきっと菜の花びより(宛如雨后天晴菜花开)》OP主题曲.wav -> 茶太 - I will - PC游戏《晴のちきっと菜の花びより(宛如雨后天晴菜花开)》OP主题曲.mp3
+OK: 茶太 - SKIP - PC游戏《灰色的果实》みちるED.wav -> 茶太 - SKIP - PC游戏《灰色的果实》みちるED.mp3
+OK: 茶太 - Winter Bells♪ - PC游戏「白熊铃星群♪」OP主题曲.wav -> 茶太 - Winter Bells♪ - PC游戏「白熊铃星群♪」OP主题曲.mp3
+OK: 茶太 - たそがれ空 - PCゲーム「ほしうた ～Starlight Serenade～」ED.wav -> 茶太 - たそがれ空 - PCゲーム「ほしうた ～Starlight Serenade～」ED.mp3
+OK: 茶太 - よつのは - PC游戏「よつのは 四叶草」OP主题曲.flac -> 茶太 - よつのは - PC游戏「よつのは 四叶草」OP主题曲.mp3
+OK: 茶太 - エロイコ - PCゲーム《Dolphin Divers》OP.wav -> 茶太 - エロイコ - PCゲーム《Dolphin Divers》OP.mp3
+OK: 茶太 - カンデコ - PC游戏「愛しい対象の護り方」OP主題歌.flac -> 茶太 - カンデコ - PC游戏「愛しい対象の護り方」OP主題歌.mp3
+OK: 茶太 - 変わり行く世界のために.wav -> 茶太 - 変わり行く世界のために.mp3
+OK: 茶太 - 宙のヒカリ - PCゲーム「星空のメモリア Eternal Heart」ED.flac -> 茶太 - 宙のヒカリ - PCゲーム「星空のメモリア Eternal Heart」ED.mp3
+OK: 茶太 - 星空のメモリア.flac -> 茶太 - 星空のメモリア.mp3
+OK: 茶太 コーラス：真理絵、くない瓜、Rio、Morrigan、藤枝あかね、茶太、たくまる - だんご大家族 - TV动画《CLANNAD》ED主题曲.ape -> 茶太 コーラス：真理絵、くない瓜、Rio、Morrigan、藤枝あかね、茶太、たくまる - だんご大家族 - TV动画《CLANNAD》ED主题曲.mp3
+OK: 荒井由実 - やさしさに包まれたなら - 魔女の宅急便.flac -> 荒井由実 - やさしさに包まれたなら - 魔女の宅急便.mp3
+OK: 荒野をこえて - グリザイアの楽園 サウンドトラック&主題歌集.flac -> 荒野をこえて - グリザイアの楽園 サウンドトラック&主題歌集.mp3
+OK: 荒野兵器 1 - なるけ みちこ - 荒野の果てに(口哨版).flac -> 荒野兵器 1 - なるけ みちこ - 荒野の果てに(口哨版).mp3
+OK: 荒野兵器 1 - なるけ みちこ - 荒野の果て～新たなる旅路へ.flac -> 荒野兵器 1 - なるけ みちこ - 荒野の果て～新たなる旅路へ.mp3
+OK: 菅野よう子 - Genesis of Aquarion／AKINO (创圣のアクエリオン O.S.T.2).flac -> 菅野よう子 - Genesis of Aquarion／AKINO (创圣のアクエリオン O.S.T.2).mp3
+OK: 菅野よう子 - さすらいのカウボーイ -カウボーイビバップのテーマ- ／TADA ‘ED’AOI (COWBOY BEBOP CD-BOX).flac -> 菅野よう子 - さすらいのカウボーイ -カウボーイビバップのテーマ- ／TADA ‘ED’AOI (COWBOY BEBOP CD-BOX).mp3
+OK: 菅野よう子 - 指轮(Single Ver.)／坂本真綾 (剧场版エスカフローネ 主题歌).flac -> 菅野よう子 - 指轮(Single Ver.)／坂本真綾 (剧场版エスカフローネ 主题歌).mp3
+OK: 菅野よう子 - 时の记忆／SEIKA (ぼくの地球を守って O.S.T. 1).flac -> 菅野よう子 - 时の记忆／SEIKA (ぼくの地球を守って O.S.T. 1).mp3
+OK: 菅野洋子 - tank - tv_stretch  - SEATBELTS (COWBOY BEBOP Tank! THE! BEST!).flac -> 菅野洋子 - tank - tv_stretch  - SEATBELTS (COWBOY BEBOP Tank! THE! BEST!).mp3
+OK: 菅野洋子 - 猫のキモチ(demo version)／Gabriela Robin (天空のエスカフローネ CD初収録).flac -> 菅野洋子 - 猫のキモチ(demo version)／Gabriela Robin (天空のエスカフローネ CD初収録).mp3
+OK: 菅野洋子 - 雾の港.ape -> 菅野洋子 - 雾の港.mp3
+OK: 菅野洋子 - 黄金の地.ape -> 菅野洋子 - 黄金の地.mp3
+OK: 菊地創 - 君に逢えたから (Inst Arrange ver.) - 五彩斑斓的世界OST.flac -> 菊地創 - 君に逢えたから (Inst Arrange ver.) - 五彩斑斓的世界OST.mp3
+OK: 華憐（電気式華憐音楽集団） - イノ血ノミズ - PC游戏《MinDeaD BlooD～麻由と麻奈の輸血箱～》.wav -> 華憐（電気式華憐音楽集団） - イノ血ノミズ - PC游戏《MinDeaD BlooD～麻由と麻奈の輸血箱～》.mp3
+OK: 華音 -カノン- 桃華月憚OST.wav -> 華音 -カノン- 桃華月憚OST.mp3
+OK: 葉月ゆら - 13番目の御伽ノ国 ~Ending theme of clepsydra~ - クレプシドラ.wav -> 葉月ゆら - 13番目の御伽ノ国 ~Ending theme of clepsydra~ - クレプシドラ.mp3
+OK: 葉月ゆら - 四，幻燈遊郭.wav -> 葉月ゆら - 四，幻燈遊郭.mp3
+OK: 蔷薇少女 - 禁じられた遊び - ALI PROJECT.wav -> 蔷薇少女 - 禁じられた遊び - ALI PROJECT.mp3
+OK: 薄蛍(花澤香菜)&雪洞(豊崎愛生)&鬼灯(堀江由衣)- 紅花ノ乙女唄（红花少女之歌） - TV动画《半妖少女绮丽谭》IN.wav -> 薄蛍(花澤香菜)&雪洞(豊崎愛生)&鬼灯(堀江由衣)- 紅花ノ乙女唄（红花少女之歌） - TV动画《半妖少女绮丽谭》IN.mp3
+OK: 薔薇少女 夢見 - Ali Project - 聖少女領域.flac -> 薔薇少女 夢見 - Ali Project - 聖少女領域.mp3
+OK: 藍井エイル - MEMORIA - TVアニメ「FateZero」エンディングテーマ.flac -> 藍井エイル - MEMORIA - TVアニメ「FateZero」エンディングテーマ.mp3
+OK: 藍井エイル - クロイウタ - キルラキル(Kill la Kill).wav -> 藍井エイル - クロイウタ - キルラキル(Kill la Kill).mp3
+OK: 藤宮香織(CV.雨宮天) - 奏 かなで - TV动画《一周的朋友》ED.flac -> 藤宮香織(CV.雨宮天) - 奏 かなで - TV动画《一周的朋友》ED.mp3
+OK: 藤田淳平 - 「記憶の欠片」.flac -> 藤田淳平 - 「記憶の欠片」.mp3
+OK: 藤田麻衣子 - ねぇ.wav -> 藤田麻衣子 - ねぇ.mp3
+OK: 藤田麻衣子 - 二度目の恋.wav -> 藤田麻衣子 - 二度目の恋.mp3
+OK: 藤田麻衣子 - 水風船.wav -> 藤田麻衣子 - 水風船.mp3
+OK: 蘿球社 - 花澤香菜 - Shoot!.wav -> 蘿球社 - 花澤香菜 - Shoot!.mp3
+OK: 虻川治 - Crumbling orld - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - Crumbling orld - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - あえかなる世界 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - あえかなる世界 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 咲のテーマ Strange sister - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 咲のテーマ Strange sister - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 夢なら醒めないで - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 夢なら醒めないで - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 寄せては帰す日常 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 寄せては帰す日常 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 幸福の残 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 幸福の残 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 弥生のテーマ Behind-the-scenes heroine - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 弥生のテーマ Behind-the-scenes heroine - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 微睡みの朝 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 微睡みの朝 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 心の輪郭 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 心の輪郭 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 悦楽 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 悦楽 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 景子のテーマ Of cat psychology - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 景子のテーマ Of cat psychology - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 有栖のテーマ 愛すべきDeja vu - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 有栖のテーマ 愛すべきDeja vu - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 灰色の群像 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 灰色の群像 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 目覚めの朝に… - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 目覚めの朝に… - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 終わりなき円舞曲 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 終わりなき円舞曲 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 胡蝶の夢 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 胡蝶の夢 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 舞亜のテーマ invisible desire - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 舞亜のテーマ invisible desire - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 誘いの夜 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 誘いの夜 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 虻川治 - 錯綜する記憶 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.wav -> 虻川治 - 錯綜する記憶 - Disappearance of Alice - PC游戏《ハピメア（幸福噩梦）》OST.mp3
+OK: 蝶々P - Sadistic Queen - PSP游戏《Caligula》OST.wav -> 蝶々P - Sadistic Queen - PSP游戏《Caligula》OST.mp3
+OK: 血族 - 《遥仰凰华》OST.flac -> 血族 - 《遥仰凰华》OST.mp3
+OK: 西村麻聡 - 遥か～SAILING FOR MY DREAM～ - TV动画《钢铁神兵B'T-X》OP1.wav -> 西村麻聡 - 遥か～SAILING FOR MY DREAM～ - TV动画《钢铁神兵B'T-X》OP1.mp3
+OK: 西沢はぐみ - dear my sweet -  PC游戏《Princess-Style》ED.wav -> 西沢はぐみ - dear my sweet -  PC游戏《Princess-Style》ED.mp3
+OK: 西沢はぐみ - Glorious Days - PC游戏《Princess-Style》OP.wav -> 西沢はぐみ - Glorious Days - PC游戏《Princess-Style》OP.mp3
+OK: 西沢はぐみ - いつかまた咲く花へ -  PC游戏《Princess-Style》玛格丽特主线ED.wav -> 西沢はぐみ - いつかまた咲く花へ -  PC游戏《Princess-Style》玛格丽特主线ED.mp3
+OK: 西沢はぐみ - カタチないキオク - PCゲーム「氷华の舞う空に」OPテーマ.wav -> 西沢はぐみ - カタチないキオク - PCゲーム「氷华の舞う空に」OPテーマ.mp3
+OK: 西碧拉系统 - PAYCHO-PASS BGM.ape -> 西碧拉系统 - PAYCHO-PASS BGM.mp3
+OK: 言语-我们的存在ED.wma -> 言语-我们的存在ED.mp3
+OK: 計名さや香 - 空色スコール - PC游戏「Pure×Cure」主題歌.flac -> 計名さや香 - 空色スコール - PC游戏「Pure×Cure」主題歌.mp3
+OK: 記憶のカケラ（记忆的碎片） - 世界树与恋爱魔法使OST.wav -> 記憶のカケラ（记忆的碎片） - 世界树与恋爱魔法使OST.mp3
+OK: 調和 oto-KOKIA专辑trip trip---IN.wma -> 調和 oto-KOKIA专辑trip trip---IN.mp3
+OK: 讃州中学勇者部 - ホシトハナ - TV动画《结城友奈是勇者》OP主题曲.flac -> 讃州中学勇者部 - ホシトハナ - TV动画《结城友奈是勇者》OP主题曲.mp3
+OK: 诗月 カオリ - Hold on me ～恋の魔法～ - ラブライド イヴ ～love-bride eve～ 特典ost.wav -> 诗月 カオリ - Hold on me ～恋の魔法～ - ラブライド イヴ ～love-bride eve～ 特典ost.mp3
+OK: 诗片 - 想いを奏でて - savage genius.wav -> 诗片 - 想いを奏でて - savage genius.mp3
+OK: 贵方とお茶を - 《遥仰凰华》OST.flac -> 贵方とお茶を - 《遥仰凰华》OST.mp3
+OK: 超时空要塞 - 愛は流れる - 飯島真理.wav -> 超时空要塞 - 愛は流れる - 飯島真理.mp3
+OK: 輕音少女 - 桜高軽音部 - Don'T Say 'Lazy'.flac -> 輕音少女 - 桜高軽音部 - Don'T Say 'Lazy'.mp3
+OK: 轻音少女 - No,thank You!.flac -> 轻音少女 - No,thank You!.mp3
+OK: 轻飘飘的时光--轻音部少女--IN_学园祭版.wma -> 轻飘飘的时光--轻音部少女--IN_学园祭版.mp3
+OK: 辻亚弥乃 - 君のうた.wav -> 辻亚弥乃 - 君のうた.mp3
+OK: 辻亚弥乃 - 桜の木の下で.wav -> 辻亚弥乃 - 桜の木の下で.mp3
+OK: 辻亚弥乃 - 風になる（幻化成风） - 剧场版《猫的报恩》ED.wav -> 辻亚弥乃 - 風になる（幻化成风） - 剧场版《猫的报恩》ED.mp3
+OK: 过亚弥乃 - 幻化成风（风になる） - 猫的报恩(猫の恩返し)ED.ape -> 过亚弥乃 - 幻化成风（风になる） - 猫的报恩(猫の恩返し)ED.mp3
+OK: 这美丽又丑陋的世界 - metamorphose - 高橋洋子.wav -> 这美丽又丑陋的世界 - metamorphose - 高橋洋子.mp3
+OK: 迦南 - 高垣彩陽 - いのちなんだよ.flac -> 迦南 - 高垣彩陽 - いのちなんだよ.mp3
+OK: 追想的绝望---蝉鸣之时 绊 第一卷 崇---主题曲.wma -> 追想的绝望---蝉鸣之时 绊 第一卷 崇---主题曲.mp3
+OK: 通し道歌 (ボーカルバージョン).flac -> 通し道歌 (ボーカルバージョン).mp3
+OK: 通往明天的羁绊--戦場女武神--OP.wma -> 通往明天的羁绊--戦場女武神--OP.mp3
+OK: 運命の夜--Fate stay night BGM.wma -> 運命の夜--Fate stay night BGM.mp3
+OK: 達見恵 - 銀色 - 《银色-完全版》OP主题曲.wav -> 達見恵 - 銀色 - 《银色-完全版》OP主题曲.mp3
+OK: 遠い道の先で.ape -> 遠い道の先で.mp3
+OK: 遠く離れていても - 硬是无视与你的未来OST.wav -> 遠く離れていても - 硬是无视与你的未来OST.mp3
+OK: 野水いおり - Black † White - 问题儿童都来自异世界？OP主题歌.wav -> 野水いおり - Black † White - 问题儿童都来自异世界？OP主题歌.mp3
+OK: 金子憲次 - Awakening - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - Awakening - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - Don't Wait For Me - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - Don't Wait For Me - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - Main Event - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - Main Event - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - The 1st Generation Theme - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - The 1st Generation Theme - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - The 3rd Generation Theme - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - The 3rd Generation Theme - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - The Earth Memories - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - The Earth Memories - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - アガレスト戦記　アレンジバージョン - PC游戏《阿加雷斯特战记》OST.wav -> 金子憲次 - アガレスト戦記　アレンジバージョン - PC游戏《阿加雷斯特战记》OST.mp3
+OK: 金子憲次 - 悲しい决意 - ps3游戏《フェアリーフェンサーエフ（妖精剑士f）》OST.wav -> 金子憲次 - 悲しい决意 - ps3游戏《フェアリーフェンサーエフ（妖精剑士f）》OST.mp3
+OK: 金色琴弦 - カノン - Brand New Breeze.flac -> 金色琴弦 - カノン - Brand New Breeze.mp3
+OK: 金艺言 - 《小夜曲》 - 韩剧《冬季恋歌》OST.wav -> 金艺言 - 《小夜曲》 - 韩剧《冬季恋歌》OST.mp3
+OK: 釘宮理恵·堀江由衣·喜多村英梨 - プレパレード - TVアニメ「とらドラ!（龙与虎）」OP1.ape -> 釘宮理恵·堀江由衣·喜多村英梨 - プレパレード - TVアニメ「とらドラ!（龙与虎）」OP1.mp3
+OK: 釘宮理恵＆喜多村英梨(逢坂大河＆川嶋亜美) - ホーリーナイト(圣夜) - TV动画《龙与虎》第19话ED.wav -> 釘宮理恵＆喜多村英梨(逢坂大河＆川嶋亜美) - ホーリーナイト(圣夜) - TV动画《龙与虎》第19话ED.mp3
+OK: 鈴木このみ - カオスシンドローム - TV动画《Chaos;Child（混沌之子）》ED.wav -> 鈴木このみ - カオスシンドローム - TV动画《Chaos;Child（混沌之子）》ED.mp3
+OK: 鈴湯 -  目覚めた朝にはきみが隣に - TV动画《little busters EX》ED.flac -> 鈴湯 -  目覚めた朝にはきみが隣に - TV动画《little busters EX》ED.mp3
+OK: 鈴田美夜子 - 星守歌 - Kud Wafter.wav -> 鈴田美夜子 - 星守歌 - Kud Wafter.mp3
+OK: 鍾愛 -ショウアイ- 桃華月憚OST.wav -> 鍾愛 -ショウアイ- 桃華月憚OST.mp3
+OK: 钢之炼金术师 - I Will - Sowelu.wav -> 钢之炼金术师 - I Will - Sowelu.mp3
+OK: 钢之炼金术师 - БРАТЬЯ(ブラーチャ) - 俄罗斯信念合唱团.wav -> 钢之炼金术师 - БРАТЬЯ(ブラーチャ) - 俄罗斯信念合唱团.mp3
+OK: 钢之炼金术师 - メリッサ(蜂花) - ポルノグラフィティ.wav -> 钢之炼金术师 - メリッサ(蜂花) - ポルノグラフィティ.mp3
+OK: 長岡成貢 - Dear My Future - TV动画《美妙旋律 Dear My Future》OP1.wav -> 長岡成貢 - Dear My Future - TV动画《美妙旋律 Dear My Future》OP1.mp3
+OK: 閉ざされた扉 - 硬是无视与你的未来OST.wav -> 閉ざされた扉 - 硬是无视与你的未来OST.mp3
+OK: 阿澄佳奈、井口裕香、德永 爱、新谷良子 - 君のMemory - 魔法少女-未知的天空艾塔提亚(Cross World).wav -> 阿澄佳奈、井口裕香、德永 爱、新谷良子 - 君のMemory - 魔法少女-未知的天空艾塔提亚(Cross World).mp3
+OK: 阿良々木月火(CV：井口裕香) - 白金ディスコ - 伪物语.wav -> 阿良々木月火(CV：井口裕香) - 白金ディスコ - 伪物语.mp3
+OK: 雨宮天 - チョ・イ・ス - TV动画《斩·赤红之瞳！》第2季ED专辑副歌.wav -> 雨宮天 - チョ・イ・ス - TV动画《斩·赤红之瞳！》第2季ED专辑副歌.mp3
+OK: 雨宮天 - 月灯り - TV动画《斩·赤红之瞳！》第2季ED.wav -> 雨宮天 - 月灯り - TV动画《斩·赤红之瞳！》第2季ED.mp3
+OK: 雨音 - 硬是无视与你的未来OST.wav -> 雨音 - 硬是无视与你的未来OST.mp3
+OK: 雪月澄乃 - 空の揺りかご - PC游戏《SNOW》插曲.wav -> 雪月澄乃 - 空の揺りかご - PC游戏《SNOW》插曲.mp3
+OK: 雪野五月 - you - PC游戏《寒蝉鸣泣之时解》ED.wav -> 雪野五月 - you - PC游戏《寒蝉鸣泣之时解》ED.mp3
+OK: 零之使魔 三美姬的輪舞 - 能登麻美子 - 使い魔たちの調べ.flac -> 零之使魔 三美姬的輪舞 - 能登麻美子 - 使い魔たちの調べ.mp3
+OK: 零之使魔 三美姬的輪舞 - 釘宮理恵 - ゴメンネ.flac -> 零之使魔 三美姬的輪舞 - 釘宮理恵 - ゴメンネ.mp3
+OK: 零之使魔 双月骑士 - I SAY YES - ICHIKO.wav -> 零之使魔 双月骑士 - I SAY YES - ICHIKO.mp3
+OK: 霜月はるか - Anthem for Kingdom - PCゲーム「神圣にして侵すべからず」OP主题曲.wav -> 霜月はるか - Anthem for Kingdom - PCゲーム「神圣にして侵すべからず」OP主题曲.mp3
+OK: 霜月はるか - Kaleidoscope - PCゲーム『星空のメモリア Eternal Heart』OP曲.flac -> 霜月はるか - Kaleidoscope - PCゲーム『星空のメモリア Eternal Heart』OP曲.mp3
+OK: 霜月はるか - REW - PCゲーム《fortissimoEXAAkkordBsusvier》主题曲.wav -> 霜月はるか - REW - PCゲーム《fortissimoEXAAkkordBsusvier》主题曲.mp3
+OK: 霜月はるか - Weiβ ～幻想への誘い～.wav -> 霜月はるか - Weiβ ～幻想への誘い～.mp3
+OK: 霜月はるか - ふたりの未来 - PC游戏《Relict ～トキの忘れもの～》ED.wav -> 霜月はるか - ふたりの未来 - PC游戏《Relict ～トキの忘れもの～》ED.mp3
+OK: 霜月はるか - ゆきうた - PC游戏《眠れる花は春をまつ。》.wav -> 霜月はるか - ゆきうた - PC游戏《眠れる花は春をまつ。》.mp3
+OK: 霜月はるか - カザハネ（风羽） - TV动画《H2O 赤砂印记》ED.wav -> 霜月はるか - カザハネ（风羽） - TV动画《H2O 赤砂印记》ED.mp3
+OK: 霜月はるか - メルクリア - PC游戏「メルクリア 〜水の都に恋の花束を〜」2nd OP主题曲.wav -> 霜月はるか - メルクリア - PC游戏「メルクリア 〜水の都に恋の花束を〜」2nd OP主题曲.mp3
+OK: 霜月はるか - ユラグソラ.wav -> 霜月はるか - ユラグソラ.mp3
+OK: 霜月はるか - 光の地図 - PC游戏《何処へ行くの、あの日》ED.wav -> 霜月はるか - 光の地図 - PC游戏《何処へ行くの、あの日》ED.mp3
+OK: 霜月はるか - 夏の羽音 - PC游戏《あした出逢った少女》OP主题曲.wav -> 霜月はるか - 夏の羽音 - PC游戏《あした出逢った少女》OP主题曲.mp3
+OK: 霜月はるか - 想いのカナタ - PC游戏「夏空カナタ（夏空彼方）」OP主题曲.flac -> 霜月はるか - 想いのカナタ - PC游戏「夏空カナタ（夏空彼方）」OP主题曲.mp3
+OK: 霜月はるか - 星の夢 ～Gathering the stars of love～.flac -> 霜月はるか - 星の夢 ～Gathering the stars of love～.mp3
+OK: 霜月はるか - 星空の坂道.flac -> 霜月はるか - 星空の坂道.mp3
+OK: 霜月はるか - 翼を持たない少女 - PCゲーム「翠の海」OP主题曲.wav -> 霜月はるか - 翼を持たない少女 - PCゲーム「翠の海」OP主题曲.mp3
+OK: 霜月はるか - 追憶の破片 - PC游戏《何処へ行くの、あの日》OP主题曲.wav -> 霜月はるか - 追憶の破片 - PC游戏《何処へ行くの、あの日》OP主题曲.mp3
+OK: 霜月はろか - 绽放于荒野的祈祷(荒野にさく祈り) - PC游戏「Relict2~月之章~」OP.flac -> 霜月はろか - 绽放于荒野的祈祷(荒野にさく祈り) - PC游戏「Relict2~月之章~」OP.mp3
+OK: 青山テルマ - My dear friend.wav -> 青山テルマ - My dear friend.mp3
+OK: 青空に駆け足 - 《遥仰凰华》OST.flac -> 青空に駆け足 - 《遥仰凰华》OST.mp3
+OK: 青葉りんご - 楽園の扉 - euphoria主题曲.flac -> 青葉りんご - 楽園の扉 - euphoria主题曲.mp3
+OK: 風のアルペジオ - PC游戏《青空下的约定》OST.wav -> 風のアルペジオ - PC游戏《青空下的约定》OST.mp3
+OK: 風のアルペジオ Piano Ver. - PC游戏《青空下的约定》OST.wav -> 風のアルペジオ Piano Ver. - PC游戏《青空下的约定》OST.mp3
+OK: 风之谷 - 風の谷のナウシカ - 安田成美.wav -> 风之谷 - 風の谷のナウシカ - 安田成美.mp3
+OK: 飛蘭 - 創世のタナトス - PC游戏《灰色的迷宫》OP主题曲（灰色的果实动画第13话ED）.wav -> 飛蘭 - 創世のタナトス - PC游戏《灰色的迷宫》OP主题曲（灰色的果实动画第13话ED）.mp3
+OK: 飛蘭 - 月華の螺旋 1コーラスバージョン 桃華月憚OST.wav -> 飛蘭 - 月華の螺旋 1コーラスバージョン 桃華月憚OST.mp3
+OK: 飛蘭 - 終末のフラクタル - PCゲーム「グリザイアの果実」主题歌.wav -> 飛蘭 - 終末のフラクタル - PCゲーム「グリザイアの果実」主题歌.mp3
+OK: 饭岛真理 - 天使の絵の具 - 剧场版《超时空要塞MACROSS可曾记得爱》.flac -> 饭岛真理 - 天使の絵の具 - 剧场版《超时空要塞MACROSS可曾记得爱》.mp3
+OK: 饭田舞 - キミの隣りで... - PSP游戏《绝体绝命都市3：破坏的城市与她的歌》主题曲.wav -> 饭田舞 - キミの隣りで... - PSP游戏《绝体绝命都市3：破坏的城市与她的歌》主题曲.mp3
+OK: 高坂穂乃果(CV.新田恵海) - もうひとりじゃないよ - TV动画《LoveLive!》高坂穂乃果角色歌.flac -> 高坂穂乃果(CV.新田恵海) - もうひとりじゃないよ - TV动画《LoveLive!》高坂穂乃果角色歌.mp3
+OK: 高桥洋子 - 魂之重奏 - 《新世纪福音战士剧场版 使徒新生～》片尾曲.flac -> 高桥洋子 - 魂之重奏 - 《新世纪福音战士剧场版 使徒新生～》片尾曲.mp3
+OK: 高槻つばさ - つまんない恋 - 女仆咖啡帕露菲.wav -> 高槻つばさ - つまんない恋 - 女仆咖啡帕露菲.mp3
+OK: 高橋瞳 - 青空のナミダ - TV动画《blood+》OP1.flac -> 高橋瞳 - 青空のナミダ - TV动画《blood+》OP1.mp3
+OK: 高橋秀紀 - She was Weeping sadly - 加奈・・・おかえり!!（加奈…欢迎回来!!）.wav -> 高橋秀紀 - She was Weeping sadly - 加奈・・・おかえり!!（加奈…欢迎回来!!）.mp3
+OK: 高橋秀紀 - あなたへ(オルゴールバージョン) - 加奈・・・おかえり!!（加奈…欢迎回来!!）.wav -> 高橋秀紀 - あなたへ(オルゴールバージョン) - 加奈・・・おかえり!!（加奈…欢迎回来!!）.mp3
+OK: 鬼哭街- 伊藤香奈子(いとうかなこ) - 涙尽鈴音響.flac -> 鬼哭街- 伊藤香奈子(いとうかなこ) - 涙尽鈴音響.mp3
+OK: 魔力女管家 - まほろ - かえりみち.flac -> 魔力女管家 - まほろ - かえりみち.mp3
+OK: 魔力女管家 - まほろ - そ．れ．い．ゆ.flac -> 魔力女管家 - まほろ - そ．れ．い．ゆ.mp3
+OK: 魔女宅急便 - 荒井由実 - ルージュの伝言.flac -> 魔女宅急便 - 荒井由実 - ルージュの伝言.mp3
+OK: 魔法先生 2 - 麻帆良學園中等部3 - A - A-Ly-Ya!.flac -> 魔法先生 2 - 麻帆良學園中等部3 - A - A-Ly-Ya!.mp3
+OK: 魔法少女奈葉 - 水樹奈々 - Inside of mind.tta -> 魔法少女奈葉 - 水樹奈々 - Inside of mind.mp3
+OK: 魔法少女奈葉 - 水樹奈々 - Level Hi！.tta -> 魔法少女奈葉 - 水樹奈々 - Level Hi！.mp3
+OK: 魔法少女奈葉 - 水樹奈々 - Open Your Heart.tta -> 魔法少女奈葉 - 水樹奈々 - Open Your Heart.mp3
+OK: 魔法少女奈葉 - 水樹奈々 - Pray.ape -> 魔法少女奈葉 - 水樹奈々 - Pray.mp3
+OK: 魔法少女奈葉 - 水樹奈々 - RUSH & DASH!.tta -> 魔法少女奈葉 - 水樹奈々 - RUSH & DASH!.mp3
+OK: 魔法少女奈葉 A'S - 水樹奈々 - Eternal Blaze.flac -> 魔法少女奈葉 A'S - 水樹奈々 - Eternal Blaze.mp3
+OK: 魔法少女奈葉 A'S - 田村ゆかり - Spiritual Garden.flac -> 魔法少女奈葉 A'S - 田村ゆかり - Spiritual Garden.mp3
+OK: 魔法少女奈葉 Strikers - 水樹奈々 - Secret Ambition.flac -> 魔法少女奈葉 Strikers - 水樹奈々 - Secret Ambition.mp3
+OK: 魔法少女奈葉 Strikers - 田村ゆかり - 星空のSpica.flac -> 魔法少女奈葉 Strikers - 田村ゆかり - 星空のSpica.mp3
+OK: 魔法少女奈葉 The Movie 1St - 水樹奈々 - Phantom Minds.flac -> 魔法少女奈葉 The Movie 1St - 水樹奈々 - Phantom Minds.mp3
+OK: 魔法騎士 - 田村直美 - ゆずれない願い.flac -> 魔法騎士 - 田村直美 - ゆずれない願い.mp3
+OK: 魔神英雄傳 - 三重野 瞳 - ひとつのハートで.flac -> 魔神英雄傳 - 三重野 瞳 - ひとつのハートで.mp3
+OK: 鴇沢直 - 高千穂 - TV动画《極黒のブリュンヒルデ（极黑的布伦希尔德）》OST.wav -> 鴇沢直 - 高千穂 - TV动画《極黒のブリュンヒルデ（极黑的布伦希尔德）》OST.mp3
+OK: 鷺巣詩郎 - B12_EWS_Amano&Kosei - 新世纪福音战士新吹奏乐版.wav -> 鷺巣詩郎 - B12_EWS_Amano&Kosei - 新世纪福音战士新吹奏乐版.mp3
+OK: 鷺巣詩郎 - Crisis Point - TV动画《漆黑的子弹》OST.wav -> 鷺巣詩郎 - Crisis Point - TV动画《漆黑的子弹》OST.mp3
+OK: 鹡鸰女神 - 早見沙織、井上麻里奈、花澤香菜、遠藤綾 - セキレイ.flac -> 鹡鸰女神 - 早見沙織、井上麻里奈、花澤香菜、遠藤綾 - セキレイ.mp3
+OK: 鹡鸰女神 - 早見沙織、井上麻里奈、花澤香菜、遠藤綾 - 白翼ノ誓約 ～Pure Engagement～.flac -> 鹡鸰女神 - 早見沙織、井上麻里奈、花澤香菜、遠藤綾 - 白翼ノ誓約 ～Pure Engagement～.mp3
+OK: 鹭巢诗郎 - Lament of hte Black Bullet - TV动画《漆黑的子弹》OST片段.wav -> 鹭巢诗郎 - Lament of hte Black Bullet - TV动画《漆黑的子弹》OST片段.mp3
+OK: 鹭巢诗郎 - Owlhunt - TV动画《漆黑的子弹》OST片段.wav -> 鹭巢诗郎 - Owlhunt - TV动画《漆黑的子弹》OST片段.mp3
+OK: 麗跳 -レイチョウ- 桃華月憚OST.wav -> 麗跳 -レイチョウ- 桃華月憚OST.mp3
+OK: 麻枝 准 - 旅 - PC游戏「Rewrite」OST.wav -> 麻枝 准 - 旅 - PC游戏「Rewrite」OST.mp3
+OK: 麻辣教師 - Kirari - Last Piece.flac -> 麻辣教師 - Kirari - Last Piece.mp3
+OK: 麻辣教師 - 奧田美和子 - しずく.flac -> 麻辣教師 - 奧田美和子 - しずく.mp3
+OK: 黄昏少女×失忆 - レクイエム - 柊 奈绪.wav -> 黄昏少女×失忆 - レクイエム - 柊 奈绪.mp3
+OK: 黑之契约者 - ツキアカリのミチシルベ - ステレオポニー.wav -> 黑之契约者 - ツキアカリのミチシルベ - ステレオポニー.mp3
+OK: 黑猫 - ダイアの花(钻石花) - より子.wav -> 黑猫 - ダイアの花(钻石花) - より子.mp3
+OK: 黑石瞳 - Continued Story - CODE GEASS 反叛的鲁路修 R2--IN.flac -> 黑石瞳 - Continued Story - CODE GEASS 反叛的鲁路修 R2--IN.mp3
+OK: 黑石瞳 - innocent days - 反叛的鲁路修 25话插曲.wav -> 黑石瞳 - innocent days - 反叛的鲁路修 25话插曲.mp3
+OK: 黑石瞳 - Over The Sky - 最终流放.wav -> 黑石瞳 - Over The Sky - 最终流放.mp3
+OK: 黑石瞳 - Paradiso - TV动画《ガン×ソード（枪X剑）》插入曲.wav -> 黑石瞳 - Paradiso - TV动画《ガン×ソード（枪X剑）》插入曲.mp3
+OK: 黑石瞳 - Prayer for Love - TV动画《最终流放LAST EXILE》OST.wav -> 黑石瞳 - Prayer for Love - TV动画《最终流放LAST EXILE》OST.mp3
+OK: 黑石瞳 - ありのままで - 绘本音乐·ブルー·バード·ブルー（蓝·鸟·蓝）.wav -> 黑石瞳 - ありのままで - 绘本音乐·ブルー·バード·ブルー（蓝·鸟·蓝）.mp3
+OK: 黑石瞳 - 僕は、鳥になる。 - 叛逆的鲁鲁修R2--IN.flac -> 黑石瞳 - 僕は、鳥になる。 - 叛逆的鲁鲁修R2--IN.mp3
+OK: 黑石瞳 - 埴生の宿 -  TVアニメ『八犬伝-東方八犬異聞-』.flac -> 黑石瞳 - 埴生の宿 -  TVアニメ『八犬伝-東方八犬異聞-』.mp3
+OK: 黑街二人组 - 贝田由里子 - Canta Per Me.flac -> 黑街二人组 - 贝田由里子 - Canta Per Me.mp3
+OK: 黒崎真音 - 君と太陽が死んだ日 - TV动画《学园默示录》ED1.wav -> 黒崎真音 - 君と太陽が死んだ日 - TV动画《学园默示录》ED1.mp3
+OK: 黒石ひとみ - If I Were A Bird.flac -> 黒石ひとみ - If I Were A Bird.mp3
+OK: 龙与虎 - オレンジ - 釘宮理恵&堀江由衣&喜多村英梨.wav -> 龙与虎 - オレンジ - 釘宮理恵&堀江由衣&喜多村英梨.mp3
+summary: skipped_mp3=2542, ok=1139, error=0

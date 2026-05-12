@@ -1,5 +1,6 @@
-data/
+# Do not commit large binaries — everything else is tracked.
 model/
+data/music_db/
+data/music_db_15s/
 .env
 .gitconfig
-docs/

@@ -1,0 +1,10 @@
+start_utc=2026-04-12T13:41:01.094081+00:00
+music_dir=E:\Ragweb\data\music_db
+ffmpeg=(not required for dry-run)
+dry_run=True to_convert=5 skipped_mp3=1177
+DRY_RUN would convert: (off vocal) - Scaret Velvet feat. Romonosov_、Ginryu.wav
+DRY_RUN would convert: (White ～セツナサのカケラ～)(YU-KI) Dream like stories.flac
+DRY_RUN would convert: - 音轨13 - PC游戏『Muv-Luv(マブラヴ)』.wav
+DRY_RUN would convert: 40mP - ピーターパンシンドローム - PSP游戏《Caligula》OST.wav
+DRY_RUN would convert: 7!! - オレンジ - TV动画《四月は君の嘘（四月是你的谎言）》ED2.flac
+summary: skipped_mp3=1177, dry_run=5, ok=0, error=0

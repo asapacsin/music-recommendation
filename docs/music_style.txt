@@ -1,0 +1,17 @@
+1. Tempo (quantifiable — program BPM / silver labels)
+slow (<80 BPM)
+mid-tempo (80–120 BPM)
+fast (>120 BPM)
+
+2. Instrumentation (multi-hot 0/1)
+piano
+orchestral
+vocal
+
+3. Mood / character (multi-hot 0/1)
+sad/melancholic
+relaxing
+dark/tense
+exciting
+elegant
+epic

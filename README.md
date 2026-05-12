@@ -65,7 +65,7 @@ The CLAP checkpoint path is configured in `config/settings.py`:
 
 Make sure the backbone `.pt` exists under `model/clap/` before CLAP indexing/evaluation commands.
 
-**Fine-tuned checkpoint for eval:** set **`RAGWEB_CLAP_CHECKPOINT`** to an absolute path of a saved `best_model.pt` (e.g. from `data/log/finetune_runs/.../`). Multi-seed training and thesis-style reporting: **`docs/cloud_finetune_protocol.md`**.
+**Fine-tuned checkpoint for eval:** set **`RAGWEB_CLAP_CHECKPOINT`** to an absolute path of a saved `best_model.pt` (e.g. from `data/log/finetune_runs/.../`). **Step-by-step fine-tune + eval:** [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md). Checklist / thesis notes: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
 
 ## Directory conventions
 

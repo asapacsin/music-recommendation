@@ -1,0 +1,159 @@
+data/music_db/05 - Arabia - The Ancient Era.mp3
+data/music_db/08 - Arabia - The Atomic Era.mp3
+data/music_db/25 - England - The Ancient Era (online-audio-converter.com).mp3
+data/music_db/29 - France - The Ancient Era.mp3
+data/music_db/29.mp3
+data/music_db/3.mp3
+data/music_db/35.mp3
+data/music_db/57.mp3
+data/music_db/62.mp3
+data/music_db/63.mp3
+data/music_db/72 - Spain - The Atomic Era.mp3
+data/music_db/80.mp3
+data/music_db/adayinspring.mp3
+data/music_db/ak.mp3
+data/music_db/akatsukiofheathaze.mp3
+data/music_db/akatsukiofhill.mp3
+data/music_db/alunarsanctuary.mp3
+data/music_db/andbeyondtheshisensho.mp3
+data/music_db/aphrodite.mp3
+data/music_db/apsaras.mp3
+data/music_db/asianblueseaswimismoon.mp3
+data/music_db/beautifulblade.mp3
+data/music_db/Beethoven Fur Elise.mp3
+data/music_db/believeintomorrow.mp3
+data/music_db/beyondthelove.mp3
+data/music_db/bgm01.mp3
+data/music_db/blowininthewind.mp3
+data/music_db/bunkiyoshitheme.mp3
+data/music_db/c.mp3
+data/music_db/chutsukokunomelody.mp3
+data/music_db/clueofharuhisuzumiya.mp3
+data/music_db/cominghome.mp3
+data/music_db/continuedintendedtotellspring.mp3
+data/music_db/dawn.mp3
+data/music_db/durnkinwind.mp3
+data/music_db/earlysummerrain.mp3
+data/music_db/Eire- - Europa.mp3
+data/music_db/emergencyandsanrado.mp3
+data/music_db/emergencybattle.mp3
+data/music_db/eveningofthemonthfire.mp3
+data/music_db/feast.mp3
+data/music_db/feelingsbeyondtheera.mp3
+data/music_db/festivaloflife.mp3
+data/music_db/Final Fantasy XIII - Main Theme - The Promise.mp3
+data/music_db/firstsnow.mp3
+data/music_db/flying.mp3
+data/music_db/flyingbird.mp3
+data/music_db/furinkazantsukisaeyunight.mp3
+data/music_db/furuiningyou.mp3
+data/music_db/g3nk.mp3
+data/music_db/GVO-BGM日本.mp3
+data/music_db/handfuloftears.mp3
+data/music_db/happyarabia.mp3
+data/music_db/harukeshiki.mp3
+data/music_db/harutsugedori.mp3
+data/music_db/haruyokoi.mp3
+data/music_db/heartland.mp3
+data/music_db/heavenssong.mp3
+data/music_db/heretostay.mp3
+data/music_db/hinatavsneji.mp3
+data/music_db/hitohirafutahira.mp3
+data/music_db/hitorishizuka.mp3
+data/music_db/Ib_Memory.mp3
+data/music_db/infectiouscrying.mp3
+data/music_db/Inuyashas Lullaby (Full).mp3
+data/music_db/InuYashas Lullaby on Harp.mp3
+data/music_db/it.mp3
+data/music_db/itarumiyuki.mp3
+data/music_db/jademoon.mp3
+data/music_db/kidsreturn.mp3
+data/music_db/Kiss The Rain.mp3
+data/music_db/koga.mp3
+data/music_db/lifebasistimesmiarineworldscarousel.mp3
+data/music_db/Lightning Returns- Final Fantasy XIII OST - Lightning's Theme - Radiance - [HD].mp3
+data/music_db/loveisamanysplendoredthing.mp3
+data/music_db/Maiden's Prayer.mp3
+data/music_db/masamichipiercesthesky.mp3
+data/music_db/matsuri.mp3
+data/music_db/matsurifight.mp3
+data/music_db/merrychristmasmrlawrence.mp3
+data/music_db/mikokikyou.mp3
+data/music_db/missmyhome.mp3
+data/music_db/monthleaveofillusion.mp3
+data/music_db/ms.mp3
+data/music_db/nevermeanttobelong.mp3
+data/music_db/ns.mp3
+data/music_db/oftestreward.mp3
+data/music_db/oldmemory.mp3
+data/music_db/onesummersday.mp3
+data/music_db/premonition.mp3
+data/music_db/rain.mp3
+data/music_db/rakkaryusui.mp3
+data/music_db/refrain.mp3
+data/music_db/resetthankyou.mp3
+data/music_db/Rezso Seress - Gloomy Sunday.mp3
+data/music_db/rosypink.mp3
+data/music_db/rs.mp3
+data/music_db/sadnessandsorrow.mp3
+data/music_db/sakura.mp3
+data/music_db/sakuraofwinter.mp3
+data/music_db/sallyflowers.mp3
+data/music_db/seasings.mp3
+data/music_db/sengokubattletwo.mp3
+data/music_db/sengokucalmfour.mp3
+data/music_db/sengokucalmone.mp3
+data/music_db/sengokucalmthree.mp3
+data/music_db/sengokucalmtwo.mp3
+data/music_db/signofthesnowcrane.mp3
+data/music_db/silvermoon.mp3
+data/music_db/sleep.mp3
+data/music_db/snk.mp3
+data/music_db/snowflakes.mp3
+data/music_db/snowgoddess.mp3
+data/music_db/sora.mp3
+data/music_db/soundofthesurf.mp3
+data/music_db/soundscapetoardor.mp3
+data/music_db/spirit.mp3
+data/music_db/springfullbloom.mp3
+data/music_db/ss.mp3
+data/music_db/starry-night.mp3
+data/music_db/streetwherewindsettles.mp3
+data/music_db/sumbeauty.mp3
+data/music_db/Synthesia Sonata No.11 in A major Mov.3 (Mozart - Alla Turca).mp3
+data/music_db/tearsofgrassland.mp3
+data/music_db/The Hunt - Europa Universalis IV- Songs of the New World.mp3
+data/music_db/theme.mp3
+data/music_db/title.mp3
+data/music_db/tk.mp3
+data/music_db/tmpnb.mp3
+data/music_db/toambersea.mp3
+data/music_db/todistantsky.mp3
+data/music_db/totheair.mp3
+data/music_db/tremblingheart.mp3
+data/music_db/tsy.mp3
+data/music_db/tuberose.mp3
+data/music_db/unification.mp3
+data/music_db/upinthesky.mp3
+data/music_db/utakata.mp3
+data/music_db/white bird.mp3
+data/music_db/woodenship.mp3
+data/music_db/ymn.mp3
+data/music_db/youngboy.mp3
+data/music_db/younggirl.mp3
+data/music_db/【殺戮の天使】 彼岸 BGM.mp3
+data/music_db/あきび.mp3
+data/music_db/いとしゅ.mp3
+data/music_db/そしゅじゃた.mp3
+data/music_db/そとなか.mp3
+data/music_db/たちしゅ.mp3
+data/music_db/ち.mp3
+data/music_db/とうごく.mp3
+data/music_db/にとしゅ.mp3
+data/music_db/まつしゅ.mp3
+data/music_db/ゆめなかの.mp3
+data/music_db/りゅしゅ.mp3
+data/music_db/春よ、来い.mp3
+data/music_db/時代を超えの想い.mp3
+data/music_db/禮儀師之奏鳴曲 --- Memory.mp3
+data/music_db/風の住む町.mp3

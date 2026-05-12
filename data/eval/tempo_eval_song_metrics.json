@@ -1,0 +1,53 @@
+{
+  "labels": [
+    "slow",
+    "mid-tempo",
+    "fast"
+  ],
+  "accuracy": 0.385,
+  "macro_f1": 0.3302178455047365,
+  "confusion_matrix": [
+    [
+      4,
+      1,
+      0
+    ],
+    [
+      19,
+      40,
+      24
+    ],
+    [
+      29,
+      50,
+      33
+    ]
+  ],
+  "per_class": {
+    "slow": {
+      "precision": 0.07692307692307693,
+      "recall": 0.8,
+      "f1": 0.14035087719298248,
+      "support": 5.0
+    },
+    "mid-tempo": {
+      "precision": 0.43956043956043955,
+      "recall": 0.4819277108433735,
+      "f1": 0.45977011494252873,
+      "support": 83.0
+    },
+    "fast": {
+      "precision": 0.5789473684210527,
+      "recall": 0.29464285714285715,
+      "f1": 0.3905325443786982,
+      "support": 112.0
+    }
+  },
+  "eval_unit": "song",
+  "aggregation": "majority_over_K_clips_tie_mean_bpm_or_mean_scores",
+  "manifest": "data\\eval\\gold_tempo_manifest.jsonl",
+  "num_songs_manifest": 200,
+  "num_songs_scored": 200,
+  "clap_ckpt": "E:\\Ragweb\\model\\clap\\music_audioset_epoch_15_esc_90.14.pt",
+  "pred_output": "E:\\Ragweb\\data\\eval\\tempo_eval_song_predictions.jsonl"
+}

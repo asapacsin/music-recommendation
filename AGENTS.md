@@ -30,7 +30,7 @@ Local music metadata pipeline + CLAP: 15s clips, train/val JSONL, FAISS retrieva
 - **Driver:** `python -m app.train_clap_multiseed` — loops seeds, writes `data/log/finetune_runs/<run_id>/seed_<n>/` (`best_model.pt`, `params.json`, `metrics.jsonl`) and run-level `summary.json` (**mean ± std** of best train-time similarity).
 - **Seeding:** `model_creation` calls `set_seed` from `params["seed"]` (default `42`) and logs per-epoch metrics to `metrics.jsonl`. Training always initializes from **`CLAP_PRETRAINED_BACKBONE_FILE`** (unaffected by `RAGWEB_CLAP_CHECKPOINT`).
 - **Eval on fine-tuned weights:** set env **`RAGWEB_CLAP_CHECKPOINT`** to a seed’s `best_model.pt`, then run retrieval / tempo eval as usual (`CLAP_MODEL_FILE` in settings becomes that path).
-- **Report:** prioritize retrieval rows for **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** per seed, then aggregate (mean ± std or table per seed). Full protocol: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
+- **Report:** prioritize retrieval rows for **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** per seed, then aggregate (mean ± std or table per seed). Step-by-step: [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md). Checklist: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
 
 ## Two different “zero-shot” flows (do not confuse)
 
@@ -66,6 +66,6 @@ Top‑K human workflow (`music_eval_topk_prepare` / `music_eval_topk_score`) rem
 ## After a Cursor reset
 
 1. Read this file + `README.md`.
-2. For tag choices and caveats, read `docs/class_selected.txt`.
+2. For tag choices and caveats, read `docs/class_selected.txt`. For fine-tune commands, read `docs/FINE_TUNING_TUTORIAL.md`.
 3. For gold merge semantics, read `docs/README_eval_merge.md`.
 4. For structured agent work, read `docs/multi_agent_workflow.md` and open any in-progress `docs/agent_runs/<run_id>/` folder.
