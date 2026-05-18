@@ -1,22 +1,33 @@
-fastapi==0.110.0
-uvicorn==0.27.1
-sentence-transformers==2.6.1
-faiss-cpu==1.8.0
-numpy==1.26.4
-pydantic==2.6.1
-python-dotenv==1.0.1
-moviepy==1.0.3
-torch==2.9
+# Core (CLAP train/eval, FAISS, audio)
+numpy>=1.26.4,<2.1
+faiss-cpu>=1.9,<1.14
+torch==2.9.0
 torchvision==0.24.0
-ffmpeg==2.0.12
 laion-clap
-mutagen==1.47
-modelscope==1.35
-accelerate==1.13.0
+tqdm>=4.66.4
+librosa>=0.10.2.post1
+
+# init_model / text_processing (load_map, descriptions)
+mutagen>=1.47
+transformers>=4.36.0
+ftfy
+regex
+# OpenAI CLAP text path uses `import clip`
+git+https://github.com/openai/CLIP.git
+
+# Config + metadata LLM extraction
+python-dotenv>=1.0.1
+openai>=2.31.0
+
+# app/utils/translator.py
 googletrans==4.0.2
-tqdm==4.66.4
-librosa==0.10.2.post1
-openai==2.31.0
-distro==1.9.0
-jiter==0.14.0
-sniffio==1.3.1
+
+# Optional: legacy recommend path (app/music_processing.py)
+# torchopenl3
+
+# Optional: video conversion only (app/converters/movie_convert.py)
+# moviepy==1.0.3
+
+# System binary (NOT a pip package): install ffmpeg on PATH for
+# music_split_to_15s.py and music_convert_to_mp3.py
+# e.g. conda install -c conda-forge ffmpeg
