@@ -42,6 +42,7 @@ def _default_params() -> dict[str, Any]:
             "metric": "similarity",
             "mode": "max",
         },
+        "train_jsonl": str(settings.CLAP_TRAIN_JSONL),
     }
 
 
@@ -73,6 +74,17 @@ def main() -> int:
         default=None,
         help="JSON object merged on top of defaults (same keys as app/main.py params).",
     )
+    parser.add_argument(
+        "--train-jsonl",
+        type=Path,
+        default=None,
+        help=f"15s train manifest (default: {settings.CLAP_TRAIN_JSONL}).",
+    )
+    parser.add_argument(
+        "--use-music-db-fallback",
+        action="store_true",
+        help="Train on data/music_db/* instead of clap_train_15s.jsonl.",
+    )
     args = parser.parse_args()
 
     run_id = args.run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -80,6 +92,10 @@ def main() -> int:
     run_root.mkdir(parents=True, exist_ok=True)
 
     base = _default_params()
+    if args.train_jsonl is not None:
+        base["train_jsonl"] = str(args.train_jsonl)
+    if args.use_music_db_fallback:
+        base["use_music_db_fallback"] = True
     if args.params_json is not None:
         if not args.params_json.is_file():
             raise FileNotFoundError(f"--params-json not found: {args.params_json}")

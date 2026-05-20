@@ -4,7 +4,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
 import json
-from utils import translator as trans
+from app.utils import translator as trans
 from config import settings
 
 def extract_text_embedding(text, model_name='ViT-H/14'):

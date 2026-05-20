@@ -22,7 +22,7 @@ Local music metadata pipeline + CLAP: 15s clips, train/val JSONL, FAISS retrieva
 **Target labels (project decision):** fine-tune and primary reporting on **three** multihot classes only — **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`**. Gold retrieval-vs-random showed these as the most stable vs metadata text; other template columns may stay labeled for reference but are **out of scope for default fine-tune** unless explicitly reopened.
 
 - **Code:** `app/init_model.py` — freeze backbone; optionally train `audio_projection`, `audio_transform`, `text_projection`, `text_transform` via `params['unfreeze_layers']`; contrastive loss (cross-entropy on scaled audio–text similarity); Adam; optional early stopping on mean diagonal similarity.
-- **Data:** `app/data_handling/music_split_to_15s.py`, `music_build_train_val_from_15s.py` → `data/mapping/clap_train_15s.jsonl`, `clap_val_15s.jsonl`.
+- **Data:** `app/data_handling/music_split_to_15s.py`, `music_build_train_val_from_15s.py` → `data/mapping/clap_train_15s.jsonl`, `clap_val_15s.jsonl`. **Training** loads that JSONL by default (`load_training_pairs` in `app/init_model.py`), not `music_db/` full tracks.
 - **Checkpoint path:** `config/settings.py` → `CLAP_MODEL_FILE` / `BEST_MODEL_FILE` as applicable.
 
 ### Cloud / multi-seed fine-tune

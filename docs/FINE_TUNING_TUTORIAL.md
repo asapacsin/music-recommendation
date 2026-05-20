@@ -16,7 +16,7 @@ Step-by-step guide to train with **multiple seeds**, save checkpoints, run **ret
 
    - `CLAP_PRETRAINED_BACKBONE_FILE` → default `model/clap/music_audioset_epoch_15_esc_90.14.pt`
 
-4. **Training audio** — `model_creation` uses all files under `data/music_db/` (see `mock_path_list()` in `app/init_model.py`). Put clips there or change that logic in code before a serious run.
+4. **Training audio** — `model_creation` reads **`data/mapping/clap_train_15s.jsonl`** (`audio_path` → 15s clips, `text` captions). Build with `python -m app.data_handling.music_build_train_val_from_15s` after 15s segments exist under `data/music_db_15s/`. Legacy fallback: `--use-music-db-fallback` globs `data/music_db/`.
 
 5. **Retrieval eval (after fine-tune)** — Merged gold + metadata FAISS index as in the main README (`gold_merged.jsonl`, `metadata_text` index built). Not required until you reach section 3.
 

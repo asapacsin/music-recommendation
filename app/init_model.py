@@ -9,7 +9,6 @@ import laion_clap
 import numpy as np
 import torch
 
-import text_processing as tp
 from config import settings
 
 
@@ -43,12 +42,90 @@ def get_filename_list(music_path_list):
     filenames_list = [Path(path).name for path in music_path_list]
     return filenames_list
 
-def embed_pipeline(music_paths, model,tensor_mode=False):
-    audio_embed = model.get_audio_embedding_from_filelist(x = music_paths, use_tensor=tensor_mode)
-    filenames = get_filename_list(music_paths)
-    descriptions_list = load_map(filenames)
-    text_embed = model.get_text_embedding(x = descriptions_list, use_tensor=tensor_mode)
-    return audio_embed,text_embed
+def _resolve_project_path(value: str) -> Path:
+    p = Path(value)
+    if p.is_absolute():
+        return p.resolve()
+    return (settings.BASE_DIR / p).resolve()
+
+
+def _load_clap_train_jsonl(jsonl_path: Path) -> tuple[list[str], list[str]]:
+    """Load (absolute audio paths, text) from ``clap_train_15s.jsonl`` rows."""
+    if not jsonl_path.is_file():
+        raise FileNotFoundError(
+            f"Training manifest not found: {jsonl_path}\n"
+            "Build it with: python -m app.data_handling.music_build_train_val_from_15s"
+        )
+    paths: list[str] = []
+    texts: list[str] = []
+    skipped = 0
+    with jsonl_path.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, start=1):
+            line = line.strip()
+            if not line:
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                skipped += 1
+                continue
+            audio_value = row.get("audio_path")
+            if not isinstance(audio_value, str) or not audio_value.strip():
+                skipped += 1
+                continue
+            abs_path = _resolve_project_path(audio_value)
+            if not abs_path.is_file():
+                skipped += 1
+                continue
+            text = row.get("text")
+            caption = text.strip() if isinstance(text, str) and text.strip() else "None"
+            paths.append(str(abs_path))
+            texts.append(caption)
+    if not paths:
+        raise ValueError(f"No trainable rows in {jsonl_path} (skipped={skipped})")
+    if skipped:
+        print(f"warning: skipped {skipped} JSONL rows (missing audio_path or file)", flush=True)
+    return paths, texts
+
+
+def load_training_pairs(params: dict[str, Any]) -> tuple[list[str], list[str] | None]:
+    """Default: 15s train manifest. Set ``train_jsonl`` in params or use ``music_db`` fallback."""
+    use_fallback = bool(params.get("use_music_db_fallback", False))
+    jsonl_raw = params.get("train_jsonl")
+    jsonl_path = (
+        Path(jsonl_raw).expanduser()
+        if jsonl_raw
+        else settings.CLAP_TRAIN_JSONL
+    )
+    if not use_fallback and jsonl_path.is_file():
+        return _load_clap_train_jsonl(jsonl_path.resolve())
+    if use_fallback or not jsonl_path.is_file():
+        paths = mock_path_list()
+        if not paths:
+            raise ValueError(
+                f"No training audio: manifest missing ({jsonl_path}) and "
+                f"{settings.MUSIC_DB_DIR} is empty. "
+                "Build clap_train_15s.jsonl or symlink 15s audio into data/music_db."
+            )
+        print(
+            f"warning: training from music_db glob ({len(paths)} files), not {jsonl_path}",
+            flush=True,
+        )
+        return paths, None
+    return _load_clap_train_jsonl(jsonl_path.resolve())
+
+
+def embed_pipeline(
+    music_paths: list[str],
+    model,
+    tensor_mode: bool = False,
+    texts: list[str] | None = None,
+):
+    audio_embed = model.get_audio_embedding_from_filelist(x=music_paths, use_tensor=tensor_mode)
+    if texts is None:
+        filenames = get_filename_list(music_paths)
+        texts = load_map(filenames)
+    text_embed = model.get_text_embedding(x=texts, use_tensor=tensor_mode)
+    return audio_embed, text_embed
 
 def compute_avg_similarity(audio_embed, text_embed):
     audio_embed = torch.tensor(audio_embed)
@@ -128,6 +205,8 @@ def get_top_k_by_text_query(query_path, model, k=5):
         id_path_mapping = json.load(f)
     audio_index = faiss.read_index(str(settings.AUDIO_INDEX_FILE))
 
+    from app import text_processing as tp
+
     # Get description for the query path
     filename = tp.get_music_name(query_path)
     with open(settings.MUSIC_MAP_FILE, "r", encoding="utf-8") as f:
@@ -189,7 +268,8 @@ def model_creation(params: dict[str, Any]) -> dict[str, Any]:
     set_seed(seed)
 
     model = load_original_model()
-    paths = mock_path_list()
+    paths, train_texts = load_training_pairs(params)
+    print(f"Training on {len(paths)} clips", flush=True)
     # print("Model parameters and their requires_grad status:")
     # for name, param in model.named_parameters():
     #     print(name, param.shape, param.requires_grad)
@@ -256,8 +336,11 @@ def model_creation(params: dict[str, Any]) -> dict[str, Any]:
     for epoch in range(num_epochs):
         for i in range(0, len(paths), batch_size):
             loss = 0
-            batch_paths = paths[i:i+batch_size]
-            batch_audio_embed, batch_text_embed = embed_pipeline(batch_paths, model, tensor_mode=True)
+            batch_paths = paths[i : i + batch_size]
+            batch_texts = train_texts[i : i + batch_size] if train_texts is not None else None
+            batch_audio_embed, batch_text_embed = embed_pipeline(
+                batch_paths, model, tensor_mode=True, texts=batch_texts
+            )
             # Contrastive loss 
             logits = torch.mm(batch_audio_embed.squeeze(1), batch_text_embed.squeeze(1).t()) * temperature
             labels = torch.arange(batch_audio_embed.size(0)).cuda()
@@ -267,7 +350,9 @@ def model_creation(params: dict[str, Any]) -> dict[str, Any]:
             optimizer.step()
             last_loss = float(loss.detach().cpu().item())
 
-        audio_embed_list, text_embed_list = embed_pipeline(paths, model, tensor_mode=True)
+        audio_embed_list, text_embed_list = embed_pipeline(
+            paths, model, tensor_mode=True, texts=train_texts
+        )
         similarity = compute_avg_similarity(audio_embed_list, text_embed_list)
         sim_f = float(similarity.detach().cpu().item())
         print(f"Epoch {epoch+1}/{num_epochs}, Loss: {last_loss:.4f}, Similarity: {sim_f:.4f}")

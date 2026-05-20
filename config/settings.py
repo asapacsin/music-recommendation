@@ -12,11 +12,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ---------------------------------------------------------------------------
 DATA_DIR = BASE_DIR / "data"
 MUSIC_DB_DIR = DATA_DIR / "music_db"
+MUSIC_DB_15S_DIR = DATA_DIR / "music_db_15s"
 QUERY_INPUT_DIR = DATA_DIR / "input"
 FAISS_INDEX_DIR = DATA_DIR / "index"
 EMBEDDINGS_CACHE_DIR = DATA_DIR / "embeddings_cache"
 FILE_NAME_DIR = DATA_DIR / "file_name"
 MAPPING_DIR = DATA_DIR / "mapping"
+CLAP_TRAIN_JSONL = MAPPING_DIR / "clap_train_15s.jsonl"
 LOG_DIR = DATA_DIR / "log"
 
 # ---------------------------------------------------------------------------
