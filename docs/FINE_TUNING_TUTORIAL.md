@@ -26,6 +26,8 @@ Step-by-step guide to train with **multiple seeds**, save checkpoints, run **ret
 
 Pick a **run id** (folder name) and number of seeds (thesis suggestion: **5**).
 
+**SICC / Slurm:** use [`scripts/sbatch_clap_finetune.sh`](../scripts/sbatch_clap_finetune.sh) — see [`scripts/README_sbatch.md`](../scripts/README_sbatch.md) for upload and `sbatch` steps.
+
 **Windows (cmd):**
 
 ```bat
@@ -143,5 +145,4 @@ There is **no** single command that merges five retrieval CSVs automatically. Pr
 
 ## 7. Next steps (code / data improvements)
 
-- Point training at **train JSONL** clips instead of all of `data/music_db/` (requires editing `init_model.py` or a new data loader).
 - Add a small script that merges N retrieval CSVs + `summary.json` into one Excel-ready CSV (optional future work).
