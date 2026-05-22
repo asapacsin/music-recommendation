@@ -8,7 +8,7 @@ Recommended naming convention:
 
 YYYYMMDD_short_topic
 # e.g. 20260210_retrieval_matrix
-📁 Required Files per Run
+📁 Required Files per Run+
 File	Phase	Purpose
 PLAN.md	Plan	Defines objective, approach, commands, and expected outputs
 RUNLOG.md	Execute	Append-only execution log of commands, outputs, and observations
