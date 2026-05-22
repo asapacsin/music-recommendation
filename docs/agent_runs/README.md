@@ -1,34 +1,65 @@
-# Agent runs (Plan / Execute / Review)
+Agent Runs (Plan / Execute / Review)
 
-Each **run** is a folder:
+Each run is a self-contained folder:
 
-`docs/agent_runs/<run_id>/`
+docs/agent_runs/<run_id>/
 
-Recommended naming: `YYYYMMDD_short_topic` (example: `20260210_retrieval_matrix`).
+Recommended naming convention:
 
-## Files in a run
+YYYYMMDD_short_topic
+# e.g. 20260210_retrieval_matrix
+📁 Required Files per Run
+File	Phase	Purpose
+PLAN.md	Plan	Defines objective, approach, commands, and expected outputs
+RUNLOG.md	Execute	Append-only execution log of commands, outputs, and observations
+REVIEW.md	Review	Final evaluation checklist (pass/fail + notes)
 
-| File | Phase | Purpose |
-|------|--------|---------|
-| `PLAN.md` | Plan | Goal, commands, expected outputs — from [../templates/agent_plan.template.md](../templates/agent_plan.template.md) |
-| `RUNLOG.md` | Execute | Append-only log of commands and results — from [../templates/agent_runlog.template.md](../templates/agent_runlog.template.md) |
-| `REVIEW.md` | Review | Pass/fail checklist — from [../templates/agent_review.template.md](../templates/agent_review.template.md) |
+All templates are sourced from:
 
-## Workflow overview
+../templates/agent_plan.template.md
+../templates/agent_runlog.template.md
+../templates/agent_review.template.md
+🔄 Workflow Overview
 
-See [../multi_agent_workflow.md](../multi_agent_workflow.md).
+Refer to the full system workflow:
 
-## Git and traceability
+../multi_agent_workflow.md
 
-- **Default:** commit `PLAN.md`, `RUNLOG.md`, and `REVIEW.md` for thesis auditability (commands and verdicts stay in history).
-- **Optional:** if logs become huge or contain machine-specific noise, add a pattern to `.gitignore` (e.g. per-team policy). Prefer redacting secrets over dropping the whole RUNLOG.
+Standard flow:
 
-Large binary or generated **data** outputs stay under `data/` as elsewhere in the repo; PLAN should reference those paths explicitly.
+Plan → define scope, steps, success criteria
+Execute → run commands and append results to RUNLOG.md
+Review → validate outcomes against PLAN.md checklist
+🧾 Git & Traceability Policy
+Default policy: commit all three files:
+PLAN.md
+RUNLOG.md
+REVIEW.md
 
-## Starting a new run
+This ensures full auditability of:
 
-1. Create `docs/agent_runs/<run_id>/`.
-2. Copy the three templates into `PLAN.md`, `RUNLOG.md`, `REVIEW.md` (replace `<run_id>` in headers).
-3. Fill PLAN first; Execute; then Review.
+decisions
+execution history
+final evaluation
+If logs become excessively large or noisy:
+prefer redaction of sensitive data
+only as a last resort, consider .gitignore rules (team-specific)
+All large outputs (datasets, artifacts, models) must be stored under:
+data/
 
-This folder may contain only `README.md` until you add run subfolders; that is expected.
+and referenced explicitly in PLAN.md.
+
+🚀 Starting a New Run
+
+Create directory:
+
+docs/agent_runs/<run_id>/
+Copy templates into:
+PLAN.md
+RUNLOG.md
+REVIEW.md
+Ensure headers inside each file are updated to <run_id>.
+Write PLAN.md first before any execution
+Proceed:
+Execute → append to RUNLOG.md
+Review → finalize REVIEW.md

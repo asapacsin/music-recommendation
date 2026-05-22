@@ -371,6 +371,43 @@ Outputs:
 
 CSV columns: `query_text` (prompt with trailing ` music` removed for CLAP where applicable), `top_k`, `n_pool`, `n_positive`, `prevalence`, `precision_at_k`, `precision_delta` (vs prevalence), `ndcg_at_k`, `ndcg_random_mean`, `ndcg_delta`. With `--include-tempo`, append **`tempo_accuracy`**, **`tempo_macro_f1`**, **`tempo_n_songs`** (same values on every row; songs = unique pool basenames with valid `program_tempo`). JSON has the same rows under `rows` plus `meta` (paths, pool size, seeds, skipped query ids, `include_tempo_queries`; with `--include-tempo`, `meta.tempo` includes accuracy, macro_f1, confusion matrix, per-class breakdown).
 
+**Baseline semantics (thesis):** `precision_delta` / `ndcg_delta` compare retrieval ranking to a **random** baseline on the same gold pool — large deltas are expected and are **not** the main claim. The primary comparison is **pretrained CLAP vs fine-tuned CLAP** on the **same** metadata FAISS index and gold pool (`--no-include-tempo-queries` for headline style rows). Re-run pretrained eval without `RAGWEB_CLAP_CHECKPOINT`; fine-tuned eval with `RAGWEB_CLAP_CHECKPOINT` pointing at each `seed_*/best_model.pt` (see [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md) §3).
+
+## Thesis results (headline numbers)
+
+Primary tags: **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** (queries `piano music`, `vocal music`, `relaxing music` in the retrieval matrix). Training run: `thesis_ft_v1` — artifacts under `data/log/finetune_runs/thesis_ft_v1/` (`summary.json`, `seed_*/best_model.pt`, `metrics.jsonl`). Pretrained retrieval: `data/eval/retrieval_vs_random_matrix.csv` (no `RAGWEB_CLAP_CHECKPOINT`). Fine-tuned retrieval @K=10: same eval command with checkpoint set; **metrics identical across seeds 42–46** for the three headline queries.
+
+### Training (RQ2)
+
+| Metric | Value |
+|--------|-------|
+| Seeds | 42, 43, 44, 45, 46 |
+| Best train similarity (per seed) | ~0.357–0.360 |
+| Mean ± std | **0.3590 ± 0.0013** |
+| Best epoch | 5 (all seeds) |
+
+Source: `data/log/finetune_runs/thesis_ft_v1/summary.json`.
+
+### Retrieval @K=10 — fine-tuned (all five seeds: same)
+
+| Query (tag) | Positives / pool | precision@10 | nDCG@10 | Δ nDCG vs random |
+|-------------|------------------|--------------|---------|------------------|
+| piano | 29 / 200 | 0.30 | 0.428 | +0.288 |
+| vocal | 139 / 200 | 1.00 | 1.00 | +0.303 |
+| relaxing | 76 / 200 | 0.60 | 0.652 | +0.275 |
+
+### Retrieval @K=10 — pretrained vs fine-tuned (RQ1)
+
+| Query | Pretrained prec@10 / nDCG@10 | Fine-tuned prec@10 / nDCG@10 |
+|-------|------------------------------|------------------------------|
+| piano | 0.20 / 0.359 | 0.30 / 0.428 |
+| vocal | 1.00 / 1.00 | 1.00 / 1.00 |
+| relaxing | 0.50 / 0.537 | 0.60 / 0.652 |
+
+Pretrained rows from `data/eval/retrieval_vs_random_matrix.csv` (`top_k=10`). Confirm fine-tuned numbers on cluster (E3) with `RAGWEB_CLAP_CHECKPOINT` per seed if reproducing.
+
+**Interpretation:** Fine-tuning yields modest but consistent gains on **piano** and **relaxing**; **vocal** is already at ceiling with pretrained CLAP on this pool. **Orchestral**, **sad/melancholic**, **tempo** matrix rows, and other tags remain weak — report in appendix or a secondary table (`retrieval_vs_random_matrix.csv`, full export).
+
 ## Legacy audio retrieval scripts
 
 - `app/recommend.py`: OpenL3-based audio similarity flow
