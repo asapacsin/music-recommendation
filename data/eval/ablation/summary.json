@@ -1,0 +1,36 @@
+{
+  "pretrained_csv": "/home/mc46451/music-recommendation/data/eval/ablation/pretrained.csv",
+  "ft_csvs": [
+    "/home/mc46451/music-recommendation/data/eval/ablation/ft_seed42.csv",
+    "/home/mc46451/music-recommendation/data/eval/ablation/ft_seed43.csv",
+    "/home/mc46451/music-recommendation/data/eval/ablation/ft_seed44.csv",
+    "/home/mc46451/music-recommendation/data/eval/ablation/ft_seed45.csv",
+    "/home/mc46451/music-recommendation/data/eval/ablation/ft_seed46.csv",
+    "/home/mc46451/music-recommendation/data/eval/retrieval_matrix_seed42.csv",
+    "/home/mc46451/music-recommendation/data/eval/retrieval_matrix_seed43.csv",
+    "/home/mc46451/music-recommendation/data/eval/retrieval_matrix_seed44.csv",
+    "/home/mc46451/music-recommendation/data/eval/retrieval_matrix_seed45.csv",
+    "/home/mc46451/music-recommendation/data/eval/retrieval_matrix_seed46.csv"
+  ],
+  "top_k": 10,
+  "primary_tags": [
+    {
+      "tag_id": "inst_piano",
+      "query_text": "piano"
+    },
+    {
+      "tag_id": "inst_vocal",
+      "query_text": "vocal"
+    },
+    {
+      "tag_id": "mood_relaxing",
+      "query_text": "relaxing"
+    }
+  ],
+  "n_primary_rows": 3,
+  "n_all_query_rows": 12,
+  "outputs": {
+    "summary_primary": "/home/mc46451/music-recommendation/data/eval/ablation/summary_primary.csv",
+    "summary_all_queries": "/home/mc46451/music-recommendation/data/eval/ablation/summary_all_queries.csv"
+  }
+}

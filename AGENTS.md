@@ -27,9 +27,9 @@ Local music metadata pipeline + CLAP: 15s clips, train/val JSONL, FAISS retrieva
 
 ### Cloud / multi-seed fine-tune
 
-- **Driver:** `python -m app.train_clap_multiseed` — loops seeds, writes `data/log/finetune_runs/<run_id>/seed_<n>/` (`best_model.pt`, `params.json`, `metrics.jsonl`) and run-level `summary.json` (**mean ± std** of best train-time similarity).
+- **Driver:** `python -m app.train_clap_multiseed` — checkpoints under `model/clap/finetune/<run_id>/seed_<n>/best_model.pt`; logs under `data/log/finetune_runs/<run_id>/seed_<n>/` (`params.json`, `metrics.jsonl`) and run-level `summary.json` (**mean ± std** of best train-time similarity).
 - **Seeding:** `model_creation` calls `set_seed` from `params["seed"]` (default `42`) and logs per-epoch metrics to `metrics.jsonl`. Training always initializes from **`CLAP_PRETRAINED_BACKBONE_FILE`** (unaffected by `RAGWEB_CLAP_CHECKPOINT`).
-- **Eval on fine-tuned weights:** set env **`RAGWEB_CLAP_CHECKPOINT`** to a seed’s `best_model.pt`, then run retrieval / tempo eval as usual (`CLAP_MODEL_FILE` in settings becomes that path).
+- **Eval on fine-tuned weights:** set env **`RAGWEB_CLAP_CHECKPOINT`** to e.g. `model/clap/finetune/<run_id>/seed_<n>/best_model.pt`, then run retrieval / tempo eval as usual (`CLAP_MODEL_FILE` in settings becomes that path).
 - **Report:** prioritize retrieval rows for **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** per seed, then aggregate (mean ± std or table per seed). Step-by-step: [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md). Checklist: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
 
 ## Two different “zero-shot” flows (do not confuse)
@@ -62,6 +62,7 @@ Top‑K human workflow (`music_eval_topk_prepare` / `music_eval_topk_score`) rem
 - Gold merge / counts: `music_eval_merge_gold`, `music_eval_gold_label_counts`
 - Retrieval vs random matrix: `python -m app.data_handling.music_eval_retrieval_vs_random` (merged gold + metadata FAISS index; tempo matrix rows on by default; `--include-tempo` adds global CLAP-vs-BPM columns)
 - Multi-seed CLAP fine-tune: `python -m app.train_clap_multiseed` (see `docs/cloud_finetune_protocol.md`; eval with `RAGWEB_CLAP_CHECKPOINT`)
+- Full ablation job (pretrained + per-seed matrices + summary CSVs): `sbatch scripts/sbatch_clap_ablation.sh` → `data/eval/ablation/`; report module `app/data_handling/music_eval_ablation_report.py`
 
 ## After a Cursor reset
 

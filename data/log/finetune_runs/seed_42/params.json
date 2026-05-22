@@ -16,5 +16,5 @@
   },
   "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
   "seed": 42,
-  "save_path": "/home/mc46451/music-recommendation/data/log/finetune_runs/thesis_ft_v1/seed_42/best_model.pt"
+  "save_path": "/home/mc46451/music-recommendation/model/clap/finetune/_legacy/seed_42/best_model.pt"
 }

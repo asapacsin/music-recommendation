@@ -56,15 +56,15 @@ python -m app.train_clap_multiseed --n-seeds 5 --base-seed 42 --run-id thesis_ft
 
 ### What you get
 
-Under `data/log/finetune_runs/thesis_ft_v1/` (replace with your `--run-id`):
+All CLAP weights live under `model/clap/` (backbone + `finetune/<run_id>/`). Training logs: `data/log/finetune_runs/<run_id>/` (replace `thesis_ft_v1` with your `--run-id`):
 
 | Path | Contents |
 |------|----------|
-| `seed_42/best_model.pt` | Fine-tuned **core** weights (+ `seed`, `epoch`, …) |
-| `seed_42/params.json` | Full `params` used for that run |
-| `seed_42/metrics.jsonl` | One JSON line per epoch: `loss`, `similarity` |
+| `model/clap/finetune/<run_id>/seed_42/best_model.pt` | Fine-tuned **core** weights (+ `seed`, `epoch`, …) |
+| `data/log/finetune_runs/<run_id>/seed_42/params.json` | Full `params` used for that run |
+| `data/log/finetune_runs/<run_id>/seed_42/metrics.jsonl` | One JSON line per epoch: `loss`, `similarity` |
 | … | Same for each seed |
-| `summary.json` | All seeds + **mean** / **stdev** of best train-time `similarity` |
+| `data/log/finetune_runs/<run_id>/summary.json` | All seeds + **mean** / **stdev** of best train-time `similarity` |
 
 If training fails for one seed, fix the error and re-run with a **new** `--run-id` so you do not mix partial runs.
 
@@ -89,7 +89,7 @@ Eval scripts load CLAP via `app/clap_eval_load.load_clap_module_httsat()`. If **
 **Windows cmd (one seed):**
 
 ```bat
-set RAGWEB_CLAP_CHECKPOINT=E:\Ragweb\data\log\finetune_runs\thesis_ft_v1\seed_42\best_model.pt
+set RAGWEB_CLAP_CHECKPOINT=E:\Ragweb\model\finetune\thesis_ft_v1\seed_42\best_model.pt
 cd /d E:\Ragweb
 python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10 20 --out-csv data\eval\retrieval_matrix_seed42.csv
 set RAGWEB_CLAP_CHECKPOINT=
@@ -100,7 +100,7 @@ Repeat for `seed_43`, … with a **different** `--out-csv` each time so files ar
 **PowerShell:**
 
 ```powershell
-$env:RAGWEB_CLAP_CHECKPOINT = "E:\Ragweb\data\log\finetune_runs\thesis_ft_v1\seed_42\best_model.pt"
+$env:RAGWEB_CLAP_CHECKPOINT = "E:\Ragweb\model\finetune\thesis_ft_v1\seed_42\best_model.pt"
 Set-Location E:\Ragweb
 python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10 20 --out-csv data/eval/retrieval_matrix_seed42.csv
 Remove-Item Env:RAGWEB_CLAP_CHECKPOINT

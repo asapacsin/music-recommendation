@@ -40,8 +40,9 @@ PROCESS_META_FILE = MAPPING_DIR / "process_meta.json"
 # Model paths
 # ---------------------------------------------------------------------------
 MODEL_DIR = BASE_DIR / "model"
-# Public LAION CLAP weights (training always starts from this path in ``init_model.load_original_model``).
-CLAP_PRETRAINED_BACKBONE_FILE = MODEL_DIR / "clap" / "music_audioset_epoch_15_esc_90.14.pt"
+# All CLAP weights under ``model/clap/``: backbone .pt at top of clap/, fine-tunes under clap/finetune/.
+CLAP_DIR = MODEL_DIR / "clap"
+CLAP_PRETRAINED_BACKBONE_FILE = CLAP_DIR / "music_audioset_epoch_15_esc_90.14.pt"
 # Eval / retrieval: defaults to backbone; set ``RAGWEB_CLAP_CHECKPOINT`` to a ``best_model.pt`` from fine-tune.
 _clap_ckpt = os.environ.get("RAGWEB_CLAP_CHECKPOINT")
 CLAP_MODEL_FILE = (
@@ -51,6 +52,22 @@ CLAP_MODEL_FILE = (
 )
 LLM_MODEL_DIR = MODEL_DIR / "llama3"
 BEST_MODEL_FILE = MODEL_DIR / "best_model.pt"
+# Fine-tuned CLAP checkpoints live next to the backbone under model/clap/.
+FINETUNE_MODEL_DIR = CLAP_DIR / "finetune"
+
+
+def finetune_checkpoint_path(run_id: str, seed: int) -> Path:
+    """Path to ``best_model.pt`` for a multi-seed fine-tune run."""
+    return FINETUNE_MODEL_DIR / run_id / f"seed_{seed}" / "best_model.pt"
+
+
+def finetune_log_run_dir(run_id: str) -> Path:
+    """Per-run training logs (summary, params, metrics — no large weights)."""
+    return LOG_DIR / "finetune_runs" / run_id
+
+
+def finetune_log_seed_dir(run_id: str, seed: int) -> Path:
+    return finetune_log_run_dir(run_id) / f"seed_{seed}"
 
 # ---------------------------------------------------------------------------
 # Test data
@@ -62,5 +79,5 @@ TEST_DATA_DIR = BASE_DIR / "tests" / "data"
 # ---------------------------------------------------------------------------
 for _d in [MUSIC_DB_DIR, FAISS_INDEX_DIR, QUERY_INPUT_DIR,
            EMBEDDINGS_CACHE_DIR, FILE_NAME_DIR, MAPPING_DIR, LOG_DIR,
-           LOG_DIR / "finetune_runs"]:
+           LOG_DIR / "finetune_runs", CLAP_DIR, FINETUNE_MODEL_DIR]:
     _d.mkdir(parents=True, exist_ok=True)

@@ -65,7 +65,7 @@ The CLAP checkpoint path is configured in `config/settings.py`:
 
 Make sure the backbone `.pt` exists under `model/clap/` before CLAP indexing/evaluation commands.
 
-**Fine-tuned checkpoint for eval:** set **`RAGWEB_CLAP_CHECKPOINT`** to an absolute path of a saved `best_model.pt` (e.g. from `data/log/finetune_runs/.../`). **Step-by-step fine-tune + eval:** [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md). Checklist / thesis notes: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
+**Fine-tuned checkpoint for eval:** set **`RAGWEB_CLAP_CHECKPOINT`** to an absolute path of a saved `best_model.pt` (e.g. from `model/clap/finetune/<run_id>/seed_<n>/`). **Step-by-step fine-tune + eval:** [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md). Checklist / thesis notes: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
 
 ## Directory conventions
 
@@ -375,7 +375,7 @@ CSV columns: `query_text` (prompt with trailing ` music` removed for CLAP where 
 
 ## Thesis results (headline numbers)
 
-Primary tags: **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** (queries `piano music`, `vocal music`, `relaxing music` in the retrieval matrix). Training run: `thesis_ft_v1` — artifacts under `data/log/finetune_runs/thesis_ft_v1/` (`summary.json`, `seed_*/best_model.pt`, `metrics.jsonl`). Pretrained retrieval: `data/eval/retrieval_vs_random_matrix.csv` (no `RAGWEB_CLAP_CHECKPOINT`). Fine-tuned retrieval @K=10: same eval command with checkpoint set; **metrics identical across seeds 42–46** for the three headline queries.
+Primary tags: **`inst_piano`**, **`inst_vocal`**, **`mood_relaxing`** (queries `piano music`, `vocal music`, `relaxing music` in the retrieval matrix). Training run: `thesis_ft_v1` — checkpoints `model/clap/finetune/thesis_ft_v1/seed_*/best_model.pt`; logs `data/log/finetune_runs/thesis_ft_v1/` (`summary.json`, `metrics.jsonl`). Pretrained retrieval: `data/eval/retrieval_vs_random_matrix.csv` (no `RAGWEB_CLAP_CHECKPOINT`). Fine-tuned retrieval @K=10: same eval command with checkpoint set; **metrics identical across seeds 42–46** for the three headline queries.
 
 ### Training (RQ2)
 

@@ -28,7 +28,7 @@ export PYTHONPATH="$REPO/app:$REPO"
 nvidia-smi || true
 
 # --- Multi-seed fine-tune (thesis: 5 seeds) ---
-# Outputs: data/log/finetune_runs/<RUN_ID>/summary.json, seed_*/best_model.pt, metrics.jsonl
+# Outputs: model/clap/finetune/<RUN_ID>/seed_*/best_model.pt; logs under data/log/finetune_runs/<RUN_ID>/
 RUN_ID="${RUN_ID:-thesis_ft_v1}"
 N_SEEDS="${N_SEEDS:-5}"
 BASE_SEED="${BASE_SEED:-42}"
@@ -38,4 +38,5 @@ python -m app.train_clap_multiseed \
   --n-seeds "$N_SEEDS" \
   --base-seed "$BASE_SEED"
 
-echo "Done. Summary: $REPO/data/log/finetune_runs/$RUN_ID/summary.json"
+echo "Done. Checkpoints: $REPO/model/clap/finetune/$RUN_ID/seed_*/best_model.pt"
+echo "Summary: $REPO/data/log/finetune_runs/$RUN_ID/summary.json"

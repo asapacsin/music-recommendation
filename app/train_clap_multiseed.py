@@ -1,9 +1,9 @@
 """
 Multi-seed CLAP fine-tune driver (calls ``init_model.model_creation`` per seed).
 
-Writes ``data/log/finetune_runs/<run_id>/seed_<n>/`` with ``best_model.pt``,
-``params.json``, ``metrics.jsonl``, and a run-level ``summary.json`` (mean/std of
-best train-time similarity — extend with retrieval metrics as needed).
+Checkpoints: ``model/clap/finetune/<run_id>/seed_<n>/best_model.pt``
+Logs: ``data/log/finetune_runs/<run_id>/seed_<n>/`` (params.json, metrics.jsonl)
+Run summary: ``data/log/finetune_runs/<run_id>/summary.json``
 """
 from __future__ import annotations
 
@@ -58,7 +58,7 @@ def main() -> int:
         "--run-id",
         type=str,
         default=None,
-        help="Subfolder under data/log/finetune_runs (default: UTC timestamp).",
+        help="Experiment id (subfolder under model/clap/finetune/ and data/log/finetune_runs/).",
     )
     parser.add_argument("--base-seed", type=int, default=42, help="First seed when using --n-seeds.")
     parser.add_argument("--n-seeds", type=int, default=3, help="Number of consecutive seeds from base-seed.")
@@ -88,8 +88,10 @@ def main() -> int:
     args = parser.parse_args()
 
     run_id = args.run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    run_root = settings.LOG_DIR / "finetune_runs" / run_id
-    run_root.mkdir(parents=True, exist_ok=True)
+    log_run_root = settings.finetune_log_run_dir(run_id)
+    model_run_root = settings.FINETUNE_MODEL_DIR / run_id
+    log_run_root.mkdir(parents=True, exist_ok=True)
+    model_run_root.mkdir(parents=True, exist_ok=True)
 
     base = _default_params()
     if args.train_jsonl is not None:
@@ -112,11 +114,20 @@ def main() -> int:
     sims: list[float] = []
 
     for seed in seeds:
-        seed_dir = run_root / f"seed_{seed}"
-        seed_dir.mkdir(parents=True, exist_ok=True)
-        save_path = seed_dir / "best_model.pt"
-        params_path = seed_dir / "params.json"
-        merged = {**base, "seed": seed, "save_path": str(save_path)}
+        log_seed_dir = settings.finetune_log_seed_dir(run_id, seed)
+        model_seed_dir = model_run_root / f"seed_{seed}"
+        log_seed_dir.mkdir(parents=True, exist_ok=True)
+        model_seed_dir.mkdir(parents=True, exist_ok=True)
+
+        save_path = model_seed_dir / "best_model.pt"
+        params_path = log_seed_dir / "params.json"
+        metrics_path = log_seed_dir / "metrics.jsonl"
+        merged = {
+            **base,
+            "seed": seed,
+            "save_path": str(save_path),
+            "metrics_path": str(metrics_path),
+        }
         params_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
 
         out = model_creation(merged)
@@ -128,16 +139,26 @@ def main() -> int:
     finite = [s for s in sims if math.isfinite(s)]
     summary: dict[str, Any] = {
         "run_id": run_id,
-        "run_root": str(run_root),
+        "log_run_root": str(log_run_root),
+        "model_run_root": str(model_run_root),
         "seeds": seeds,
         "per_seed": per_seed,
         "best_similarity_mean": statistics.mean(finite) if finite else None,
         "best_similarity_stdev": statistics.stdev(finite) if len(finite) > 1 else 0.0,
         "n_seeds_finite": len(finite),
     }
-    summary_path = run_root / "summary.json"
+    summary_path = log_run_root / "summary.json"
     summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({"summary": str(summary_path), "best_similarity_mean": summary["best_similarity_mean"]}, indent=2))
+    print(
+        json.dumps(
+            {
+                "summary": str(summary_path),
+                "model_run_root": str(model_run_root),
+                "best_similarity_mean": summary["best_similarity_mean"],
+            },
+            indent=2,
+        )
+    )
     return 0
 
 

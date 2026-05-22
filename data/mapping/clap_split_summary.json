@@ -1,13 +1,13 @@
 {
-  "mapping_rows": 72428,
+  "mapping_rows": 743,
   "metadata_rows": 3882,
-  "matched_segment_rows": 72428,
+  "matched_segment_rows": 743,
   "unmatched_segment_rows": 0,
-  "group_count_sources": 3880,
-  "train_rows": 65171,
-  "val_rows": 7257,
+  "group_count_sources": 44,
+  "train_rows": 665,
+  "val_rows": 78,
   "val_ratio": 0.1,
   "seed": 42,
-  "train_out": "E:\\Ragweb\\data\\mapping\\clap_train_15s.jsonl",
-  "val_out": "E:\\Ragweb\\data\\mapping\\clap_val_15s.jsonl"
+  "train_out": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+  "val_out": "/home/mc46451/music-recommendation/data/mapping/clap_val_15s.jsonl"
 }

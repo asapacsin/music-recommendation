@@ -29,12 +29,10 @@ Per project decision ([`AGENTS.md`](../AGENTS.md), [`docs/mark_class.txt`](mark_
    python -m app.train_clap_multiseed --seeds 42,43,44 --params-json path/to/overrides.json
    ```
 
-2. **Artifacts per run** — Under `data/log/finetune_runs/<run_id>/`:
+2. **Artifacts per run**
 
-   - `seed_<n>/best_model.pt` — PyTorch dict including `seed`, `epoch`, `model_state_dict`, …
-   - `seed_<n>/params.json` — full params passed to `model_creation`
-   - `seed_<n>/metrics.jsonl` — one JSON line per epoch: `seed`, `epoch`, `loss`, `similarity` (train-time mean diagonal similarity)
-   - `summary.json` — `per_seed` results plus `best_similarity_mean` and `best_similarity_stdev` over finite values
+   - **Checkpoints (large):** `model/clap/finetune/<run_id>/seed_<n>/best_model.pt` — PyTorch dict including `seed`, `epoch`, `model_state_dict`, …
+   - **Logs:** `data/log/finetune_runs/<run_id>/seed_<n>/params.json`, `metrics.jsonl`; run-level `summary.json` with `per_seed` results plus `best_similarity_mean` and `best_similarity_stdev` over finite values
 
 3. **Determinism** — `set_seed` sets `cudnn.deterministic=True` and `benchmark=False` (slower but more stable). Residual nondeterminism on GPU is normal; report **mean ± std over seeds**, not a single run.
 
@@ -45,7 +43,7 @@ Per project decision ([`AGENTS.md`](../AGENTS.md), [`docs/mark_class.txt`](mark_
 Eval scripts load CLAP via `config.settings.CLAP_MODEL_FILE`. To evaluate a **fine-tuned** checkpoint without editing code:
 
 ```bash
-export RAGWEB_CLAP_CHECKPOINT=/path/to/data/log/finetune_runs/<run_id>/seed_42/best_model.pt
+export RAGWEB_CLAP_CHECKPOINT=/path/to/model/clap/finetune/<run_id>/seed_42/best_model.pt
 python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10 20
 ```
 

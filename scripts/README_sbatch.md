@@ -64,8 +64,66 @@ tail -f ~/slurm-<jobid>.out
 RUN_ID=smoke_test N_SEEDS=1 sbatch scripts/sbatch_clap_finetune.sh
 ```
 
-## After the job
+## After the fine-tune job
 
 - Training record: `data/log/finetune_runs/<RUN_ID>/summary.json`
-- Per-seed checkpoints: `seed_<n>/best_model.pt`
-- Retrieval eval (separate): see `docs/FINE_TUNING_TUTORIAL.md` §3
+- Per-seed checkpoints: `model/clap/finetune/<RUN_ID>/seed_<n>/best_model.pt`
+- Per-seed logs: `data/log/finetune_runs/<RUN_ID>/seed_<n>/` (`params.json`, `metrics.jsonl`)
+
+## Retrieval eval (after fine-tune)
+
+Script: `scripts/sbatch_clap_retrieval_eval.sh` — runs `music_eval_retrieval_vs_random` for each seed with `RAGWEB_CLAP_CHECKPOINT`. Builds `metadata_text_index.faiss` first if missing.
+
+Prerequisites: `thesis_ft_v1` (or your `RUN_ID`) checkpoints under `model/clap/finetune/<RUN_ID>/`, backbone at `model/clap/…`, gold at `data/eval/gold_merged.jsonl`.
+
+```bash
+chmod +x ~/music-recommendation/scripts/sbatch_clap_retrieval_eval.sh
+cd ~/music-recommendation
+sbatch scripts/sbatch_clap_retrieval_eval.sh
+```
+
+Overrides:
+
+```bash
+RUN_ID=thesis_ft_v1 SEEDS="42" sbatch scripts/sbatch_clap_retrieval_eval.sh
+```
+
+After the job:
+
+- `data/eval/retrieval_matrix_seed<seed>.csv` (and `.json`)
+- Thesis headline rows: filter `query_text` ∈ `piano`, `vocal`, `relaxing`
+
+Details: `docs/FINE_TUNING_TUTORIAL.md` §3
+
+## Full ablation (pretrained + all seeds + report)
+
+Script: `scripts/sbatch_clap_ablation.sh` — one job that:
+
+1. Runs **full** retrieval matrix (9 style + 3 tempo queries, default flags) for **pretrained** CLAP.
+2. Repeats for each fine-tuned seed (`model/clap/finetune/<RUN_ID>/seed_<n>/best_model.pt`).
+3. Writes summary tables via `python -m app.data_handling.music_eval_ablation_report`.
+
+```bash
+chmod +x ~/music-recommendation/scripts/sbatch_clap_ablation.sh
+cd ~/music-recommendation
+sbatch scripts/sbatch_clap_ablation.sh
+```
+
+Outputs under `data/eval/ablation/`:
+
+| File | Contents |
+|------|----------|
+| `pretrained.csv` / `pretrained.json` | Backbone-only retrieval |
+| `ft_seed<N>.csv` / `.json` | Per-seed fine-tuned retrieval |
+| `summary_primary.csv` | Pretrained vs FT mean±std for **piano, vocal, relaxing** @ `REPORT_TOP_K` (default 10) |
+| `summary_all_queries.csv` | Same for **every** query in the pretrained matrix |
+| `summary.json` | Paths and metadata |
+
+Overrides:
+
+```bash
+RUN_ID=thesis_ft_v1 SEEDS="42 43" TOP_K="10 20" REPORT_TOP_K=20 sbatch scripts/sbatch_clap_ablation.sh
+SKIP_EVAL=1 sbatch scripts/sbatch_clap_ablation.sh   # report only (CSVs must already exist)
+```
+
+If you already have `data/eval/retrieval_matrix_seed*.csv`, copy or symlink them into `data/eval/ablation/` as `ft_seed<N>.csv`, add `pretrained.csv`, then `SKIP_EVAL=1`.

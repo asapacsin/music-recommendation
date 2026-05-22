@@ -1,0 +1,4 @@
+tag_id,query_text,top_k,n_positive,pretrained_precision_at_k,pretrained_ndcg_delta,ft_precision_mean,ft_precision_stdev,ft_ndcg_delta_mean,ft_ndcg_delta_stdev,delta_precision_vs_pretrained,delta_ndcg_vs_pretrained,n_ft_seeds
+inst_piano,piano,10,29,0.200000,0.218975,0.300000,0.000000,0.288406,0.000000,0.100000,0.069431,10
+inst_vocal,vocal,10,139,1.000000,0.303099,1.000000,0.000000,0.303099,0.000000,0.000000,0.000000,10
+mood_relaxing,relaxing,10,76,0.500000,0.159975,0.600000,0.000000,0.275055,0.000000,0.100000,0.115080,10
