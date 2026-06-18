@@ -1,0 +1,3 @@
+query_id,query_text,gold_column,top_k,n_pool,n_positive,prevalence,precision_at_k,precision_delta,ndcg_at_k,ndcg_random_mean,ndcg_delta
+inst_piano,piano,gold_pub_piano,10,120,60,0.5,1.0,0.5,1.0,0.490499392800881,0.509500607199119
+inst_vocal,vocal,gold_pub_vocal,10,120,60,0.5,0.0,-0.5,0.0,0.5025381321641297,-0.5025381321641297

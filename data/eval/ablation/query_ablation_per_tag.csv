@@ -1,0 +1,25 @@
+query_id,query_text,query_group,model,top_k,n_positive,prevalence,precision_at_k,ndcg_delta,precision_stdev_across_seeds,in_primary_3,in_finetune_scope
+inst_piano,piano,style_primary,pretrained,10,29,0.145,0.200000,0.218975,,True,True
+inst_piano,piano,style_primary,fine_tuned,10,29,0.145,0.300000,0.288406,0.000000,True,True
+inst_vocal,vocal,style_primary,pretrained,10,139,0.695,1.000000,0.303099,,True,True
+inst_vocal,vocal,style_primary,fine_tuned,10,139,0.695,1.000000,0.303099,0.000000,True,True
+mood_relaxing,relaxing,style_primary,pretrained,10,76,0.38,0.500000,0.159975,,True,True
+mood_relaxing,relaxing,style_primary,fine_tuned,10,76,0.38,0.600000,0.275055,0.000000,True,True
+inst_orchestral,orchestral,style_extra,pretrained,10,4,0.02,0.000000,-0.032614,,False,False
+inst_orchestral,orchestral,style_extra,fine_tuned,10,4,0.02,0.000000,-0.032614,0.000000,False,False
+mood_sad_melancholic,sad melancholic,style_extra,pretrained,10,15,0.075,0.000000,-0.078350,,False,False
+mood_sad_melancholic,sad melancholic,style_extra,fine_tuned,10,15,0.075,0.000000,-0.078350,0.000000,False,False
+mood_dark_tense,dark tense,style_extra,pretrained,10,6,0.03,0.000000,-0.047770,,False,False
+mood_dark_tense,dark tense,style_extra,fine_tuned,10,6,0.03,0.100000,0.043322,0.000000,False,False
+mood_exciting,exciting,style_extra,pretrained,10,6,0.03,0.000000,-0.040060,,False,False
+mood_exciting,exciting,style_extra,fine_tuned,10,6,0.03,0.100000,0.060807,0.000000,False,False
+mood_elegant,elegant refined sophisticated,style_extra,pretrained,10,15,0.075,0.200000,0.085128,,False,False
+mood_elegant,elegant refined sophisticated,style_extra,fine_tuned,10,15,0.075,0.300000,0.339366,0.000000,False,False
+mood_epic,epic cinematic grand orchestral,style_extra,pretrained,10,5,0.025,0.100000,0.063129,,False,False
+mood_epic,epic cinematic grand orchestral,style_extra,fine_tuned,10,5,0.025,0.000000,-0.043864,0.000000,False,False
+tempo_slow,slow gentle ballad soft pacing low BPM relaxed understated,tempo,pretrained,10,5,0.025,0.000000,-0.038825,,False,False
+tempo_slow,slow gentle ballad soft pacing low BPM relaxed understated,tempo,fine_tuned,10,5,0.025,0.000000,-0.038825,0.000000,False,False
+tempo_mid,moderate steady mid-tempo walking groove even rhythm mid pacing,tempo,pretrained,10,83,0.415,0.100000,-0.303650,,False,False
+tempo_mid,moderate steady mid-tempo walking groove even rhythm mid pacing,tempo,fine_tuned,10,83,0.415,0.280000,-0.042307,0.040000,False,False
+tempo_fast,fast driving upbeat energetic high BPM quick rhythm danceable,tempo,pretrained,10,112,0.56,0.900000,0.341566,,False,False
+tempo_fast,fast driving upbeat energetic high BPM quick rhythm danceable,tempo,fine_tuned,10,112,0.56,0.800000,0.283064,0.000000,False,False

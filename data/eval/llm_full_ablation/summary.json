@@ -1,0 +1,115 @@
+{
+  "ablation_dir": "/home/mc46451/music-recommendation/data/eval/llm_full_ablation",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "top_k": 10,
+  "note": "Full-corpus tag-aware LLM caption rewrite (one call per song); eval uses per-checkpoint FAISS rebuild (metadata and/or caption index).",
+  "index_kinds": [
+    "meta",
+    "caption"
+  ],
+  "by_index": {
+    "meta": [
+      {
+        "tag_id": "inst_piano",
+        "query_text": "piano",
+        "top_k": 10,
+        "n_positive": "29",
+        "orig_precision_mean": 0.3666666666666667,
+        "orig_ndcg_delta_mean": 0.31955976576784356,
+        "orig_ndcg_delta_stdev": 0.03224471841387589,
+        "llm_precision_mean": 0.3,
+        "llm_ndcg_delta_mean": 0.2436536816913705,
+        "llm_ndcg_delta_stdev": 0.0,
+        "delta_precision": -0.06666666666666671,
+        "delta_ndcg": -0.07590608407647306,
+        "n_seeds": 3
+      },
+      {
+        "tag_id": "inst_vocal",
+        "query_text": "vocal",
+        "top_k": 10,
+        "n_positive": "139",
+        "orig_precision_mean": 0.9666666666666667,
+        "orig_ndcg_delta_mean": 0.27696581147370397,
+        "orig_ndcg_delta_stdev": 0.036957298418738835,
+        "llm_precision_mean": 0.8,
+        "llm_ndcg_delta_mean": 0.16611385750161733,
+        "llm_ndcg_delta_stdev": 0.0,
+        "delta_precision": -0.16666666666666663,
+        "delta_ndcg": -0.11085195397208664,
+        "n_seeds": 3
+      },
+      {
+        "tag_id": "mood_relaxing",
+        "query_text": "relaxing",
+        "top_k": 10,
+        "n_positive": "76",
+        "orig_precision_mean": 0.4,
+        "orig_ndcg_delta_mean": 0.10633539623691002,
+        "orig_ndcg_delta_stdev": 0.01085388805209915,
+        "llm_precision_mean": 0.4,
+        "llm_ndcg_delta_mean": -0.02278764052637977,
+        "llm_ndcg_delta_stdev": 0.0,
+        "delta_precision": 0.0,
+        "delta_ndcg": -0.1291230367632898,
+        "n_seeds": 3
+      }
+    ],
+    "caption": [
+      {
+        "tag_id": "inst_piano",
+        "query_text": "piano",
+        "top_k": 10,
+        "n_positive": "12",
+        "orig_precision_mean": 0.43333333333333335,
+        "orig_ndcg_delta_mean": 0.40753156016940945,
+        "orig_ndcg_delta_stdev": 0.02917889955695126,
+        "llm_precision_mean": 0.3,
+        "llm_ndcg_delta_mean": 0.22588127319377874,
+        "llm_ndcg_delta_stdev": 0.0,
+        "delta_precision": -0.13333333333333336,
+        "delta_ndcg": -0.1816502869756307,
+        "n_seeds": 3
+      },
+      {
+        "tag_id": "inst_vocal",
+        "query_text": "vocal",
+        "top_k": 10,
+        "n_positive": "86",
+        "orig_precision_mean": 1.0,
+        "orig_ndcg_delta_mean": 0.27693245156737045,
+        "orig_ndcg_delta_stdev": 0.0,
+        "llm_precision_mean": 0.7,
+        "llm_ndcg_delta_mean": 0.019057077502877773,
+        "llm_ndcg_delta_stdev": 0.0,
+        "delta_precision": -0.30000000000000004,
+        "delta_ndcg": -0.2578753740644927,
+        "n_seeds": 3
+      },
+      {
+        "tag_id": "mood_relaxing",
+        "query_text": "relaxing",
+        "top_k": 10,
+        "n_positive": "37",
+        "orig_precision_mean": 0.23333333333333334,
+        "orig_ndcg_delta_mean": 0.018597748920728574,
+        "orig_ndcg_delta_stdev": 0.03720010202257467,
+        "llm_precision_mean": 0.3,
+        "llm_ndcg_delta_mean": -0.0014336420406566575,
+        "llm_ndcg_delta_stdev": 0.0,
+        "delta_precision": 0.06666666666666665,
+        "delta_ndcg": -0.02003139096138523,
+        "n_seeds": 3
+      }
+    ]
+  },
+  "outputs": {
+    "summary_primary": "/home/mc46451/music-recommendation/data/eval/llm_full_ablation/summary_primary.csv",
+    "summary_by_index": "/home/mc46451/music-recommendation/data/eval/llm_full_ablation/summary_by_index.csv",
+    "report_md": "/home/mc46451/music-recommendation/data/eval/llm_full_ablation/REPORT.md"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "learning_rate": 0.0001,
+  "num_epochs": 20,
+  "batch_size": 32,
+  "temperature": 100,
+  "unfreeze_layers": {
+    "audio_projection": true,
+    "audio_transform": true,
+    "text_projection": true,
+    "text_transform": true
+  },
+  "early_stopping": {
+    "enabled": true,
+    "monitor": "val_similarity",
+    "mode": "max",
+    "patience": 2,
+    "min_epochs": 5
+  },
+  "seed": 43,
+  "train_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/train_mixed.jsonl",
+  "val_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_val_15s.jsonl",
+  "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_1/best_model.pt",
+  "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/thesis_self_v2_s43/iter_1/metrics.jsonl",
+  "init_checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_0/best_model.pt"
+}

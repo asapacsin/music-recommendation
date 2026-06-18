@@ -1,0 +1,47 @@
+{
+  "manifest": "/home/mc46451/music-recommendation/data/eval/openmic_manifest.jsonl",
+  "dataset": "openmic",
+  "arm": "thesis_tag_llm",
+  "checkpoint_env": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_tag_llm/seed_43/best_model.pt",
+  "top_k": 10,
+  "n_pool": 120,
+  "n_tracks_manifest": 120,
+  "primary_tags": [
+    "inst_piano",
+    "inst_vocal"
+  ],
+  "positives_per_tag": {
+    "inst_piano": 60,
+    "inst_vocal": 60
+  },
+  "rows": [
+    {
+      "query_id": "inst_piano",
+      "query_text": "piano",
+      "gold_column": "gold_pub_piano",
+      "top_k": 10,
+      "n_pool": 120,
+      "n_positive": 60,
+      "prevalence": 0.5,
+      "precision_at_k": 1.0,
+      "precision_delta": 0.5,
+      "ndcg_at_k": 1.0,
+      "ndcg_random_mean": 0.5095554238906466,
+      "ndcg_delta": 0.49044457610935344
+    },
+    {
+      "query_id": "inst_vocal",
+      "query_text": "vocal",
+      "gold_column": "gold_pub_vocal",
+      "top_k": 10,
+      "n_pool": 120,
+      "n_positive": 60,
+      "prevalence": 0.5,
+      "precision_at_k": 0.0,
+      "precision_delta": -0.5,
+      "ndcg_at_k": 0.0,
+      "ndcg_random_mean": 0.49561484923652876,
+      "ndcg_delta": -0.49561484923652876
+    }
+  ]
+}

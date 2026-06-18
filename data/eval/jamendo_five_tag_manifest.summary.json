@@ -1,0 +1,13 @@
+{
+  "manifest": "/home/mc46451/music-recommendation/data/eval/jamendo_five_tag_manifest.jsonl",
+  "n_tracks": 297,
+  "max_per_tag": 60,
+  "positives_per_tag": {
+    "pub_piano": 95,
+    "pub_guitar": 75,
+    "pub_vocal": 63,
+    "pub_relaxing": 71,
+    "pub_epic": 61
+  },
+  "audio_dir": "/home/mc46451/music-recommendation/data/public_eval/jamendo/audio_five_tag"
+}

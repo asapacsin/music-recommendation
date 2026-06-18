@@ -1,0 +1,59 @@
+---
+description: Persistent AGENT_STATE workflow — read/update state/agent_state.json every turn
+alwaysApply: true
+---
+
+# AGENT_STATE workflow (mandatory)
+
+**Single source of truth:** [`state/agent_state.json`](state/agent_state.json)
+
+This complements (does not replace) [`docs/agent_runs/`](docs/agent_runs/) for thesis experiment traceability.
+
+## Before every response
+
+1. Read `state/agent_state.json` — especially `MEMORY` and `PLAN.current_step_index`
+2. Check `TEST` results and `REVIEW` notes
+3. Continue from last unfinished `PLAN.next_actions`
+4. Do **not** ask the user to restate context already in `MEMORY`
+5. Do **not** reset state unless the user explicitly says: **RESET AGENT STATE**
+
+## Mandatory loop per task
+
+| Step | Action | Update JSON section |
+|------|--------|---------------------|
+| 1 PLAN | Decompose goal; pick smallest next action | `PLAN` |
+| 2 CODE | Implement only current step | `CODE` |
+| 3 TEST | Run/write relevant tests; record pass/fail | `TEST` |
+| 4 REVIEW | Edge cases, quality, consistency | `REVIEW` |
+| 5 MEMORY | Stable facts, decisions, constraints | `MEMORY` |
+
+After each meaningful batch, **write** `state/agent_state.json` (merge updates; keep `last_updated` current).
+
+## Response format
+
+When this rule is active, structure user-facing replies with these sections (only sections that changed need detail):
+
+```
+[PLAN]
+[CODE]
+[TEST]
+[REVIEW]
+[MEMORY]
+[NEXT ACTION]
+```
+
+## AGENT_STATE schema (top-level keys)
+
+- `PLAN` — goal, tasks[], current_step_index, next_actions[]
+- `CODE` — files_created/modified[], key_decisions[], apis_introduced[]
+- `TEST` — cases[]{name, result, detail}, bugs_discovered[]
+- `REVIEW` — quality_notes[], edge_cases[], refactoring_suggestions[], consistency_checks[], verdict
+- `MEMORY` — project facts, user_preferences[], constraints[], entry_commands, durable findings
+
+## Coexistence with Ragweb pipeline
+
+- **Session / agent continuity** → `state/agent_state.json`
+- **Thesis experiment artifacts** → `docs/agent_runs/<run_id>/` (PLAN, RUNLOG, REVIEW) per [ragweb_agent_pipeline.mdc](ragweb_agent_pipeline.mdc)
+- **Durable repo entry points** → [AGENTS.md](AGENTS.md)
+
+Skip full agent_state ritual for trivial one-line fixes; still update `CODE`/`TEST` if you changed behavior.

@@ -118,6 +118,16 @@ Outputs under `data/eval/ablation/`:
 | `summary_primary.csv` | Pretrained vs FT mean±std for **piano, vocal, relaxing** @ `REPORT_TOP_K` (default 10) |
 | `summary_all_queries.csv` | Same for **every** query in the pretrained matrix |
 | `summary.json` | Paths and metadata |
+| `query_ablation_report.md` | **Query-set ablation** — tiers + cumulative add-tag (see below) |
+| `query_ablation_tiers.csv` / `query_ablation_cumulative.csv` | Macro P@K / ΔnDCG as query set grows |
+
+**Query-set ablation** (expanding tag queries, not checkpoint comparison):
+
+```bash
+python -m app.data_handling.music_eval_query_ablation_report --top-k 10
+```
+
+Uses existing `pretrained.csv` and `ft_seed*.csv` in `data/eval/ablation/`.
 
 Overrides:
 
@@ -127,3 +137,31 @@ SKIP_EVAL=1 sbatch scripts/sbatch_clap_ablation.sh   # report only (CSVs must al
 ```
 
 If you already have `data/eval/retrieval_matrix_seed*.csv`, copy or symlink them into `data/eval/ablation/` as `ft_seed<N>.csv`, add `pretrained.csv`, then `SKIP_EVAL=1`.
+
+## Composite query ablation (tags in one prompt)
+
+Script: `scripts/sbatch_composite_query_ablation.sh` — cumulative prompts **without** trailing `music`:
+
+1. `piano` → 2. `piano vocal` → 3. `piano vocal relaxing` (AND gold relevance; primary 3 tags only).
+
+Runs pretrained + each fine-tuned seed; writes `data/eval/ablation/composite/composite_query_report.md`.
+
+```bash
+cd ~/music-recommendation
+sbatch scripts/sbatch_composite_query_ablation.sh
+```
+
+```bash
+SKIP_EVAL=1 sbatch scripts/sbatch_composite_query_ablation.sh   # report only
+```
+
+## Public eval datasets (download)
+
+Script: `scripts/download_public_eval.sh` — MTG-Jamendo, MagnaTagATune, OpenMIC-2018 into `data/public_eval/` (gitignored).
+
+```bash
+conda activate ragweb   # pip install gdown if Jamendo step fails
+bash scripts/download_public_eval.sh
+```
+
+Partial: `SKIP_JAMENDO=1` / `SKIP_MTAT=1` / `SKIP_OPENMIC=1`. Jamendo audio is large and slow.

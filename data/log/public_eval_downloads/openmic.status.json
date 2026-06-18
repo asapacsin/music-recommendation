@@ -1,0 +1,7 @@
+{
+  "dataset": "openmic",
+  "state": "COMPLETED",
+  "updated_utc": "2026-06-18T03:48:00Z",
+  "message": "20000+ ogg files; manifest 120/120 audio ready",
+  "log_file": "/home/mc46451/music-recommendation/data/log/public_eval_downloads/openmic_backend.log"
+}

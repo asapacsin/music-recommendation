@@ -1,0 +1,5 @@
+{"seed": 44, "epoch": 2, "loss": 2.6947498321533203, "val_similarity": 0.4208504386346971, "checkpoint_metric": 0.4208504386346971, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 3, "loss": 2.660259962081909, "val_similarity": 0.5467306765409717, "checkpoint_metric": 0.5467306765409717, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 4, "loss": 2.6284093856811523, "val_similarity": 0.6051855686123516, "checkpoint_metric": 0.6051855686123516, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 5, "loss": 2.6043264865875244, "val_similarity": 0.5364711228701544, "checkpoint_metric": 0.5364711228701544, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 6, "loss": 2.6861257553100586, "val_similarity": 0.44213363918980414, "checkpoint_metric": 0.44213363918980414, "monitor": "val_similarity"}

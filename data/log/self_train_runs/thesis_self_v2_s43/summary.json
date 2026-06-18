@@ -1,0 +1,134 @@
+{
+  "run_id": "thesis_self_v2_s43",
+  "n_iters": 2,
+  "hard_frac": 0.2,
+  "seed": 43,
+  "no_refine": false,
+  "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+  "val_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_val_15s.jsonl",
+  "max_samples": null,
+  "gate_params": {
+    "min_sim_gain": 0.0,
+    "min_text_cos": 0.85
+  },
+  "refine_max_hard": null,
+  "per_iter": [
+    {
+      "run_id": "thesis_self_v2_s43",
+      "iter": 0,
+      "mine": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_0/hard_mined.jsonl",
+        "n_total": 65041,
+        "n_hard": 13009,
+        "hard_frac": 0.2,
+        "mean_sim_all": 0.2367592339029421,
+        "mean_sim_hard": 0.04211211803858761,
+        "init_checkpoint": null
+      },
+      "refine": {
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_0/hard_mined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_0/refined.jsonl",
+        "n_in": 13009,
+        "n_out": 1841,
+        "n_dropped": 11168,
+        "refine_max_hard": null,
+        "llm_stats": {
+          "n_llm_calls": 13009,
+          "n_accepted": 1841,
+          "n_rejected_sim": 4877,
+          "n_rejected_drift": 6291,
+          "n_rejected_empty": 0
+        }
+      },
+      "manifest": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_0/hard_mined.jsonl",
+        "refined_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_0/refined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_0/train_mixed.jsonl",
+        "n_orig": 65041,
+        "n_hard_unique": 13009,
+        "n_hard_extra": 1841,
+        "n_mixed": 66882,
+        "iter": 0
+      },
+      "train": {
+        "seed": 43,
+        "best_epoch": 4,
+        "best_similarity": 0.5702895442984758,
+        "best_train_similarity": 0.5553637301428838,
+        "best_val_similarity": 0.5702895442984758,
+        "monitor": "val_similarity",
+        "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_0/best_model.pt",
+        "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/thesis_self_v2_s43/iter_0/metrics.jsonl"
+      },
+      "val_mean_similarity": 0.5702390074729919,
+      "checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_0/best_model.pt",
+      "no_refine": false,
+      "gold_retrieval_eval": {
+        "returncode": 0,
+        "stdout_tail": "erNorm.weight \t Loaded\ntext_branch.encoder.layer.10.output.LayerNorm.bias \t Loaded\ntext_branch.encoder.layer.11.attention.self.query.weight \t Loaded\ntext_branch.encoder.layer.11.attention.self.query.bias \t Loaded\ntext_branch.encoder.layer.11.attention.self.key.weight \t Loaded\ntext_branch.encoder.layer.11.attention.self.key.bias \t Loaded\ntext_branch.encoder.layer.11.attention.self.value.weight \t Loaded\ntext_branch.encoder.layer.11.attention.self.value.bias \t Loaded\ntext_branch.encoder.layer.11.attention.output.dense.weight \t Loaded\ntext_branch.encoder.layer.11.attention.output.dense.bias \t Loaded\ntext_branch.encoder.layer.11.attention.output.LayerNorm.weight \t Loaded\ntext_branch.encoder.layer.11.attention.output.LayerNorm.bias \t Loaded\ntext_branch.encoder.layer.11.intermediate.dense.weight \t Loaded\ntext_branch.encoder.layer.11.intermediate.dense.bias \t Loaded\ntext_branch.encoder.layer.11.output.dense.weight \t Loaded\ntext_branch.encoder.layer.11.output.dense.bias \t Loaded\ntext_branch.encoder.layer.11.output.LayerNorm.weight \t Loaded\ntext_branch.encoder.layer.11.output.LayerNorm.bias \t Loaded\ntext_branch.pooler.dense.weight \t Loaded\ntext_branch.pooler.dense.bias \t Loaded\ntext_transform.sequential.0.weight \t Loaded\ntext_transform.sequential.0.bias \t Loaded\ntext_transform.sequential.3.weight \t Loaded\ntext_transform.sequential.3.bias \t Loaded\ntext_projection.0.weight \t Loaded\ntext_projection.0.bias \t Loaded\ntext_projection.2.weight \t Loaded\ntext_projection.2.bias \t Loaded\naudio_transform.sequential.0.weight \t Loaded\naudio_transform.sequential.0.bias \t Loaded\naudio_transform.sequential.3.weight \t Loaded\naudio_transform.sequential.3.bias \t Loaded\naudio_projection.0.weight \t Loaded\naudio_projection.0.bias \t Loaded\naudio_projection.2.weight \t Loaded\naudio_projection.2.bias \t Loaded\n{\n  \"written_json\": \"/home/mc46451/music-recommendation/data/eval/retrieval_vs_random_matrix.json\",\n  \"written_csv\": \"/home/mc46451/music-recommendation/data/eval/retrieval_vs_random_matrix.csv\"\n}\n",
+        "stderr_tail": "/home/mc46451/miniconda3/envs/ragweb/lib/python3.11/site-packages/torch/functional.py:505: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4317.)\n  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]\n\nLoading weights:   0%|          | 0/197 [00:00<?, ?it/s]\nLoading weights: 100%|██████████| 197/197 [00:00<00:00, 13999.49it/s]\n[transformers] \u001b[1mRobertaModel LOAD REPORT\u001b[0m from: roberta-base\nKey                       | Status     | \n--------------------------+------------+-\nlm_head.layer_norm.weight | UNEXPECTED | \nlm_head.bias              | UNEXPECTED | \nlm_head.layer_norm.bias   | UNEXPECTED | \nlm_head.dense.weight      | UNEXPECTED | \nlm_head.dense.bias        | UNEXPECTED | \npooler.dense.bias         | MISSING    | \npooler.dense.weight       | MISSING    | \n\nNotes:\n- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"
+      }
+    },
+    {
+      "run_id": "thesis_self_v2_s43",
+      "iter": 1,
+      "mine": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/hard_mined.jsonl",
+        "n_total": 65041,
+        "n_hard": 13009,
+        "hard_frac": 0.2,
+        "mean_sim_all": 0.554893698391586,
+        "mean_sim_hard": 0.3660097779193961,
+        "init_checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_0/best_model.pt"
+      },
+      "refine": {
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/hard_mined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/refined.jsonl",
+        "n_in": 13009,
+        "n_out": 6212,
+        "n_dropped": 6797,
+        "refine_max_hard": null,
+        "llm_stats": {
+          "n_llm_calls": 13009,
+          "n_accepted": 6212,
+          "n_rejected_sim": 6797,
+          "n_rejected_drift": 0,
+          "n_rejected_empty": 0
+        }
+      },
+      "manifest": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/hard_mined.jsonl",
+        "refined_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/refined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v2_s43/iter_1/train_mixed.jsonl",
+        "n_orig": 65041,
+        "n_hard_unique": 13009,
+        "n_hard_extra": 6212,
+        "n_mixed": 71253,
+        "iter": 1
+      },
+      "train": {
+        "seed": 43,
+        "best_epoch": 1,
+        "best_similarity": 0.5191816899975854,
+        "best_train_similarity": 0.49317281692184944,
+        "best_val_similarity": 0.5191816899975854,
+        "monitor": "val_similarity",
+        "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_1/best_model.pt",
+        "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/thesis_self_v2_s43/iter_1/metrics.jsonl"
+      },
+      "val_mean_similarity": 0.5196066498756409,
+      "checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v2_s43/iter_1/best_model.pt",
+      "no_refine": false,
+      "gold_retrieval_eval": {
+        "returncode": 0,
+        "stdout_tail": "erNorm.weight \t Loaded\ntext_branch.encoder.layer.10.output.LayerNorm.bias \t Loaded\ntext_branch.encoder.layer.11.attention.self.query.weight \t Loaded\ntext_branch.encoder.layer.11.attention.self.query.bias \t Loaded\ntext_branch.encoder.layer.11.attention.self.key.weight \t Loaded\ntext_branch.encoder.layer.11.attention.self.key.bias \t Loaded\ntext_branch.encoder.layer.11.attention.self.value.weight \t Loaded\ntext_branch.encoder.layer.11.attention.self.value.bias \t Loaded\ntext_branch.encoder.layer.11.attention.output.dense.weight \t Loaded\ntext_branch.encoder.layer.11.attention.output.dense.bias \t Loaded\ntext_branch.encoder.layer.11.attention.output.LayerNorm.weight \t Loaded\ntext_branch.encoder.layer.11.attention.output.LayerNorm.bias \t Loaded\ntext_branch.encoder.layer.11.intermediate.dense.weight \t Loaded\ntext_branch.encoder.layer.11.intermediate.dense.bias \t Loaded\ntext_branch.encoder.layer.11.output.dense.weight \t Loaded\ntext_branch.encoder.layer.11.output.dense.bias \t Loaded\ntext_branch.encoder.layer.11.output.LayerNorm.weight \t Loaded\ntext_branch.encoder.layer.11.output.LayerNorm.bias \t Loaded\ntext_branch.pooler.dense.weight \t Loaded\ntext_branch.pooler.dense.bias \t Loaded\ntext_transform.sequential.0.weight \t Loaded\ntext_transform.sequential.0.bias \t Loaded\ntext_transform.sequential.3.weight \t Loaded\ntext_transform.sequential.3.bias \t Loaded\ntext_projection.0.weight \t Loaded\ntext_projection.0.bias \t Loaded\ntext_projection.2.weight \t Loaded\ntext_projection.2.bias \t Loaded\naudio_transform.sequential.0.weight \t Loaded\naudio_transform.sequential.0.bias \t Loaded\naudio_transform.sequential.3.weight \t Loaded\naudio_transform.sequential.3.bias \t Loaded\naudio_projection.0.weight \t Loaded\naudio_projection.0.bias \t Loaded\naudio_projection.2.weight \t Loaded\naudio_projection.2.bias \t Loaded\n{\n  \"written_json\": \"/home/mc46451/music-recommendation/data/eval/retrieval_vs_random_matrix.json\",\n  \"written_csv\": \"/home/mc46451/music-recommendation/data/eval/retrieval_vs_random_matrix.csv\"\n}\n",
+        "stderr_tail": "/home/mc46451/miniconda3/envs/ragweb/lib/python3.11/site-packages/torch/functional.py:505: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4317.)\n  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]\n\nLoading weights:   0%|          | 0/197 [00:00<?, ?it/s]\nLoading weights: 100%|██████████| 197/197 [00:00<00:00, 12661.13it/s]\n[transformers] \u001b[1mRobertaModel LOAD REPORT\u001b[0m from: roberta-base\nKey                       | Status     | \n--------------------------+------------+-\nlm_head.bias              | UNEXPECTED | \nlm_head.dense.bias        | UNEXPECTED | \nlm_head.layer_norm.bias   | UNEXPECTED | \nlm_head.layer_norm.weight | UNEXPECTED | \nlm_head.dense.weight      | UNEXPECTED | \npooler.dense.bias         | MISSING    | \npooler.dense.weight       | MISSING    | \n\nNotes:\n- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"
+      }
+    }
+  ],
+  "outer_stopped_early": false
+}

@@ -1,8 +1,58 @@
-# Do not commit large binaries — everything else is tracked.
+# --- Models & weights (regenerate via scripts / Hugging Face) ---
 model/
+
+# --- Local audio / video corpora ---
 data/music_db/
 data/music_db_15s/
 data/movie_input/
+# Public eval corpora (Jamendo, MagnaTagATune, OpenMIC) — scripts/download_public_eval.sh
+data/public_eval/
+scripts/data/public_eval/
+scripts/data/log/
+# Stray MTAT split-zip copies (real data under data/public_eval/ or scripts/data/public_eval/)
+mp3.zip.*
+*.zip.00[0-9]
+
+# Mapping JSONL backups / preflight copies (regenerate from build scripts)
+data/mapping/*.bak
+data/mapping/*.bak*
+data/mapping/*.preflight.bak
+data/mapping/*.prefilter.bak
+data/mapping/*.valdrop.bak
+
+# Download job logs (regeneratable)
+data/log/public_eval_downloads/
+
+# --- Caches & derived indexes (regeneratable) ---
+data/cache/
+data/embeddings_cache/
+data/embeddings_cache*/
+data/index/
+*.faiss
+# Per-run FAISS built during ablations (keep REPORT.md / summary CSVs if desired)
+data/eval/**/index/
+
+# --- Large generated training / mining artifacts ---
+data/self_train/
+
+# --- Credentials & environment ---
+# SSH / credentials (keys belong in ~/.ssh/, never in the repo)
+.ssh/
+id_ed25519*
+id_rsa*
+*.pem
+*_rsa
+*_ed25519
+!*.pub.example
 .env
 .gitconfig
-docs/
+
+# --- IDE / tooling noise ---
+.codegraph/
+
+# --- Python / cluster noise ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+slurm-*.out
+

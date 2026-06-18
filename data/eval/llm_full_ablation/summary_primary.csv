@@ -1,0 +1,4 @@
+tag_id,query_text,top_k,n_positive,orig_precision_mean,orig_precision_stdev,orig_ndcg_delta_mean,orig_ndcg_delta_stdev,llm_precision_mean,llm_precision_stdev,llm_ndcg_delta_mean,llm_ndcg_delta_stdev,delta_precision,delta_ndcg,n_seeds
+inst_piano,piano,10,29,0.366667,0.047140,0.319560,0.032245,0.300000,0.000000,0.243654,0.000000,-0.066667,-0.075906,3
+inst_vocal,vocal,10,139,0.966667,0.047140,0.276966,0.036957,0.800000,0.000000,0.166114,0.000000,-0.166667,-0.110852,3
+mood_relaxing,relaxing,10,76,0.400000,0.000000,0.106335,0.010854,0.400000,0.000000,-0.022788,0.000000,0.000000,-0.129123,3

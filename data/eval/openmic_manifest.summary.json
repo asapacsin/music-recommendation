@@ -1,0 +1,8 @@
+{
+  "manifest": "/home/mc46451/music-recommendation/data/eval/openmic_manifest.jsonl",
+  "n_rows": 120,
+  "n_with_audio": 120,
+  "max_per_tag": 60,
+  "label_threshold": 0.5,
+  "note": "mood_relaxing not applicable; eval uses piano + vocal only"
+}

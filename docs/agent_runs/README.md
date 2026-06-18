@@ -13,6 +13,7 @@ File	Phase	Purpose
 PLAN.md	Plan	Defines objective, approach, commands, and expected outputs
 RUNLOG.md	Execute	Append-only execution log of commands, outputs, and observations
 REVIEW.md	Review	Final evaluation checklist (pass/fail + notes)
+STATE.md	Handoff	Optional — durable snapshot of main points for the next session (update when status changes)
 
 All templates are sourced from:
 

@@ -1,0 +1,6 @@
+{
+  "seed": 44,
+  "best_epoch": 5,
+  "best_similarity": 0.9079117173487857,
+  "monitor": "val_similarity"
+}

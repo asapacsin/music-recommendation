@@ -1,0 +1,24 @@
+{
+  "learning_rate": 0.0001,
+  "num_epochs": 20,
+  "batch_size": 32,
+  "temperature": 100,
+  "unfreeze_layers": {
+    "audio_projection": true,
+    "audio_transform": true,
+    "text_projection": true,
+    "text_transform": true
+  },
+  "early_stopping": {
+    "enabled": true,
+    "monitor": "val_similarity",
+    "mode": "max",
+    "patience": 2,
+    "min_epochs": 5
+  },
+  "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_llm_gated_iter0.jsonl",
+  "val_jsonl": "data/mapping/clap_val_15s.jsonl",
+  "seed": 44,
+  "save_path": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_llm_ablation_llm/seed_44/best_model.pt",
+  "metrics_path": "/home/mc46451/music-recommendation/data/log/finetune_runs/thesis_llm_ablation_llm/seed_44/metrics.jsonl"
+}

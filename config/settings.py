@@ -19,6 +19,8 @@ EMBEDDINGS_CACHE_DIR = DATA_DIR / "embeddings_cache"
 FILE_NAME_DIR = DATA_DIR / "file_name"
 MAPPING_DIR = DATA_DIR / "mapping"
 CLAP_TRAIN_JSONL = MAPPING_DIR / "clap_train_15s.jsonl"
+CLAP_VAL_JSONL = MAPPING_DIR / "clap_val_15s.jsonl"
+SELF_TRAIN_DATA_DIR = DATA_DIR / "self_train"
 LOG_DIR = DATA_DIR / "log"
 
 # ---------------------------------------------------------------------------
@@ -50,10 +52,17 @@ CLAP_MODEL_FILE = (
     if _clap_ckpt
     else CLAP_PRETRAINED_BACKBONE_FILE
 )
-LLM_MODEL_DIR = MODEL_DIR / "llama3"
+# Local Hugging Face snapshot for caption refinement (see scripts/download_llama31_8b.sh).
+LLM_HF_REPO_ID = os.environ.get(
+    "RAGWEB_LLM_HF_REPO_ID", "meta-llama/Meta-Llama-3.1-8B-Instruct"
+)
+_llm_dir_name = os.environ.get("RAGWEB_LLM_MODEL_DIR", "llama3.1-8b-instruct")
+LLM_MODEL_DIR = MODEL_DIR / _llm_dir_name
+LLM_LOAD_IN_4BIT = os.environ.get("RAGWEB_LLM_4BIT", "0").strip() in ("1", "true", "yes")
 BEST_MODEL_FILE = MODEL_DIR / "best_model.pt"
 # Fine-tuned CLAP checkpoints live next to the backbone under model/clap/.
 FINETUNE_MODEL_DIR = CLAP_DIR / "finetune"
+SELF_TRAIN_MODEL_DIR = CLAP_DIR / "self_train"
 
 
 def finetune_checkpoint_path(run_id: str, seed: int) -> Path:
@@ -69,6 +78,28 @@ def finetune_log_run_dir(run_id: str) -> Path:
 def finetune_log_seed_dir(run_id: str, seed: int) -> Path:
     return finetune_log_run_dir(run_id) / f"seed_{seed}"
 
+
+def self_train_run_data_dir(run_id: str) -> Path:
+    """Per-run self-train artifacts (hard_mined, train_mixed, iter_metrics)."""
+    return SELF_TRAIN_DATA_DIR / run_id
+
+
+def self_train_iter_data_dir(run_id: str, iter_n: int) -> Path:
+    return self_train_run_data_dir(run_id) / f"iter_{iter_n}"
+
+
+def self_train_log_run_dir(run_id: str) -> Path:
+    return LOG_DIR / "self_train_runs" / run_id
+
+
+def self_train_log_iter_dir(run_id: str, iter_n: int) -> Path:
+    return self_train_log_run_dir(run_id) / f"iter_{iter_n}"
+
+
+def self_train_checkpoint_path(run_id: str, iter_n: int) -> Path:
+    return SELF_TRAIN_MODEL_DIR / run_id / f"iter_{iter_n}" / "best_model.pt"
+
+
 # ---------------------------------------------------------------------------
 # Test data
 # ---------------------------------------------------------------------------
@@ -79,5 +110,6 @@ TEST_DATA_DIR = BASE_DIR / "tests" / "data"
 # ---------------------------------------------------------------------------
 for _d in [MUSIC_DB_DIR, FAISS_INDEX_DIR, QUERY_INPUT_DIR,
            EMBEDDINGS_CACHE_DIR, FILE_NAME_DIR, MAPPING_DIR, LOG_DIR,
-           LOG_DIR / "finetune_runs", CLAP_DIR, FINETUNE_MODEL_DIR]:
+           LOG_DIR / "finetune_runs", LOG_DIR / "self_train_runs",
+           CLAP_DIR, FINETUNE_MODEL_DIR, SELF_TRAIN_DATA_DIR, SELF_TRAIN_MODEL_DIR]:
     _d.mkdir(parents=True, exist_ok=True)

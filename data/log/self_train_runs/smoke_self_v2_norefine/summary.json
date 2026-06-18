@@ -1,0 +1,64 @@
+{
+  "run_id": "smoke_self_v2_norefine",
+  "n_iters": 1,
+  "hard_frac": 0.2,
+  "seed": 42,
+  "no_refine": true,
+  "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+  "val_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_val_15s.jsonl",
+  "max_samples": 8,
+  "gate_params": {
+    "min_sim_gain": 0.0,
+    "min_text_cos": 0.85
+  },
+  "refine_max_hard": null,
+  "per_iter": [
+    {
+      "run_id": "smoke_self_v2_norefine",
+      "iter": 0,
+      "mine": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_norefine/iter_0/hard_mined.jsonl",
+        "n_total": 8,
+        "n_hard": 2,
+        "hard_frac": 0.2,
+        "mean_sim_all": 0.07314641820266843,
+        "mean_sim_hard": 0.005346262827515602,
+        "init_checkpoint": null
+      },
+      "refine": {
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_norefine/iter_0/hard_mined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_norefine/iter_0/refined.jsonl",
+        "n_in": 2,
+        "n_out": 2,
+        "n_dropped": 0,
+        "refine_max_hard": null
+      },
+      "manifest": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_norefine/iter_0/hard_mined.jsonl",
+        "refined_jsonl": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_norefine/iter_0/refined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_norefine/iter_0/train_mixed.jsonl",
+        "n_orig": 8,
+        "n_hard_unique": 2,
+        "n_hard_extra": 2,
+        "n_mixed": 10,
+        "iter": 0
+      },
+      "train": {
+        "seed": 42,
+        "best_epoch": 1,
+        "best_similarity": 0.19439437985420227,
+        "best_train_similarity": 0.060631800442934036,
+        "best_val_similarity": 0.19439437985420227,
+        "monitor": "val_similarity",
+        "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/smoke_self_v2_norefine/iter_0/best_model.pt",
+        "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/smoke_self_v2_norefine/iter_0/metrics.jsonl"
+      },
+      "val_mean_similarity": 0.08701995015144348,
+      "checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/smoke_self_v2_norefine/iter_0/best_model.pt",
+      "no_refine": true
+    }
+  ],
+  "outer_stopped_early": false
+}

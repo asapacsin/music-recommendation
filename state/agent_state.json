@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "last_updated": "2026-06-09",
+  "PLAN": {
+    "high_level_goal": "Music CLAP thesis: tag ablation + multi-dataset public OOD tests",
+    "current_step_index": 5,
+    "tasks": [
+      {
+        "id": "public_ood_mtat_openmic_impl",
+        "status": "completed",
+        "description": "MTAT + OpenMIC manifests, shared public retrieval, run_public_eval.sh"
+      },
+      {
+        "id": "public_ood_docs_and_progress",
+        "status": "completed",
+        "description": "docs/PUBLIC_OOD_EVAL.md + progress_monitor public_ood section"
+      },
+      {
+        "id": "public_ood_data_prep",
+        "status": "in_progress",
+        "description": "Jamendo 297/297 done; MTAT mp3 extract + OpenMIC download pending"
+      },
+      {
+        "id": "public_ood_eval_run",
+        "status": "pending",
+        "description": "Jamendo-only eval now possible; full 3-dataset after MTAT+OpenMIC"
+      },
+      {
+        "id": "tag_llm_ablation_run",
+        "status": "in_progress",
+        "description": "Check tag_llm_ablation REPORT.md / job 121197 eval completion"
+      }
+    ],
+    "next_actions": [
+      "Wait for OpenMIC Slurm 121212 (~43% tarball); bash scripts/status_public_eval_download.sh",
+      "When OVERALL COMPLETED: DATASETS=\"jamendo mtat openmic\" ARMS=\"pretrained thesis_tag_only thesis_tag_llm\" sbatch scripts/sbatch_public_eval.sh"
+    ]
+  },
+  "CODE": {
+    "files_created": ["docs/PUBLIC_OOD_EVAL.md"],
+    "files_modified": [
+      "scripts/lib/public_eval_download_common.sh",
+      "scripts/download_mtat_backend.sh",
+      "scripts/download_openmic_backend.sh",
+      "scripts/download_jamendo_five_tag_backend.sh",
+      "scripts/status_public_eval_download.sh",
+      "scripts/sbatch_download_public_eval.sh",
+      "docs/PUBLIC_OOD_EVAL.md",
+      "app/progress_monitor.py",
+      "docs/PROGRESS_MONITOR.md",
+      "docs/DOWNLOAD_STATUS.md",
+      "AGENTS.md",
+      "tests/test_progress_monitor.py",
+      "docs/PROGRESS.md",
+      "data/eval/progress_snapshot.json",
+      "data/eval/download_status_snapshot.json",
+      "state/agent_state.json"
+    ],
+    "key_decisions": [
+      "Download backends write {dataset}.status.json and exit 1 on FAILED; status script shows big banners",
+      "COMPLETED only when disk + manifest checks pass (not just Done in log)",
+      "Public OOD tracked in progress_snapshot.public_ood with manifest audio_ready + eval CSV counts",
+      "Download counts merged from download_status_snapshot.json"
+    ],
+    "apis_introduced": [
+      "progress_monitor._public_ood_status",
+      "progress_monitor._manifest_audio_readiness"
+    ]
+  },
+  "TEST": {
+    "cases": [
+      {
+        "name": "tests/test_progress_monitor.py",
+        "result": "pass",
+        "detail": "7 passed"
+      },
+      {
+        "name": "openmic_backend _n_ogg fix + resubmit",
+        "result": "pass",
+        "detail": "Jobs 121211 MTAT + 121212 OpenMIC RUNNING; exit 2 overall"
+      }
+    ],
+    "bugs_discovered": []
+  },
+  "REVIEW": {
+    "quality_notes": [
+      "PUBLIC_OOD_EVAL.md is human runbook; PROGRESS.md section is auto-generated"
+    ],
+    "edge_cases": [
+      "Jamendo eval runnable now; MTAT manifest needs rebuild after mp3 extract"
+    ],
+    "verdict": "docs + monitor PASS"
+  },
+  "MEMORY": {
+    "public_ood_guide": "docs/PUBLIC_OOD_EVAL.md",
+    "progress_public_section": "docs/PROGRESS.md ## Public OOD test",
+    "jamendo_ready": "297/297 five-tag MP3s on disk",
+    "entry_commands": {
+      "public_ood_guide": "docs/PUBLIC_OOD_EVAL.md",
+      "progress": "bash scripts/refresh_progress.sh",
+      "download_status": "bash scripts/refresh_download_status.sh",
+      "jamendo_public_eval": "DATASETS=jamendo ARMS=\"pretrained thesis_tag_only thesis_tag_llm\" bash scripts/run_public_eval.sh"
+    }
+  }
+}

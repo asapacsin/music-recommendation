@@ -1,0 +1,17 @@
+{
+  "manifest": "/home/mc46451/music-recommendation/data/eval/mtat_manifest.jsonl",
+  "n_rows": 179,
+  "n_with_audio": 179,
+  "max_per_tag": 60,
+  "vocal_cols": [
+    "vocals",
+    "male vocal",
+    "female voice",
+    "singer",
+    "voice"
+  ],
+  "relax_cols": [
+    "calm",
+    "mellow"
+  ]
+}

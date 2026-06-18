@@ -1,0 +1,96 @@
+{
+  "run_id": "thesis_self_v1",
+  "n_iters": 2,
+  "hard_frac": 0.2,
+  "seed": 42,
+  "no_refine": true,
+  "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+  "val_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_val_15s.jsonl",
+  "max_samples": null,
+  "per_iter": [
+    {
+      "run_id": "thesis_self_v1",
+      "iter": 0,
+      "mine": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_0/hard_mined.jsonl",
+        "n_total": 665,
+        "n_hard": 133,
+        "hard_frac": 0.2,
+        "mean_sim_all": 0.2869119489551487,
+        "mean_sim_hard": 0.1310211623969831,
+        "init_checkpoint": null
+      },
+      "refine": {
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_0/hard_mined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_0/refined.jsonl",
+        "n_in": 133,
+        "n_out": 133,
+        "n_dropped": 0
+      },
+      "manifest": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_0/hard_mined.jsonl",
+        "refined_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_0/refined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_0/train_mixed.jsonl",
+        "n_orig": 665,
+        "n_hard_unique": 133,
+        "n_hard_extra": 133,
+        "n_mixed": 798,
+        "iter": 0
+      },
+      "train": {
+        "seed": 42,
+        "best_epoch": 5,
+        "best_similarity": 0.3649139702320099,
+        "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v1/iter_0/best_model.pt",
+        "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/thesis_self_v1/iter_0/metrics.jsonl"
+      },
+      "val_mean_similarity": 0.2855781614780426,
+      "checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v1/iter_0/best_model.pt",
+      "no_refine": true
+    },
+    {
+      "run_id": "thesis_self_v1",
+      "iter": 1,
+      "mine": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_1/hard_mined.jsonl",
+        "n_total": 665,
+        "n_hard": 133,
+        "hard_frac": 0.2,
+        "mean_sim_all": 0.3724020937331637,
+        "mean_sim_hard": 0.27167421781030815,
+        "init_checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v1/iter_0/best_model.pt"
+      },
+      "refine": {
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_1/hard_mined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_1/refined.jsonl",
+        "n_in": 133,
+        "n_out": 133,
+        "n_dropped": 0
+      },
+      "manifest": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_1/hard_mined.jsonl",
+        "refined_jsonl": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_1/refined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/thesis_self_v1/iter_1/train_mixed.jsonl",
+        "n_orig": 665,
+        "n_hard_unique": 133,
+        "n_hard_extra": 133,
+        "n_mixed": 798,
+        "iter": 1
+      },
+      "train": {
+        "seed": 42,
+        "best_epoch": 5,
+        "best_similarity": 0.39615824818611145,
+        "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v1/iter_1/best_model.pt",
+        "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/thesis_self_v1/iter_1/metrics.jsonl"
+      },
+      "val_mean_similarity": 0.3150825798511505,
+      "checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/thesis_self_v1/iter_1/best_model.pt",
+      "no_refine": true
+    }
+  ]
+}

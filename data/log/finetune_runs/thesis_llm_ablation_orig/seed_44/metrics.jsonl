@@ -1,0 +1,11 @@
+{"seed": 44, "epoch": 2, "loss": 2.692734479904175, "val_similarity": 0.43388180320775543, "checkpoint_metric": 0.43388180320775543, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 3, "loss": 2.6640706062316895, "val_similarity": 0.5564750827480803, "checkpoint_metric": 0.5564750827480803, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 1, "loss": 2.7029149532318115, "train_similarity": 0.3194546237136823, "similarity": 0.3194546237136823, "val_similarity": 0.3212519587649188, "checkpoint_metric": 0.3212519587649188, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 4, "loss": 2.638505220413208, "val_similarity": 0.6056421228841034, "checkpoint_metric": 0.6056421228841034, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 5, "loss": 2.6321029663085938, "val_similarity": 0.5301650961624007, "checkpoint_metric": 0.5301650961624007, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 2, "loss": 2.693359136581421, "train_similarity": 0.42855037529034046, "similarity": 0.42855037529034046, "val_similarity": 0.43084233194762356, "checkpoint_metric": 0.43084233194762356, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 6, "loss": 2.619154453277588, "val_similarity": 0.44291250810352045, "checkpoint_metric": 0.44291250810352045, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 3, "loss": 2.6531777381896973, "train_similarity": 0.5481079017574761, "similarity": 0.5481079017574761, "val_similarity": 0.5511692427746538, "checkpoint_metric": 0.5511692427746538, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 4, "loss": 2.628831148147583, "train_similarity": 0.5965775038358373, "similarity": 0.5965775038358373, "val_similarity": 0.6063136737253861, "checkpoint_metric": 0.6063136737253861, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 5, "loss": 2.62296199798584, "train_similarity": 0.504463345271976, "similarity": 0.504463345271976, "val_similarity": 0.5183384790296816, "checkpoint_metric": 0.5183384790296816, "monitor": "val_similarity"}
+{"seed": 44, "epoch": 6, "loss": 2.671696901321411, "train_similarity": 0.439464547878588, "similarity": 0.439464547878588, "val_similarity": 0.45352760556979366, "checkpoint_metric": 0.45352760556979366, "monitor": "val_similarity"}

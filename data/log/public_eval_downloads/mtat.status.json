@@ -1,0 +1,7 @@
+{
+  "dataset": "mtat",
+  "state": "COMPLETED",
+  "updated_utc": "2026-06-09T04:41:34Z",
+  "message": "25863 mp3 files; manifest 179/179 audio ready",
+  "log_file": "/home/mc46451/music-recommendation/data/log/public_eval_downloads/mtat_backend.log"
+}

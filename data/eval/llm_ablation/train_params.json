@@ -1,0 +1,12 @@
+{
+  "val_jsonl": "data/mapping/clap_val_15s.jsonl",
+  "num_epochs": 20,
+  "batch_size": 32,
+  "early_stopping": {
+    "enabled": true,
+    "monitor": "val_similarity",
+    "mode": "max",
+    "patience": 2,
+    "min_epochs": 5
+  }
+}

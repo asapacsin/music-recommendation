@@ -10,6 +10,8 @@ librosa>=0.10.2.post1
 # init_model / text_processing (load_map, descriptions)
 mutagen>=1.47
 transformers>=4.36.0
+accelerate>=0.27.0
+# Optional for RAGWEB_LLM_4BIT=1: bitsandbytes>=0.43.0
 ftfy
 regex
 # OpenAI CLAP text path uses `import clip`

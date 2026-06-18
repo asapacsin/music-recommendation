@@ -1,0 +1,12 @@
+{
+  "updated_utc": "2026-06-18T03:58:44Z",
+  "jamendo_five_tag_mp3": 297,
+  "jamendo_five_tag_target": 297,
+  "jamendo_manifest_audio_path_lines": 297,
+  "jamendo_five_tag_job": null,
+  "mtat_mp3": 25863,
+  "mtat_zip001_bytes": 1100000000,
+  "openmic_ogg": 20000,
+  "llama_safetensor_shards": 4,
+  "llama_safetensor_shards_expected": 4
+}

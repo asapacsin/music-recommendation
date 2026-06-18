@@ -87,15 +87,21 @@ else
   echo "SKIP_EVAL=1 — using existing matrices in $ABLATION_DIR (and legacy data/eval/ if needed)"
 fi
 
-echo "=== Ablation report ==="
+echo "=== Checkpoint comparison (pretrained vs fine-tuned) ==="
 python -m app.data_handling.music_eval_ablation_report \
   --ablation-dir "$ABLATION_DIR" \
   --pretrained-csv "$ABLATION_DIR/pretrained.csv" \
   --top-k "$REPORT_TOP_K" \
   --run-id "$RUN_ID"
 
+echo "=== Query-set ablation (expanding tag queries) ==="
+python -m app.data_handling.music_eval_query_ablation_report \
+  --ablation-dir "$ABLATION_DIR" \
+  --pretrained-csv "$ABLATION_DIR/pretrained.csv" \
+  --top-k "$REPORT_TOP_K"
+
 echo "Done."
 echo "  Matrices: $ABLATION_DIR/pretrained.csv, $ABLATION_DIR/ft_seed*.csv"
-echo "  Report:   $ABLATION_DIR/summary_primary.csv (piano/vocal/relaxing @ K=$REPORT_TOP_K)"
-echo "            $ABLATION_DIR/summary_all_queries.csv"
-echo "            $ABLATION_DIR/summary.json"
+echo "  Checkpoint: $ABLATION_DIR/summary_primary.csv (piano/vocal/relaxing @ K=$REPORT_TOP_K)"
+echo "  Query ablation: $ABLATION_DIR/query_ablation_report.md"
+echo "                  $ABLATION_DIR/query_ablation_tiers.csv"

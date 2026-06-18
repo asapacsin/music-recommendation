@@ -1,0 +1,71 @@
+{
+  "run_id": "smoke_self_v2_refine",
+  "n_iters": 1,
+  "hard_frac": 0.2,
+  "seed": 42,
+  "no_refine": false,
+  "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+  "val_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_val_15s.jsonl",
+  "max_samples": 8,
+  "gate_params": {
+    "min_sim_gain": 0.0,
+    "min_text_cos": 0.85
+  },
+  "refine_max_hard": 2,
+  "per_iter": [
+    {
+      "run_id": "smoke_self_v2_refine",
+      "iter": 0,
+      "mine": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_refine/iter_0/hard_mined.jsonl",
+        "n_total": 8,
+        "n_hard": 2,
+        "hard_frac": 0.2,
+        "mean_sim_all": 0.060717418789863586,
+        "mean_sim_hard": -0.015726028010249138,
+        "init_checkpoint": null
+      },
+      "refine": {
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_refine/iter_0/hard_mined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_refine/iter_0/refined.jsonl",
+        "n_in": 2,
+        "n_out": 0,
+        "n_dropped": 2,
+        "refine_max_hard": 2,
+        "llm_stats": {
+          "n_llm_calls": 2,
+          "n_accepted": 0,
+          "n_rejected_sim": 0,
+          "n_rejected_drift": 2,
+          "n_rejected_empty": 0
+        }
+      },
+      "manifest": {
+        "train_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_15s.jsonl",
+        "hard_jsonl": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_refine/iter_0/hard_mined.jsonl",
+        "refined_jsonl": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_refine/iter_0/refined.jsonl",
+        "out_path": "/home/mc46451/music-recommendation/data/self_train/smoke_self_v2_refine/iter_0/train_mixed.jsonl",
+        "n_orig": 8,
+        "n_hard_unique": 2,
+        "n_hard_extra": 2,
+        "n_mixed": 10,
+        "iter": 0
+      },
+      "train": {
+        "seed": 42,
+        "best_epoch": 1,
+        "best_similarity": 0.19491131603717804,
+        "best_train_similarity": 0.06170700117945671,
+        "best_val_similarity": 0.19491131603717804,
+        "monitor": "val_similarity",
+        "save_path": "/home/mc46451/music-recommendation/model/clap/self_train/smoke_self_v2_refine/iter_0/best_model.pt",
+        "metrics_path": "/home/mc46451/music-recommendation/data/log/self_train_runs/smoke_self_v2_refine/iter_0/metrics.jsonl"
+      },
+      "val_mean_similarity": 0.08782734721899033,
+      "checkpoint": "/home/mc46451/music-recommendation/model/clap/self_train/smoke_self_v2_refine/iter_0/best_model.pt",
+      "no_refine": false
+    }
+  ],
+  "outer_stopped_early": false
+}

@@ -67,6 +67,18 @@ Make sure the backbone `.pt` exists under `model/clap/` before CLAP indexing/eva
 
 **Fine-tuned checkpoint for eval:** set **`RAGWEB_CLAP_CHECKPOINT`** to an absolute path of a saved `best_model.pt` (e.g. from `model/clap/finetune/<run_id>/seed_<n>/`). **Step-by-step fine-tune + eval:** [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md). Checklist / thesis notes: [`docs/cloud_finetune_protocol.md`](docs/cloud_finetune_protocol.md).
 
+### 4) Optional: local Llama 3.1 (caption refinement, later)
+
+Weights are **not** in git. Download once for the self-training / LLM refiner path:
+
+```bash
+# Hugging Face: accept license + huggingface-cli login
+bash scripts/download_llama31_8b.sh
+python -m app.llm_local --smoke-test
+```
+
+Details: [`docs/LLM_LOCAL.md`](docs/LLM_LOCAL.md). Env: `RAGWEB_LLM_MODEL_DIR`, `RAGWEB_LLM_HF_REPO_ID`, `RAGWEB_LLM_4BIT=1`.
+
 ## Directory conventions
 
 - Source music: `data/music_db`
@@ -372,6 +384,10 @@ Outputs:
 CSV columns: `query_text` (prompt with trailing ` music` removed for CLAP where applicable), `top_k`, `n_pool`, `n_positive`, `prevalence`, `precision_at_k`, `precision_delta` (vs prevalence), `ndcg_at_k`, `ndcg_random_mean`, `ndcg_delta`. With `--include-tempo`, append **`tempo_accuracy`**, **`tempo_macro_f1`**, **`tempo_n_songs`** (same values on every row; songs = unique pool basenames with valid `program_tempo`). JSON has the same rows under `rows` plus `meta` (paths, pool size, seeds, skipped query ids, `include_tempo_queries`; with `--include-tempo`, `meta.tempo` includes accuracy, macro_f1, confusion matrix, per-class breakdown).
 
 **Baseline semantics (thesis):** `precision_delta` / `ndcg_delta` compare retrieval ranking to a **random** baseline on the same gold pool — large deltas are expected and are **not** the main claim. The primary comparison is **pretrained CLAP vs fine-tuned CLAP** on the **same** metadata FAISS index and gold pool (`--no-include-tempo-queries` for headline style rows). Re-run pretrained eval without `RAGWEB_CLAP_CHECKPOINT`; fine-tuned eval with `RAGWEB_CLAP_CHECKPOINT` pointing at each `seed_*/best_model.pt` (see [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md) §3).
+
+## Thesis questions (A–D)
+
+Human-readable map of experiments, run IDs, report paths, and status: **[`docs/THESIS_QUESTIONS.md`](docs/THESIS_QUESTIONS.md)**. Live cluster progress: **[`docs/PROGRESS.md`](docs/PROGRESS.md)** (`bash scripts/refresh_progress.sh`) — guide: **[`docs/PROGRESS_MONITOR.md`](docs/PROGRESS_MONITOR.md)**.
 
 ## Thesis results (headline numbers)
 

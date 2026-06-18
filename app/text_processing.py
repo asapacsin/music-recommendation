@@ -1,7 +1,5 @@
 import clip
 from mutagen.easyid3 import EasyID3
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
 import json
 from app.utils import translator as trans
@@ -74,12 +72,12 @@ def llm_describe(prompt,model,tokenizer,max_new_tokens=200,devices="cpu"):
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 def load_model(model_path=None, device="cpu"):
-    if model_path is None:
-        model_path = settings.LLM_MODEL_DIR
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    device = "cuda" if torch.cuda.is_available() and device == "cuda" else "cpu"
-    model = AutoModelForCausalLM.from_pretrained(model_path, dtype=torch.float16, device_map=device)
-    return model, tokenizer
+    """Load local instruct LM (default Llama 3.1 8B under ``settings.LLM_MODEL_DIR``)."""
+    from app.llm_local import load_llm
+
+    path = model_path if model_path is not None else settings.LLM_MODEL_DIR
+    dev = "cuda" if device == "cuda" else "auto"
+    return load_llm(path, device=dev)
 
 def save_descriptions(descriptions, output_path=None):
     """

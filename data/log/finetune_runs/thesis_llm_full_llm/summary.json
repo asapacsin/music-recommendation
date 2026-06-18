@@ -1,0 +1,45 @@
+{
+  "run_id": "thesis_llm_full_llm",
+  "log_run_root": "/home/mc46451/music-recommendation/data/log/finetune_runs/thesis_llm_full_llm",
+  "model_run_root": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_llm_full_llm",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "best_epoch": 4,
+      "best_similarity": 0.48033739814368726,
+      "best_train_similarity": -Infinity,
+      "best_val_similarity": 0.48033739814368726,
+      "monitor": "val_similarity",
+      "save_path": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_llm_full_llm/seed_42/best_model.pt",
+      "metrics_path": "/home/mc46451/music-recommendation/data/log/finetune_runs/thesis_llm_full_llm/seed_42/metrics.jsonl"
+    },
+    {
+      "seed": 43,
+      "best_epoch": 4,
+      "best_similarity": 0.48033739814368726,
+      "best_train_similarity": -Infinity,
+      "best_val_similarity": 0.48033739814368726,
+      "monitor": "val_similarity",
+      "save_path": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_llm_full_llm/seed_43/best_model.pt",
+      "metrics_path": "/home/mc46451/music-recommendation/data/log/finetune_runs/thesis_llm_full_llm/seed_43/metrics.jsonl"
+    },
+    {
+      "seed": 44,
+      "best_epoch": 4,
+      "best_similarity": 0.48033739814368726,
+      "best_train_similarity": -Infinity,
+      "best_val_similarity": 0.48033739814368726,
+      "monitor": "val_similarity",
+      "save_path": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_llm_full_llm/seed_44/best_model.pt",
+      "metrics_path": "/home/mc46451/music-recommendation/data/log/finetune_runs/thesis_llm_full_llm/seed_44/metrics.jsonl"
+    }
+  ],
+  "best_similarity_mean": 0.48033739814368726,
+  "best_similarity_stdev": 0.0,
+  "n_seeds_finite": 3
+}

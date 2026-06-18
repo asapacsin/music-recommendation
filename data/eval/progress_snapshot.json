@@ -1,0 +1,716 @@
+{
+  "updated_utc": "2026-06-18T03:58:44Z",
+  "thesis_questions": [
+    {
+      "id": "A",
+      "label": "Fine-tune vs pretrained",
+      "status": "partial",
+      "report": null,
+      "report_exists": false,
+      "artifacts": [
+        "data/eval/retrieval_vs_random_matrix copy.csv",
+        "data/eval/retrieval_vs_random_matrix.csv"
+      ],
+      "runs": []
+    },
+    {
+      "id": "B",
+      "label": "Grok vs LLM captions",
+      "status": "done",
+      "report": "data/eval/llm_full_ablation/REPORT.md",
+      "report_exists": true,
+      "artifacts": [],
+      "runs": [
+        {
+          "run_id": "thesis_llm_full_llm",
+          "status": "done",
+          "n_complete": 3,
+          "n_total": 3,
+          "seeds": [
+            {
+              "seed": 42,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 4,
+              "best_val_similarity": 0.48033739814368726
+            },
+            {
+              "seed": 43,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 4,
+              "best_val_similarity": 0.48033739814368726
+            },
+            {
+              "seed": 44,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 4,
+              "best_val_similarity": 0.48033739814368726
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "label": "Self-train loop",
+      "status": "done",
+      "report": null,
+      "report_exists": false,
+      "artifacts": [],
+      "runs": []
+    },
+    {
+      "id": "D",
+      "label": "Tag-only vs tag\u2192LLM",
+      "status": "done",
+      "report": "data/eval/tag_llm_ablation/REPORT.md",
+      "report_exists": true,
+      "artifacts": [],
+      "runs": [
+        {
+          "run_id": "thesis_tag_only",
+          "status": "done",
+          "n_complete": 3,
+          "n_total": 3,
+          "seeds": [
+            {
+              "seed": 42,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 5,
+              "best_val_similarity": 0.9079117173487857
+            },
+            {
+              "seed": 43,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 5,
+              "best_val_similarity": 0.9079117173487857
+            },
+            {
+              "seed": 44,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 5,
+              "best_val_similarity": 0.9079117173487857
+            }
+          ]
+        },
+        {
+          "run_id": "thesis_tag_llm",
+          "status": "done",
+          "n_complete": 3,
+          "n_total": 3,
+          "seeds": [
+            {
+              "seed": 42,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 6,
+              "best_val_similarity": 0.5465295002205807
+            },
+            {
+              "seed": 43,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 6,
+              "best_val_similarity": 0.5465295002205807
+            },
+            {
+              "seed": 44,
+              "checkpoint": true,
+              "training_complete": true,
+              "best_epoch": 6,
+              "best_val_similarity": 0.5465295002205807
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "question_d_units": [
+    {
+      "unit": "0",
+      "label": "Tag JSONL",
+      "state": "done",
+      "detail": {
+        "lines": 65041
+      }
+    },
+    {
+      "unit": "1",
+      "label": "Llama tag\u2192text",
+      "state": "done",
+      "detail": {
+        "song_lines": 3440,
+        "clip_lines": 65041
+      }
+    },
+    {
+      "unit": "2",
+      "label": "Audio cache",
+      "state": "done",
+      "detail": {
+        "cache_index_bytes": 13272331
+      }
+    },
+    {
+      "unit": "3",
+      "label": "FT thesis_tag_only (seeds 42\u201344)",
+      "state": "done",
+      "detail": {
+        "n_complete": 3,
+        "n_total": 3
+      }
+    },
+    {
+      "unit": "4",
+      "label": "FT thesis_tag_llm (seeds 42\u201344)",
+      "state": "done",
+      "detail": {
+        "n_complete": 3,
+        "n_total": 3
+      }
+    },
+    {
+      "unit": "5",
+      "label": "Gold eval + REPORT.md",
+      "state": "done",
+      "detail": {}
+    }
+  ],
+  "question_d_training_recipe": {
+    "question": "Does tag\u2192LLM training text beat short tag strings for gold tag retrieval?",
+    "arms": {
+      "thesis_tag_only": {
+        "run_id": "thesis_tag_only",
+        "train_jsonl": "data/mapping/clap_train_tag.jsonl",
+        "train_text": "Short tags from gold multihot (piano, vocal, relaxing) or fallback \"music\""
+      },
+      "thesis_tag_llm": {
+        "run_id": "thesis_tag_llm",
+        "train_jsonl": "data/mapping/clap_train_tag_llm.jsonl",
+        "train_text": "Llama-expanded sentence per song (same tags), copied to all 15s clips"
+      }
+    },
+    "shared": {
+      "train_clips": 65041,
+      "val_jsonl": "data/mapping/clap_val_15s.jsonl",
+      "val_text": "Grok-style captions on held-out clips (same val for both arms)",
+      "audio": "15s segments under data/music_db_15s/; backbone audio cache used at train time",
+      "backbone": "Frozen CLAP AudioSet; train audio/text projection + transform heads",
+      "loss": "Contrastive (scaled audio\u2013text similarity, batch cross-entropy)",
+      "params_file": "data/eval/llm_ablation/train_params.json"
+    },
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "hyperparams": {
+      "num_epochs": 20,
+      "batch_size": 32,
+      "learning_rate": 0.0001
+    },
+    "early_stopping": {
+      "monitor": "val_similarity",
+      "mode": "max",
+      "patience": 2,
+      "min_epochs": 5,
+      "note": "val_similarity = mean diagonal audio\u2013text match on val JSONL; not the thesis retrieval metric (P@K / nDCG on gold \u2014 Unit 5)"
+    },
+    "checkpoints": "model/clap/finetune/<run_id>/seed_<n>/best_model.pt",
+    "thesis_eval": "Gold retrieval vs random \u2192 data/eval/tag_llm_ablation/REPORT.md (Unit 5)"
+  },
+  "public_ood": {
+    "status": "partial",
+    "report": "data/eval/REPORT.md",
+    "report_exists": false,
+    "default_arms": [
+      "pretrained",
+      "thesis_ft_v1",
+      "thesis_tag_only",
+      "thesis_tag_llm"
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "download_snapshot_utc": "2026-06-18T03:58:44Z",
+    "download_counts": {
+      "jamendo_five_tag_mp3": 297,
+      "jamendo_five_tag_target": 297,
+      "mtat_mp3": 25863,
+      "openmic_ogg": 20000
+    },
+    "datasets": [
+      {
+        "dataset": "jamendo",
+        "manifest": {
+          "manifest": "data/eval/jamendo_five_tag_manifest.jsonl",
+          "manifest_exists": true,
+          "n_rows": 297,
+          "n_audio_ready": 297
+        },
+        "prep_state": "done",
+        "eval_dir": "data/eval/jamendo_public",
+        "eval_csvs": 3,
+        "eval_expected": 12,
+        "eval_state": "partial"
+      },
+      {
+        "dataset": "mtat",
+        "manifest": {
+          "manifest": "data/eval/mtat_manifest.jsonl",
+          "manifest_exists": true,
+          "n_rows": 179,
+          "n_audio_ready": 179
+        },
+        "prep_state": "done",
+        "eval_dir": "data/eval/mtat_public",
+        "eval_csvs": 0,
+        "eval_expected": 12,
+        "eval_state": "next"
+      },
+      {
+        "dataset": "openmic",
+        "manifest": {
+          "manifest": "data/eval/openmic_manifest.jsonl",
+          "manifest_exists": true,
+          "n_rows": 120,
+          "n_audio_ready": 120
+        },
+        "prep_state": "done",
+        "eval_dir": "data/eval/openmic_public",
+        "eval_csvs": 0,
+        "eval_expected": 12,
+        "eval_state": "next"
+      }
+    ],
+    "units": [
+      {
+        "dataset": "jamendo",
+        "step": "manifest + audio",
+        "state": "done",
+        "detail": "297/297 audio_ready"
+      },
+      {
+        "dataset": "jamendo",
+        "step": "retrieval eval",
+        "state": "partial",
+        "detail": "3/12 csvs"
+      },
+      {
+        "dataset": "mtat",
+        "step": "manifest + audio",
+        "state": "done",
+        "detail": "179/179 audio_ready"
+      },
+      {
+        "dataset": "mtat",
+        "step": "retrieval eval",
+        "state": "next",
+        "detail": "0/12 csvs"
+      },
+      {
+        "dataset": "openmic",
+        "step": "manifest + audio",
+        "state": "done",
+        "detail": "120/120 audio_ready"
+      },
+      {
+        "dataset": "openmic",
+        "step": "retrieval eval",
+        "state": "next",
+        "detail": "0/12 csvs"
+      }
+    ],
+    "eval_expected_total": 36,
+    "eval_csvs_total": 3,
+    "guide": "docs/PUBLIC_OOD_EVAL.md",
+    "orchestrator": "bash scripts/run_public_ood_pipeline.sh",
+    "pipeline_units": [
+      {
+        "unit": "0",
+        "label": "Jamendo five-tag download + manifest",
+        "state": "done",
+        "detail": {
+          "audio_ready": "297/297",
+          "download_status": "\u2014"
+        },
+        "dataset": "jamendo"
+      },
+      {
+        "unit": "1",
+        "label": "MTAT download + manifest",
+        "state": "done",
+        "detail": {
+          "audio_ready": "179/179",
+          "download_status": "COMPLETED"
+        },
+        "dataset": "mtat"
+      },
+      {
+        "unit": "2",
+        "label": "OpenMIC download + manifest",
+        "state": "done",
+        "detail": {
+          "audio_ready": "120/120",
+          "download_status": "COMPLETED"
+        },
+        "dataset": "openmic"
+      },
+      {
+        "unit": "3",
+        "label": "Public retrieval eval (per-arm CSVs)",
+        "state": "running",
+        "detail": {
+          "csvs": "3/36",
+          "datasets_ready": "jamendo,mtat,openmic",
+          "arms": "pretrained,thesis_ft_v1,thesis_tag_only,thesis_tag_llm"
+        }
+      },
+      {
+        "unit": "4",
+        "label": "Combined data/eval/REPORT.md",
+        "state": "running",
+        "detail": {
+          "report_exists": false
+        }
+      }
+    ],
+    "eval_matrix": [
+      {
+        "dataset": "jamendo",
+        "arms": {
+          "pretrained": {
+            "csv_done": 3,
+            "csv_expected": 3
+          },
+          "thesis_ft_v1": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_tag_only": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_tag_llm": {
+            "csv_done": 0,
+            "csv_expected": 3
+          }
+        }
+      },
+      {
+        "dataset": "mtat",
+        "arms": {
+          "pretrained": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_ft_v1": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_tag_only": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_tag_llm": {
+            "csv_done": 0,
+            "csv_expected": 3
+          }
+        }
+      },
+      {
+        "dataset": "openmic",
+        "arms": {
+          "pretrained": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_ft_v1": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_tag_only": {
+            "csv_done": 0,
+            "csv_expected": 3
+          },
+          "thesis_tag_llm": {
+            "csv_done": 0,
+            "csv_expected": 3
+          }
+        }
+      }
+    ],
+    "next_commands": [
+      "bash scripts/status_public_eval_download.sh",
+      "DATASETS=\"jamendo mtat openmic\" ARMS=\"pretrained thesis_tag_only thesis_tag_llm\" SKIP_EXISTING=1 sbatch scripts/sbatch_public_eval.sh"
+    ],
+    "mermaid": "```mermaid\nflowchart LR\n  0[\"Jamendo<br/>(done)\"]\n  1[\"MTAT<br/>(done)\"]\n  2[\"OpenMIC<br/>(done)\"]\n  3[\"Retrieval eval\"]\n  4[\"REPORT.md\"]\n  0 --> 3\n  1 --> 3\n  2 --> 3\n  3 --> 4\n```"
+  },
+  "artifacts": {
+    "clap_train_tag": {
+      "path": "data/mapping/clap_train_tag.jsonl",
+      "exists": true,
+      "lines": 65041,
+      "bytes": 29731783
+    },
+    "clap_train_tag_llm": {
+      "path": "data/mapping/clap_train_tag_llm.jsonl",
+      "exists": true,
+      "lines": 65041,
+      "bytes": 33892000
+    },
+    "tag_llm_ablation_report": {
+      "path": "data/eval/tag_llm_ablation/REPORT.md",
+      "exists": true,
+      "lines": 35,
+      "bytes": 1657
+    },
+    "llm_full_ablation_report": {
+      "path": "data/eval/llm_full_ablation/REPORT.md",
+      "exists": true,
+      "lines": 35,
+      "bytes": 1571
+    }
+  },
+  "slurm_recent": [
+    {
+      "job_id": "121728",
+      "log": "slurm-121728.out",
+      "mtime_utc": "2026-06-18T08:53:28Z",
+      "phase": "unknown",
+      "state": "running",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": false,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": false
+      },
+      "tail": [
+        "Embed jamendo audio:   5%|\u258c         | 1/19 [00:08<02:37,  8.76s/batch]",
+        "Embed jamendo audio:  11%|\u2588         | 2/19 [00:15<02:07,  7.52s/batch]Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!",
+        "Embed jamendo audio:  16%|\u2588\u258c        | 3/19 [00:26<02:24,  9.06s/batch]",
+        "Embed jamendo audio:  21%|\u2588\u2588        | 4/19 [00:34<02:08,  8.59s/batch]",
+        "Embed jamendo audio:  26%|\u2588\u2588\u258b       | 5/19 [00:43<02:01,  8.71s/batch]",
+        "Embed jamendo audio:  32%|\u2588\u2588\u2588\u258f      | 6/19 [00:52<01:58,  9.11s/batch]",
+        "Embed jamendo audio:  37%|\u2588\u2588\u2588\u258b      | 7/19 [01:03<01:54,  9.54s/batch]",
+        "Embed jamendo audio:  42%|\u2588\u2588\u2588\u2588\u258f     | 8/19 [01:12<01:44,  9.49s/batch]"
+      ]
+    },
+    {
+      "job_id": "121212",
+      "log": "slurm-121212.out",
+      "mtime_utc": "2026-06-09T10:40:21Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "  Extracting tarball (may take several minutes)",
+        "================================================================",
+        "[05:42:57] Extracting /home/mc46451/music-recommendation/data/public_eval/openmic/openmic-2018-v1.0.0.tgz (may take several minutes)",
+        "/home/mc46451/music-recommendation/scripts/download_openmic_backend.sh: line 63: syntax error near unexpected token `may'",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "  ERROR: public-dl Slurm job FAILED (exit 2)",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      ]
+    },
+    {
+      "job_id": "121214",
+      "log": "slurm-121214.out",
+      "mtime_utc": "2026-06-09T09:37:17Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"/home/mc46451/miniconda3/envs/ragweb/lib/python3.11/json/decoder.py\", line 340, in decode",
+        "    raise JSONDecodeError(\"Extra data\", s, end)",
+        "json.decoder.JSONDecodeError: Extra data: line 1 column 67 (char 66)",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "  ERROR: public-dl Slurm job FAILED (exit 1)",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      ]
+    },
+    {
+      "job_id": "121213",
+      "log": "slurm-121213.out",
+      "mtime_utc": "2026-06-09T09:34:22Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "  zip -s 0 mp3.zip.001 failed (need zip parts .001-.003 with correct sizes)",
+        "  Log: /home/mc46451/music-recommendation/data/log/public_eval_downloads/mtat_backend.log",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "  ERROR: public-dl Slurm job FAILED (exit 1)",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      ]
+    },
+    {
+      "job_id": "121211",
+      "log": "slurm-121211.out",
+      "mtime_utc": "2026-06-09T09:29:26Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "  Script crashed \u2014 see log above for the first error",
+        "  Log: /home/mc46451/music-recommendation/data/log/public_eval_downloads/mtat_backend.log",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "  ERROR: public-dl Slurm job FAILED (exit 1)",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      ]
+    },
+    {
+      "job_id": "121206",
+      "log": "slurm-121206.out",
+      "mtime_utc": "2026-06-09T09:03:02Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "================================================================",
+        "  OpenMIC download/extract started",
+        "================================================================",
+        "/home/mc46451/music-recommendation/scripts/download_openmic_backend.sh: line 43: _n_ogg: unbound variable",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "  ERROR: public-dl Slurm job FAILED (exit 1)",
+        "  Check: bash scripts/status_public_eval_download.sh",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      ]
+    },
+    {
+      "job_id": "121203",
+      "log": "slurm-121203.out",
+      "mtime_utc": "2026-06-09T09:02:50Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "754400K .......... .......... .......... .......... .......... 99%  643K 0s",
+        "754450K .......... .......... .......... .......... .......... 99%  716K 0s",
+        "754500K .......... .......... .......... .......... .......... 99%  461K 0s",
+        "754550K .......... .......... .......... .......... .......... 99%  206K 0s",
+        "754600K .......... .......... .......... .......... .......... 99%  606K 0s",
+        "754650K ........                                              100%  278M=14m45s",
+        "2026-06-09 04:07:07 (551 KB/s) - \u2018mp3.zip.003\u2019 saved [772769864/772769864]",
+        "[04:07:07] ERROR: mp3.zip.003 size 1239222826 != expected 772769864"
+      ]
+    },
+    {
+      "job_id": "121205",
+      "log": "slurm-121205.out",
+      "mtime_utc": "2026-06-09T09:02:18Z",
+      "phase": "public_ood_download",
+      "state": "failed",
+      "markers": {
+        "tag_jsonl_build": false,
+        "llm_gen": false,
+        "fine_tune_tag_only": false,
+        "fine_tune_tag_llm": false,
+        "public_download": true,
+        "public_eval": false,
+        "skip_train": false,
+        "skip_eval": false,
+        "done": false,
+        "error": true
+      },
+      "tail": [
+        "754400K .......... .......... .......... .......... .......... 99% 1.10M 0s",
+        "754450K .......... .......... .......... .......... .......... 99% 1022K 0s",
+        "754500K .......... .......... .......... .......... .......... 99% 4.11M 0s",
+        "754550K .......... .......... .......... .......... .......... 99% 1.89M 0s",
+        "754600K .......... .......... .......... .......... .......... 99% 1.48M 0s",
+        "754650K ........                                              100%  348M=13m14s",
+        "2026-06-09 04:06:35 (543 KB/s) - \u2018mp3.zip.003\u2019 saved [772769864/772769864]",
+        "[04:06:35] ERROR: mp3.zip.003 size 1194150442 != expected 772769864"
+      ]
+    }
+  ]
+}
