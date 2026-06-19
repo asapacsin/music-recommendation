@@ -1,0 +1,63 @@
+{
+  "manifest": "/home/mc46451/music-recommendation/data/eval/mtat_manifest.jsonl",
+  "dataset": "mtat",
+  "arm": "thesis_tag_mixed",
+  "checkpoint_env": "/home/mc46451/music-recommendation/model/clap/finetune/thesis_tag_mixed/seed_43/best_model.pt",
+  "top_k": 10,
+  "n_pool": 179,
+  "n_tracks_manifest": 179,
+  "primary_tags": [
+    "inst_piano",
+    "inst_vocal",
+    "mood_relaxing"
+  ],
+  "positives_per_tag": {
+    "inst_piano": 67,
+    "inst_vocal": 67,
+    "mood_relaxing": 63
+  },
+  "rows": [
+    {
+      "query_id": "inst_piano",
+      "query_text": "piano",
+      "gold_column": "gold_pub_piano",
+      "top_k": 10,
+      "n_pool": 179,
+      "n_positive": 67,
+      "prevalence": 0.3743016759776536,
+      "precision_at_k": 0.5,
+      "precision_delta": 0.12569832402234637,
+      "ndcg_at_k": 0.39749351961824175,
+      "ndcg_random_mean": 0.37678426688353334,
+      "ndcg_delta": 0.020709252734708417
+    },
+    {
+      "query_id": "inst_vocal",
+      "query_text": "vocal",
+      "gold_column": "gold_pub_vocal",
+      "top_k": 10,
+      "n_pool": 179,
+      "n_positive": 67,
+      "prevalence": 0.3743016759776536,
+      "precision_at_k": 1.0,
+      "precision_delta": 0.6256983240223464,
+      "ndcg_at_k": 1.0,
+      "ndcg_random_mean": 0.39460137531644657,
+      "ndcg_delta": 0.6053986246835534
+    },
+    {
+      "query_id": "mood_relaxing",
+      "query_text": "relaxing",
+      "gold_column": "gold_pub_relaxing",
+      "top_k": 10,
+      "n_pool": 179,
+      "n_positive": 63,
+      "prevalence": 0.35195530726256985,
+      "precision_at_k": 0.3,
+      "precision_delta": -0.05195530726256986,
+      "ndcg_at_k": 0.38363315291837646,
+      "ndcg_random_mean": 0.3597361898094488,
+      "ndcg_delta": 0.023896963108927638
+    }
+  ]
+}

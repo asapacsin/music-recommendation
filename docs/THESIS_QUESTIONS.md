@@ -24,7 +24,7 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 | **B** | Do **LLM-refined Grok captions** beat **original Grok** captions (same FT recipe)? | `thesis_llm_ablation_orig` vs `thesis_llm_ablation_llm` (sparse); `thesis_llm_full_llm` vs orig (full corpus) | `data/eval/llm_ablation/REPORT.md`, `data/eval/llm_full_ablation/REPORT.md` | **Done** (mostly null vs Grok) |
 | **C** | Does **iterative self-train** (mine → LLM → FT) help? | iter 0 vs iter 1 checkpoints | `model/clap/self_train/...`, run docs | **Done** (negative: iter 1 regressed) |
 | **D** | Does **tag→LLM** training text beat **tag-only** text on tag retrieval? | `thesis_tag_only` vs `thesis_tag_llm` | `data/eval/tag_llm_ablation/REPORT.md` | **Done** |
-| **E** | Is OOD drop **forgetting** or **specialization**? (anime-only vs mixed FT, 2×2) | `thesis_tag_only` vs `thesis_tag_mixed` | `data/eval/domain_tradeoff/REPORT.md` | **Pending run** |
+| **E** | Is OOD drop **forgetting** or **specialization**? (anime-only vs mixed FT, 2×2) | `thesis_tag_only` vs `thesis_tag_mixed` | `data/eval/domain_tradeoff/REPORT.md` | **Done** |
 
 **Public OOD** (Jamendo / MTAT / OpenMIC) is **not** question A–D. It tests checkpoints **after** training on external audio. Question **E** adds mixed-domain training to interpret OOD vs in-domain jointly. See [Public OOD test](#public-ood-test-post-train) and [Question E](#question-e--forgetting-vs-specialization-mixed-domain-2×2).
 
@@ -117,7 +117,7 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 | **Guide** | [`docs/DOMAIN_TRADEOFF.md`](DOMAIN_TRADEOFF.md) |
 | **Agent run** | [`docs/agent_runs/20260609_domain_tradeoff/`](agent_runs/20260609_domain_tradeoff/) |
 
-**Status:** Pipeline implemented; cluster run **pending**.
+**Finding:** Fine-tuning specializes at a cost to public OOD; anime-only vs mixed does **not** yield a clean tradeoff — effects are small and tag-dependent (vocal: better in-domain with anime-only, better OOD with mixed). Report: **`data/eval/domain_tradeoff/REPORT.md`** (job 121770).
 
 ---
 
