@@ -23,9 +23,10 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 | **A** | Does **fine-tuning** beat **pretrained** CLAP on tag retrieval? | pretrained vs `thesis_ft_v1` | `data/eval/retrieval_vs_random_matrix*.csv`, FT logs | **Done** |
 | **B** | Do **LLM-refined Grok captions** beat **original Grok** captions (same FT recipe)? | `thesis_llm_ablation_orig` vs `thesis_llm_ablation_llm` (sparse); `thesis_llm_full_llm` vs orig (full corpus) | `data/eval/llm_ablation/REPORT.md`, `data/eval/llm_full_ablation/REPORT.md` | **Done** (mostly null vs Grok) |
 | **C** | Does **iterative self-train** (mine → LLM → FT) help? | iter 0 vs iter 1 checkpoints | `model/clap/self_train/...`, run docs | **Done** (negative: iter 1 regressed) |
-| **D** | Does **tag→LLM** training text beat **tag-only** text on tag retrieval? | `thesis_tag_only` vs `thesis_tag_llm` | `data/eval/tag_llm_ablation/REPORT.md` | **Running** (tag-only 3/3; tag→LLM FT job 121197) |
+| **D** | Does **tag→LLM** training text beat **tag-only** text on tag retrieval? | `thesis_tag_only` vs `thesis_tag_llm` | `data/eval/tag_llm_ablation/REPORT.md` | **Done** |
+| **E** | Is OOD drop **forgetting** or **specialization**? (anime-only vs mixed FT, 2×2) | `thesis_tag_only` vs `thesis_tag_mixed` | `data/eval/domain_tradeoff/REPORT.md` | **Pending run** |
 
-**Public OOD** (Jamendo / MTAT / OpenMIC) is **not** question A–D. It tests checkpoints **after** training on external audio. See [Public OOD test](#public-ood-test-post-train) below.
+**Public OOD** (Jamendo / MTAT / OpenMIC) is **not** question A–D. It tests checkpoints **after** training on external audio. Question **E** adds mixed-domain training to interpret OOD vs in-domain jointly. See [Public OOD test](#public-ood-test-post-train) and [Question E](#question-e--forgetting-vs-specialization-mixed-domain-2×2).
 
 ---
 
@@ -94,9 +95,29 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 | **Outputs** | Checkpoints under `model/clap/finetune/thesis_tag_only|thesis_tag_llm/`. Report: **`data/eval/tag_llm_ablation/REPORT.md`** |
 | **Agent run** | [`docs/agent_runs/20260601_tag_train_llm_ablation/`](agent_runs/20260601_tag_train_llm_ablation/) |
 
-**Status:** Implementation **complete**; cluster run **pending** — no `tag_llm_ablation/REPORT.md` yet.
+**Status:** Report at **`data/eval/tag_llm_ablation/REPORT.md`**.
 
 **Do not confuse with B** — D uses **tag-derived** training text, not full Grok caption replacement.
+
+---
+
+## Question E — Forgetting vs specialization (mixed-domain 2×2)
+
+**Question:** When anime-only fine-tuning hurts public OOD, is that **catastrophic forgetting** (recoverable with mixed training) or **specialization** (in-domain gain at OOD cost)?
+
+| | Detail |
+|--|--------|
+| **Arms** | (1) **Anime-only** `thesis_tag_only` (existing). (2) **Mixed** `thesis_tag_mixed` ← `clap_train_tag_mixed.jsonl` (anime + MTAT + OpenMIC; Jamendo **never** in train) |
+| **Training text** | Tag-only only (same as D tag arm) |
+| **Seeds** | 42, 43, 44 |
+| **2×2 eval** | Rows: anime-only vs mixed. Cols: in-domain gold vs public OOD (Jamendo + MTAT + OpenMIC) |
+| **Build mixed JSONL** | `python -m app.data_handling.music_build_mixed_domain_train_jsonl` |
+| **Full pipeline** | `sbatch scripts/sbatch_domain_tradeoff_ablation.sh` |
+| **Outputs** | `model/clap/finetune/thesis_tag_mixed/seed_*/best_model.pt`, **`data/eval/domain_tradeoff/REPORT.md`** |
+| **Guide** | [`docs/DOMAIN_TRADEOFF.md`](DOMAIN_TRADEOFF.md) |
+| **Agent run** | [`docs/agent_runs/20260609_domain_tradeoff/`](agent_runs/20260609_domain_tradeoff/) |
+
+**Status:** Pipeline implemented; cluster run **pending**.
 
 ---
 
@@ -122,7 +143,8 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 | FT vs pretrained | `data/eval/retrieval_vs_random_matrix.csv` + `thesis_ft_v1` logs |
 | Grok vs LLM captions | `data/eval/llm_full_ablation/REPORT.md` |
 | Self-train | `docs/agent_runs/20260526_self_train_v2/STATE.md` |
-| Tag vs tag→LLM | `data/eval/tag_llm_ablation/REPORT.md` *(after run)* |
+| Tag vs tag→LLM | `data/eval/tag_llm_ablation/REPORT.md` |
+| Forgetting vs specialization (2×2) | `data/eval/domain_tradeoff/REPORT.md` |
 | Public sets | `data/eval/REPORT.md` *(public combined)* |
 
 ---
@@ -132,4 +154,5 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 - Tag scope: [`docs/class_selected.txt`](class_selected.txt)
 - Follow-up ideas: [`docs/RESEARCH_DIRECTIONS.md`](RESEARCH_DIRECTIONS.md)
 - Fine-tune how-to: [`docs/FINE_TUNING_TUTORIAL.md`](FINE_TUNING_TUTORIAL.md)
+- Operator commands: [`docs/OPERATIONS.md`](OPERATIONS.md)
 - Gold merge: [`docs/README_eval_merge.md`](README_eval_merge.md)

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "last_updated": "2026-06-09",
+  "last_updated": "2026-06-18",
   "PLAN": {
     "high_level_goal": "Music CLAP thesis: tag ablation + multi-dataset public OOD tests",
     "current_step_index": 5,
@@ -32,13 +32,14 @@
       }
     ],
     "next_actions": [
-      "Wait for OpenMIC Slurm 121212 (~43% tarball); bash scripts/status_public_eval_download.sh",
-      "When OVERALL COMPLETED: DATASETS=\"jamendo mtat openmic\" ARMS=\"pretrained thesis_tag_only thesis_tag_llm\" sbatch scripts/sbatch_public_eval.sh"
+      "Public OOD eval: confirm Slurm job completion; bash scripts/refresh_progress.sh",
+      "Git push fixed: 2445c8b on origin/main (public corpora excluded from git)"
     ]
   },
   "CODE": {
     "files_created": ["docs/PUBLIC_OOD_EVAL.md"],
     "files_modified": [
+      ".gitignore",
       "scripts/lib/public_eval_download_common.sh",
       "scripts/download_mtat_backend.sh",
       "scripts/download_openmic_backend.sh",

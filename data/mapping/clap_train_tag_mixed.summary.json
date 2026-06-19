@@ -1,0 +1,18 @@
+{
+  "out_jsonl": "/home/mc46451/music-recommendation/data/mapping/clap_train_tag_mixed.jsonl",
+  "holdout_txt": "/home/mc46451/music-recommendation/data/mapping/public_eval_holdout_paths.txt",
+  "n_anime": 65041,
+  "n_public_sampled": 6610,
+  "n_total": 71651,
+  "n_mtat_candidates": 4576,
+  "n_openmic_candidates": 2034,
+  "n_holdout_paths": 299,
+  "public_clip_target": 65041,
+  "mix_ratio": 0.5,
+  "domain_counts": {
+    "anime": 65041,
+    "mtat": 4576,
+    "openmic": 2034
+  },
+  "seed": 42
+}
