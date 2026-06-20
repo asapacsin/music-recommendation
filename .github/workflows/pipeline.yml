@@ -1,10 +1,8 @@
+# Disabled on push/PR — thesis repo; Docker CI not maintained. Re-enable push/pull_request when ready.
 name: CI-CD Pipeline
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build-test:
@@ -26,5 +24,3 @@ jobs:
       - name: Run basic container check
         run: |
           docker run --rm myapp:latest python --version
-
-
