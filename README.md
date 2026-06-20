@@ -8,60 +8,69 @@ Fine-tune [CLAP](https://github.com/LAION-AI/CLAP) on a local anime/game music l
 
 ---
 
+## Gold retrieval improvements (headline)
+
+**Eval:** ~200 human-labeled songs, metadata FAISS index, precision@10 and nDCG@10.  
+**Main comparison (Question A):** pretrained AudioSet CLAP vs fine-tuned `thesis_ft_v1` (Grok captions, seeds 42–44).
+
+| Tag | Pretrained P@10 | Fine-tuned P@10 | **Δ P@10** | Pretrained nDCG@10 | Fine-tuned nDCG@10 | **Δ nDCG** |
+|-----|-----------------|-----------------|------------|--------------------|--------------------|------------|
+| piano | 0.20 | **0.30** | **+0.10** | 0.359 | **0.428** | **+0.069** |
+| vocal | 1.00 | 1.00 | 0.00 | 1.00 | 1.00 | 0.00 |
+| relaxing | 0.50 | **0.60** | **+0.10** | 0.537 | **0.652** | **+0.115** |
+
+**Takeaway:** Fine-tuning **does improve** in-domain gold retrieval on piano and relaxing (+10 pp precision each, higher nDCG). Vocal is already at ceiling before FT. This is the primary positive result — specialization **works on the gold set** for the tags that were weak pretrained.
+
+Source: [`data/eval/retrieval_vs_random_matrix.csv`](data/eval/retrieval_vs_random_matrix.csv) (pretrained rows); fine-tuned rows with `RAGWEB_CLAP_CHECKPOINT=thesis_ft_v1/seed_42/best_model.pt`.
+
+### Other experiments on gold (same eval pool)
+
+| Comparison | Piano Δ P@10 | Vocal Δ P@10 | Relaxing Δ P@10 | Note |
+|------------|--------------|--------------|-----------------|------|
+| **B** Grok vs LLM captions (FT) | −0.07 | −0.17 | 0.00 | LLM rewrite **does not** beat Grok on gold |
+| **D** tag-only vs tag→LLM text (FT) | 0.00 | 0.00 | **+0.10** | tag→LLM helps relaxing only (metadata index) |
+| **E** anime-only vs mixed corpus (FT) | **+0.10** | −0.10 | 0.00 | Mixed helps piano on gold; vocal slightly worse |
+
+Reports: [`llm_full_ablation/REPORT.md`](data/eval/llm_full_ablation/REPORT.md), [`tag_llm_ablation/REPORT.md`](data/eval/tag_llm_ablation/REPORT.md), [`domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md).
+
+---
+
 ## Research conclusion
 
-Fine-tuning on the anime library **specializes the encoder at a clear cost to public generalization**. Within fine-tuning, the choice of **anime-only vs. mixed corpus does not produce a clean specialization–generalization tradeoff** — the effect is small and tag-dependent, with only **vocal** following the expected pattern (slightly better in-domain with anime-only; better out-of-domain with mixed training).
+**In-domain:** Fine-tuning on the anime library **improves gold retrieval** (piano +0.10, relaxing +0.10 P@10 vs pretrained). **Out-of-domain:** that same specialization **hurts** public retrieval — both FT arms sit far below pretrained on Jamendo / MTAT / OpenMIC.
 
-Supporting evidence across experiments:
+Within fine-tuning choices (caption rewrite, tag text, anime vs mixed corpus), **gold gains are small or absent** except the main A result and isolated tag-level shifts — anime-only vs mixed does **not** produce a clean specialization–generalization tradeoff; effects are tag-dependent (vocal: slightly better in-domain with anime-only, better OOD with mixed).
 
-- **A** — In-domain gold retrieval improves for piano and relaxing after FT; vocal is already strong pretrained.
-- **B** — Replacing Grok captions with a full-corpus LLM rewrite does **not** beat the original text.
-- **C** — Iterative self-train (mine → LLM → FT) **regressed** after one outer iteration.
-- **D** — Tag→LLM training text vs short tag strings: **no single winner** across tags and index types.
-- **E** — Anime-only (`thesis_tag_only`) vs mixed (`thesis_tag_mixed`): gold scores stay similar; OOD shifts are small and tag-specific (see 2×2 table below).
-- **Public OOD** — Both FT arms sit far below pretrained on external sets; mixed training partially recovers vocal/relaxing vs anime-only only.
+- **B** — LLM caption rewrite does not beat Grok on gold.
+- **C** — Self-train loop regressed after one iteration.
+- **D** — Tag→LLM vs tag-only: no single winner on gold across all tags.
+- **Public OOD** — [`data/eval/REPORT.md`](data/eval/REPORT.md): pretrained piano 0.98 / vocal 0.76 vs FT ~0.7 / ~0.37 (anime-only macro).
 
 ---
 
 ## Results at a glance
 
-| Question | What we compared | Finding | Report |
-|----------|------------------|---------|--------|
-| **A** | Pretrained vs fine-tuned (`thesis_ft_v1`) | FT helps piano & relaxing on gold; vocal at ceiling | [`retrieval_vs_random_matrix.csv`](data/eval/retrieval_vs_random_matrix.csv) |
-| **B** | Grok captions vs full-corpus LLM rewrite | **No gain** — keep Grok text | [`llm_full_ablation/REPORT.md`](data/eval/llm_full_ablation/REPORT.md) |
-| **C** | Single FT vs self-train loop | **Negative** — iter 1 regressed | [`docs/agent_runs/20260526_self_train_v2/`](docs/agent_runs/20260526_self_train_v2/) |
-| **D** | Tag-only vs tag→LLM training text | **Mixed** — tag-dependent, no clear winner | [`tag_llm_ablation/REPORT.md`](data/eval/tag_llm_ablation/REPORT.md) |
-| **E** | Anime-only vs mixed-domain FT (2×2 gold × OOD) | **No clean tradeoff** — small, tag-dependent shifts | [`domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md) |
-
-Public OOD (all FT arms vs pretrained): [`data/eval/REPORT.md`](data/eval/REPORT.md).
+| Question | What we compared | Gold finding | Report |
+|----------|------------------|--------------|--------|
+| **A** | Pretrained vs `thesis_ft_v1` | **+0.10 P@10** piano & relaxing | [`retrieval_vs_random_matrix.csv`](data/eval/retrieval_vs_random_matrix.csv) |
+| **B** | Grok vs LLM captions | No gold gain (LLM worse on piano/vocal) | [`llm_full_ablation/REPORT.md`](data/eval/llm_full_ablation/REPORT.md) |
+| **C** | Single FT vs self-train | Negative | [`docs/agent_runs/20260526_self_train_v2/`](docs/agent_runs/20260526_self_train_v2/) |
+| **D** | Tag-only vs tag→LLM | Mixed (+0.10 relaxing on metadata index) | [`tag_llm_ablation/REPORT.md`](data/eval/tag_llm_ablation/REPORT.md) |
+| **E** | Anime-only vs mixed FT | Gold similar; piano +0.10 with mixed | [`domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md) |
 
 ---
 
-## Main result (A) — fine-tuning vs pretrained
+## Domain tradeoff (E) — gold × OOD @K=10
 
-Gold retrieval @K=10 on ~200 human-labeled songs (metadata FAISS). Same pool and queries for both arms.
+Mean over seeds 42–44.
 
-| Query | Pretrained prec@10 / nDCG@10 | Fine-tuned prec@10 / nDCG@10 |
-|-------|------------------------------|------------------------------|
-| piano | 0.20 / 0.359 | **0.30 / 0.428** |
-| vocal | 1.00 / 1.00 | 1.00 / 1.00 |
-| relaxing | 0.50 / 0.537 | **0.60 / 0.652** |
+| Tag | Anime-only / **Gold** | Mixed / **Gold** | Δ Gold | Anime-only / OOD | Mixed / OOD | Δ OOD |
+|-----|----------------------|------------------|--------|------------------|-------------|-------|
+| piano | 0.20 | **0.30** | **+0.10** | 0.70 | 0.69 | −0.01 |
+| vocal | **1.00** | 0.90 | −0.10 | 0.37 | **0.53** | +0.17 |
+| relaxing | 0.50 | 0.50 | 0.00 | 0.28 | **0.40** | +0.12 |
 
-Run: `thesis_ft_v1` (seeds 42–44). Checkpoints: `model/clap/finetune/thesis_ft_v1/seed_*/best_model.pt`.
-
----
-
-## Domain tradeoff (E) — anime-only vs mixed @K=10
-
-Mean over seeds 42–44. **Gold** = in-domain human labels. **OOD** = macro mean over Jamendo, MTAT, OpenMIC.
-
-| Tag | Anime-only / Gold | Mixed / Gold | Anime-only / OOD | Mixed / OOD |
-|-----|-------------------|--------------|------------------|-------------|
-| piano | 0.20 | 0.30 | 0.70 | 0.69 |
-| vocal | **1.00** | 0.90 | 0.37 | **0.53** |
-| relaxing | 0.50 | 0.50 | 0.28 | **0.40** |
-
-Pretrained OOD reference (macro): piano 0.98, vocal 0.76, relaxing 0.53 — both FT arms remain well below pretrained on public data.
+Pretrained OOD reference (macro): piano 0.98, vocal 0.76, relaxing 0.53.
 
 ---
 
@@ -78,9 +87,9 @@ flowchart LR
 ```
 
 1. Grok metadata → 15s clips → contrastive CLAP fine-tune (val early-stop).
-2. In-domain eval: text query → FAISS → precision / nDCG on human gold.
-3. Ablations vary **training text** or **training corpus**; eval protocol stays fixed.
-4. Public OOD scores checkpoints without further training.
+2. **Primary metric:** text query → FAISS → P@K / nDCG on human gold (~200 songs).
+3. Ablations vary training text or corpus; gold eval protocol stays fixed.
+4. Public OOD is a **separate** post-train test (not the main claim).
 
 ---
 
@@ -100,7 +109,7 @@ conda activate ragweb   # or: python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Backbone: `model/clap/music_audioset_epoch_15_esc_90.14.pt`. Reproduce headline eval:
+Backbone: `model/clap/music_audioset_epoch_15_esc_90.14.pt`. Reproduce headline gold eval:
 
 ```bash
 python -m app.metadata_faiss build --min-confidence 0.35
