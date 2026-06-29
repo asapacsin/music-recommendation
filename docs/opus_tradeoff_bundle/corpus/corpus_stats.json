@@ -1,0 +1,32 @@
+{
+  "note": "Full JSONL manifests are too large for Opus (~32MB). Use these counts in the thesis Methods section.",
+  "files": {
+    "clap_train_tag.jsonl": {
+      "path_repo": "data/mapping/clap_train_tag.jsonl",
+      "description": "Anime-only tag-only training corpus (thesis_tag_only arm)",
+      "total_lines": 65041,
+      "domain_breakdown": {"anime": 65041}
+    },
+    "clap_train_tag_mixed.jsonl": {
+      "path_repo": "data/mapping/clap_train_tag_mixed.jsonl",
+      "description": "Mixed training corpus (thesis_tag_mixed arm): anime + MTAT + OpenMIC",
+      "total_lines": 71651,
+      "domain_breakdown": {
+        "anime": 65041,
+        "mtat": 4576,
+        "openmic": 2034
+      },
+      "jamendo_in_training": false
+    },
+    "clap_val_15s.jsonl": {
+      "path_repo": "data/mapping/clap_val_15s.jsonl",
+      "description": "Validation clips for early stopping (both arms)",
+      "total_lines": 7246
+    }
+  },
+  "samples_in_bundle": [
+    "corpus/clap_train_tag_SAMPLE.jsonl",
+    "corpus/clap_train_tag_mixed_SAMPLE.jsonl",
+    "corpus/clap_val_15s_SAMPLE.jsonl"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "trade_dir": "/home/mc46451/music-recommendation/data/eval/domain_tradeoff",
+  "eval_root": "/home/mc46451/music-recommendation/data/eval",
+  "datasets": [
+    "jamendo",
+    "mtat",
+    "openmic"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "top_k": 10,
+  "anime_arm": "thesis_tag_only",
+  "mixed_arm": "thesis_tag_mixed",
+  "rows": [
+    {
+      "tag_id": "inst_piano",
+      "anime_only_gold": 0.2,
+      "mixed_gold": 0.3,
+      "gold_delta_mixed_minus_anime": 0.09999999999999998,
+      "anime_only_ood_macro": 0.7,
+      "mixed_ood_macro": 0.6888888888888889,
+      "ood_delta_mixed_minus_anime": -0.011111111111111072,
+      "pretrained_ood_macro": 0.9777777777777777,
+      "interpretation": "No clear tradeoff \u2014 arms similar",
+      "ood_by_dataset_anime_only": {
+        "jamendo": 0.7,
+        "mtat": 0.39999999999999997,
+        "openmic": 1.0
+      },
+      "ood_by_dataset_mixed": {
+        "jamendo": 0.5333333333333333,
+        "mtat": 0.5333333333333333,
+        "openmic": 1.0
+      }
+    },
+    {
+      "tag_id": "inst_vocal",
+      "anime_only_gold": 1.0,
+      "mixed_gold": 0.9,
+      "gold_delta_mixed_minus_anime": -0.09999999999999998,
+      "anime_only_ood_macro": 0.3666666666666667,
+      "mixed_ood_macro": 0.5333333333333333,
+      "ood_delta_mixed_minus_anime": 0.16666666666666663,
+      "pretrained_ood_macro": 0.7555555555555555,
+      "interpretation": "No clear tradeoff \u2014 arms similar",
+      "ood_by_dataset_anime_only": {
+        "jamendo": 0.3,
+        "mtat": 0.8,
+        "openmic": 0.0
+      },
+      "ood_by_dataset_mixed": {
+        "jamendo": 0.13333333333333333,
+        "mtat": 0.9666666666666667,
+        "openmic": 0.5
+      }
+    },
+    {
+      "tag_id": "mood_relaxing",
+      "anime_only_gold": 0.5,
+      "mixed_gold": 0.5,
+      "gold_delta_mixed_minus_anime": 0.0,
+      "anime_only_ood_macro": 0.2833333333333333,
+      "mixed_ood_macro": 0.4,
+      "ood_delta_mixed_minus_anime": 0.1166666666666667,
+      "pretrained_ood_macro": 0.5333333333333333,
+      "interpretation": "Forgetting-dominated (mixed recovers OOD)",
+      "ood_by_dataset_anime_only": {
+        "jamendo": 0.23333333333333334,
+        "mtat": 0.3333333333333333
+      },
+      "ood_by_dataset_mixed": {
+        "jamendo": 0.4666666666666667,
+        "mtat": 0.3333333333333333
+      }
+    }
+  ],
+  "report_md": "/home/mc46451/music-recommendation/data/eval/domain_tradeoff/REPORT.md"
+}
