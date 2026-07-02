@@ -1,7 +1,0 @@
-n_tags_in_prompt,query_ids,query_text,relevance,top_k,n_pool,n_positive,prevalence,precision_at_k,precision_delta,ndcg_at_k,ndcg_random_mean,ndcg_delta
-1,inst_piano,piano,and,10,200,29,0.145,0.3,0.155,0.42838543210841196,0.13997947122700596,0.288405960881406
-1,inst_piano,piano,and,20,200,29,0.145,0.2,0.05500000000000002,0.3148506086040554,0.14571508103878453,0.16913552756527087
-2,inst_piano;inst_vocal,piano vocal,and,10,200,5,0.025,0.0,-0.025,0.0,0.04262127950443546,-0.04262127950443546
-2,inst_piano;inst_vocal,piano vocal,and,20,200,5,0.025,0.05,0.025,0.08681077623592635,0.057919942758506614,0.02889083347741974
-3,inst_piano;inst_vocal;mood_relaxing,piano vocal relaxing,and,10,200,4,0.02,0.0,-0.02,0.0,0.03189376269304086,-0.03189376269304086
-3,inst_piano;inst_vocal;mood_relaxing,piano vocal relaxing,and,20,200,4,0.02,0.0,-0.02,0.0,0.058235971525975205,-0.058235971525975205

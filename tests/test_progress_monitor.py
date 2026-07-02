@@ -18,16 +18,15 @@ def _touch(path: Path, content: str = "") -> None:
     path.write_text(content, encoding="utf-8")
 
 
-def test_build_snapshot_question_d_units(tmp_path: Path) -> None:
+def test_build_snapshot_question_e_units(tmp_path: Path) -> None:
     repo = tmp_path
-    _touch(repo / "data/mapping/clap_train_tag.jsonl", "x\n" * 65041)
-    _touch(repo / "data/mapping/clap_train_tag_llm.jsonl", "x\n" * 65041)
-    _touch(repo / "data/mapping/clap_train_tag_llm_songs.jsonl", "x\n" * 3440)
+    _touch(repo / "data/mapping/clap_train_15s.jsonl", "x\n" * 65041)
+    _touch(repo / "data/mapping/clap_train_grok_mixed.jsonl", "x\n" * 70000)
     cache = repo / "data/embeddings_cache/clap_backbone/music_audioset_epoch_15_esc_90.14"
     _touch(cache / "index.json", "{}")
 
     snap = build_snapshot(repo)
-    units = {u["unit"]: u for u in snap["question_d_units"]}
+    units = {u["unit"]: u for u in snap["question_e_units"]}
     assert units["0"]["state"] == "done"
     assert units["1"]["state"] == "done"
     assert units["2"]["state"] == "done"
@@ -36,8 +35,8 @@ def test_build_snapshot_question_d_units(tmp_path: Path) -> None:
 
 def test_seed_complete_detection(tmp_path: Path) -> None:
     repo = tmp_path
-    seed_dir = repo / "model/clap/finetune/thesis_tag_only/seed_42"
-    log_dir = repo / "data/log/finetune_runs/thesis_tag_only/seed_42"
+    seed_dir = repo / "model/clap/finetune/thesis_grok_only/seed_42"
+    log_dir = repo / "data/log/finetune_runs/thesis_grok_only/seed_42"
     _touch(seed_dir / "best_model.pt")
     _touch(
         log_dir / "training_complete.json",
@@ -49,9 +48,10 @@ def test_seed_complete_detection(tmp_path: Path) -> None:
     )
 
     snap = build_snapshot(repo)
-    d = next(q for q in snap["thesis_questions"] if q["id"] == "D")
-    tag_only = next(r for r in d["runs"] if r["run_id"] == "thesis_tag_only")
-    s42 = next(s for s in tag_only["seeds"] if s["seed"] == 42)
+    e = snap["thesis_questions"][0]
+    assert e["id"] == "E"
+    grok_only = next(r for r in e["runs"] if r["run_id"] == "thesis_grok_only")
+    s42 = next(s for s in grok_only["seeds"] if s["seed"] == 42)
     assert s42["checkpoint"] is True
     assert s42["training_complete"] is True
     assert s42["best_epoch"] == 5
@@ -61,7 +61,7 @@ def test_seed_complete_detection(tmp_path: Path) -> None:
 def test_render_markdown_includes_training_recipe(tmp_path: Path) -> None:
     repo = tmp_path
     _touch(
-        repo / "data/eval/llm_ablation/train_params.json",
+        repo / "data/eval/domain_tradeoff/train_params.json",
         json.dumps(
             {
                 "val_jsonl": "data/mapping/clap_val_15s.jsonl",
@@ -71,11 +71,11 @@ def test_render_markdown_includes_training_recipe(tmp_path: Path) -> None:
             }
         ),
     )
-    _touch(repo / "data/mapping/clap_train_tag.jsonl", "x\n" * 100)
+    _touch(repo / "data/mapping/clap_train_15s.jsonl", "x\n" * 100)
     snap = build_snapshot(repo)
     md = render_markdown(snap)
-    assert "## Question D — training recipe" in md
-    assert "thesis_tag_only" in md
+    assert "## Question E — training recipe" in md
+    assert "thesis_grok_only" in md
     assert "best** val_similarity" in md or "ep5 val=" in md
 
 
@@ -134,6 +134,8 @@ def test_public_ood_pipeline_actions(tmp_path: Path) -> None:
     plan = public_ood_pipeline_actions(repo)
     assert "jamendo" in plan["datasets_ready"]
     assert any(a["type"] == "eval" for a in plan["actions"])
+    eval_action = next(a for a in plan["actions"] if a["type"] == "eval")
+    assert "thesis_grok_only" in eval_action["arms"]
 
 
 def test_resolve_openmic_audio_path(tmp_path: Path) -> None:
@@ -149,7 +151,7 @@ def test_resolve_openmic_audio_path(tmp_path: Path) -> None:
 
 def test_write_outputs(tmp_path: Path) -> None:
     repo = tmp_path
-    _touch(repo / "data/mapping/clap_train_tag.jsonl", "line\n")
+    _touch(repo / "data/mapping/clap_train_15s.jsonl", "line\n")
     snapshot = write_outputs(repo)
     assert (repo / "data/eval/progress_snapshot.json").is_file()
     md = (repo / "docs/PROGRESS.md").read_text(encoding="utf-8")
@@ -161,9 +163,9 @@ def test_render_markdown_includes_slurm_tail(tmp_path: Path) -> None:
     repo = tmp_path
     _touch(
         repo / "slurm-999.out",
-        "=== Fine-tune TAG-ONLY: thesis_tag_only ===\nEpoch 1\nDone.\n",
+        "=== Fine-tune thesis_grok_only ===\nEpoch 1\nDone.\n",
     )
     snap = build_snapshot(repo)
     md = render_markdown(snap)
     assert "Job `999`" in md
-    assert "ft_tag_only" in md
+    assert "domain_tradeoff" in md

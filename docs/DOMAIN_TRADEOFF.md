@@ -12,7 +12,7 @@
 - **Anime-only train:** `clap_train_15s.jsonl` (Grok caption per clip)
 - **Mixed train:** `clap_train_grok_mixed.jsonl` (Grok anime + MTAT/OpenMIC tag strings; eval holdouts excluded)
 - **Jamendo never in training** (strict OOD)
-- Both arms retrained with matched hyperparams (`data/eval/llm_ablation/train_params.json`)
+- Both arms retrained with matched hyperparams (`data/eval/domain_tradeoff/train_params.json`)
 
 ---
 
@@ -105,4 +105,4 @@ Resume flags: `SKIP_BUILD`, `SKIP_CACHE`, `SKIP_TRAIN`, `SKIP_GOLD_EVAL`, `SKIP_
 - Public OOD: [`docs/PUBLIC_OOD_EVAL.md`](PUBLIC_OOD_EVAL.md)
 - Agent run: [`docs/agent_runs/20260619_grok_domain_tradeoff/`](agent_runs/20260619_grok_domain_tradeoff/)
 
-**Note:** Older tag-only domain tradeoff artifacts (`thesis_tag_only` / `thesis_tag_mixed` under sparse `"music"` supervision) are **superseded** — do not use for Question E thesis tables.
+**Note:** Legacy tag-only / LLM ablation pipelines were removed from this repo; Question E uses Grok captions only.

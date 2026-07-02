@@ -1,7 +1,7 @@
 """
 2×2 domain tradeoff report: in-domain gold vs public OOD for anime-only vs mixed FT.
 
-Rows: anime_only (thesis_tag_only), mixed (thesis_tag_mixed)
+Rows: anime_only (thesis_grok_only), mixed (thesis_grok_mixed)
 Cols: gold (human multihot), ood_macro (mean P@K over public datasets)
 """
 from __future__ import annotations
@@ -298,8 +298,8 @@ def main() -> int:
     parser.add_argument("--datasets", type=str, default="jamendo,mtat,openmic")
     parser.add_argument("--seeds", type=str, default="42,43,44")
     parser.add_argument("--top-k", type=int, default=10)
-    parser.add_argument("--anime-arm", type=str, default="thesis_tag_only")
-    parser.add_argument("--mixed-arm", type=str, default="thesis_tag_mixed")
+    parser.add_argument("--anime-arm", type=str, default="thesis_grok_only")
+    parser.add_argument("--mixed-arm", type=str, default="thesis_grok_mixed")
     args = parser.parse_args()
 
     meta = build_domain_tradeoff_report(

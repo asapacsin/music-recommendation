@@ -19,7 +19,7 @@
 |------|------|
 | `data/mapping/clap_train_15s.jsonl` | Anime-only train (Grok captions) |
 | `data/mapping/clap_val_15s.jsonl` | Val early-stop (Grok) |
-| `data/eval/llm_ablation/train_params.json` | Matched FT hyperparams (batch 32, max 20 epochs) |
+| `data/eval/domain_tradeoff/train_params.json` | Matched FT hyperparams (batch 32, max 20 epochs) |
 | `data/mapping/public_eval_holdout_paths.txt` | MTAT/OpenMIC eval holdouts |
 | Public corpora (Jamendo, MTAT, OpenMIC) | OOD eval — Jamendo never in train |
 

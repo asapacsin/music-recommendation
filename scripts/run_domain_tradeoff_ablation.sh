@@ -23,7 +23,7 @@ INDEX_DIR="${INDEX_DIR:-$TRADE_DIR/index}"
 ANIME_JSONL="${ANIME_JSONL:-$REPO/data/mapping/clap_train_15s.jsonl}"
 MIXED_JSONL="${MIXED_JSONL:-$REPO/data/mapping/clap_train_grok_mixed.jsonl}"
 HOLDOUT_TXT="${HOLDOUT_TXT:-$REPO/data/mapping/public_eval_holdout_paths.txt}"
-TRAIN_PARAMS="${TRAIN_PARAMS:-$REPO/data/eval/llm_ablation/train_params.json}"
+TRAIN_PARAMS="${TRAIN_PARAMS:-$REPO/data/eval/domain_tradeoff/train_params.json}"
 VAL_JSONL="${VAL_JSONL:-$REPO/data/mapping/clap_val_15s.jsonl}"
 METADATA_JSON="${METADATA_JSON:-$REPO/data/mapping/music_metadata.json}"
 

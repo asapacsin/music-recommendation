@@ -1,7 +1,0 @@
-index_kind,tag_id,query_text,tag_precision_mean,tag_llm_precision_mean,delta_precision,tag_ndcg_delta_mean,tag_llm_ndcg_delta_mean,delta_ndcg
-meta,inst_piano,piano,0.200000,0.200000,0.000000,0.149544,0.218975,0.069431
-meta,inst_vocal,vocal,1.000000,1.000000,0.000000,0.303099,0.303099,0.000000
-meta,mood_relaxing,relaxing,0.500000,0.600000,0.100000,0.045818,0.194602,0.148784
-caption,inst_piano,piano,0.400000,0.600000,0.200000,0.467397,0.594257,0.126859
-caption,inst_vocal,vocal,1.000000,0.800000,-0.200000,0.276932,0.125170,-0.151762
-caption,mood_relaxing,relaxing,1.000000,0.800000,-0.200000,0.686037,0.512851,-0.173187

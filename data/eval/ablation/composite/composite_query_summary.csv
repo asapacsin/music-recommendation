@@ -1,4 +1,0 @@
-n_tags_in_prompt,query_text,query_ids,n_positive,prevalence,top_k,pretrained_precision_at_k,pretrained_ndcg_delta,ft_precision_mean,ft_precision_stdev,ft_ndcg_delta_mean,ft_ndcg_delta_stdev,delta_precision_vs_pretrained,delta_ndcg_vs_pretrained,n_ft_seeds
-1,piano,inst_piano,29,0.145,10,0.200000,0.218975,0.300000,0.000000,0.288406,0.000000,0.100000,0.069431,5
-2,piano vocal,inst_piano;inst_vocal,5,0.025,10,0.000000,-0.042621,0.000000,0.000000,-0.042621,0.000000,0.000000,0.000000,5
-3,piano vocal relaxing,inst_piano;inst_vocal;mood_relaxing,4,0.02,10,0.000000,-0.031894,0.000000,0.000000,-0.031894,0.000000,0.000000,0.000000,5

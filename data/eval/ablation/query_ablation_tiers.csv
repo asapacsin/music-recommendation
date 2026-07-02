@@ -1,7 +1,0 @@
-tier_id,description,model,top_k,n_queries,macro_precision_at_k,macro_ndcg_delta
-primary_3_finetune_scope,3 tags used for CLAP fine-tune,pretrained,10,3,0.566667,0.227350
-primary_3_finetune_scope,3 tags used for CLAP fine-tune,fine_tuned,10,3,0.633333,0.288853
-all_style_8_multihot,All gold multihot style/instrument columns,pretrained,10,9,0.222222,0.070168
-all_style_8_multihot,All gold multihot style/instrument columns,fine_tuned,10,9,0.266667,0.128359
-full_style_plus_tempo_11,8 style + 3 tempo retrieval phrases,pretrained,10,12,0.250000,0.052550
-full_style_plus_tempo_11,8 style + 3 tempo retrieval phrases,fine_tuned,10,12,0.290000,0.113097

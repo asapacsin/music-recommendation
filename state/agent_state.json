@@ -1,56 +1,65 @@
 {
   "version": 1,
-  "last_updated": "2026-06-20",
+  "last_updated": "2026-07-02",
   "PLAN": {
-    "high_level_goal": "Question E complete — README + Opus pack aligned to Grok tradeoff results",
-    "current_step_index": 6,
+    "high_level_goal": "Grok-only repo — Question E pipeline and artifacts only",
+    "current_step_index": 7,
     "tasks": [
       {
         "id": "grok_tradeoff_slurm",
         "status": "completed",
-        "description": "Job 122295 — full pipeline + domain_tradeoff/REPORT.md"
+        "description": "Job 122295 — domain_tradeoff/REPORT.md"
       },
       {
-        "id": "readme_enterprise_rewrite",
+        "id": "grok_only_cleanup",
         "status": "completed",
-        "description": "README: specialization-generalization, skills, gold/OOD tables"
-      },
-      {
-        "id": "opus_feed_numbers",
-        "status": "completed",
-        "description": "OPUS_FEED.md filled from summary.json"
+        "description": "Delete tag/llm/self-train artifacts; slim AGENTS to E-only"
       }
     ],
     "next_actions": [
-      "Thesis writing from docs/opus_tradeoff_bundle/OPUS_FEED.md",
-      "Optional: update docs/agent_runs/20260619_grok_domain_tradeoff/REVIEW.md verdict PASS"
+      "Thesis writing from docs/opus_tradeoff_bundle/OPUS_FEED.md"
     ]
   },
   "CODE": {
     "files_modified": [
-      "README.md",
-      "docs/opus_tradeoff_bundle/OPUS_FEED.md",
+      "AGENTS.md",
       "docs/THESIS_QUESTIONS.md",
-      "state/agent_state.json"
+      "docs/OPERATIONS.md",
+      "docs/PROGRESS_MONITOR.md",
+      "app/progress_monitor.py",
+      "scripts/run_public_eval.sh",
+      "scripts/run_public_ood_pipeline.sh",
+      "scripts/run_domain_tradeoff_ablation.sh",
+      "app/data_handling/music_eval_domain_tradeoff_report.py",
+      "tests/test_progress_monitor.py",
+      "data/eval/domain_tradeoff/train_params.json"
     ],
     "key_decisions": [
-      "README is technical/thesis Q E only; gold + OOD tables separate; no enterprise copy in corpus",
-      "Canonical results: job 122295, thesis_grok_* arms, domain_tradeoff/REPORT.md"
+      "Repo scoped to Question E: thesis_grok_only/mixed checkpoints only under model/clap/finetune/",
+      "train_params.json moved to data/eval/domain_tradeoff/",
+      "Legacy scripts and eval dirs (tag_llm, llm_ablation, ablation) removed"
     ]
   },
   "TEST": {
-    "cases": [],
+    "cases": [
+      {
+        "name": "test_progress_monitor.py",
+        "result": "pass",
+        "detail": "10 passed"
+      }
+    ],
     "bugs_discovered": []
   },
   "REVIEW": {
     "quality_notes": [
-      "README numbers match data/eval/domain_tradeoff/summary.json"
+      "model/clap/finetune contains only thesis_grok_only and thesis_grok_mixed",
+      "Public OOD CSVs trimmed to pretrained + grok arms"
     ],
     "verdict": "PASS"
   },
   "MEMORY": {
     "user_preferences": [
-      "README/corpus: technical + thesis focus only; no enterprise/business/stakeholder framing in repo docs"
+      "Single canonical pipeline: Grok Question E only; no parallel tag/llm experiment clutter in repo"
     ],
     "question_e": {
       "status": "done",
@@ -58,7 +67,8 @@
       "run_ids": ["thesis_grok_only", "thesis_grok_mixed"],
       "trade_dir": "data/eval/domain_tradeoff",
       "report": "data/eval/domain_tradeoff/REPORT.md",
-      "opus_feed": "docs/opus_tradeoff_bundle/OPUS_FEED.md"
+      "opus_feed": "docs/opus_tradeoff_bundle/OPUS_FEED.md",
+      "checkpoints": "model/clap/finetune/thesis_grok_{only,mixed}/seed_*/best_model.pt"
     }
   }
 }

@@ -87,6 +87,7 @@ def _write_public_csv(path: Path, piano: float, vocal: float, relaxing: float) -
 
 
 def test_build_domain_tradeoff_report(tmp_path: Path) -> None:
+    """Grok E 2×2 report schema."""
     trade = tmp_path / "domain_tradeoff"
     trade.mkdir()
     eval_root = tmp_path / "eval"
@@ -96,11 +97,11 @@ def test_build_domain_tradeoff_report(tmp_path: Path) -> None:
     for ds in ("jamendo", "mtat", "openmic"):
         pub = eval_root / f"{ds}_public"
         pub.mkdir(parents=True)
-        for arm in ("pretrained", "thesis_tag_only", "thesis_tag_mixed"):
+        for arm in ("pretrained", "thesis_grok_only", "thesis_grok_mixed"):
             for seed in (42, 43, 44):
-                if arm == "thesis_tag_only":
+                if arm == "thesis_grok_only":
                     p, v, r = 0.3, 0.0, 0.2
-                elif arm == "thesis_tag_mixed":
+                elif arm == "thesis_grok_mixed":
                     p, v, r = 0.7, 0.5, 0.3
                 else:
                     p, v, r = 0.9, 0.9, 0.4
@@ -112,8 +113,8 @@ def test_build_domain_tradeoff_report(tmp_path: Path) -> None:
         datasets=["jamendo", "mtat", "openmic"],
         seeds=[42, 43, 44],
         top_k=10,
-        anime_arm="thesis_tag_only",
-        mixed_arm="thesis_tag_mixed",
+        anime_arm="thesis_grok_only",
+        mixed_arm="thesis_grok_mixed",
     )
     assert (trade / "REPORT.md").is_file()
     assert len(meta["rows"]) == 3
@@ -122,7 +123,7 @@ def test_build_domain_tradeoff_report(tmp_path: Path) -> None:
 
 
 def test_build_grok_domain_tradeoff_report(tmp_path: Path) -> None:
-    """Grok E v2 arm IDs produce same 2×2 schema as tag-only E."""
+    """Alias: grok arm IDs (defaults match CLI)."""
     trade = tmp_path / "domain_tradeoff_grok"
     trade.mkdir()
     eval_root = tmp_path / "eval"

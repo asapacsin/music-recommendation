@@ -1,86 +1,87 @@
-# Operations guide
+# Operations guide — Question E
 
-Commands to **build data** and **run evals** referenced in the thesis. For the research story and results, read [`README.md`](../README.md) and [`THESIS_QUESTIONS.md`](THESIS_QUESTIONS.md).
+Commands to build data and run the **Grok domain tradeoff** pipeline. Story and numbers: [`README.md`](../README.md), [`THESIS_QUESTIONS.md`](THESIS_QUESTIONS.md).
 
 ---
 
-## Pipeline (in order)
-
-### 1. Metadata
+## 1. Metadata & 15s clips
 
 ```bash
 python app/data_handling/music_extract_metadata.py
-python app/data_handling/music_metadata_merge_process_meta.py --music-confidence-min 0.7
-```
-
-### 2. 15s clips + train/val manifests
-
-```bash
-python app/data_handling/music_split_to_15s.py
 python app/data_handling/music_build_train_val_from_15s.py
 ```
 
-Outputs: `data/mapping/clap_train_15s.jsonl`, `clap_val_15s.jsonl`, `clap_split_summary.json`.
+Outputs: `data/mapping/clap_train_15s.jsonl`, `clap_val_15s.jsonl`.
 
-### 3. Fine-tune (multi-seed)
+---
+
+## 2. Mixed-domain train JSONL
 
 ```bash
-python -m app.train_clap_multiseed --run-id thesis_ft_v1 --seeds 42,43,44
+python -m app.data_handling.music_build_mixed_domain_train_jsonl \
+  --anime-jsonl data/mapping/clap_train_15s.jsonl \
+  --out-jsonl data/mapping/clap_train_grok_mixed.jsonl
 ```
 
-Or Slurm: `sbatch scripts/sbatch_clap_finetune.sh`. Tutorial: [`FINE_TUNING_TUTORIAL.md`](FINE_TUNING_TUTORIAL.md).
+---
 
-### 4. Metadata FAISS + gold retrieval matrix
+## 3. Full Question E pipeline (Slurm)
+
+```bash
+sbatch scripts/sbatch_domain_tradeoff_ablation.sh
+```
+
+Stages: mixed JSONL → audio cache → FT `thesis_grok_only` + `thesis_grok_mixed` (seeds 42–44) → gold eval → public OOD → `data/eval/domain_tradeoff/REPORT.md`.
+
+Eval-only:
+
+```bash
+SKIP_BUILD=1 SKIP_CACHE=1 SKIP_TRAIN=1 bash scripts/run_domain_tradeoff_ablation.sh
+```
+
+Details: [`DOMAIN_TRADEOFF.md`](DOMAIN_TRADEOFF.md). FT params: `data/eval/domain_tradeoff/train_params.json`.
+
+---
+
+## 4. Gold set (in-domain eval)
+
+```bash
+python -m app.data_handling.music_eval_merge_gold
+```
+
+See [`README_eval_merge.md`](README_eval_merge.md).
+
+---
+
+## 5. Metadata FAISS + pretrained baseline matrix
 
 ```bash
 python -m app.metadata_faiss build --min-confidence 0.35
 python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10
 ```
 
-Eval with fine-tuned weights: `export RAGWEB_CLAP_CHECKPOINT=.../best_model.pt` then same matrix command.
+Fine-tuned eval: `export RAGWEB_CLAP_CHECKPOINT=.../best_model.pt` then rerun matrix.
 
 ---
 
-## Human gold set
-
-Build song manifest → label CSV → merge:
+## 6. Public OOD (optional standalone)
 
 ```bash
-python -m app.data_handling.music_eval_build_song_manifest \
-  --filter-val-jsonl data/mapping/clap_val_15s.jsonl --random-sample 150 --seed 42
-
-python -m app.data_handling.music_eval_prepare_gold_multihot_csv
-# label data/eval/gold_labels_multihot_template.csv (0/1 per column)
-
-python -m app.data_handling.music_eval_merge_gold
+ARMS="pretrained thesis_grok_only thesis_grok_mixed" bash scripts/run_public_eval.sh
 ```
 
-Details: [`README_eval_merge.md`](README_eval_merge.md).
+Or: `sbatch scripts/sbatch_public_eval.sh` with the same `ARMS`.
 
 ---
 
-## Thesis ablation Slurm jobs
-
-| Question | Command |
-|----------|---------|
-| B — LLM vs Grok (full corpus) | `sbatch scripts/sbatch_llm_full_corpus_gen.sh` then `SKIP_LLM_GEN=1 sbatch scripts/sbatch_llm_full_ablation.sh` |
-| D — Tag vs tag→LLM | `sbatch scripts/sbatch_tag_llm_corpus_gen.sh` then `SKIP_LLM_GEN=1 sbatch scripts/sbatch_tag_llm_ablation.sh` |
-| E — Domain tradeoff | `sbatch scripts/sbatch_domain_tradeoff_ablation.sh` |
-| Public OOD | `bash scripts/run_public_eval.sh` or `sbatch scripts/sbatch_public_eval.sh` |
-
-Progress: `bash scripts/refresh_progress.sh` → [`PROGRESS.md`](PROGRESS.md).
-
----
-
-## Audio cache (optional, speeds up FT)
+## 7. Audio cache (speeds up FT)
 
 ```bash
 python -m app.data_handling.music_precompute_clap_audio_cache \
   --jsonl data/mapping/clap_train_15s.jsonl \
-  --jsonl data/mapping/clap_val_15s.jsonl
+  --jsonl data/mapping/clap_val_15s.jsonl \
+  --jsonl data/mapping/clap_train_grok_mixed.jsonl
 ```
-
-Training picks up cache automatically when present under `data/embeddings_cache/`.
 
 ---
 
@@ -88,11 +89,11 @@ Training picks up cache automatically when present under `data/embeddings_cache/
 
 | Module | Role |
 |--------|------|
-| `app/init_model.py` | CLAP load, train loop, contrastive loss |
-| `app/train_clap_multiseed.py` | Multi-seed fine-tune driver |
-| `app/metadata_faiss.py` | Build / search metadata index |
+| `app/init_model.py` | CLAP load, train loop |
+| `app/train_clap_multiseed.py` | Multi-seed FT driver |
+| `app/data_handling/music_build_mixed_domain_train_jsonl.py` | Mixed train JSONL |
+| `app/data_handling/music_eval_domain_tradeoff_report.py` | 2×2 report |
+| `app/metadata_faiss.py` | Metadata index |
 | `app/data_handling/music_eval_retrieval_vs_random.py` | Gold retrieval matrix |
-| `app/data_handling/music_eval_tag_llm_ablation_report.py` | Question D report |
-| `app/data_handling/music_eval_llm_full_ablation_report.py` | Question B report |
 
-Legacy / out of thesis scope: `app/recommend.py` (OpenL3), manual Top-10 human labeling workflow (`music_eval_topk_*`), clip-level tempo zero-shot as a headline metric.
+Progress: `bash scripts/refresh_progress.sh` → [`PROGRESS.md`](PROGRESS.md).

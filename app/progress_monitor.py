@@ -21,7 +21,7 @@ PUBLIC_DATASETS: tuple[tuple[str, str, str], ...] = (
     ("openmic", "data/eval/openmic_manifest.jsonl", "data/eval/openmic_public"),
 )
 
-DEFAULT_PUBLIC_ARMS = ("pretrained", "thesis_ft_v1", "thesis_tag_only", "thesis_tag_llm")
+DEFAULT_PUBLIC_ARMS = ("pretrained", "thesis_grok_only", "thesis_grok_mixed")
 
 REPO = Path(__file__).resolve().parents[1]
 SNAPSHOT_PATH = REPO / "data/eval/progress_snapshot.json"
@@ -152,10 +152,8 @@ def _parse_slurm_log(repo: Path, path: Path) -> dict[str, Any]:
     text = path.read_text(encoding="utf-8", errors="replace")
     job_id = path.stem.replace("slurm-", "")
     markers = {
-        "tag_jsonl_build": "=== Build tag train JSONL ===" in text,
-        "llm_gen": "n_songs_done" in text or "Tag → LLM" in text or "tag_llm" in text.lower(),
-        "fine_tune_tag_only": "=== Fine-tune TAG-ONLY: thesis_tag_only ===" in text,
-        "fine_tune_tag_llm": "thesis_tag_llm ===" in text and "Fine-tune TAG" in text,
+        "domain_tradeoff": "domain tradeoff" in text.lower() or "thesis_grok_only" in text,
+        "fine_tune_grok": "thesis_grok_only" in text or "thesis_grok_mixed" in text,
         "public_download": "public-dl Slurm job" in text or "public_eval backend driver" in text,
         "public_eval": "public OOD" in text.lower() or "music_eval_public_retrieval" in text,
         "skip_train": "SKIP_TRAIN=1" in text,
@@ -164,23 +162,19 @@ def _parse_slurm_log(repo: Path, path: Path) -> dict[str, Any]:
         "error": "ERROR:" in text or "Traceback (most recent call last)" in text,
     }
     phase = "unknown"
-    if markers["fine_tune_tag_llm"]:
-        phase = "ft_tag_llm"
-    elif markers["fine_tune_tag_only"]:
-        phase = "ft_tag_only"
+    if markers["domain_tradeoff"] or markers["fine_tune_grok"]:
+        phase = "domain_tradeoff"
     elif markers["public_eval"]:
         phase = "public_ood_eval"
     elif markers["public_download"]:
         phase = "public_ood_download"
-    elif markers["llm_gen"] and not markers["fine_tune_tag_only"]:
-        phase = "llm_corpus_gen"
     elif markers["skip_train"] and markers["done"]:
         phase = "skipped_train"
 
     tail = [ln for ln in text.splitlines() if ln.strip()][-8:]
 
     state = "completed" if markers["done"] and not markers["error"] else "failed" if markers["error"] else "running"
-    if markers["skip_train"] and markers["done"] and not markers["fine_tune_tag_only"] and not markers["fine_tune_tag_llm"]:
+    if markers["skip_train"] and markers["done"] and not markers["fine_tune_grok"]:
         state = "skipped"
 
     return {
@@ -197,122 +191,68 @@ def _parse_slurm_log(repo: Path, path: Path) -> dict[str, Any]:
 
 
 def _thesis_question_status(repo: Path) -> list[dict[str, Any]]:
-    checks = [
+    report_path = repo / "data/eval/domain_tradeoff/REPORT.md"
+    grok_only = _run_status(repo, "thesis_grok_only")
+    grok_mixed = _run_status(repo, "thesis_grok_mixed")
+    report_ok = report_path.is_file()
+    if report_ok:
+        status = "done"
+    elif grok_only.n_complete == grok_only.n_total and grok_mixed.n_complete == grok_mixed.n_total:
+        status = "eval_pending"
+    elif grok_only.n_complete > 0 or grok_mixed.n_complete > 0:
+        status = "running"
+    else:
+        status = "pending"
+    return [
         {
-            "id": "A",
-            "label": "Fine-tune vs pretrained",
-            "result_glob": "data/eval/retrieval_vs_random_matrix*.csv",
-            "run_ids": [],
-            "report": None,
-        },
-        {
-            "id": "B",
-            "label": "Grok vs LLM captions",
-            "result_glob": None,
-            "run_ids": ["thesis_llm_full_llm"],
-            "report": "data/eval/llm_full_ablation/REPORT.md",
-        },
-        {
-            "id": "C",
-            "label": "Self-train loop",
-            "result_glob": None,
-            "run_ids": [],
-            "report": None,
-            "extra": "docs/agent_runs/20260526_self_train_v2/REVIEW.md",
-        },
-        {
-            "id": "D",
-            "label": "Tag-only vs tag→LLM",
-            "result_glob": None,
-            "run_ids": ["thesis_tag_only", "thesis_tag_llm"],
-            "report": "data/eval/tag_llm_ablation/REPORT.md",
-        },
+            "id": "E",
+            "label": "Forgetting vs specialization (Grok domain tradeoff)",
+            "status": status,
+            "report": str(report_path.relative_to(repo)),
+            "report_exists": report_ok,
+            "artifacts": [
+                str(p.relative_to(repo))
+                for p in (
+                    repo / "data/mapping/clap_train_grok_mixed.jsonl",
+                    repo / "data/eval/domain_tradeoff/summary.json",
+                )
+                if p.is_file()
+            ],
+            "runs": [
+                {
+                    "run_id": r.run_id,
+                    "status": r.status,
+                    "n_complete": r.n_complete,
+                    "n_total": r.n_total,
+                    "seeds": [asdict(s) for s in r.seeds],
+                }
+                for r in (grok_only, grok_mixed)
+            ],
+        }
     ]
-    rows: list[dict[str, Any]] = []
-    for item in checks:
-        report_path = (repo / item["report"]) if item.get("report") else None
-        extra_raw = item.get("extra")
-        extra = (repo / extra_raw) if extra_raw else None
-        glob_hits: list[str] = []
-        if item.get("result_glob"):
-            glob_hits = sorted(
-                str(p.relative_to(repo)) for p in repo.glob(item["result_glob"])
-            )
-        runs = [_run_status(repo, rid) for rid in item.get("run_ids", [])]
-        report_ok = report_path.is_file() if report_path else False
-        if item["id"] == "A":
-            ft = _run_status(repo, "thesis_ft_v1")
-            status = "done" if glob_hits and ft.n_complete == ft.n_total else "partial" if glob_hits or ft.n_complete else "pending"
-        elif item["id"] == "C":
-            status = "done" if extra and extra.is_file() else "pending"
-        elif item["id"] == "D":
-            tag_only = _run_status(repo, "thesis_tag_only")
-            tag_llm = _run_status(repo, "thesis_tag_llm")
-            if report_ok:
-                status = "done"
-            elif tag_only.n_complete == tag_only.n_total and tag_llm.n_complete == tag_llm.n_total:
-                status = "eval_pending"
-            elif tag_only.n_complete > 0 or tag_llm.n_complete > 0:
-                status = "running"
-            else:
-                status = "pending"
-        else:
-            status = "done" if report_ok else "partial" if any(r.n_complete for r in runs) else "pending"
-
-        rows.append(
-            {
-                "id": item["id"],
-                "label": item["label"],
-                "status": status,
-                "report": str(report_path.relative_to(repo)) if report_path else None,
-                "report_exists": report_ok,
-                "artifacts": glob_hits,
-                "runs": [
-                    {
-                        "run_id": r.run_id,
-                        "status": r.status,
-                        "n_complete": r.n_complete,
-                        "n_total": r.n_total,
-                        "seeds": [asdict(s) for s in r.seeds],
-                    }
-                    for r in runs
-                ],
-            }
-        )
-    return rows
 
 
-def _question_d_units(repo: Path) -> list[dict[str, Any]]:
-    tag_jsonl = repo / "data/mapping/clap_train_tag.jsonl"
-    tag_llm_jsonl = repo / "data/mapping/clap_train_tag_llm.jsonl"
-    tag_songs = repo / "data/mapping/clap_train_tag_llm_songs.jsonl"
+def _question_e_units(repo: Path) -> list[dict[str, Any]]:
+    anime_jsonl = repo / "data/mapping/clap_train_15s.jsonl"
+    mixed_jsonl = repo / "data/mapping/clap_train_grok_mixed.jsonl"
     cache_index = (
         repo / "data/embeddings_cache/clap_backbone/music_audioset_epoch_15_esc_90.14/index.json"
     )
-    tag_only = _run_status(repo, "thesis_tag_only")
-    tag_llm = _run_status(repo, "thesis_tag_llm")
-    report = repo / "data/eval/tag_llm_ablation/REPORT.md"
+    grok_only = _run_status(repo, "thesis_grok_only")
+    grok_mixed = _run_status(repo, "thesis_grok_mixed")
+    report = repo / "data/eval/domain_tradeoff/REPORT.md"
 
-    n_songs = _count_lines(tag_songs) or 0
     units = [
-        ("0", "Tag JSONL", tag_jsonl.is_file() and (_count_lines(tag_jsonl) or 0) > 60000),
-        ("1", "Llama tag→text", tag_llm_jsonl.is_file() and n_songs >= 3440),
+        ("0", "Anime train JSONL", anime_jsonl.is_file() and (_count_lines(anime_jsonl) or 0) > 60000),
+        ("1", "Mixed train JSONL", mixed_jsonl.is_file() and (_count_lines(mixed_jsonl) or 0) > 60000),
         ("2", "Audio cache", cache_index.is_file()),
-        (
-            "3",
-            "FT thesis_tag_only (seeds 42–44)",
-            tag_only.n_complete == tag_only.n_total,
-        ),
-        (
-            "4",
-            "FT thesis_tag_llm (seeds 42–44)",
-            tag_llm.n_complete == tag_llm.n_total,
-        ),
-        ("5", "Gold eval + REPORT.md", report.is_file()),
+        ("3", "FT thesis_grok_only (seeds 42–44)", grok_only.n_complete == grok_only.n_total),
+        ("4", "FT thesis_grok_mixed (seeds 42–44)", grok_mixed.n_complete == grok_mixed.n_total),
+        ("5", "Gold + OOD eval + REPORT.md", report.is_file()),
     ]
     out: list[dict[str, Any]] = []
     first_pending = True
-    run_by_unit = {"3": tag_only, "4": tag_llm}
+    run_by_unit = {"3": grok_only, "4": grok_mixed}
     for uid, label, done in units:
         if done:
             state = "done"
@@ -329,46 +269,45 @@ def _question_d_units(repo: Path) -> list[dict[str, Any]]:
             state = "pending"
         detail: dict[str, Any] = {}
         if uid == "0":
-            detail["lines"] = _count_lines(tag_jsonl)
+            detail["lines"] = _count_lines(anime_jsonl)
         if uid == "1":
-            detail["song_lines"] = n_songs
-            detail["clip_lines"] = _count_lines(tag_llm_jsonl)
+            detail["lines"] = _count_lines(mixed_jsonl)
         if uid == "2":
             detail["cache_index_bytes"] = cache_index.stat().st_size if cache_index.is_file() else None
         if uid == "3":
-            detail.update({"n_complete": tag_only.n_complete, "n_total": tag_only.n_total})
+            detail.update({"n_complete": grok_only.n_complete, "n_total": grok_only.n_total})
         if uid == "4":
-            detail.update({"n_complete": tag_llm.n_complete, "n_total": tag_llm.n_total})
+            detail.update({"n_complete": grok_mixed.n_complete, "n_total": grok_mixed.n_total})
         out.append({"unit": uid, "label": label, "state": state, "detail": detail})
     return out
 
 
-def _question_d_training_recipe(repo: Path) -> dict[str, Any]:
-    """Static + on-disk params for Question D CLAP fine-tune (both arms)."""
-    params_path = repo / "data/eval/llm_ablation/train_params.json"
+def _question_e_training_recipe(repo: Path) -> dict[str, Any]:
+    """Static + on-disk params for Question E CLAP fine-tune (both arms)."""
+    params_path = repo / "data/eval/domain_tradeoff/train_params.json"
     params = _read_json(params_path) or {}
     early = params.get("early_stopping") or {}
-    tag_lines = _count_lines(repo / "data/mapping/clap_train_tag.jsonl")
+    anime_lines = _count_lines(repo / "data/mapping/clap_train_15s.jsonl")
     val_jsonl = params.get("val_jsonl", "data/mapping/clap_val_15s.jsonl")
     return {
-        "question": "Does tag→LLM training text beat short tag strings for gold tag retrieval?",
+        "question": "Is OOD drop forgetting or specialization when mixing public clips into Grok-caption FT?",
         "arms": {
-            "thesis_tag_only": {
-                "run_id": "thesis_tag_only",
-                "train_jsonl": "data/mapping/clap_train_tag.jsonl",
-                "train_text": "Short tags from gold multihot (piano, vocal, relaxing) or fallback \"music\"",
+            "thesis_grok_only": {
+                "run_id": "thesis_grok_only",
+                "train_jsonl": "data/mapping/clap_train_15s.jsonl",
+                "train_text": "Grok/metadata captions on ACG clips",
             },
-            "thesis_tag_llm": {
-                "run_id": "thesis_tag_llm",
-                "train_jsonl": "data/mapping/clap_train_tag_llm.jsonl",
-                "train_text": "Llama-expanded sentence per song (same tags), copied to all 15s clips",
+            "thesis_grok_mixed": {
+                "run_id": "thesis_grok_mixed",
+                "train_jsonl": "data/mapping/clap_train_grok_mixed.jsonl",
+                "train_text": "Grok ACG + short tag strings on MTAT/OpenMIC",
             },
         },
         "shared": {
-            "train_clips": tag_lines,
+            "train_clips": anime_lines,
             "val_jsonl": val_jsonl,
             "val_text": "Grok-style captions on held-out clips (same val for both arms)",
-            "audio": "15s segments under data/music_db_15s/; backbone audio cache used at train time",
+            "audio": "15s segments; backbone audio cache used at train time when present",
             "backbone": "Frozen CLAP AudioSet; train audio/text projection + transform heads",
             "loss": "Contrastive (scaled audio–text similarity, batch cross-entropy)",
             "params_file": _rel(repo, params_path) if params_path.is_file() else None,
@@ -386,11 +325,11 @@ def _question_d_training_recipe(repo: Path) -> dict[str, Any]:
             "min_epochs": early.get("min_epochs", 5),
             "note": (
                 "val_similarity = mean diagonal audio–text match on val JSONL; "
-                "not the thesis retrieval metric (P@K / nDCG on gold — Unit 5)"
+                "not the thesis retrieval metric (P@K / nDCG on gold)"
             ),
         },
         "checkpoints": "model/clap/finetune/<run_id>/seed_<n>/best_model.pt",
-        "thesis_eval": "Gold retrieval vs random → data/eval/tag_llm_ablation/REPORT.md (Unit 5)",
+        "thesis_eval": "2×2 gold + OOD → data/eval/domain_tradeoff/REPORT.md",
     }
 
 
@@ -574,12 +513,12 @@ def _public_ood_next_commands(repo: Path, pub: dict[str, Any], units: list[dict[
     if ready and eval_u.get("state") in {"next", "running", "partial"}:
         ds_arg = " ".join(ready)
         cmds.append(
-            f'DATASETS="{ds_arg}" ARMS="pretrained thesis_tag_only thesis_tag_llm" '
+            f'DATASETS="{ds_arg}" ARMS="pretrained thesis_grok_only thesis_grok_mixed" '
             "SKIP_EXISTING=1 sbatch scripts/sbatch_public_eval.sh"
         )
     elif eval_u.get("state") == "done" and not pub.get("report_exists"):
         cmds.append(
-            'DATASETS="jamendo mtat openmic" ARMS="pretrained thesis_tag_only thesis_tag_llm" '
+            'DATASETS="jamendo mtat openmic" ARMS="pretrained thesis_grok_only thesis_grok_mixed" '
             "RUN_REPORT=1 SKIP_EXISTING=1 bash scripts/run_public_eval.sh  # report only"
         )
 
@@ -765,7 +704,7 @@ def public_ood_pipeline_actions(repo: Path | None = None) -> dict[str, Any]:
             {
                 "type": "eval",
                 "datasets": ready,
-                "arms": ["pretrained", "thesis_tag_only", "thesis_tag_llm"],
+                "arms": ["pretrained", "thesis_grok_only", "thesis_grok_mixed"],
                 "skip_existing": True,
             }
         )
@@ -785,14 +724,12 @@ def build_snapshot(repo: Path | None = None) -> dict[str, Any]:
     return {
         "updated_utc": _utc_now(),
         "thesis_questions": _thesis_question_status(repo),
-        "question_d_units": _question_d_units(repo),
-        "question_d_training_recipe": _question_d_training_recipe(repo),
+        "question_e_units": _question_e_units(repo),
+        "question_e_training_recipe": _question_e_training_recipe(repo),
         "public_ood": _public_ood_status(repo),
         "artifacts": {
-            "clap_train_tag": _artifact(repo, repo / "data/mapping/clap_train_tag.jsonl"),
-            "clap_train_tag_llm": _artifact(repo, repo / "data/mapping/clap_train_tag_llm.jsonl"),
-            "tag_llm_ablation_report": _artifact(repo, repo / "data/eval/tag_llm_ablation/REPORT.md"),
-            "llm_full_ablation_report": _artifact(repo, repo / "data/eval/llm_full_ablation/REPORT.md"),
+            "clap_train_grok_mixed": _artifact(repo, repo / "data/mapping/clap_train_grok_mixed.jsonl"),
+            "domain_tradeoff_report": _artifact(repo, repo / "data/eval/domain_tradeoff/REPORT.md"),
         },
         "slurm_recent": [_parse_slurm_log(repo, p) for p in slurm_logs],
     }
@@ -846,51 +783,51 @@ def render_markdown(snapshot: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "## Question D pipeline",
+            "## Question E pipeline",
             "",
             "| Unit | Step | State | Detail |",
             "|------|------|-------|--------|",
         ]
     )
-    for u in snapshot["question_d_units"]:
+    for u in snapshot["question_e_units"]:
         detail = u.get("detail") or {}
         detail_s = ", ".join(f"{k}={v}" for k, v in detail.items() if v is not None) or "—"
         lines.append(
             f"| {u['unit']} | {u['label']} | **{_status_badge(u['state'])}** | {detail_s} |"
         )
 
-    recipe = snapshot.get("question_d_training_recipe") or {}
+    recipe = snapshot.get("question_e_training_recipe") or {}
     if recipe:
         shared = recipe.get("shared") or {}
         early = recipe.get("early_stopping") or {}
         hyper = recipe.get("hyperparams") or {}
         arms = recipe.get("arms") or {}
-        tag_only = arms.get("thesis_tag_only") or {}
-        tag_llm = arms.get("thesis_tag_llm") or {}
+        anime = arms.get("thesis_grok_only") or {}
+        mixed = arms.get("thesis_grok_mixed") or {}
         seeds_s = ", ".join(str(s) for s in recipe.get("seeds") or DEFAULT_SEEDS)
         clips = shared.get("train_clips")
         clips_s = str(clips) if clips is not None else "?"
         lines.extend(
             [
                 "",
-                "## Question D — training recipe",
+                "## Question E — training recipe",
                 "",
                 recipe.get("question", ""),
                 "",
-                "**Two arms — only training text differs:**",
+                "**Two arms — training corpus differs:**",
                 "",
                 f"| Arm | Run ID | Train JSONL | Text paired with each clip |",
                 f"|-----|--------|-------------|----------------------------|",
-                f"| Tag-only | `{tag_only.get('run_id', 'thesis_tag_only')}` | `{tag_only.get('train_jsonl', '')}` | {tag_only.get('train_text', '')} |",
-                f"| Tag→LLM | `{tag_llm.get('run_id', 'thesis_tag_llm')}` | `{tag_llm.get('train_jsonl', '')}` | {tag_llm.get('train_text', '')} |",
+                f"| Anime-only | `{anime.get('run_id', 'thesis_grok_only')}` | `{anime.get('train_jsonl', '')}` | {anime.get('train_text', '')} |",
+                f"| Mixed | `{mixed.get('run_id', 'thesis_grok_mixed')}` | `{mixed.get('train_jsonl', '')}` | {mixed.get('train_text', '')} |",
                 "",
                 "**Shared setup:**",
                 "",
-                f"- **Train clips:** {clips_s} (`{tag_only.get('train_jsonl', 'clap_train_tag.jsonl')}`)",
+                f"- **Anime clips:** {clips_s} (`{anime.get('train_jsonl', 'clap_train_15s.jsonl')}`)",
                 f"- **Val:** `{shared.get('val_jsonl', 'clap_val_15s.jsonl')}` — {shared.get('val_text', '')}",
                 f"- **Audio:** {shared.get('audio', '')}",
                 f"- **Backbone / loss:** {shared.get('backbone', '')}; {shared.get('loss', '')}",
-                f"- **Params:** `{shared.get('params_file') or 'data/eval/llm_ablation/train_params.json'}`",
+                f"- **Params:** `{shared.get('params_file') or 'data/eval/domain_tradeoff/train_params.json'}`",
                 "",
                 "**Seeds & stop rule:**",
                 "",
@@ -913,7 +850,7 @@ def render_markdown(snapshot: dict[str, Any]) -> str:
         "(from `training_complete.json`, not last epoch).*"
     )
     lines.append("")
-    for run_id in ("thesis_tag_only", "thesis_tag_llm", "thesis_ft_v1", "thesis_llm_full_llm"):
+    for run_id in ("thesis_grok_only", "thesis_grok_mixed"):
         r = _run_status(REPO, run_id)
         if r.n_complete == 0 and not any(s.checkpoint for s in r.seeds):
             continue
@@ -941,7 +878,7 @@ def render_markdown(snapshot: dict[str, Any]) -> str:
                 "",
                 "## Public OOD pipeline",
                 "",
-                f"*Post-train external retrieval — separate from Question A–D. "
+                f"*Post-train external retrieval — part of Question E OOD arm. "
                 f"Overall: **{_status_badge(pub.get('status', 'pending'))}**. "
                 f"Orchestrator: `{pub.get('orchestrator', 'bash scripts/run_public_ood_pipeline.sh')}`*",
                 "",

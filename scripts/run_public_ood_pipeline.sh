@@ -42,10 +42,10 @@ _run_eval() {
   echo ""
   echo ">> Submit public eval: DATASETS=$datasets"
   if [[ "$DRY_RUN" == "1" ]]; then
-    echo "DRY_RUN: DATASETS=\"$datasets\" ARMS=\"pretrained thesis_tag_only thesis_tag_llm\" SKIP_EXISTING=1 sbatch scripts/sbatch_public_eval.sh"
+    echo "DRY_RUN: DATASETS=\"$datasets\" ARMS=\"pretrained thesis_grok_only thesis_grok_mixed\" SKIP_EXISTING=1 sbatch scripts/sbatch_public_eval.sh"
     return 0
   fi
-  DATASETS="$datasets" ARMS="pretrained thesis_tag_only thesis_tag_llm" SKIP_EXISTING=1 \
+  DATASETS="$datasets" ARMS="pretrained thesis_grok_only thesis_grok_mixed" SKIP_EXISTING=1 \
     sbatch "$REPO/scripts/sbatch_public_eval.sh"
   echo "Monitor: bash scripts/refresh_progress.sh  (Public OOD pipeline section)"
 }

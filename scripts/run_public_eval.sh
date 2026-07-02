@@ -11,7 +11,7 @@ DATASETS="${DATASETS:-jamendo mtat openmic}"
 SEEDS="${SEEDS:-42 43 44}"
 TOP_K="${TOP_K:-10}"
 AUDIO_BATCH="${AUDIO_BATCH:-16}"
-ARMS="${ARMS:-pretrained thesis_ft_v1}"
+ARMS="${ARMS:-pretrained thesis_grok_only thesis_grok_mixed}"
 SKIP_EXISTING="${SKIP_EXISTING:-0}"
 RUN_REPORT="${RUN_REPORT:-1}"
 BUILD_MANIFESTS="${BUILD_MANIFESTS:-0}"
@@ -30,13 +30,6 @@ declare -A MANIFEST_BUILDER=(
 )
 
 declare -A ARM_RUN_ID=(
-  [thesis_ft_v1]="thesis_ft_v1"
-  [thesis_llm_full_llm]="thesis_llm_full_llm"
-  [thesis_llm_ablation_orig]="thesis_llm_ablation_orig"
-  [thesis_llm_ablation_llm]="thesis_llm_ablation_llm"
-  [thesis_tag_only]="thesis_tag_only"
-  [thesis_tag_llm]="thesis_tag_llm"
-  [thesis_tag_mixed]="thesis_tag_mixed"
   [thesis_grok_only]="thesis_grok_only"
   [thesis_grok_mixed]="thesis_grok_mixed"
 )

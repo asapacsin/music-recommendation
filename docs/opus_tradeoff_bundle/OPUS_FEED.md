@@ -141,15 +141,9 @@ Fine-tuning CLAP on an ACG catalog with Grok/metadata captions improves in-domai
 
 ---
 
-## 9. Out of scope (do not cite as main results)
+## 9. Prior experiments (removed from repo)
 
-| Experiment | Run ID | Note |
-|------------|--------|------|
-| Older Grok FT vs pretrained | `thesis_ft_v1` | Question A; different hparams |
-| Grok vs LLM captions | `thesis_llm_full_llm` | Question B |
-| Self-train loop | `thesis_self_v2` | Question C |
-| Tag vs tag→LLM | `thesis_tag_llm` | Question D |
-| Tag-only domain tradeoff | `thesis_tag_only` / `thesis_tag_mixed` | Superseded sparse-label run |
+Earlier thesis arms (A–D, tag-only E) were deleted during Grok-only cleanup. **Cite only** `thesis_grok_only` / `thesis_grok_mixed` and `data/eval/domain_tradeoff/` for this chapter.
 
 ---
 
