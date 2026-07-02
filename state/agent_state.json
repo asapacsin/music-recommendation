@@ -1,106 +1,61 @@
 {
   "version": 1,
-  "last_updated": "2026-06-18",
+  "last_updated": "2026-06-20",
   "PLAN": {
-    "high_level_goal": "Music CLAP thesis: tag ablation + multi-dataset public OOD tests",
-    "current_step_index": 5,
+    "high_level_goal": "Question E complete — README + Opus pack aligned to Grok tradeoff results",
+    "current_step_index": 6,
     "tasks": [
       {
-        "id": "public_ood_mtat_openmic_impl",
+        "id": "grok_tradeoff_slurm",
         "status": "completed",
-        "description": "MTAT + OpenMIC manifests, shared public retrieval, run_public_eval.sh"
+        "description": "Job 122295 — full pipeline + domain_tradeoff/REPORT.md"
       },
       {
-        "id": "public_ood_docs_and_progress",
+        "id": "readme_enterprise_rewrite",
         "status": "completed",
-        "description": "docs/PUBLIC_OOD_EVAL.md + progress_monitor public_ood section"
+        "description": "README focused on specialization-generalization, tech stack, impact"
       },
       {
-        "id": "public_ood_data_prep",
-        "status": "in_progress",
-        "description": "Jamendo 297/297 done; MTAT mp3 extract + OpenMIC download pending"
-      },
-      {
-        "id": "public_ood_eval_run",
-        "status": "pending",
-        "description": "Jamendo-only eval now possible; full 3-dataset after MTAT+OpenMIC"
-      },
-      {
-        "id": "tag_llm_ablation_run",
-        "status": "in_progress",
-        "description": "Check tag_llm_ablation REPORT.md / job 121197 eval completion"
+        "id": "opus_feed_numbers",
+        "status": "completed",
+        "description": "OPUS_FEED.md filled from summary.json"
       }
     ],
     "next_actions": [
-      "Public OOD eval: confirm Slurm job completion; bash scripts/refresh_progress.sh",
-      "Git push fixed: 2445c8b on origin/main (public corpora excluded from git)"
+      "Thesis writing from docs/opus_tradeoff_bundle/OPUS_FEED.md",
+      "Optional: update docs/agent_runs/20260619_grok_domain_tradeoff/REVIEW.md verdict PASS"
     ]
   },
   "CODE": {
-    "files_created": ["docs/PUBLIC_OOD_EVAL.md"],
     "files_modified": [
-      ".gitignore",
-      "scripts/lib/public_eval_download_common.sh",
-      "scripts/download_mtat_backend.sh",
-      "scripts/download_openmic_backend.sh",
-      "scripts/download_jamendo_five_tag_backend.sh",
-      "scripts/status_public_eval_download.sh",
-      "scripts/sbatch_download_public_eval.sh",
-      "docs/PUBLIC_OOD_EVAL.md",
-      "app/progress_monitor.py",
-      "docs/PROGRESS_MONITOR.md",
-      "docs/DOWNLOAD_STATUS.md",
-      "AGENTS.md",
-      "tests/test_progress_monitor.py",
-      "docs/PROGRESS.md",
-      "data/eval/progress_snapshot.json",
-      "data/eval/download_status_snapshot.json",
+      "README.md",
+      "docs/opus_tradeoff_bundle/OPUS_FEED.md",
+      "docs/THESIS_QUESTIONS.md",
       "state/agent_state.json"
     ],
     "key_decisions": [
-      "Download backends write {dataset}.status.json and exit 1 on FAILED; status script shows big banners",
-      "COMPLETED only when disk + manifest checks pass (not just Done in log)",
-      "Public OOD tracked in progress_snapshot.public_ood with manifest audio_ready + eval CSV counts",
-      "Download counts merged from download_status_snapshot.json"
-    ],
-    "apis_introduced": [
-      "progress_monitor._public_ood_status",
-      "progress_monitor._manifest_audio_readiness"
+      "README is enterprise-facing Q E only; A-D out of scope in main README",
+      "Canonical results: job 122295, thesis_grok_* arms, domain_tradeoff/REPORT.md"
     ]
   },
   "TEST": {
-    "cases": [
-      {
-        "name": "tests/test_progress_monitor.py",
-        "result": "pass",
-        "detail": "7 passed"
-      },
-      {
-        "name": "openmic_backend _n_ogg fix + resubmit",
-        "result": "pass",
-        "detail": "Jobs 121211 MTAT + 121212 OpenMIC RUNNING; exit 2 overall"
-      }
-    ],
+    "cases": [],
     "bugs_discovered": []
   },
   "REVIEW": {
     "quality_notes": [
-      "PUBLIC_OOD_EVAL.md is human runbook; PROGRESS.md section is auto-generated"
+      "README numbers match data/eval/domain_tradeoff/summary.json"
     ],
-    "edge_cases": [
-      "Jamendo eval runnable now; MTAT manifest needs rebuild after mp3 extract"
-    ],
-    "verdict": "docs + monitor PASS"
+    "verdict": "PASS"
   },
   "MEMORY": {
-    "public_ood_guide": "docs/PUBLIC_OOD_EVAL.md",
-    "progress_public_section": "docs/PROGRESS.md ## Public OOD test",
-    "jamendo_ready": "297/297 five-tag MP3s on disk",
-    "entry_commands": {
-      "public_ood_guide": "docs/PUBLIC_OOD_EVAL.md",
-      "progress": "bash scripts/refresh_progress.sh",
-      "download_status": "bash scripts/refresh_download_status.sh",
-      "jamendo_public_eval": "DATASETS=jamendo ARMS=\"pretrained thesis_tag_only thesis_tag_llm\" bash scripts/run_public_eval.sh"
+    "question_e": {
+      "status": "done",
+      "slurm_job": "122295",
+      "run_ids": ["thesis_grok_only", "thesis_grok_mixed"],
+      "trade_dir": "data/eval/domain_tradeoff",
+      "report": "data/eval/domain_tradeoff/REPORT.md",
+      "opus_feed": "docs/opus_tradeoff_bundle/OPUS_FEED.md"
     }
   }
 }

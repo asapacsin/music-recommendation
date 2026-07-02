@@ -119,3 +119,44 @@ def test_build_domain_tradeoff_report(tmp_path: Path) -> None:
     assert len(meta["rows"]) == 3
     vocal_row = next(r for r in meta["rows"] if r["tag_id"] == "inst_vocal")
     assert vocal_row["ood_delta_mixed_minus_anime"] > 0
+
+
+def test_build_grok_domain_tradeoff_report(tmp_path: Path) -> None:
+    """Grok E v2 arm IDs produce same 2×2 schema as tag-only E."""
+    trade = tmp_path / "domain_tradeoff_grok"
+    trade.mkdir()
+    eval_root = tmp_path / "eval"
+    for seed in (42, 43, 44):
+        _write_gold_csv(trade / f"anime_only_gold_seed{seed}.csv", 0.5, 0.8, 0.4)
+        _write_gold_csv(trade / f"mixed_gold_seed{seed}.csv", 0.55, 0.75, 0.45)
+    for ds in ("jamendo", "mtat", "openmic"):
+        pub = eval_root / f"{ds}_public"
+        pub.mkdir(parents=True)
+        for arm in ("pretrained", "thesis_grok_only", "thesis_grok_mixed"):
+            for seed in (42, 43, 44):
+                p, v, r = (0.3, 0.4, 0.2) if arm == "thesis_grok_only" else (0.6, 0.5, 0.35)
+                if arm == "pretrained":
+                    p, v, r = 0.9, 0.9, 0.4
+                _write_public_csv(pub / f"{arm}_seed{seed}.csv", p, v, r)
+
+    meta = build_domain_tradeoff_report(
+        trade_dir=trade,
+        eval_root=eval_root,
+        datasets=["jamendo", "mtat", "openmic"],
+        seeds=[42, 43, 44],
+        top_k=10,
+        anime_arm="thesis_grok_only",
+        mixed_arm="thesis_grok_mixed",
+    )
+    text = (trade / "REPORT.md").read_text(encoding="utf-8")
+    assert "thesis_grok_only" in text
+    assert "thesis_grok_mixed" in text
+    assert "## 2×2 P@K (mean over seeds)" in text
+    assert len(meta["rows"]) == 3
+    for row in meta["rows"]:
+        assert "anime_only_gold" in row
+        assert "mixed_gold" in row
+        assert "anime_only_ood_macro" in row
+        assert "mixed_ood_macro" in row
+        assert "gold_delta_mixed_minus_anime" in row
+        assert "ood_delta_mixed_minus_anime" in row

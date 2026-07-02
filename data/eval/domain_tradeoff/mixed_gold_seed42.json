@@ -39,11 +39,11 @@
       "n_pool": 200,
       "n_positive": 29,
       "prevalence": 0.145,
-      "precision_at_k": 0.3,
-      "precision_delta": 0.155,
-      "ndcg_at_k": 0.42257499837058643,
+      "precision_at_k": 0.4,
+      "precision_delta": 0.255,
+      "ndcg_at_k": 0.5103515512676448,
       "ndcg_random_mean": 0.13997947122700596,
-      "ndcg_delta": 0.2825955271435805
+      "ndcg_delta": 0.3703720800406388
     },
     {
       "query_text": "orchestral",
@@ -63,11 +63,11 @@
       "n_pool": 200,
       "n_positive": 139,
       "prevalence": 0.695,
-      "precision_at_k": 0.9,
-      "precision_delta": 0.20500000000000007,
-      "ndcg_at_k": 0.9266360779006401,
+      "precision_at_k": 0.8,
+      "precision_delta": 0.1050000000000001,
+      "ndcg_at_k": 0.8603818544462509,
       "ndcg_random_mean": 0.696901432200071,
-      "ndcg_delta": 0.22973464570056912
+      "ndcg_delta": 0.16348042224617998
     },
     {
       "query_text": "sad melancholic",
@@ -75,11 +75,11 @@
       "n_pool": 200,
       "n_positive": 15,
       "prevalence": 0.075,
-      "precision_at_k": 0.0,
-      "precision_delta": -0.075,
-      "ndcg_at_k": 0.0,
+      "precision_at_k": 0.1,
+      "precision_delta": 0.02500000000000001,
+      "ndcg_at_k": 0.06625422345438903,
       "ndcg_random_mean": 0.07835005099359306,
-      "ndcg_delta": -0.07835005099359306
+      "ndcg_delta": -0.012095827539204032
     },
     {
       "query_text": "relaxing",
@@ -89,9 +89,9 @@
       "prevalence": 0.38,
       "precision_at_k": 0.5,
       "precision_delta": 0.12,
-      "ndcg_at_k": 0.41388361500911724,
+      "ndcg_at_k": 0.4330549290057019,
       "ndcg_random_mean": 0.37703306367692135,
-      "ndcg_delta": 0.03685055133219589
+      "ndcg_delta": 0.05602186532878056
     },
     {
       "query_text": "dark tense",
@@ -99,11 +99,11 @@
       "n_pool": 200,
       "n_positive": 6,
       "prevalence": 0.03,
-      "precision_at_k": 0.1,
-      "precision_delta": 0.07,
-      "ndcg_at_k": 0.10086747116627115,
+      "precision_at_k": 0.0,
+      "precision_delta": -0.03,
+      "ndcg_at_k": 0.0,
       "ndcg_random_mean": 0.047770098920201176,
-      "ndcg_delta": 0.053097372246069974
+      "ndcg_delta": -0.047770098920201176
     },
     {
       "query_text": "exciting",
@@ -113,9 +113,9 @@
       "prevalence": 0.03,
       "precision_at_k": 0.1,
       "precision_delta": 0.07,
-      "ndcg_at_k": 0.11706259313796354,
+      "ndcg_at_k": 0.15130120674940672,
       "ndcg_random_mean": 0.04006003568080698,
-      "ndcg_delta": 0.07700255745715656
+      "ndcg_delta": 0.11124117106859974
     },
     {
       "query_text": "elegant refined sophisticated",
@@ -123,11 +123,11 @@
       "n_pool": 200,
       "n_positive": 15,
       "prevalence": 0.075,
-      "precision_at_k": 0.1,
-      "precision_delta": 0.02500000000000001,
-      "ndcg_at_k": 0.06943122193677727,
+      "precision_at_k": 0.3,
+      "precision_delta": 0.22499999999999998,
+      "ndcg_at_k": 0.39375843764607193,
       "ndcg_random_mean": 0.07591476301012898,
-      "ndcg_delta": -0.006483541073351709
+      "ndcg_delta": 0.317843674635943
     },
     {
       "query_text": "epic cinematic grand orchestral",
@@ -135,11 +135,11 @@
       "n_pool": 200,
       "n_positive": 5,
       "prevalence": 0.025,
-      "precision_at_k": 0.1,
-      "precision_delta": 0.07500000000000001,
-      "ndcg_at_k": 0.14606834984270645,
+      "precision_at_k": 0.0,
+      "precision_delta": -0.025,
+      "ndcg_at_k": 0.0,
       "ndcg_random_mean": 0.04386445074991301,
-      "ndcg_delta": 0.10220389909279343
+      "ndcg_delta": -0.04386445074991301
     },
     {
       "query_text": "slow gentle ballad soft pacing low BPM relaxed understated",
@@ -159,11 +159,11 @@
       "n_pool": 200,
       "n_positive": 83,
       "prevalence": 0.415,
-      "precision_at_k": 0.6,
-      "precision_delta": 0.185,
-      "ndcg_at_k": 0.5404673768993046,
+      "precision_at_k": 0.3,
+      "precision_delta": -0.11499999999999999,
+      "ndcg_at_k": 0.3843113526044082,
       "ndcg_random_mean": 0.39843828110612667,
-      "ndcg_delta": 0.1420290957931779
+      "ndcg_delta": -0.014126928501718483
     },
     {
       "query_text": "fast driving upbeat energetic high BPM quick rhythm danceable",
@@ -171,11 +171,11 @@
       "n_pool": 200,
       "n_positive": 112,
       "prevalence": 0.56,
-      "precision_at_k": 0.9,
-      "precision_delta": 0.33999999999999997,
-      "ndcg_at_k": 0.9216017310213247,
+      "precision_at_k": 0.6,
+      "precision_delta": 0.039999999999999925,
+      "ndcg_at_k": 0.6175852859163219,
       "ndcg_random_mean": 0.5732908114776565,
-      "ndcg_delta": 0.3483109195436682
+      "ndcg_delta": 0.04429447443866541
     }
   ]
 }

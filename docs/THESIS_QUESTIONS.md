@@ -24,7 +24,7 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 | **B** | Do **LLM-refined Grok captions** beat **original Grok** captions (same FT recipe)? | `thesis_llm_ablation_orig` vs `thesis_llm_ablation_llm` (sparse); `thesis_llm_full_llm` vs orig (full corpus) | `data/eval/llm_ablation/REPORT.md`, `data/eval/llm_full_ablation/REPORT.md` | **Done** (mostly null vs Grok) |
 | **C** | Does **iterative self-train** (mine → LLM → FT) help? | iter 0 vs iter 1 checkpoints | `model/clap/self_train/...`, run docs | **Done** (negative: iter 1 regressed) |
 | **D** | Does **tag→LLM** training text beat **tag-only** text on tag retrieval? | `thesis_tag_only` vs `thesis_tag_llm` | `data/eval/tag_llm_ablation/REPORT.md` | **Done** |
-| **E** | Is OOD drop **forgetting** or **specialization**? (anime-only vs mixed FT, 2×2) | `thesis_tag_only` vs `thesis_tag_mixed` | `data/eval/domain_tradeoff/REPORT.md` | **Done** |
+| **E** | Is OOD drop **forgetting** or **specialization**? (anime-only vs mixed FT, 2×2, Grok captions) | `thesis_grok_only` vs `thesis_grok_mixed` | `data/eval/domain_tradeoff/REPORT.md` | **Done** (job 122295) |
 
 **Public OOD** (Jamendo / MTAT / OpenMIC) is **not** question A–D. It tests checkpoints **after** training on external audio. Question **E** adds mixed-domain training to interpret OOD vs in-domain jointly. See [Public OOD test](#public-ood-test-post-train) and [Question E](#question-e--forgetting-vs-specialization-mixed-domain-2×2).
 
@@ -107,17 +107,21 @@ Agents: also see [`AGENTS.md`](../AGENTS.md) and [`state/agent_state.json`](../s
 
 | | Detail |
 |--|--------|
-| **Arms** | (1) **Anime-only** `thesis_tag_only` (existing). (2) **Mixed** `thesis_tag_mixed` ← `clap_train_tag_mixed.jsonl` (anime + MTAT + OpenMIC; Jamendo **never** in train) |
-| **Training text** | Tag-only only (same as D tag arm) |
+| **Arms** | (1) **Anime-only** `thesis_grok_only` ← `clap_train_15s.jsonl` (Grok/metadata per clip). (2) **Mixed** `thesis_grok_mixed` ← `clap_train_grok_mixed.jsonl` (Grok anime + MTAT/OpenMIC tag strings; Jamendo **never** in train) |
+| **Training text** | Grok/metadata on all ACG clips; public clips use mapped dataset tags |
 | **Seeds** | 42, 43, 44 |
 | **2×2 eval** | Rows: anime-only vs mixed. Cols: in-domain gold vs public OOD (Jamendo + MTAT + OpenMIC) |
-| **Build mixed JSONL** | `python -m app.data_handling.music_build_mixed_domain_train_jsonl` |
+| **Build mixed JSONL** | `python -m app.data_handling.music_build_mixed_domain_train_jsonl --anime-jsonl data/mapping/clap_train_15s.jsonl --out-jsonl data/mapping/clap_train_grok_mixed.jsonl` |
 | **Full pipeline** | `sbatch scripts/sbatch_domain_tradeoff_ablation.sh` |
-| **Outputs** | `model/clap/finetune/thesis_tag_mixed/seed_*/best_model.pt`, **`data/eval/domain_tradeoff/REPORT.md`** |
+| **Outputs** | `model/clap/finetune/thesis_grok_{only,mixed}/seed_*/best_model.pt`, **`data/eval/domain_tradeoff/REPORT.md`** |
 | **Guide** | [`docs/DOMAIN_TRADEOFF.md`](DOMAIN_TRADEOFF.md) |
-| **Agent run** | [`docs/agent_runs/20260609_domain_tradeoff/`](agent_runs/20260609_domain_tradeoff/) |
+| **Agent run** | [`docs/agent_runs/20260619_grok_domain_tradeoff/`](agent_runs/20260619_grok_domain_tradeoff/) |
 
-**Finding:** Fine-tuning specializes at a cost to public OOD; anime-only vs mixed does **not** yield a clean tradeoff — effects are small and tag-dependent (vocal: better in-domain with anime-only, better OOD with mixed). Report: **`data/eval/domain_tradeoff/REPORT.md`** (job 121770).
+**Status:** **Done** — Slurm job **122295**. Report: **`data/eval/domain_tradeoff/REPORT.md`**.
+
+**Finding:** Grok-caption FT lifts in-domain gold (vocal 0.90 anime-only) but OOD remains below pretrained. Mixed training improves OOD vocal (+0.27) and relaxing (+0.12) vs anime-only with small or no gold cost on piano/relaxing; vocal gold −0.10 with mixed.
+
+**Superseded:** Tag-only domain tradeoff (`thesis_tag_only` / `thesis_tag_mixed`) — do not use for Question E.
 
 ---
 

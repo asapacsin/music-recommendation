@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# Mixed-domain forgetting vs specialization ablation (Question E):
-#   - build clap_train_tag_mixed.jsonl (anime + MTAT + OpenMIC; Jamendo excluded)
-#   - audio cache -> fine-tune thesis_tag_mixed (seeds 42-44)
+# Domain tradeoff — Question E (Grok captions on ACG, anime-only vs mixed FT):
+#   - build clap_train_grok_mixed.jsonl (Grok anime + MTAT + OpenMIC)
+#   - audio cache -> fine-tune thesis_grok_only + thesis_grok_mixed (seeds 42-44)
 #   - in-domain gold + public OOD eval -> 2×2 report
-#
-# Compare against existing thesis_tag_only (anime-only) — no retrain.
 #
 # Usage:
 #   sbatch scripts/sbatch_domain_tradeoff_ablation.sh
@@ -21,17 +19,16 @@ export PYTHONPATH="${PYTHONPATH:-$REPO}"
 
 TRADE_DIR="${TRADE_DIR:-$REPO/data/eval/domain_tradeoff}"
 INDEX_DIR="${INDEX_DIR:-$TRADE_DIR/index}"
-TAG_ABLATION_DIR="${TAG_ABLATION_DIR:-$REPO/data/eval/tag_llm_ablation}"
 
-ANIME_JSONL="${ANIME_JSONL:-$REPO/data/mapping/clap_train_tag.jsonl}"
-MIXED_JSONL="${MIXED_JSONL:-$REPO/data/mapping/clap_train_tag_mixed.jsonl}"
+ANIME_JSONL="${ANIME_JSONL:-$REPO/data/mapping/clap_train_15s.jsonl}"
+MIXED_JSONL="${MIXED_JSONL:-$REPO/data/mapping/clap_train_grok_mixed.jsonl}"
 HOLDOUT_TXT="${HOLDOUT_TXT:-$REPO/data/mapping/public_eval_holdout_paths.txt}"
 TRAIN_PARAMS="${TRAIN_PARAMS:-$REPO/data/eval/llm_ablation/train_params.json}"
 VAL_JSONL="${VAL_JSONL:-$REPO/data/mapping/clap_val_15s.jsonl}"
 METADATA_JSON="${METADATA_JSON:-$REPO/data/mapping/music_metadata.json}"
 
-RUN_ID_MIXED="${RUN_ID_MIXED:-thesis_tag_mixed}"
-RUN_ID_ANIME="${RUN_ID_ANIME:-thesis_tag_only}"
+RUN_ID_ANIME="${RUN_ID_ANIME:-thesis_grok_only}"
+RUN_ID_MIXED="${RUN_ID_MIXED:-thesis_grok_mixed}"
 SEEDS="${SEEDS:-42 43 44}"
 TOP_K="${TOP_K:-10}"
 MIN_CONFIDENCE="${MIN_CONFIDENCE:-0.35}"
@@ -48,12 +45,16 @@ SKIP_EXISTING="${SKIP_EXISTING:-1}"
 NO_AUDIO_CACHE="${NO_AUDIO_CACHE:-0}"
 
 DATASETS="${DATASETS:-jamendo mtat openmic}"
-PUBLIC_ARMS="${PUBLIC_ARMS:-pretrained thesis_tag_only thesis_tag_mixed}"
+PUBLIC_ARMS="${PUBLIC_ARMS:-pretrained thesis_grok_only thesis_grok_mixed}"
 
 mkdir -p "$TRADE_DIR" "$INDEX_DIR"
 
 if [[ ! -f "$TRAIN_PARAMS" ]]; then
   echo "ERROR: train params missing: $TRAIN_PARAMS" >&2
+  exit 1
+fi
+if [[ ! -f "$ANIME_JSONL" ]]; then
+  echo "ERROR: anime train JSONL missing: $ANIME_JSONL" >&2
   exit 1
 fi
 
@@ -82,9 +83,34 @@ _resolve_ckpt() {
   return 1
 }
 
-# --- 0. Build mixed JSONL ---
+_gold_eval_arm() {
+  local run_id="$1"
+  local prefix="$2"
+  echo "=== In-domain gold eval ($run_id) ==="
+  for seed in $SEEDS; do
+    ckpt="$(_resolve_ckpt "$run_id" "$seed")"
+    export RAGWEB_CLAP_CHECKPOINT="$ckpt"
+    meta_index="${INDEX_DIR}/${prefix}_meta_seed${seed}.faiss"
+    meta_mapping="${INDEX_DIR}/${prefix}_meta_seed${seed}.mapping.json"
+    echo "  seed $seed — build metadata FAISS"
+    python -m app.data_handling.music_build_retrieval_faiss build-metadata \
+      --metadata "$METADATA_JSON" \
+      --out-index "$meta_index" \
+      --out-mapping "$meta_mapping" \
+      --min-confidence "$MIN_CONFIDENCE"
+    python -m app.data_handling.music_eval_retrieval_vs_random \
+      --top-k "$TOP_K" \
+      --index "$meta_index" \
+      --mapping "$meta_mapping" \
+      --out-csv "$TRADE_DIR/${prefix}_gold_seed${seed}.csv" \
+      --out-json "$TRADE_DIR/${prefix}_gold_seed${seed}.json"
+  done
+  unset RAGWEB_CLAP_CHECKPOINT || true
+}
+
+# --- 0. Build mixed JSONL (Grok anime rows) ---
 if [[ "$SKIP_BUILD" != "1" ]]; then
-  echo "=== Build mixed-domain train JSONL ==="
+  echo "=== Build Grok mixed-domain train JSONL ==="
   _BUILD_FLAGS=(
     --anime-jsonl "$ANIME_JSONL"
     --out-jsonl "$MIXED_JSONL"
@@ -105,18 +131,32 @@ fi
 
 # --- 1. Audio cache ---
 if [[ "$SKIP_CACHE" != "1" ]]; then
-  echo "=== Precompute CLAP audio cache (mixed + val) ==="
+  echo "=== Precompute CLAP audio cache (anime + mixed + val) ==="
   python -m app.data_handling.music_precompute_clap_audio_cache \
+    --jsonl "$ANIME_JSONL" \
     --jsonl "$MIXED_JSONL" \
     --jsonl "$VAL_JSONL"
 else
   echo "SKIP_CACHE=1"
 fi
 
-# --- 2. Train mixed arm ---
+# --- 2. Train both arms ---
 if [[ "$SKIP_TRAIN" != "1" ]]; then
-  echo "=== Fine-tune $RUN_ID_MIXED ==="
-  _train_cmd=(
+  echo "=== Fine-tune $RUN_ID_ANIME (Grok anime-only) ==="
+  _train_anime=(
+    python -m app.train_clap_multiseed
+    --run-id "$RUN_ID_ANIME"
+    --seeds "$_SEEDS_CSV"
+    --train-jsonl "$ANIME_JSONL"
+    --params-json "$TRAIN_PARAMS"
+  )
+  if ((${#_MULTISEED_FLAGS[@]})); then
+    _train_anime+=("${_MULTISEED_FLAGS[@]}")
+  fi
+  "${_train_anime[@]}"
+
+  echo "=== Fine-tune $RUN_ID_MIXED (Grok anime + public) ==="
+  _train_mixed=(
     python -m app.train_clap_multiseed
     --run-id "$RUN_ID_MIXED"
     --seeds "$_SEEDS_CSV"
@@ -124,52 +164,22 @@ if [[ "$SKIP_TRAIN" != "1" ]]; then
     --params-json "$TRAIN_PARAMS"
   )
   if ((${#_MULTISEED_FLAGS[@]})); then
-    _train_cmd+=("${_MULTISEED_FLAGS[@]}")
+    _train_mixed+=("${_MULTISEED_FLAGS[@]}")
   fi
-  "${_train_cmd[@]}"
+  "${_train_mixed[@]}"
 else
   echo "SKIP_TRAIN=1"
 fi
 
-# --- 3. Link anime-only gold CSVs from tag ablation ---
-echo "=== Stage anime-only gold eval CSVs ==="
-for seed in $SEEDS; do
-  src="$TAG_ABLATION_DIR/tag_meta_seed${seed}.csv"
-  dst="$TRADE_DIR/anime_only_gold_seed${seed}.csv"
-  if [[ -f "$src" ]]; then
-    cp -f "$src" "$dst"
-  elif [[ ! -f "$dst" ]]; then
-    echo "WARNING: missing anime-only gold CSV: $src (run tag ablation eval first)" >&2
-  fi
-done
-
-# --- 4. In-domain gold eval (mixed arm) ---
+# --- 3. In-domain gold eval (both arms) ---
 if [[ "$SKIP_GOLD_EVAL" != "1" ]]; then
-  echo "=== In-domain gold eval ($RUN_ID_MIXED) ==="
-  for seed in $SEEDS; do
-    ckpt="$(_resolve_ckpt "$RUN_ID_MIXED" "$seed")"
-    export RAGWEB_CLAP_CHECKPOINT="$ckpt"
-    meta_index="${INDEX_DIR}/mixed_meta_seed${seed}.faiss"
-    meta_mapping="${INDEX_DIR}/mixed_meta_seed${seed}.mapping.json"
-    echo "  seed $seed — build metadata FAISS"
-    python -m app.data_handling.music_build_retrieval_faiss build-metadata \
-      --metadata "$METADATA_JSON" \
-      --out-index "$meta_index" \
-      --out-mapping "$meta_mapping" \
-      --min-confidence "$MIN_CONFIDENCE"
-    python -m app.data_handling.music_eval_retrieval_vs_random \
-      --top-k "$TOP_K" \
-      --index "$meta_index" \
-      --mapping "$meta_mapping" \
-      --out-csv "$TRADE_DIR/mixed_gold_seed${seed}.csv" \
-      --out-json "$TRADE_DIR/mixed_gold_seed${seed}.json"
-  done
-  unset RAGWEB_CLAP_CHECKPOINT || true
+  _gold_eval_arm "$RUN_ID_ANIME" "anime_only"
+  _gold_eval_arm "$RUN_ID_MIXED" "mixed"
 else
   echo "SKIP_GOLD_EVAL=1"
 fi
 
-# --- 5. Public OOD eval ---
+# --- 4. Public OOD eval ---
 if [[ "$SKIP_PUBLIC_EVAL" != "1" ]]; then
   echo "=== Public OOD eval ==="
   ARMS="$PUBLIC_ARMS" \
@@ -183,7 +193,7 @@ else
   echo "SKIP_PUBLIC_EVAL=1"
 fi
 
-# --- 6. 2×2 report ---
+# --- 5. 2×2 report ---
 if [[ "$SKIP_REPORT" != "1" ]]; then
   echo "=== Domain tradeoff 2×2 report ==="
   python -m app.data_handling.music_eval_domain_tradeoff_report \
@@ -192,8 +202,8 @@ if [[ "$SKIP_REPORT" != "1" ]]; then
     --datasets "${DATASETS// /,}" \
     --seeds "$_SEEDS_CSV" \
     --top-k "$TOP_K" \
-    --anime-arm thesis_tag_only \
-    --mixed-arm thesis_tag_mixed
+    --anime-arm "$RUN_ID_ANIME" \
+    --mixed-arm "$RUN_ID_MIXED"
 fi
 
 echo "Done."

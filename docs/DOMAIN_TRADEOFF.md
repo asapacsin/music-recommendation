@@ -1,15 +1,18 @@
 # Domain tradeoff: forgetting vs specialization (Question E)
 
-**Goal:** Distinguish **catastrophic forgetting** from **specialization** when fine-tuning on the anime/game catalog.
+**Goal:** Distinguish **catastrophic forgetting** from **specialization** when fine-tuning on the anime/game catalog with **Grok/metadata captions** on all ACG clips.
 
-**2×2 design** (tag-only training text, 3 seeds 42–44):
+**2×2 design** (3 seeds 42–44):
 
 |  | In-domain gold | Public OOD |
 |--|----------------|------------|
-| **Anime-only** (`thesis_tag_only`) | Existing eval | Existing `data/eval/REPORT.md` |
-| **Mixed** (`thesis_tag_mixed`) | New eval | New eval |
+| **Anime-only** (`thesis_grok_only`) | Eval | Eval |
+| **Mixed** (`thesis_grok_mixed`) | Eval | Eval |
 
-Mixed training = anime `clap_train_tag.jsonl` + MTAT + OpenMIC (eval holdouts excluded). **Jamendo never in training** (strict OOD).
+- **Anime-only train:** `clap_train_15s.jsonl` (Grok caption per clip)
+- **Mixed train:** `clap_train_grok_mixed.jsonl` (Grok anime + MTAT/OpenMIC tag strings; eval holdouts excluded)
+- **Jamendo never in training** (strict OOD)
+- Both arms retrained with matched hyperparams (`data/eval/llm_ablation/train_params.json`)
 
 ---
 
@@ -35,13 +38,17 @@ sbatch scripts/sbatch_domain_tradeoff_ablation.sh
 ### Step-by-step
 
 ```bash
-# 1. Build mixed JSONL (50/50 anime/public rows by default)
-python -m app.data_handling.music_build_mixed_domain_train_jsonl
+# Build mixed JSONL
+python -m app.data_handling.music_build_mixed_domain_train_jsonl \
+  --anime-jsonl data/mapping/clap_train_15s.jsonl \
+  --out-jsonl data/mapping/clap_train_grok_mixed.jsonl \
+  --holdout-txt data/mapping/public_eval_holdout_paths.txt \
+  --mix-ratio 0.5
 
-# 2. Full orchestrator (build → cache → train → eval → report)
+# Full orchestrator
 bash scripts/run_domain_tradeoff_ablation.sh
 
-# 3. Eval + report only (after checkpoints exist)
+# Eval + report only (checkpoints exist)
 SKIP_BUILD=1 SKIP_CACHE=1 SKIP_TRAIN=1 \
   bash scripts/run_domain_tradeoff_ablation.sh
 ```
@@ -50,11 +57,15 @@ SKIP_BUILD=1 SKIP_CACHE=1 SKIP_TRAIN=1 \
 
 | Variable | Default | Meaning |
 |----------|---------|---------|
+| `ANIME_JSONL` | `clap_train_15s.jsonl` | Grok anime train |
+| `MIXED_JSONL` | `clap_train_grok_mixed.jsonl` | Mixed train output |
+| `RUN_ID_ANIME` | `thesis_grok_only` | Anime-only checkpoints |
+| `RUN_ID_MIXED` | `thesis_grok_mixed` | Mixed checkpoints |
+| `TRADE_DIR` | `data/eval/domain_tradeoff` | Report + gold CSVs |
 | `MIX_RATIO` | `0.5` | Public fraction when `PUBLIC_CLIP_TARGET=0` |
-| `PUBLIC_CLIP_TARGET` | `0` | Explicit public row count (overrides ratio) |
-| `RUN_ID_MIXED` | `thesis_tag_mixed` | Checkpoint folder |
-| `RUN_ID_ANIME` | `thesis_tag_only` | Reference arm (no retrain) |
 | `SEEDS` | `42 43 44` | Training + eval seeds |
+
+Resume flags: `SKIP_BUILD`, `SKIP_CACHE`, `SKIP_TRAIN`, `SKIP_GOLD_EVAL`, `SKIP_PUBLIC_EVAL`, `SKIP_REPORT`.
 
 ---
 
@@ -62,11 +73,11 @@ SKIP_BUILD=1 SKIP_CACHE=1 SKIP_TRAIN=1 \
 
 | Artifact | Path |
 |----------|------|
-| Mixed train JSONL | `data/mapping/clap_train_tag_mixed.jsonl` |
+| Mixed train JSONL | `data/mapping/clap_train_grok_mixed.jsonl` |
 | Holdout audit list | `data/mapping/public_eval_holdout_paths.txt` |
-| Checkpoints | `model/clap/finetune/thesis_tag_mixed/seed_*/best_model.pt` |
+| Checkpoints | `model/clap/finetune/thesis_grok_{only,mixed}/seed_*/best_model.pt` |
 | Gold CSVs | `data/eval/domain_tradeoff/{anime_only,mixed}_gold_seed*.csv` |
-| Public CSVs | `data/eval/{jamendo,mtat,openmic}_public/thesis_tag_mixed_seed*.csv` |
+| Public CSVs | `data/eval/{jamendo,mtat,openmic}_public/thesis_grok_*_seed*.csv` |
 | **2×2 report** | **`data/eval/domain_tradeoff/REPORT.md`** |
 | Summary JSON | `data/eval/domain_tradeoff/summary.json` |
 
@@ -75,22 +86,23 @@ SKIP_BUILD=1 SKIP_CACHE=1 SKIP_TRAIN=1 \
 ## Leakage rules
 
 1. **Jamendo:** never included in mixed training; always OOD.
-2. **MTAT / OpenMIC:** all paths in eval manifests are in `public_eval_holdout_paths.txt` and excluded from training.
+2. **MTAT / OpenMIC:** eval manifest paths are in `public_eval_holdout_paths.txt` and excluded from training.
 3. Do not add eval manifest clips to mixed JSONL without updating holdouts.
 
 ---
 
 ## Prerequisites
 
-- `data/mapping/clap_train_tag.jsonl` (Question D tag-only corpus)
-- `thesis_tag_only` checkpoints + `data/eval/tag_llm_ablation/tag_meta_seed*.csv` (anime-only gold column)
+- `data/mapping/clap_train_15s.jsonl` and `clap_val_15s.jsonl` (Grok captions)
 - Public downloads COMPLETED: `bash scripts/status_public_eval_download.sh`
-- Same `train_params.json` as Question D
+- Same `train_params.json` as LLM/tag ablation runs (batch 32, val early-stop)
 
 ---
 
 ## Related
 
-- Question D: [`docs/THESIS_QUESTIONS.md`](THESIS_QUESTIONS.md)
+- Question D (tag vs tag→LLM): [`docs/THESIS_QUESTIONS.md`](THESIS_QUESTIONS.md) — separate from Question E
 - Public OOD: [`docs/PUBLIC_OOD_EVAL.md`](PUBLIC_OOD_EVAL.md)
-- Agent run: [`docs/agent_runs/20260609_domain_tradeoff/PLAN.md`](agent_runs/20260609_domain_tradeoff/PLAN.md)
+- Agent run: [`docs/agent_runs/20260619_grok_domain_tradeoff/`](agent_runs/20260619_grok_domain_tradeoff/)
+
+**Note:** Older tag-only domain tradeoff artifacts (`thesis_tag_only` / `thesis_tag_mixed` under sparse `"music"` supervision) are **superseded** — do not use for Question E thesis tables.

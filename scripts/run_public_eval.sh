@@ -37,6 +37,8 @@ declare -A ARM_RUN_ID=(
   [thesis_tag_only]="thesis_tag_only"
   [thesis_tag_llm]="thesis_tag_llm"
   [thesis_tag_mixed]="thesis_tag_mixed"
+  [thesis_grok_only]="thesis_grok_only"
+  [thesis_grok_mixed]="thesis_grok_mixed"
 )
 
 _resolve_ckpt() {

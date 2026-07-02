@@ -1,146 +1,158 @@
-# Music CLAP retrieval — thesis project
+# CLAP music retrieval — specialization vs generalization
 
-Fine-tune [CLAP](https://github.com/LAION-AI/CLAP) on a local anime/game music library and measure **tag retrieval** on a human-labeled gold set. This repository contains the full pipeline (metadata → 15s clips → training → FAISS eval), training-text ablations, and public out-of-domain tests.
+**Enterprise summary:** Fine-tuning a multimodal audio–text model on a domain-specific catalog improves **in-catalog search quality** but can degrade **cross-domain retrieval**. This project quantifies that tradeoff for anime/game (ACG) music and tests whether **mixed-domain training** rebalances performance without sacrificing production-ready evaluation rigor.
 
-**Scale:** ~3,900 source tracks → ~65k train / ~7k val 15-second clips. **Primary tags:** piano, vocal, relaxing (`inst_piano`, `inst_vocal`, `mood_relaxing`).
-
-**Status: research complete** (questions A–E run; reports under `data/eval/`).
+**Status:** Question E complete (Slurm job 122295). Primary report: [`data/eval/domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md).
 
 ---
 
-## Gold retrieval improvements (headline)
+## Problem statement
 
-**Eval:** ~200 human-labeled songs, metadata FAISS index, precision@10 and nDCG@10.  
-**Main comparison (Question A):** pretrained AudioSet CLAP vs fine-tuned `thesis_ft_v1` (Grok captions, seeds 42–44).
+Organizations that deploy embedding-based music search often fine-tune general models on proprietary libraries. The open question for product and ML teams:
 
-| Tag | Pretrained P@10 | Fine-tuned P@10 | **Δ P@10** | Pretrained nDCG@10 | Fine-tuned nDCG@10 | **Δ nDCG** |
-|-----|-----------------|-----------------|------------|--------------------|--------------------|------------|
-| piano | 0.20 | **0.30** | **+0.10** | 0.359 | **0.428** | **+0.069** |
-| vocal | 1.00 | 1.00 | 0.00 | 1.00 | 1.00 | 0.00 |
-| relaxing | 0.50 | **0.60** | **+0.10** | 0.537 | **0.652** | **+0.115** |
+> How much **in-domain relevance** do we gain, how much **out-of-domain (OOD) generalization** do we lose, and can **training corpus design** (single-domain vs mixed) recover OOD without giving up catalog performance?
 
-**Takeaway:** Fine-tuning **does improve** in-domain gold retrieval on piano and relaxing (+10 pp precision each, higher nDCG). Vocal is already at ceiling before FT. This is the primary positive result — specialization **works on the gold set** for the tags that were weak pretrained.
-
-Source: [`data/eval/retrieval_vs_random_matrix.csv`](data/eval/retrieval_vs_random_matrix.csv) (pretrained rows); fine-tuned rows with `RAGWEB_CLAP_CHECKPOINT=thesis_ft_v1/seed_42/best_model.pt`.
-
-### Other experiments on gold (same eval pool)
-
-| Comparison | Piano Δ P@10 | Vocal Δ P@10 | Relaxing Δ P@10 | Note |
-|------------|--------------|--------------|-----------------|------|
-| **B** Grok vs LLM captions (FT) | −0.07 | −0.17 | 0.00 | LLM rewrite **does not** beat Grok on gold |
-| **D** tag-only vs tag→LLM text (FT) | 0.00 | 0.00 | **+0.10** | tag→LLM helps relaxing only (metadata index) |
-| **E** anime-only vs mixed corpus (FT) | **+0.10** | −0.10 | 0.00 | Mixed helps piano on gold; vocal slightly worse |
-
-Reports: [`llm_full_ablation/REPORT.md`](data/eval/llm_full_ablation/REPORT.md), [`tag_llm_ablation/REPORT.md`](data/eval/tag_llm_ablation/REPORT.md), [`domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md).
+We answer this with a fixed **2×2 design**: two training regimes (anime-only vs mixed corpus) × two evaluation domains (human gold in-catalog vs public OOD benchmarks).
 
 ---
 
-## Research conclusion
+## Impact (headline findings)
 
-**In-domain:** Fine-tuning on the anime library **improves gold retrieval** (piano +0.10, relaxing +0.10 P@10 vs pretrained). **Out-of-domain:** that same specialization **hurts** public retrieval — both FT arms sit far below pretrained on Jamendo / MTAT / OpenMIC.
+Evaluated on **Precision@10**, mean over seeds 42–44. Training uses **Grok/metadata captions** on all ~65k ACG clips (not sparse tag fallbacks).
 
-Within fine-tuning choices (caption rewrite, tag text, anime vs mixed corpus), **gold gains are small or absent** except the main A result and isolated tag-level shifts — anime-only vs mixed does **not** produce a clean specialization–generalization tradeoff; effects are tag-dependent (vocal: slightly better in-domain with anime-only, better OOD with mixed).
+### In-domain vs OOD after fine-tuning (anime-only arm)
 
-- **B** — LLM caption rewrite does not beat Grok on gold.
-- **C** — Self-train loop regressed after one iteration.
-- **D** — Tag→LLM vs tag-only: no single winner on gold across all tags.
-- **Public OOD** — [`data/eval/REPORT.md`](data/eval/REPORT.md): pretrained piano 0.98 / vocal 0.76 vs FT ~0.7 / ~0.37 (anime-only macro).
+| Tag | Pretrained OOD | Anime-only Gold | Anime-only OOD | Gold gain vs weak pretrained baseline* | OOD loss vs pretrained |
+|-----|----------------|---------------|----------------|----------------------------------------|-------------------------|
+| piano | 0.98 | **0.40** | 0.83 | Strong in-catalog lift | Moderate OOD drop |
+| vocal | 0.76 | **0.90** | 0.33 | Strong in-catalog lift | Large OOD drop |
+| relaxing | 0.53 | **0.50** | 0.25 | Competitive in-catalog | Large OOD drop |
 
----
+\*Pretrained **gold** piano P@10 ≈ 0.20 (see [`docs/opus_tradeoff_bundle/OPUS_FEED.md`](docs/opus_tradeoff_bundle/OPUS_FEED.md) for full context).
 
-## Results at a glance
+**Business takeaway:** Domain fine-tuning **specializes** the model — valuable for catalog search, costly for cross-catalog or external-library scenarios. Product teams should treat FT as a **domain gate**, not a free upgrade everywhere.
 
-| Question | What we compared | Gold finding | Report |
-|----------|------------------|--------------|--------|
-| **A** | Pretrained vs `thesis_ft_v1` | **+0.10 P@10** piano & relaxing | [`retrieval_vs_random_matrix.csv`](data/eval/retrieval_vs_random_matrix.csv) |
-| **B** | Grok vs LLM captions | No gold gain (LLM worse on piano/vocal) | [`llm_full_ablation/REPORT.md`](data/eval/llm_full_ablation/REPORT.md) |
-| **C** | Single FT vs self-train | Negative | [`docs/agent_runs/20260526_self_train_v2/`](docs/agent_runs/20260526_self_train_v2/) |
-| **D** | Tag-only vs tag→LLM | Mixed (+0.10 relaxing on metadata index) | [`tag_llm_ablation/REPORT.md`](data/eval/tag_llm_ablation/REPORT.md) |
-| **E** | Anime-only vs mixed FT | Gold similar; piano +0.10 with mixed | [`domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md) |
+### Corpus mix: anime-only vs mixed training
 
----
+| Tag | Δ Gold (mixed − anime) | Δ OOD (mixed − anime) | Interpretation |
+|-----|------------------------|------------------------|----------------|
+| piano | 0.00 | +0.01 | Arms similar |
+| vocal | −0.10 | **+0.27** | Mixed training **recovers OOD**; slight in-domain cost |
+| relaxing | 0.00 | **+0.12** | Mixed training **recovers OOD**; gold unchanged |
 
-## Domain tradeoff (E) — gold × OOD @K=10
+**Business takeaway:** **Corpus composition is a first-class lever.** Mixed training (ACG + public MTAT/OpenMIC, Jamendo held out) improves OOD on vocal and relaxing without hurting piano gold. No single regime wins every tag in both domains — **tag-level routing or mixed training** may be warranted for multi-surface products.
 
-Mean over seeds 42–44.
-
-| Tag | Anime-only / **Gold** | Mixed / **Gold** | Δ Gold | Anime-only / OOD | Mixed / OOD | Δ OOD |
-|-----|----------------------|------------------|--------|------------------|-------------|-------|
-| piano | 0.20 | **0.30** | **+0.10** | 0.70 | 0.69 | −0.01 |
-| vocal | **1.00** | 0.90 | −0.10 | 0.37 | **0.53** | +0.17 |
-| relaxing | 0.50 | 0.50 | 0.00 | 0.28 | **0.40** | +0.12 |
-
-Pretrained OOD reference (macro): piano 0.98, vocal 0.76, relaxing 0.53.
+Full tables and per-dataset OOD breakdown: [`data/eval/domain_tradeoff/REPORT.md`](data/eval/domain_tradeoff/REPORT.md).
 
 ---
 
-## How it works
+## Technical approach
 
 ```mermaid
-flowchart LR
-  audio[music_db] --> meta[Grok metadata]
-  meta --> clips[15s segments]
-  clips --> ft[CLAP fine-tune]
-  ft --> faiss[Metadata FAISS]
-  faiss --> gold[Gold retrieval]
-  ft --> ood[Public OOD eval]
+flowchart TB
+  subgraph ingest [Data ingestion]
+    ACG[ACG library ~4k tracks]
+    PUB[Public corpora MTAT OpenMIC]
+    ACG --> CLIPS[15s clips + Grok captions]
+    PUB --> TAGS[Tag-derived train text]
+  end
+  subgraph train [Training]
+    CLIPS --> ARM1[thesis_grok_only]
+    CLIPS --> MIXED[Mixed JSONL]
+    TAGS --> MIXED
+    MIXED --> ARM2[thesis_grok_mixed]
+  end
+  subgraph eval [Evaluation]
+    ARM1 --> GOLD[In-domain gold 200 songs]
+    ARM2 --> GOLD
+    ARM1 --> OOD[Jamendo MTAT OpenMIC]
+    ARM2 --> OOD
+    GOLD --> REPORT[2×2 REPORT.md]
+    OOD --> REPORT
+  end
 ```
 
-1. Grok metadata → 15s clips → contrastive CLAP fine-tune (val early-stop).
-2. **Primary metric:** text query → FAISS → P@K / nDCG on human gold (~200 songs).
-3. Ablations vary training text or corpus; gold eval protocol stays fixed.
-4. Public OOD is a **separate** post-train test (not the main claim).
+| Stage | Description |
+|-------|-------------|
+| **Supervision** | Contrastive CLAP fine-tune; frozen AudioSet backbone; train projection heads only |
+| **In-domain eval** | Metadata FAISS + human multihot gold (~200 songs); queries *piano*, *vocal*, *relaxing* |
+| **OOD eval** | Same protocol on external manifests; Jamendo **never** in training |
+| **Reproducibility** | 3 seeds (42–44), val early-stop, matched hyperparams across both arms |
 
 ---
 
-## What is in the repo
+## Tech stack
 
-- Data pipeline, multi-seed fine-tune, gold eval, ablation Slurm scripts
-- Reports: `data/eval/*/REPORT.md`, retrieval matrices, progress monitor (`bash scripts/refresh_progress.sh`)
-
-Details: [`AGENTS.md`](AGENTS.md), [`docs/THESIS_QUESTIONS.md`](docs/THESIS_QUESTIONS.md), [`docs/OPERATIONS.md`](docs/OPERATIONS.md).
+| Layer | Technology |
+|-------|------------|
+| **Model** | [CLAP](https://github.com/LAION-AI/CLAP) (`music_audioset_epoch_15_esc_90.14.pt` backbone) |
+| **Runtime** | Python 3.11, PyTorch, `conda` env `ragweb` |
+| **Audio** | 15s clips, 48 kHz mono at load (librosa); no loudness normalization |
+| **Captions** | Grok/metadata text per ACG clip; dataset tags on public train clips |
+| **Retrieval index** | FAISS IndexFlatIP on L2-normalized metadata text embeddings |
+| **Metrics** | Precision@10, nDCG@10 vs random baseline |
+| **Orchestration** | Bash pipelines + Slurm (`h800_batch`); resume via `SKIP_*` flags |
+| **Scale** | ~65k train / ~7k val clips (anime-only); ~72k mixed train rows |
 
 ---
 
-## Quick start
+## Experimental arms (Question E)
+
+| Arm | Run ID | Training corpus |
+|-----|--------|-----------------|
+| Pretrained | — | AudioSet CLAP (no FT) |
+| Anime-only | `thesis_grok_only` | ACG ~65k clips, Grok captions |
+| Mixed | `thesis_grok_mixed` | ACG + MTAT + OpenMIC (~72k); Jamendo OOD-only |
+
+Checkpoints: `model/clap/finetune/thesis_grok_{only,mixed}/seed_{42,43,44}/best_model.pt`
+
+---
+
+## Reproduce
 
 ```bash
-conda activate ragweb   # or: python -m venv .venv && source .venv/bin/activate
+conda activate ragweb
 pip install -r requirements.txt
 ```
 
-Backbone: `model/clap/music_audioset_epoch_15_esc_90.14.pt`. Reproduce headline gold eval:
+**Full Question E pipeline** (build → cache → train both arms → gold + OOD → report):
 
 ```bash
-python -m app.metadata_faiss build --min-confidence 0.35
-python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10
-export RAGWEB_CLAP_CHECKPOINT=model/clap/finetune/thesis_ft_v1/seed_42/best_model.pt
-python -m app.data_handling.music_eval_retrieval_vs_random --top-k 10
+sbatch scripts/sbatch_domain_tradeoff_ablation.sh
 ```
 
-Fine-tune tutorial: [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md).
+**Eval + report only** (checkpoints exist):
+
+```bash
+SKIP_BUILD=1 SKIP_CACHE=1 SKIP_TRAIN=1 bash scripts/run_domain_tradeoff_ablation.sh
+```
+
+Operator details: [`docs/DOMAIN_TRADEOFF.md`](docs/DOMAIN_TRADEOFF.md), [`docs/OPERATIONS.md`](docs/OPERATIONS.md).
 
 ---
 
-## Documentation
+## Repository layout
 
-| Doc | Purpose |
-|-----|---------|
-| [`docs/THESIS_QUESTIONS.md`](docs/THESIS_QUESTIONS.md) | Questions A–E, run IDs, commands |
-| [`docs/PROGRESS.md`](docs/PROGRESS.md) | Experiment status snapshot |
-| [`docs/DOMAIN_TRADEOFF.md`](docs/DOMAIN_TRADEOFF.md) | Question E protocol |
-| [`docs/FINE_TUNING_TUTORIAL.md`](docs/FINE_TUNING_TUTORIAL.md) | Train + eval checkpoints |
-| [`docs/OPERATIONS.md`](docs/OPERATIONS.md) | Operator commands |
+| Path | Purpose |
+|------|---------|
+| `app/` | CLAP training, FAISS build, eval, report modules |
+| `scripts/` | Slurm entrypoints and orchestrators |
+| `data/mapping/` | Train/val JSONL manifests |
+| `data/eval/domain_tradeoff/` | **Primary 2×2 report and gold CSVs** |
+| `data/eval/{jamendo,mtat,openmic}_public/` | OOD per-checkpoint CSVs |
+| `docs/opus_tradeoff_bundle/OPUS_FEED.md` | Single-file thesis data pack |
+
+Large audio and checkpoints are gitignored; committed **reports and CSVs** are the evidence trail.
 
 ---
 
-## Data layout
+## Further reading
 
-| Path | Contents |
-|------|----------|
-| `data/music_db` / `data/music_db_15s` | Source audio / 15s segments |
-| `data/mapping` | Metadata, manifests |
-| `data/eval` | Gold labels, **reports**, matrices |
-| `model/clap/finetune/` | Checkpoints (gitignored) |
+| Document | Audience |
+|----------|----------|
+| [`docs/DOMAIN_TRADEOFF.md`](docs/DOMAIN_TRADEOFF.md) | ML engineers — protocol and env vars |
+| [`docs/THESIS_QUESTIONS.md`](docs/THESIS_QUESTIONS.md) | Research context (E is headline; A–D archived) |
+| [`docs/opus_tradeoff_bundle/OPUS_FEED.md`](docs/opus_tradeoff_bundle/OPUS_FEED.md) | Thesis writing — numbers and methods |
+| [`AGENTS.md`](AGENTS.md) | Autonomous agents / session handoff |
 
-Large assets are gitignored; `data/eval/` reports are the committed evidence trail.
+**Out of scope for this README:** LLM caption ablation (B), self-training (C), tag→LLM (D), and legacy tag-only domain tradeoff — exploratory runs retained under `data/eval/` for audit only.

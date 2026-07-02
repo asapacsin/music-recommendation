@@ -202,8 +202,8 @@ def build_domain_tradeoff_report(
     lines = [
         "# Domain tradeoff report (2×2: training regime × eval domain)",
         "",
-        "Tests **forgetting vs specialization** by comparing anime-only FT (`thesis_tag_only`) "
-        f"vs mixed FT (`{mixed_arm}`: anime + MTAT + OpenMIC train, Jamendo OOD-only).",
+        "Tests **forgetting vs specialization** by comparing anime-only FT "
+        f"(`{anime_arm}`) vs mixed FT (`{mixed_arm}`: anime + MTAT + OpenMIC train, Jamendo OOD-only).",
         "",
         f"- Trade dir: `{trade_dir}`",
         f"- Public eval root: `{eval_root}`",

@@ -332,7 +332,10 @@ def build_mixed_domain_train_jsonl(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build mixed-domain tag-only train JSONL (anime + MTAT + OpenMIC)."
+        description=(
+            "Build mixed-domain train JSONL (anime + MTAT + OpenMIC). "
+            "Anime JSONL may use Grok captions (clap_train_15s.jsonl) or tag-only text."
+        )
     )
     parser.add_argument("--anime-jsonl", type=Path, default=DEFAULT_ANIME_JSONL)
     parser.add_argument(

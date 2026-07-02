@@ -7,8 +7,8 @@
 #SBATCH --time=48:00:00
 #SBATCH --output=slurm-%j.out
 
-# Mixed-domain forgetting vs specialization (Question E):
-#   build mixed JSONL -> cache -> FT thesis_tag_mixed -> gold + public eval -> 2×2 report
+# Question E — Grok-caption domain tradeoff (anime-only vs mixed FT):
+#   build clap_train_grok_mixed.jsonl -> cache -> FT both arms -> gold + public eval -> 2×2 report
 #
 # Submit:
 #   sbatch scripts/sbatch_domain_tradeoff_ablation.sh

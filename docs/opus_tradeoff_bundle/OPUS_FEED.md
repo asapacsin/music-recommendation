@@ -3,28 +3,33 @@
 **Purpose:** Revise the thesis to focus on the **specialization–generalization tradeoff** only.  
 **Rule for Opus:** Use only numbers in this document. Do not invent metrics.
 
+**Status:** Complete — Slurm job **122295** (2026). Source: `data/eval/domain_tradeoff/summary.json`.
+
 ---
 
 ## 1. What Opus should do
 
 Rewrite the thesis around **one question**:
 
-> When CLAP is fine-tuned on ACG music, how much **in-domain gold retrieval** is gained versus **public out-of-domain (OOD) retrieval** lost — and does **anime-only vs mixed** training corpus rebalance that tradeoff per tag?
+> When CLAP is fine-tuned on ACG music with **Grok/metadata captions**, how much **in-domain gold retrieval** is gained versus **public out-of-domain (OOD) retrieval** lost — and does **anime-only vs mixed** training corpus rebalance that tradeoff per tag?
 
-**Remove from main thesis:** LLM captions (B), self-training (C), tag→LLM (D), drift filtering, hard-pair mining.  
-**Do not use** `thesis_ft_v1` (Grok-caption fine-tune) as the main comparison — that is a different experiment.
+**Remove from main thesis:** LLM captions (B), self-training (C), tag→LLM (D), drift filtering, hard-pair mining, tag-only domain tradeoff.
+
+**Do not use** `thesis_ft_v1` (older Grok FT, batch 128 / 5 epochs) as the main E comparison.
 
 ---
 
-## 2. Experimental arms (only these three)
+## 2. Experimental arms
 
 | Arm | Run ID | Training corpus | Training text |
 |-----|--------|-----------------|---------------|
 | Pretrained CLAP | — | None | — |
-| Anime-only fine-tune | `thesis_tag_only` | ACG catalog only (~65k clips) | Tag-only strings |
-| Mixed fine-tune | `thesis_tag_mixed` | ACG + MTAT + OpenMIC (~72k clips) | Tag-only strings |
+| Anime-only fine-tune | `thesis_grok_only` | ACG catalog only (~65k clips) | Grok/metadata per clip (`clap_train_15s.jsonl`) |
+| Mixed fine-tune | `thesis_grok_mixed` | ACG + MTAT + OpenMIC (~72k clips) | Grok on anime; mapped tag strings on MTAT/OpenMIC |
 
 Both fine-tuned arms share **identical** optimizer, early-stopping, backbone freeze, and seeds (42, 43, 44). Only **corpus composition** differs.
+
+**Report:** `data/eval/domain_tradeoff/REPORT.md`
 
 ---
 
@@ -34,8 +39,8 @@ Both fine-tuned arms share **identical** optimizer, early-stopping, backbone fre
 |------|--------|
 | Private catalog | ~4,011 source tracks → 15s clips |
 | Train clips (anime-only) | 65,041 |
-| Train clips (mixed) | 71,651 = 65,041 anime + 4,576 MTAT + 2,034 OpenMIC |
-| Val clips | 7,246 (`clap_val_15s.jsonl`, early-stop both arms) |
+| Train clips (mixed) | ~71,651 = 65,041 anime + 4,576 MTAT + 2,034 OpenMIC |
+| Val clips | 7,246 (`clap_val_15s.jsonl`, Grok captions, early-stop both arms) |
 | Gold eval | 200 human-labeled songs, 3 binary tags |
 | Gold queries | `piano`, `vocal`, `relaxing` |
 | OOD eval | Jamendo, MagnaTagATune (MTAT), OpenMIC |
@@ -68,8 +73,8 @@ Both fine-tuned arms share **identical** optimizer, early-stopping, backbone fre
 | Loudness normalization | **None** |
 | Seeds | 42, 43, 44 |
 
-Anime-only train JSONL: `clap_train_tag.jsonl`  
-Mixed train JSONL: `clap_train_tag_mixed.jsonl`  
+Anime-only train JSONL: `clap_train_15s.jsonl`  
+Mixed train JSONL: `clap_train_grok_mixed.jsonl`  
 Val JSONL: `clap_val_15s.jsonl`
 
 ---
@@ -80,111 +85,67 @@ Mean over seeds 42–44. **Primary thesis table.**
 
 | Tag | Pretrained OOD | Anime-only Gold | Mixed Gold | Δ Gold | Anime-only OOD | Mixed OOD | Δ OOD |
 |-----|----------------|-----------------|------------|--------|----------------|-----------|-------|
-| inst_piano | 0.98 | 0.20 | 0.30 | +0.10 | 0.70 | 0.69 | −0.01 |
-| inst_vocal | 0.76 | 1.00 | 0.90 | −0.10 | 0.37 | 0.53 | +0.17 |
-| mood_relaxing | 0.53 | 0.50 | 0.50 | 0.00 | 0.28 | 0.40 | +0.12 |
+| inst_piano | 0.98 | 0.40 | 0.40 | 0.00 | 0.83 | 0.84 | +0.01 |
+| inst_vocal | 0.76 | 0.90 | 0.80 | −0.10 | 0.33 | 0.60 | +0.27 |
+| mood_relaxing | 0.53 | 0.50 | 0.50 | 0.00 | 0.25 | 0.37 | +0.12 |
 
-**Δ columns** = mixed minus anime-only.
+**Δ columns** = mixed minus anime-only (`thesis_grok_mixed` − `thesis_grok_only`).
 
 **Interpretation (one sentence per row):**
-- Piano: mixed helps in-domain (+0.10 gold); OOD unchanged.
-- Vocal: anime-only best in-domain (ceiling 1.00); mixed recovers OOD (+0.17) at cost of in-domain (−0.10).
-- Relaxing: gold tied; mixed improves OOD (+0.12).
+- Piano: gold tied at 0.40; OOD essentially unchanged (+0.01).
+- Vocal: anime-only best in-domain (0.90); mixed recovers OOD (+0.27) at −0.10 gold cost.
+- Relaxing: gold tied at 0.50; mixed improves OOD (+0.12).
 
-**Overall:** Fine-tuning specializes (OOD far below pretrained 0.98/0.76/0.53). Mixed corpus **redistributes** the cost by tag — no single arm wins everywhere.
-
----
-
-## 6. Main result — nDCG@10 (gold, in-domain)
-
-Same seeds; identical across seeds for each arm in this run.
-
-| Tag | Pretrained Gold | Anime-only Gold | Mixed Gold |
-|-----|-----------------|-----------------|------------|
-| inst_piano | 0.212 | 0.290 | 0.423 |
-| inst_vocal | 0.556 | 1.000 | 0.927 |
-| mood_relaxing | 0.543 | 0.423 | 0.414 |
-
-Pretrained gold from zero-shot eval on same 200-song pool. Anime-only / mixed from `thesis_tag_only` / `thesis_tag_mixed` checkpoints.
+**Overall:** Fine-tuning with Grok captions strongly lifts in-domain gold vs pretrained (especially vocal/piano). Both FT arms sit below pretrained on OOD macro. Mixed corpus **redistributes** the cost by tag — vocal and relaxing OOD benefit from mixed training.
 
 ---
 
-## 7. OOD by dataset (P@10, mean seeds 42–44)
+## 6. OOD by dataset (P@10, mean seeds 42–44)
 
 ### Jamendo
 
 | Tag | Anime-only | Mixed |
 |-----|------------|-------|
-| inst_piano | 0.70 | 0.53 |
-| inst_vocal | 0.30 | 0.13 |
-| mood_relaxing | 0.23 | 0.47 |
+| inst_piano | 0.63 | 0.63 |
+| inst_vocal | 0.27 | 0.27 |
+| mood_relaxing | 0.20 | 0.30 |
 
 ### MagnaTagATune (MTAT)
 
 | Tag | Anime-only | Mixed |
 |-----|------------|-------|
-| inst_piano | 0.40 | 0.53 |
-| inst_vocal | 0.80 | 0.97 |
-| mood_relaxing | 0.33 | 0.33 |
+| inst_piano | 0.87 | 0.90 |
+| inst_vocal | 0.33 | 0.73 |
+| mood_relaxing | 0.30 | 0.43 |
 
 ### OpenMIC
 
 | Tag | Anime-only | Mixed |
 |-----|------------|-------|
 | inst_piano | 1.00 | 1.00 |
-| inst_vocal | 0.00 | 0.50 |
+| inst_vocal | 0.40 | 0.80 |
 | mood_relaxing | n/a | n/a |
 
 (OpenMIC has no mood labels.)
 
-### Pretrained OOD reference (macro mean, same three datasets)
+---
 
-| Tag | Pretrained |
-|-----|------------|
-| inst_piano | 0.98 |
-| inst_vocal | 0.76 |
-| mood_relaxing | 0.53 |
+## 7. Abstract-ready findings (copy-paste)
+
+Fine-tuning CLAP on an ACG catalog with Grok/metadata captions improves in-domain gold retrieval (e.g. vocal P@10 0.90 anime-only vs ~0.70 pretrained gold baseline) but reduces public OOD retrieval versus the pretrained model (vocal OOD macro 0.33–0.60 vs 0.76 pretrained). Comparing anime-only training (`thesis_grok_only`) to mixed training (`thesis_grok_mixed`: Grok ACG plus MTAT and OpenMIC, Jamendo held out) shows a **tag-dependent** tradeoff: mixed training improves OOD vocal (+0.27 P@10) and relaxing (+0.12) versus anime-only, with a modest in-domain vocal cost (−0.10). Piano gold is unchanged across corpus mix. **Corpus composition is a first-class design choice** for specialized music retrieval in production.
 
 ---
 
-## 8. Abstract-ready findings (copy-paste)
-
-Fine-tuning CLAP on an ACG catalog under tag-only supervision improves some in-domain gold retrieval but sharply reduces public OOD retrieval versus the pretrained model. Comparing anime-only training (`thesis_tag_only`) to mixed training (`thesis_tag_mixed`: anime plus MTAT and OpenMIC, Jamendo held out) shows a **tag-dependent** tradeoff: mixed training improves OOD vocal (+0.17 P@10) and relaxing (+0.12) versus anime-only, and improves in-domain piano (+0.10), but reduces in-domain vocal (−0.10). No training regime dominates on every tag in both domains. **Corpus composition is a first-class design choice** for specialized music retrieval.
-
----
-
-## 9. Thesis edits checklist
-
-**Add**
-- Arm mapping table (Section 2 above)
-- Table 5.1 (Section 5) + nDCG table (Section 6)
-- OOD-by-dataset table (Section 7)
-- Gold prevalence table (Section 3)
-- Hyperparameter table (Section 4)
-- Preprocessing note: mono at load, no loudness norm
-
-**Remove or appendix**
-- Ch 4–5: LLM refinement, drift gate, hard mining, self-training loop
-- Table 5.1 old version using `thesis_ft_v1` (Grok captions)
-- Bootstrap CI claims (not computed)
-- Triple-duplicated §3.6.1 paragraph
-- Sentences claiming self-training “progressively improves” retrieval
-
-**Fix**
-- Do not conflate `thesis_ft_v1` with `thesis_tag_only`
-- Vocal pretrained **gold** P@10 is 0.70 (not 1.00); ceiling 1.00 is after anime-only FT only
-
----
-
-## 10. Out of scope (do not cite as main results)
+## 8. Out of scope (do not cite as main results)
 
 | Experiment | Run ID | Note |
 |------------|--------|------|
-| Grok-caption FT vs pretrained | `thesis_ft_v1` | Question A; different training text |
-| Grok vs LLM captions | `thesis_llm_full_llm` | Question B; null on gold |
-| Self-train loop | `thesis_self_v2` | Question C; iter 1 regressed |
-| Tag vs tag→LLM | `thesis_tag_llm` | Question D; not needed for E |
+| Older Grok FT vs pretrained | `thesis_ft_v1` | Question A; different hparams |
+| Grok vs LLM captions | `thesis_llm_full_llm` | Question B |
+| Self-train loop | `thesis_self_v2` | Question C |
+| Tag vs tag→LLM | `thesis_tag_llm` | Question D |
+| Tag-only domain tradeoff | `thesis_tag_only` / `thesis_tag_mixed` | Superseded sparse-label run |
 
 ---
 
-*Generated from repo eval: `data/eval/domain_tradeoff/`, gold CSVs, finetune params. Single-file pack for Opus — no other files required.*
+*Source: `data/eval/domain_tradeoff/` (job 122295). Single-file pack for Opus.*
