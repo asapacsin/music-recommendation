@@ -13,7 +13,7 @@
       {
         "id": "readme_enterprise_rewrite",
         "status": "completed",
-        "description": "README focused on specialization-generalization, tech stack, impact"
+        "description": "README: specialization-generalization, skills, gold/OOD tables"
       },
       {
         "id": "opus_feed_numbers",
@@ -34,7 +34,7 @@
       "state/agent_state.json"
     ],
     "key_decisions": [
-      "README is enterprise-facing Q E only; A-D out of scope in main README",
+      "README is technical/thesis Q E only; gold + OOD tables separate; no enterprise copy in corpus",
       "Canonical results: job 122295, thesis_grok_* arms, domain_tradeoff/REPORT.md"
     ]
   },
@@ -49,6 +49,9 @@
     "verdict": "PASS"
   },
   "MEMORY": {
+    "user_preferences": [
+      "README/corpus: technical + thesis focus only; no enterprise/business/stakeholder framing in repo docs"
+    ],
     "question_e": {
       "status": "done",
       "slurm_job": "122295",
