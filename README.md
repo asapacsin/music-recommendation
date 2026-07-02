@@ -31,7 +31,7 @@ Same eval protocol throughout: fixed queries, metadata FAISS index, P@10; only c
 | vocal | 0.70 | **0.90** | 0.80 |
 | relaxing | 0.50 | 0.50 | 0.50 |
 
-**Summary:** Fine-tuning raises gold P@10 on piano (+0.20) and vocal (+0.20, anime-only vs pretrained). Mixed matches anime-only on piano and relaxing; vocal gold is −0.10 vs anime-only.
+**Summary:** Fine-tuning raises gold P@10 on piano (+0.20) and vocal (+0.10).
 
 ---
 
@@ -55,21 +55,9 @@ Per-dataset OOD: [`data/eval/domain_tradeoff/REPORT.md`](data/eval/domain_tradeo
 
 ---
 
-## Skills demonstrated (tech stack)
+## Skills
 
-| Area | What this project shows |
-|------|-------------------------|
-| **Multimodal ML** | Contrastive fine-tuning of CLAP (frozen AudioSet backbone, train projection heads); audio–text alignment at scale |
-| **Deep learning ops** | PyTorch training loops, val early-stopping, multi-seed runs (42–44), backbone **audio embedding cache** for reproducible throughput |
-| **Retrieval & search** | FAISS IndexFlatIP, L2-normalized embeddings, text-query → metadata retrieval, P@K / nDCG vs random baseline |
-| **Evaluation design** | Human gold multihot labels, held-out public OOD sets, strict leakage rules (Jamendo OOD-only), 2×2 train×eval matrix |
-| **Data engineering** | 15s clip manifests (JSONL), ~65k–72k row training corpora, holdout path audits, mixed-domain dataset joins |
-| **Audio ML pipeline** | librosa load (48 kHz mono), segment extraction, batch embedding precompute |
-| **MLOps / HPC** | End-to-end Bash orchestrators, Slurm GPU jobs (H800), idempotent pipelines with `SKIP_*` resume flags |
-| **Experiment tracking** | Versioned CSV/JSON reports, `summary.json`, Slurm logs, agent run artifacts under `docs/agent_runs/` |
-| **LLM-assisted metadata** | Grok-generated per-clip training captions vs sparse tag-only baselines |
-
-**Core stack:** Python 3.11 · PyTorch · CLAP · FAISS · librosa · Slurm · Bash
+Multimodal / contrastive learning · PyTorch fine-tuning · FAISS retrieval · audio embedding pipelines · evaluation design (gold + OOD) · Slurm / GPU batch jobs · Python data pipelines
 
 ---
 
