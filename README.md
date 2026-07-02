@@ -57,7 +57,7 @@ Per-dataset OOD: [`data/eval/domain_tradeoff/REPORT.md`](data/eval/domain_tradeo
 
 ## Skills
 
-Multimodal / contrastive learning · PyTorch fine-tuning · FAISS retrieval · audio embedding pipelines · evaluation design (gold + OOD) · Slurm / GPU batch jobs · Python data pipelines
+Python · PyTorch · Transformers · contrastive learning · fine-tuning · FAISS · semantic / vector retrieval · multimodal (audio–text) · librosa · information retrieval (P@K, nDCG) · experiment design · Slurm · GPU · Bash
 
 ---
 
